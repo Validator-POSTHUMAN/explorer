@@ -129,6 +129,21 @@ function mapAmount(events:{type: string, attributes: {key: string, value: string
     .filter(x => x.key === 'YW1vdW50'|| x.key === `amount`)
     .map(x => x.key==='amount'? x.value : String.fromCharCode(...fromBase64(x.value)))
 }
+
+async function copyTxHash(txhash: string) {
+  try {
+    await navigator.clipboard.writeText(`${window.location.origin}/${props.chain}/tx/${txhash}`);    
+    // showCopyToast.value = 1;
+    // setTimeout(() => {
+    //   showCopyToast.value = 0;
+    // }, 1000);
+  } catch (err) {
+    // showCopyToast.value = 2;
+    // setTimeout(() => {
+    //   showCopyToast.value = 0;
+    // }, 1000);
+  }
+}
 </script>
 <template>
   <div v-if="account">
@@ -513,29 +528,18 @@ function mapAmount(events:{type: string, attributes: {key: string, value: string
         <table class="table w-full text-sm">
           <thead>
             <tr>
-              <th class="py-3">{{ $t('account.height') }}</th>
-              <th class="py-3">{{ $t('account.hash') }}</th>
-              <th class="py-3">{{ $t('account.messages') }}</th>
+              <th class="py-3 w-[1.125rem]"></th>
+              <!-- <th class="py-3">{{ $t('account.height') }}</th> -->
               <th class="py-3">{{ $t('account.time') }}</th>
+              <th class="py-3">Type</th>
+              <th class="py-3">{{ $t('account.amount') }}</th>
+              <th class="py-3">{{ $t('account.hash') }}</th>
             </tr>
           </thead>
           <tbody class="text-sm">
             <tr v-if="txs.length === 0"><td colspan="10"><div class="text-center">{{ $t('account.no_transactions') }}</div></td></tr>
             <tr v-for="(v, index) in txs" :key="index">
-              <td class="text-sm py-3">
-                <RouterLink :to="`/${chain}/block/${v.height}`" class="dark:invert">{{
-                  v.height
-                }}</RouterLink>
-              </td>
-              <td class="truncate py-3" style="max-width: 200px">
-                <RouterLink :to="`/${chain}/tx/${v.txhash}`" class="dark:invert">
-                  {{ v.txhash }}
-                </RouterLink>
-              </td>
-              <td class="flex items-center py-3">
-                <div class="mr-2">
-                  {{ format.messages(v.tx.body.messages) }}
-                </div>
+              <td class="py-3 w-[1.125rem]">
                 <Icon
                   v-if="v.code === 0"
                   icon="mdi-check"
@@ -544,6 +548,23 @@ function mapAmount(events:{type: string, attributes: {key: string, value: string
                 <Icon v-else icon="mdi-multiply" class="text-error text-lg" />
               </td>
               <td class="py-3">{{ format.toLocaleDate(v.timestamp) }} <span class=" text-xs">({{ format.toDay(v.timestamp, 'from') }})</span> </td>
+              <!-- <td class="text-sm py-3">
+                <RouterLink :to="`/${chain}/block/${v.height}`" class="dark:invert">{{
+                  v.height
+                }}</RouterLink>
+              </td> -->
+              <td class="py-3">
+                  {{ format.messages(v.tx.body.messages) }}
+              </td>
+              <td class="flex items-center py-3">
+                <div class="mr-2">
+                  <!-- {{ format.messages(v.tx.body.messages) }} -->
+                    {{ format.formatToken(v.tx.body.messages[0].amount![0]) }}
+                </div>
+              </td>
+              <td class="truncate py-3" style="max-width: 200px">
+                <span @click="copyTxHash(v.txhash)" class="cursor-pointer">{{ v.txhash }}</span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -557,29 +578,18 @@ function mapAmount(events:{type: string, attributes: {key: string, value: string
         <table class="table w-full text-sm">
           <thead>
             <tr>
-              <th class="py-3">{{ $t('account.height') }}</th>
-              <th class="py-3">{{ $t('account.hash') }}</th>
-              <th class="py-3">{{ $t('account.amount') }}</th>
+              <th class="py-3 w-[1.125rem]"></th>
               <th class="py-3">{{ $t('account.time') }}</th>
+              <th class="py-3">Type</th>
+              <!-- <th class="py-3">{{ $t('account.height') }}</th> -->
+              <th class="py-3">{{ $t('account.amount') }}</th>
+              <th class="py-3">{{ $t('account.hash') }}</th>
             </tr>
           </thead>
           <tbody class="text-sm">
             <tr v-if="recentReceived.length === 0"><td colspan="10"><div class="text-center">{{ $t('account.no_transactions') }}</div></td></tr>
             <tr v-for="(v, index) in recentReceived" :key="index">
-              <td class="text-sm py-3">
-                <RouterLink :to="`/${chain}/block/${v.height}`" class="dark:invert">{{
-                  v.height
-                }}</RouterLink>
-              </td>
-              <td class="truncate py-3" style="max-width: 200px">
-                <RouterLink :to="`/${chain}/tx/${v.txhash}`" class="dark:invert">
-                  {{ v.txhash }}
-                </RouterLink>
-              </td>
-              <td class="flex items-center py-3">
-                <div class="mr-2">
-                  {{ mapAmount(v.events)?.join(", ")}}
-                </div>
+              <td class="py-3 w-[1.125rem]">
                 <Icon
                   v-if="v.code === 0"
                   icon="mdi-check"
@@ -588,6 +598,24 @@ function mapAmount(events:{type: string, attributes: {key: string, value: string
                 <Icon v-else icon="mdi-multiply" class="text-error text-lg" />
               </td>
               <td class="py-3">{{ format.toLocaleDate(v.timestamp) }} <span class=" text-xs">({{ format.toDay(v.timestamp, 'from') }})</span> </td>
+              <td class="py-3"><span>Received</span></td>
+
+              <!-- <td class="text-sm py-3">
+                <RouterLink :to="`/${chain}/block/${v.height}`" class="dark:invert">{{
+                  v.height
+                }}</RouterLink>
+              </td> -->
+              <td class="flex items-center py-3">
+                <div class="mr-2">
+                  {{ format.formatToken(v.tx.body.messages[0].amount![0]) }}
+                </div>
+              </td>
+              <td class="truncate py-3" style="max-width: 200px">
+                <!-- <RouterLink :to="`/${chain}/tx/${v.txhash}`" class="dark:invert">
+                  {{ v.txhash }}
+                </RouterLink> -->
+                <span @click="copyTxHash(v.txhash)" class="cursor-pointer">{{ v.txhash }}</span>
+              </td>
             </tr>
           </tbody>
         </table>
