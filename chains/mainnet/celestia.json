@@ -4,6 +4,10 @@
   "registry_name": "celestia",
   "api": [
     {
+      "address": " https://rest.cosmos.directory:443/celestia",
+      "provider": "cosmos.directory"
+    },
+    {
       "address": "https://api.celestia.nodestake.org:443",
       "provider": "NodeStake"
     },
@@ -36,10 +40,6 @@
       "provider": "Stake&Relax Validator 🦥"
     },
     {
-      "address": "https://celestia-api.noders.services:443",
-      "provider": "[NODERS]TEAM"
-    },
-    {
       "address": "https://api.celestia.mainnet.dteam.tech:443",
       "provider": "DTEAM"
     },
@@ -52,19 +52,15 @@
       "provider": "Stakin"
     },
     {
-      "address": "https://public-celestia-lcd.numia.xyz:443",
-      "provider": "Numia"
-    },
-    {
       "address": "https://celestia-mainnet-api.itrocket.net:443",
       "provider": "🚀 itrocket 🚀"
-    },
-    {
-      "address": "https://celestia.api.cumulo.org.es:443",
-      "provider": "Cumulo"
     }
   ],
   "rpc": [
+    {
+      "address": "https://rpc.cosmos.directory:443/celestia",
+      "provider": "cosmos.directory"
+    },
     {
       "address": "https://rpc.celestia.nodestake.org:443",
       "provider": "NodeStake"
@@ -98,10 +94,6 @@
       "provider": "Polkachu"
     },
     {
-      "address": "https://public-celestia-rpc.numia.xyz:443",
-      "provider": "Numia"
-    },
-    {
       "address": "https://rpc.celestia.mainnet.dteam.tech:443",
       "provider": "DTEAM"
     },
@@ -114,20 +106,12 @@
       "provider": "Validatus"
     },
     {
-      "address": "https://celestia-rpc.noders.services:443",
-      "provider": "[NODERS]TEAM"
-    },
-    {
       "address": "https://rpc-celestia-01.stakeflow.io:443",
       "provider": "Stakeflow"
     },
     {
       "address": "https://celestia-mainnet-rpc.itrocket.net:443",
       "provider": "🚀 itrocket 🚀"
-    },
-    {
-      "address": "https://celestia.cumulo.org.es:443",
-      "provider": "Cumulo"
     }
   ],
   "sdk_version": "0.46.16",
