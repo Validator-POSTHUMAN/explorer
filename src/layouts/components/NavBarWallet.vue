@@ -36,12 +36,18 @@ const tipMsg = computed(() => {
 
 <template>
   <div class="dropdown dropdown-hover dropdown-end">
-    <label
+    <div
+      class="flex gap-3 flex-row-reverse px-20 text-white"
+    >
+      Connect wallet
+      <Icon icon="mdi:wallet" class="text-[#D9D9D9] w-6 h-6" />
+    </div>
+    <!-- <label
       tabindex="0"
       class="btn btn-sm btn-[#222226] hover:bg-[#2E2C50] rounded-full m-1 lowercase truncate !inline-flex text-xs md:!text-sm"
     >
       <Icon icon="mdi:wallet" class="text-[#D9D9D9]" />
-    </label>
+    </label> -->
     <div
       tabindex="0"
       class="dropdown-content menu shadow p-2 bg-[#171718] rounded w-52 md:!w-64 overflow-auto"

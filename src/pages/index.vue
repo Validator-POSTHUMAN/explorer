@@ -31,7 +31,7 @@ const chainStore = useBlockchain();
 <template>
   <div class="">
     <div
-      class="flex md:!flex-row flex-col items-center justify-center mb-6 mt-14 gap-2"
+      class="flex md:!flex-row flex-col items-center justify-center mt-20 gap-2"
     >
       <img class="w-453 h-153" src="../assets/logo-big.svg" />
       <!-- <h1 class="text-3xl md:!text-6xl w-453 h-153 rajdhani-regular">
@@ -54,10 +54,10 @@ const chainStore = useBlockchain();
       <h2 class="mb-6">{{ $t('pages.description') }}</h2>
     </div> -->
 
-    <div class="flex items-center rounded-full bg-[#171718] mt-10">
+    <div class="flex justify-between bg-[url('src/assets/images/search-bar.svg')] py-[1.15rem] px-[25.1rem] bg-center bg-no-repeat mt-10">
       <input
         :placeholder="$t('pages.search_placeholder')"
-        class="px-4 h-10 bg-transparent flex-1 outline-none text-base"
+        class="text-base bg-transparent outline-none"
         v-model="keywords"
       />
       <div class="px-4 text-base hidden md:!block">

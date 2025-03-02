@@ -62,6 +62,10 @@
     {
       "address": "https://celestia.api.cumulo.org.es:443",
       "provider": "Cumulo"
+    },
+    {
+      "address": "https://data.services.kyve.network",
+      "provider": "Kyve"
     }
   ],
   "rpc": [
