@@ -7,6 +7,7 @@ import newFooter from '@/layouts/components/NavFooter.vue';
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue';
 import NavbarSearch from '@/layouts/components/NavbarSearch.vue';
 import ChainProfile from '@/layouts/components/ChainProfile.vue';
+import NavbarLink from './NavbarLink.vue';
 
 import { useDashboard } from '@/stores/useDashboard';
 import { useBlockchain } from '@/stores';
@@ -72,86 +73,33 @@ function selected(route: any, nav: NavLink) {
   >
     <!-- header -->
     <div class="w-full sticky top-0 z-50 py-5">
-      <div class="border-b border-t border-y-[#686868]">
-        <div class="flex">
-          <div class="flex flex-row-reverse">
-            <div class="order-1">
-              <svg
-                width="174"
-                height="74"
-                viewBox="0 0 174 74"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 0.5H1.03311L1.59199 1.28901L52.592 73.289L52.7414 73.5H53H120.695H120.954L121.104 73.2883L171.909 1.28827L172.465 0.5H171.5H2Z"
-                  fill="#010101"
-                  stroke="#686868"
-                />
-              </svg>
-            </div>
-            <div class="">
-              <svg
-                width="219"
-                height="51"
-                viewBox="0 0 219 51"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 50.5L36.5 0.5H217.5L182.5 50.5H1Z"
-                  fill="#010101"
-                  stroke="#686868"
-                />
-                <text
-                  x="50"
-                  y="30"
-                  font-family="Arial"
-                  font-size="20"
-                  fill="white"
-                >
-                  Привет, мир!
-                </text>
-              </svg>
-            </div>
-            <div class="">
-              <svg
-                width="219"
-                height="51"
-                viewBox="0 0 219 51"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 50.5L36.5 0.5H217.5L182.5 50.5H1Z"
-                  fill="#010101"
-                  stroke="#686868"
-                />
-              </svg>
-            </div>
-            <div class="">
-              <svg
-                width="219"
-                height="51"
-                viewBox="0 0 219 51"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 50.5L36.5 0.5H217.5L182.5 50.5H1Z"
-                  fill="#010101"
-                  stroke="#686868"
-                />
-              </svg>
-            </div>
-          </div>
+      <div class="border-b border-t border-y-[#686868] bg-black">
+        <div class="flex h-16">
+          <svg
+            class="-mr-[1rem]"
+            width="174"
+            height="74"
+            viewBox="0 0 174 74"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2 0.5H1.03311L1.59199 1.28901L52.592 73.289L52.7414 73.5H53H120.695H120.954L121.104 73.2883L171.909 1.28827L172.465 0.5H171.5H2Z"
+              fill="black"
+              stroke="#686868"
+            />
+          </svg>
+
+          <NavbarLink text="_Dashboard" href="qwe" />
+          <NavbarLink text="_Stacking" href="qwe" />
+          <NavbarLink text="_Governance" href="qwe" />
           <!-- <ChainProfile /> -->
 
           <!-- <NavSearchBar />-->
           <!-- <NavBarI18n class="hidden md:!inline-block" /> -->
           <!-- <NavbarThemeSwitcher class="!inline-block" /> -->
           <!-- <NavbarSearch class="!inline-block" /> -->
-          <div class="ml-auto">
+          <div class="ml-auto h-16 flex items-center">
             <NavBarWallet />
           </div>
         </div>
@@ -159,7 +107,7 @@ function selected(route: any, nav: NavLink) {
     </div>
 
     <!-- 👉 Pages -->
-    <div style="min-height: calc(100vh - 180px)">
+    <div class="w-full">
       <RouterView v-slot="{ Component }">
         <Transition mode="out-in">
           <Component :is="Component" />
