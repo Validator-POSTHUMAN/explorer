@@ -74,7 +74,7 @@ function selected(route: any, nav: NavLink) {
     <!-- header -->
     <div class="w-full sticky top-0 z-50 py-5">
       <div class="border-b border-t border-y-[#686868] bg-black">
-        <div class="flex h-16">
+        <div class="flex h-12">
           <svg
             class="-mr-[1rem]"
             width="174"
