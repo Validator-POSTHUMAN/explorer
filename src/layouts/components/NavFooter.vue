@@ -1,43 +1,24 @@
+<script lang="ts" setup>
+import { Icon } from '@iconify/vue';
+
+
+</script>
+
 <template>
   <!-- footer -->
   <footer
-    class="flex items-center text-sm bg-[#171718] dark:bg-[#171718] text-[#FFFFFF]"
+    class="absolute bottom-0 w-full"
   >
-    <div class="flex flex-1">
-      Ⓕ&nbsp;
-      {{ new Date().getFullYear() }}&#160Fork everything with&#160
-      <img src="../../assets/images/heart.svg" />
-      by&nbsp;
-      <a
-        class="link"
-        href="https://ping.pub"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Ping.pub</a
-      >
-      &#160forked by&#160
-      <a
-        class="link"
-        href="https://posthuman.digital/"
-        target="_blank"
-        rel="noopener noreferrer"
-        >POSTHUMAN ꝏ DVS</a>
+  <div class="text-white ml-2 mb-2">
+    <p>Links</p>
+    <div class="flex flex-rol gap-1 mt-3">
+      <Icon icon="mdi:twitter" class="text-2xl" />
+      Twitter
     </div>
-    <div
-      class="hidden md:!block"
-    >
-      <a
-        class="link mr-4"
-        href="https://github.com/ping-pub/explorer/blob/master/LICENSE"
-        target="noopener noreferrer"
-        >License</a
-      >
-      <a
-        class="link"
-        href="https://github.com/ping-pub/explorer"
-        target="noopener noreferrer"
-        >Github</a
-      >
+    <div class="flex flex-rol gap-1">
+      <Icon icon="mdi:discord" class="text-2xl" />
+      Discord
     </div>
+  </div>
   </footer>
 </template>

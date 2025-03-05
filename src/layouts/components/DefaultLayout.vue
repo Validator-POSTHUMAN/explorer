@@ -7,7 +7,7 @@ import newFooter from '@/layouts/components/NavFooter.vue';
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue';
 import NavbarSearch from '@/layouts/components/NavbarSearch.vue';
 import ChainProfile from '@/layouts/components/ChainProfile.vue';
-import NavbarLink from './NavbarLink.vue';
+import NavbarLinks from './NavbarLinks.vue';
 
 import { useDashboard } from '@/stores/useDashboard';
 import { useBlockchain } from '@/stores';
@@ -89,10 +89,7 @@ function selected(route: any, nav: NavLink) {
               stroke="#686868"
             />
           </svg>
-
-          <NavbarLink text="_Dashboard" href="qwe" />
-          <NavbarLink text="_Stacking" href="qwe" />
-          <NavbarLink text="_Governance" href="qwe" />
+          <NavbarLinks/>
           <!-- <ChainProfile /> -->
 
           <!-- <NavSearchBar />-->
@@ -105,14 +102,21 @@ function selected(route: any, nav: NavLink) {
         </div>
       </div>
     </div>
-
+    <!-- <button class="btn skew-x-[-50deg] transform bg-blue-500 text-white px-6 py-3">
+        <span class="skew-x-[50deg] transform">Нажми меня</span>
+    </button> -->
     <!-- 👉 Pages -->
-    <div class="w-full">
-      <RouterView v-slot="{ Component }">
-        <Transition mode="out-in">
-          <Component :is="Component" />
-        </Transition>
-      </RouterView>
+    <RouterView v-slot="{ Component }">
+      <Transition mode="out-in">
+        <Component :is="Component" />
+      </Transition>
+    </RouterView>
+    <div class="flex justify-center mt-20">
+      <div class="border border-[#686868] hover:bg-[#242424] bg-black bg-opacity-50 rounded-full w-[23rem] h-12 text-center cursor-pointer">
+        <div class="mt-3 text-white flex flex-row justify-center gap-2">
+          <p class="text-2xl -mt-[0.4rem]">+</p>Add Favorite Networks
+        </div>
+      </div>
     </div>
     <newFooter />
   </div>

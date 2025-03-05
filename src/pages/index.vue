@@ -34,53 +34,47 @@ const favoriteChains = computed(() => {
 });
 </script>
 <template>
-  <div class="">
-    <div
-      class="flex md:!flex-row flex-col items-center justify-center mt-20 gap-2"
-    >
-      <img class="w-453 h-153" src="../assets/logo-big.svg" />
-      <!-- <h1 class="text-3xl md:!text-6xl w-453 h-153 rajdhani-regular">
+  <div
+    class="flex md:!flex-row flex-col items-center justify-center mt-20 gap-2"
+  >
+    <img class="w-453 h-153" src="../assets/logo-big.svg" />
+    <!-- <h1 class="text-3xl md:!text-6xl w-453 h-153 rajdhani-regular">
         {{ $t('pages.title') }}
       </h1> -->
-    </div>
-    <div class="text-center text-[#FFFFFF]">
-      <p class="mb-1">
-        {{ $t('pages.slogan') }}
-      </p>
-    </div>
-    <div
-      v-if="dashboard.status !== LoadingStatus.Loaded"
-      class="flex justify-center"
-    >
-      <progress class="progress progress-info w-80 h-1"></progress>
-    </div>
+  </div>
+  <div class="text-center text-[#FFFFFF]">
+    <p class="mb-1">
+      {{ $t('pages.slogan') }}
+    </p>
+  </div>
+  <div
+    v-if="dashboard.status !== LoadingStatus.Loaded"
+    class="flex justify-center"
+  >
+    <progress class="progress progress-info w-80 h-1"></progress>
+  </div>
 
-    <!-- <div class="text-center text-base mt-6">
+  <!-- <div class="text-center text-base mt-6">
       <h2 class="mb-6">{{ $t('pages.description') }}</h2>
     </div> -->
 
-    <div
-      class="flex justify-between bg-[url('src/assets/images/search-bar.svg')] py-[1.15rem] px-[25.1rem] bg-center bg-no-repeat mt-10"
-    >
-      <input
-        :placeholder="$t('pages.search_placeholder')"
-        class="text-base bg-transparent outline-none"
-        v-model="keywords"
-      />
-      <div class="px-4 text-base hidden md:!block">
-        <Icon icon="mdi:magnify" class="text-2xl text-[#686868] ml-3" />
-      </div>
+  <div class="flex justify-center relative mt-5">
+    <input
+      :placeholder="$t('pages.search_placeholder')"
+      class="text-base pl-2 outline-none border border-[#686868] bg-black bg-opacity-50 rounded-full w-[63rem] h-10"
+      v-model="keywords"
+    />
+    <div class="absolute px-4 text-base hidden md:!block ml-[59rem] mt-2">
+      <Icon icon="mdi:magnify" class="text-2xl text-[#686868]" />
     </div>
+  </div>
 
-    <div
-      class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5"
-    >
-      <ChainSummary
-        v-for="(chain, index) in favoriteChains"
-        :key="index"
-        :name="chain.chainName"
-      />
-    </div>
+  <div class="flex flex-wrap justify-center gap-4 mt-6">
+    <ChainSummary
+      v-for="(chain, index) in favoriteChains"
+      :key="index"
+      :name="chain.chainName"
+    />
   </div>
 </template>
 
