@@ -7,7 +7,7 @@ import { Icon } from '@iconify/vue';
 <template>
   <!-- footer -->
   <footer
-    class="absolute bottom-0 w-full"
+    class="absolute bottom-0"
   >
   <div class="text-white ml-2 mb-2">
     <p>Links</p>

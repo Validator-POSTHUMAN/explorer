@@ -59,3 +59,12 @@ html[data-theme='dark'] {
   font-weight: 400;
   font-style: normal;
 }
+
+
+.cosmos-styles {
+  @apply bg-black bg-opacity-50 hover:bg-[#0A2220] active:bg-[#17393D] hover:text-[#71FFB8] text-white border border-[#686868]
+}
+
+.cosmos-navbar {
+  @apply bg-black bg-opacity-50 border border-[#686868] focus:bg-[#17393D] focus:text-[#71FFB8] focus:placeholder-transparent
+}

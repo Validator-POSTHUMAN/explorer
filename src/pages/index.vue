@@ -58,15 +58,20 @@ const favoriteChains = computed(() => {
       <h2 class="mb-6">{{ $t('pages.description') }}</h2>
     </div> -->
 
-  <div class="flex justify-center relative mt-5">
-    <input
+  <div class="flex justify-center mt-5">
+    <input 
+    type="text"
+    :placeholder="$t('pages.search_placeholder')"
+    class="cosmos-navbar text-base pl-4 rounded-full w-[63rem] h-10"
+    />
+    <!-- <input
       :placeholder="$t('pages.search_placeholder')"
       class="text-base pl-2 outline-none border border-[#686868] bg-black bg-opacity-50 rounded-full w-[63rem] h-10"
       v-model="keywords"
     />
     <div class="absolute px-4 text-base hidden md:!block ml-[59rem] mt-2">
       <Icon icon="mdi:magnify" class="text-2xl text-[#686868]" />
-    </div>
+    </div> -->
   </div>
 
   <div class="flex flex-wrap justify-center gap-4 mt-6">

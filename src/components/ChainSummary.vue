@@ -27,24 +27,27 @@ const addFavor = (e: Event) => {
 <template>
   <RouterLink
     :to="`/${name}`"
-    class="bg-[#171718] bg-opacity-50 hover:bg-[#242424] border border-[#686868] rounded shadow flex flex-col items-center py-3 px-3 cursor-pointer"
+    class="btn cosmos-styles rounded h-full flex flex-col justify-center cursor-pointer relative"
   >
-  <div class="flex flex-row-reverse">
-    <div
-      @click="addFavor"
-      class="pl-4 text-xl ml-6"
-      :class="{
-        'text-warning': dashboardStore?.favoriteMap?.[props.name],
-        'text-gray-500': !dashboardStore?.favoriteMap?.[props.name],
-      }"
-    >
-      <Icon icon="mdi-star" />
-    </div>
-    <div class="w-12 h-12 ml-16 rounded-full overflow-hidden">
-      <img :src="conf.logo" />
-    </div>
-  </div>
-    <div class="font-semibold text-[#FFFFFF] truncate capitalize">
+      <div class="grid grid-cols-3 mt-3">
+        <div>
+
+        </div>
+        <div class="w-12 h-12 rounded-full overflow-hidden">
+          <img :src="conf.logo" />
+        </div>
+        <div
+          @click="addFavor"
+          class="text-xl ml-7 -mt-1"
+          :class="{
+            'text-warning': dashboardStore?.favoriteMap?.[props.name],
+            'text-gray-500': !dashboardStore?.favoriteMap?.[props.name],
+          }"
+        >
+          <Icon icon="mdi-star" />
+        </div>
+      </div>
+    <div class="font-semibold truncate capitalize justify-center mb-3">
       {{ conf?.prettyName || props.name }}
     </div>
   </RouterLink>

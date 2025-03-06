@@ -51,19 +51,6 @@ console.log(transformedAddress);
     <div
       class="relative flex gap-3 flex-row-reverse px-12 text-white items-center h-12 cursor-pointer"
     >
-      <svg
-        class="absolute h-12 right-0"
-        viewBox="0 0 376 51"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1.92992 50L36.5182 1H374.5V50H1.92992Z"
-          fill="#1D1C30"
-          stroke="#7300FF"
-          stroke-width="2"
-        />
-      </svg>
 
       <span
         class="z-10 w-52 flex items-center justify-center gap-2"

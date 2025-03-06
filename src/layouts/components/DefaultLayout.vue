@@ -69,7 +69,7 @@ function selected(route: any, nav: NavLink) {
 
 <template>
   <div
-    class="w-screen h-screen bg-[url('src/assets/images/background/cosmos-background.png')] bg-cover bg-center bg-[#0D0D0E]"
+    class="min-h-screen min-w-full bg-[url('src/assets/images/background/cosmos-background.png')] bg-cover bg-center bg-fixed bg-[#0D0D0E]"
   >
     <!-- header -->
     <div class="w-full sticky top-0 z-50 py-5">
@@ -102,9 +102,6 @@ function selected(route: any, nav: NavLink) {
         </div>
       </div>
     </div>
-    <!-- <button class="btn skew-x-[-50deg] transform bg-blue-500 text-white px-6 py-3">
-        <span class="skew-x-[50deg] transform">Нажми меня</span>
-    </button> -->
     <!-- 👉 Pages -->
     <RouterView v-slot="{ Component }">
       <Transition mode="out-in">
@@ -112,9 +109,9 @@ function selected(route: any, nav: NavLink) {
       </Transition>
     </RouterView>
     <div class="flex justify-center mt-20">
-      <div class="border border-[#686868] hover:bg-[#242424] bg-black bg-opacity-50 rounded-full w-[23rem] h-12 text-center cursor-pointer">
-        <div class="mt-3 text-white flex flex-row justify-center gap-2">
-          <p class="text-2xl -mt-[0.4rem]">+</p>Add Favorite Networks
+      <div class="btn cosmos-styles rounded-full w-[23rem] h-12 text-center cursor-pointer">
+        <div class="flex flex-row justify-center gap-2">
+          Add Favorite Networks
         </div>
       </div>
     </div>
