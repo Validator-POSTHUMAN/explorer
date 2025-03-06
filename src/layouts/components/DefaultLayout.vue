@@ -79,6 +79,7 @@ function selected(route: any, nav: NavLink) {
             <p class="text-[#686868] absolute mt-[3.5rem] ml-[2.5rem]">
               You explore:
             </p>
+            <img v-lazy="blockchain.logo" class="absolute h-12 rounded-full ml-[10rem] mt-[0.8rem]" />
             <svg
               class="mt-[-0.05rem] ml-[6rem]"
               width="174"
@@ -94,7 +95,7 @@ function selected(route: any, nav: NavLink) {
               />
             </svg>
             <p class="text-[#686868] absolute mt-[3.5rem] ml-[15rem] capitalize">
-              {{ blockchain.chainName }}
+              {{ blockchain.current?.chainName }}
             </p>
           </div>
           <div class="ml-[15.7rem]">
