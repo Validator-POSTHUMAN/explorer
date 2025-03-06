@@ -59,17 +59,17 @@ const favoriteChains = computed(() => {
     </div> -->
 
   <div class="flex justify-center mt-5">
-    <input 
-    type="text"
-    :placeholder="$t('pages.search_placeholder')"
-    class="cosmos-navbar text-base pl-4 rounded-full w-[63rem] h-10"
-    />
-    <!-- <input
+    <div class="join">
+      <input 
+      type="text"
       :placeholder="$t('pages.search_placeholder')"
-      class="text-base pl-2 outline-none border border-[#686868] bg-black bg-opacity-50 rounded-full w-[63rem] h-10"
-      v-model="keywords"
-    />
-    <div class="absolute px-4 text-base hidden md:!block ml-[59rem] mt-2">
+      class="cosmos-navbar text-base pl-4 rounded-full w-[60rem] h-12 join-item"
+      />
+      <button class="btn join-item cosmos-styles rounded-r-full">
+        <Icon icon="mdi:magnify" class="text-2xl"/>
+      </button>
+    </div>
+    <!-- <div class="absolute px-4 text-base hidden md:!block ml-[59rem] mt-2">
       <Icon icon="mdi:magnify" class="text-2xl text-[#686868]" />
     </div> -->
   </div>

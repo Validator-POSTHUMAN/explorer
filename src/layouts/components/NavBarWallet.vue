@@ -48,10 +48,10 @@ console.log(transformedAddress);
 
 <template>
   <div class="dropdown dropdown-hover dropdown-end h-16">
-    <div
-      class="relative flex gap-3 flex-row-reverse px-12 text-white items-center h-12 cursor-pointer"
+    <button
+      class="btn cosmos-wallet-btn rounded-none flex gap-3 flex-row-reverse px-12 text-white items-center h-12 cursor-pointer"
+      style="clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);"
     >
-
       <span
         class="z-10 w-52 flex items-center justify-center gap-2"
         v-if="walletStore?.currentAddress"
@@ -63,7 +63,7 @@ console.log(transformedAddress);
         ><Icon icon="mdi:wallet" class="text-[#D9D9D9] w-6 h-6 z-10" />Connect
         wallet</span
       >
-    </div>
+    </button>
     <!-- <label
       tabindex="0"
       class="btn btn-sm btn-[#222226] hover:bg-[#2E2C50] rounded-full m-1 lowercase truncate !inline-flex text-xs md:!text-sm"

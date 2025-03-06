@@ -73,23 +73,33 @@ function selected(route: any, nav: NavLink) {
   >
     <!-- header -->
     <div class="w-full sticky top-0 z-50 py-5">
-      <div class="border-b border-t border-y-[#686868] bg-black">
+      <div class="border-b border-t border-y-[#686868] bg-black relative">
         <div class="flex h-12">
-          <svg
-            class="-mr-[1rem]"
-            width="174"
-            height="74"
-            viewBox="0 0 174 74"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2 0.5H1.03311L1.59199 1.28901L52.592 73.289L52.7414 73.5H53H120.695H120.954L121.104 73.2883L171.909 1.28827L172.465 0.5H171.5H2Z"
-              fill="black"
-              stroke="#686868"
-            />
-          </svg>
-          <NavbarLinks/>
+          <div class="absolute flex flex-row">
+            <p class="text-[#686868] absolute mt-[3.5rem] ml-[2.5rem]">
+              You explore:
+            </p>
+            <svg
+              class="mt-[-0.05rem] ml-[6rem]"
+              width="174"
+              height="74"
+              viewBox="0 0 174 74"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 0.5H1.03311L1.59199 1.28901L52.592 73.289L52.7414 73.5H53H120.695H120.954L121.104 73.2883L171.909 1.28827L172.465 0.5H171.5H2Z"
+                fill="black"
+                stroke="#686868"
+              />
+            </svg>
+            <p class="text-[#686868] absolute mt-[3.5rem] ml-[15rem] capitalize">
+              {{ blockchain.chainName }}
+            </p>
+          </div>
+          <div class="ml-[15.7rem]">
+            <NavbarLinks/>
+          </div>
           <!-- <ChainProfile /> -->
 
           <!-- <NavSearchBar />-->
@@ -109,11 +119,11 @@ function selected(route: any, nav: NavLink) {
       </Transition>
     </RouterView>
     <div class="flex justify-center mt-20">
-      <div class="btn cosmos-styles rounded-full w-[23rem] h-12 text-center cursor-pointer">
+      <button class="btn cosmos-styles rounded-full w-[23rem] h-12 text-center cursor-pointer">
         <div class="flex flex-row justify-center gap-2">
           Add Favorite Networks
         </div>
-      </div>
+      </button>
     </div>
     <newFooter />
   </div>
