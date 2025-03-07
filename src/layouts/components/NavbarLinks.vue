@@ -26,14 +26,14 @@ function isNavLink(nav: VerticalNavItems | any): nav is NavLink {
       </span>
     </RouterLink>
     <RouterLink class="btn rounded-none cosmos-styles skew-x-[-35deg] transform normal-case"
-    
+    to="/cosmos/stacking"
     >
       <span class="skew-x-[35deg] transform ">
         _Stacking
       </span>
     </RouterLink>
     <RouterLink class="btn rounded-none cosmos-styles skew-x-[-35deg] transform normal-case"
-    
+    to="/cosmos/govarnance"
     >
       <span class="skew-x-[35deg] transform ">
         _Governance
