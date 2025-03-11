@@ -65,7 +65,7 @@ const favoriteChains = computed(() => {
       :placeholder="$t('pages.search_placeholder')"
       class="cosmos-navbar text-base pl-4 rounded-full w-[60rem] h-12 join-item"
       />
-      <button class="btn join-item cosmos-styles rounded-r-full">
+      <button class="btn join-item cosmos-styles rounded-r-full text-2xl">
         <Icon icon="mdi:magnify" class="text-2xl"/>
       </button>
     </div>

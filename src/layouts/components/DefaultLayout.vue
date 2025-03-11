@@ -20,6 +20,7 @@ import type {
   NavSectionTitle,
   VerticalNavItems,
 } from '../types';
+import { RouterLink } from 'vue-router';
 
 const dashboard = useDashboard();
 dashboard.initial();
@@ -75,26 +76,12 @@ function selected(route: any, nav: NavLink) {
     <div class="w-full sticky top-0 z-50 py-5">
       <div class="border-b border-t border-y-[#686868] bg-black relative">
         <div class="flex h-12">
-          <div class="absolute flex flex-row">
-            <p class="text-[#686868] absolute mt-[3.5rem] ml-[2.5rem]">
+          <div class="flex flex-row mt-14">
+            <p class="text-[#686868]">
               You explore:
             </p>
-            <img v-lazy="blockchain.logo" class="absolute h-12 rounded-full ml-[10rem] mt-[0.8rem]" />
-            <svg
-              class="mt-[-0.05rem] ml-[6rem]"
-              width="174"
-              height="74"
-              viewBox="0 0 174 74"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2 0.5H1.03311L1.59199 1.28901L52.592 73.289L52.7414 73.5H53H120.695H120.954L121.104 73.2883L171.909 1.28827L172.465 0.5H171.5H2Z"
-                fill="black"
-                stroke="#686868"
-              />
-            </svg>
-            <p class="text-[#686868] absolute mt-[3.5rem] ml-[15rem] capitalize">
+            <img v-lazy="blockchain.logo"/>
+            <p class="text-[#686868] capitalize">
               {{ blockchain.current?.chainName }}
             </p>
           </div>

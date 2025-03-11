@@ -5,20 +5,14 @@ import { RouterLink } from 'vue-router';
 
 <template>
   <div class="join">
-    <RouterLink to="/cosmos" @click.native="reloadPage" class="btn rounded-none cosmos-styles skew-x-[-35deg] transform normal-case">
-      <span class="skew-x-[35deg] transform ">
+    <RouterLink to="/cosmos" @click.native="reloadPage" class="btn rounded-none cosmos-styles normal-case">
         _Dashboard
-      </span>
     </RouterLink>
-    <RouterLink to="/cosmos/stacking" @click.native="reloadPage" class="btn rounded-none cosmos-styles skew-x-[-35deg] transform normal-case">
-      <span class="skew-x-[35deg] transform ">
+    <RouterLink to="/cosmos/staking" @click.native="reloadPage" class="btn rounded-none cosmos-styles normal-case">
         _Stacking
-      </span>
     </RouterLink>
-    <RouterLink to="/cosmos/gov" @click.native="reloadPage" class="btn rounded-none cosmos-styles skew-x-[-35deg] transform normal-case">
-      <span class="skew-x-[35deg] transform ">
+    <RouterLink to="/cosmos/gov" @click.native="reloadPage" class="btn rounded-none cosmos-styles normal-case">
         _Governance
-      </span>
     </RouterLink>
   </div>
 </template>
