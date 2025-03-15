@@ -32,7 +32,7 @@ function changeChart(type: string) {
 </script>
 
 <template>
-  <div class="tabs tabs-boxed bg-transparent justify-end">
+  <!-- <div class="tabs tabs-boxed bg-transparent justify-end">
     <a
       class="tab text-xs mr-2 text-[#FFFFFF] uppercase"
       :class="{ 'tab-active': kind === 'price' }"
@@ -47,7 +47,7 @@ function changeChart(type: string) {
     >
       Volume
     </a>
-  </div>
+  </div> -->
   <ApexCharts
     type="area"
     height="230"

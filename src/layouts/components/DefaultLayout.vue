@@ -76,18 +76,7 @@ function selected(route: any, nav: NavLink) {
     <div class="w-full sticky top-0 z-50 py-5">
       <div class="border-b border-t border-y-[#686868] bg-black relative">
         <div class="flex h-12">
-          <div class="flex flex-row mt-14">
-            <p class="text-[#686868]">
-              You explore:
-            </p>
-            <img v-lazy="blockchain.logo"/>
-            <p class="text-[#686868] capitalize">
-              {{ blockchain.current?.chainName }}
-            </p>
-          </div>
-          <div class="ml-[15.7rem]">
-            <NavbarLinks/>
-          </div>
+          <NavbarLinks />
           <!-- <ChainProfile /> -->
 
           <!-- <NavSearchBar />-->
@@ -99,6 +88,12 @@ function selected(route: any, nav: NavLink) {
           </div>
         </div>
       </div>
+      <div class="flex flex-row gap-[7.6rem] text-[#686868] ml-20 mt-2">
+        <p>You explore:</p>
+        <p class="capitalize">
+          {{ blockchain.current?.chainName }}
+        </p>
+      </div>
     </div>
     <!-- 👉 Pages -->
     <RouterView v-slot="{ Component }">
@@ -107,7 +102,9 @@ function selected(route: any, nav: NavLink) {
       </Transition>
     </RouterView>
     <div class="flex justify-center mt-20">
-      <button class="btn cosmos-styles rounded-full w-[23rem] h-12 text-center cursor-pointer">
+      <button
+        class="btn cosmos-styles rounded-full w-[23rem] h-12 text-center cursor-pointer"
+      >
         <div class="flex flex-row justify-center gap-2">
           Add Favorite Networks
         </div>

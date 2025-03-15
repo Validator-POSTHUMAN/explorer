@@ -49,7 +49,7 @@ console.log(transformedAddress);
 <template>
   <div class="dropdown dropdown-hover dropdown-end h-16">
     <button
-      class="btn cosmos-wallet-btn rounded-none flex gap-3 flex-row-reverse px-12 text-white items-center h-12 cursor-pointer"
+      class="btn cosmos-wallet-btn rounded-l-full flex gap-3 flex-row-reverse px-12 text-white items-center h-12 cursor-pointer"
     >
       <span
         class="z-10 w-52 flex items-center justify-center gap-2"
