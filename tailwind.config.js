@@ -12,6 +12,9 @@ module.exports = {
         secondary: '#7a7c7d',
         active: '#7a7c7d',
       },
+      backgroundColor: {
+        'wallet-gradient': 'linear-gradient(0deg, #3A1F67, #3A1F67), #1D1C30',
+      }
     },
   },
   plugins: [require('daisyui')],

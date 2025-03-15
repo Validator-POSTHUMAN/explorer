@@ -34,7 +34,7 @@ const tipMsg = computed(() => {
 });
 
 function transformAddress(address: string): string {
-  const prefix = address.slice(0, 8);
+  const prefix = address.slice(0, 16);
   const suffix = address.slice(-4);
 
   return `${prefix}..${suffix}`;
@@ -48,31 +48,21 @@ console.log(transformedAddress);
 
 <template>
   <div class="dropdown dropdown-hover dropdown-end h-16">
-    <div
-      class="relative flex gap-3 flex-row-reverse px-12 text-white items-center h-16 cursor-pointer"
+    <button
+      class="btn cosmos-wallet-btn rounded-l-full flex gap-3 flex-row-reverse px-12 text-white items-center h-12 cursor-pointer"
     >
-      <!-- <svg
-        class="absolute h-16"
-        width="376"
-        height="51"
-        viewBox="0 0 376 51"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      <span
+        class="z-10 w-52 flex items-center justify-center gap-2"
+        v-if="walletStore?.currentAddress"
+        ><Icon icon="mdi:wallet" class="text-[#D9D9D9] w-6 h-6 z-10" />{{
+          transformAddress(walletStore.currentAddress)
+        }}</span
       >
-        <path
-          d="M1.92992 50L36.5182 1H374.5V50H1.92992Z"
-          fill="#1D1C30"
-          stroke="#7300FF"
-          stroke-width="2"
-        />
-      </svg> -->
-
-      <span class="z-10" v-if="walletStore?.currentAddress">{{
-        transformAddress(walletStore.currentAddress)
-      }}</span>
-      <span class="z-10" v-else>Connect wallet</span>
-      <Icon icon="mdi:wallet" class="text-[#D9D9D9] w-6 h-6 z-10" />
-    </div>
+      <span class="z-10 w-52 flex items-center justify-center gap-2" v-else
+        ><Icon icon="mdi:wallet" class="text-[#D9D9D9] w-6 h-6 z-10" />Connect
+        wallet</span
+      >
+    </button>
     <!-- <label
       tabindex="0"
       class="btn btn-sm btn-[#222226] hover:bg-[#2E2C50] rounded-full m-1 lowercase truncate !inline-flex text-xs md:!text-sm"

@@ -59,3 +59,20 @@ html[data-theme='dark'] {
   font-weight: 400;
   font-style: normal;
 }
+
+
+.cosmos-styles {
+  @apply bg-black bg-opacity-50 hover:bg-[#0A2220] active:bg-[#17393D] hover:text-[#71FFB8] text-white border border-[#686868]
+}
+
+.cosmos-navbar-pgs {
+  @apply bg-black hover:bg-[#0A2220] active:bg-[#17393D] hover:text-[#71FFB8] text-white border-[#686868] rounded-r-full
+}
+
+.cosmos-navbar {
+  @apply bg-black bg-opacity-50 border border-[#686868] focus:bg-[#17393D] focus:text-[#71FFB8] focus:placeholder-transparent
+}
+
+.cosmos-wallet-btn {
+  @apply bg-[#1D1C3] bg-opacity-50 border border-[#7300FF] hover:bg-[#3A1F67]
+}
