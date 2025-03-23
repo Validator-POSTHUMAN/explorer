@@ -8,7 +8,7 @@ const blockchain = useBlockchain();
 
 <template>
   <div class="join">
-    <img class="px-5 join-item" src="src/assets/logo.svg"/>
+    <img class="px-5 join-item" src="@/assets/logo.svg"/>
     <div class="border join-horizontal border-t-0 border-[#686868] overflow-hidden h-[6rem] rounded-b-[1.5625rem] rounded-t-none bg-black">
       <img :src="blockchain.logo" class="w-full h-full object-cover p-4"/>
     </div>

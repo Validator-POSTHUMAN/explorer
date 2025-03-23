@@ -160,7 +160,7 @@ function changeChart(type: string) {
     <!--Up-->
     <div class="flex flex-row gap-4 px-2">
       <div
-        class="bg-black bg-opacity-50 border-[0.5rem] border-[#1C1C21] rounded-lg mt-4"
+        class="bg-black bg-opacity-50 border-[0.5rem] border-[#1C1C21] rounded-lg mt-4 flex-1"
       >
         <div
           class="flex justify-between px-4 pt-4 pb-2 text-lg font-semibold text-[#FFFFFF]"
@@ -501,7 +501,7 @@ function changeChart(type: string) {
         </Teleport>
       </div>
       <div
-        class="border-[0.5rem] border-[#17393D] rounded-lg mt-4 w-2/6 px-10 bg-black bg-opacity-50"
+        class="border-[0.5rem] border-[#17393D] rounded-lg mt-4 px-10 bg-black bg-opacity-50"
       >
         <h3 class="text-lg font-bold text-[#71FFB8] uppercase mt-4">
           {{ $t('index.price_calculator') }}

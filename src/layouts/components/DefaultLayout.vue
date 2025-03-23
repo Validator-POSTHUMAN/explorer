@@ -70,7 +70,7 @@ function selected(route: any, nav: NavLink) {
 
 <template>
   <div
-    class="min-h-screen min-w-full bg-[url('src/assets/images/background/cosmos-background.png')] bg-cover bg-center bg-fixed bg-[#0D0D0E]"
+    class="min-h-screen min-w-full bg-[url('@/assets/images/background/cosmos-background.png')] bg-cover bg-center bg-fixed bg-[#0D0D0E]"
   >
     <!-- header -->
     <div class="w-full sticky top-0 z-50 py-5">
@@ -110,6 +110,6 @@ function selected(route: any, nav: NavLink) {
         </div>
       </button>
     </div>
-    <newFooter />
+      <newFooter />
   </div>
 </template>
