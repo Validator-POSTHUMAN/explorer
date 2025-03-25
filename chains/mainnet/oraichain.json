@@ -1,0 +1,77 @@
+{
+  "chain_name": "oraichain",
+  "theme_color": "#2e2e2e",
+  "registry_name": "oraichain",
+  "api": [
+    {
+      "address": "https://api-orai.blockval.io",
+      "provider": "Blockval"
+    },
+    {
+      "address": "https://mainnet-orai-api.konsortech.xyz",
+      "provider": "KonsorTech"
+    },
+    {
+      "address": "https://orai.api.m.stavr.tech",
+      "provider": "🔥STAVR🔥"
+    },
+    {
+      "address": "https://orai-rest.owallet.io",
+      "provider": "OWALLET"
+    },
+    {
+      "address": "https://oraichain-mainnet-api.itrocket.net",
+      "provider": "ITRocket"
+    },
+    {
+      "address": "http://lcd.orai.io",
+      "provider": "oraichain-team"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://rpc-orai.blockval.io",
+      "provider": "Blockval"
+    },
+    {
+      "address": "https://mainnet-orai-rpc.konsortech.xyz",
+      "provider": "KonsorTech"
+    },
+    {
+      "address": "https://orai.rpc.m.stavr.tech",
+      "provider": "🔥STAVR🔥"
+    },
+    {
+      "address": "https://orai-rpc.owallet.io",
+      "provider": "OWALLET"
+    },
+    {
+      "address": "https://rpc.orai.pfc.zone",
+      "provider": "PFC"
+    },
+    {
+      "address": "https://orai-rpc.imdev.app",
+      "provider": "imORAI"
+    },
+    {
+      "address": "https://oraichain-mainnet-rpc.itrocket.net",
+      "provider": "ITRocket"
+    },
+    {
+      "address": "https://rpc.orai.io",
+      "provider": "oraichain-team"
+    }
+  ],
+  "sdk_version": "0.45.16",
+  "addr_prefix": "orai",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg",
+  "assets": [
+    {
+      "base": "uorai",
+      "symbol": "ORAI",
+      "exponent": "6",
+      "coingecko_id": "oraichain-token",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg"
+    }
+  ]
+}
