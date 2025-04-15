@@ -1,7 +1,6 @@
 {
-  "chain_name": "elys",
+  "chain_name": "elys-testnet",
   "theme_color": "#2e2e2e",
-  "registry_name": "elys",
   "api": [
     {
       "address": "https://elys-testnet-api.itrocket.net",
