@@ -37,7 +37,7 @@
     {
       "base": "basecro",
       "symbol": "CRO",
-      "exponent": "18",
+      "exponent": "8",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cronos/images/cro.svg"
     }
   ]
