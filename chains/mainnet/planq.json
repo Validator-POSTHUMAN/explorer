@@ -1,0 +1,93 @@
+{
+  "chain_name": "planq",
+  "theme_color": "#2e2e2e",
+  "registry_name": "planq",
+  "api": [
+    {
+      "address": "https://api.planq.indonode.net:443",
+      "provider": "Indonode"
+    },
+    {
+      "address": "https://mainnet-planq-api.konsortech.xyz:443",
+      "provider": "KonsorTech"
+    },
+    {
+      "address": "https://planq-api.stake-town.com:443",
+      "provider": "StakeTown"
+    },
+    {
+      "address": "https://planq-api.genznodes.dev:443",
+      "provider": "genznodes"
+    },
+    {
+      "address": "https://api.planq.safeblock.space:443",
+      "provider": "Safe Block"
+    },
+    {
+      "address": "https://planq.api.m.stavr.tech:443",
+      "provider": "🔥STAVR🔥"
+    },
+    {
+      "address": "https://rest.planq.network:443",
+      "provider": "planq.network"
+    },
+    {
+      "address": "https://planq_mainnet_api.chain.whenmoonwhenlambo.money:443",
+      "provider": "🚀 WHEN MOON 🌕 WHEN LAMBO 🔥"
+    },
+    {
+      "address": "https://api.planq.nodestake.org:443",
+      "provider": "NodeStake"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://rpc.planq.indonode.net:443",
+      "provider": "Indonode"
+    },
+    {
+      "address": "https://mainnet-planq-rpc.konsortech.xyz:443",
+      "provider": "KonsorTech"
+    },
+    {
+      "address": "https://planq-rpc.stake-town.com:443",
+      "provider": "StakeTown"
+    },
+    {
+      "address": "https://planq-rpc.genznodes.dev:443",
+      "provider": "genznodes"
+    },
+    {
+      "address": "https://rpc.planq.safeblock.space:443",
+      "provider": "Safe Block"
+    },
+    {
+      "address": "https://planq.rpc.m.stavr.tech:443",
+      "provider": "🔥STAVR🔥"
+    },
+    {
+      "address": "https://rpc.planq.network:443",
+      "provider": "planq.network"
+    },
+    {
+      "address": "https://planq_mainnet_rpc.chain.whenmoonwhenlambo.money:443",
+      "provider": "🚀 WHEN MOON 🌕 WHEN LAMBO 🔥"
+    },
+    {
+      "address": "https://rpc.planq.nodestake.org:443",
+      "provider": "NodeStake"
+    }
+  ],
+  "sdk_version": "0.47.16",
+  "addr_prefix": "plq",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/planq.svg",
+  "assets": [
+    {
+      "base": "aplanq",
+      "symbol": "PLQ",
+      "exponent": "18",
+      "coingecko_id": "planq",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/planq/images/planq.svg"
+    }
+  ]
+}
