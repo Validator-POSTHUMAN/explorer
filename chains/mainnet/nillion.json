@@ -1,0 +1,45 @@
+{
+  "chain_name": "nillion",
+  "theme_color": "#2e2e2e",
+  "registry_name": "nillion",
+  "api": [
+    {
+      "address": "https://api.nillion.nodestake.org:443",
+      "provider": "NodeStake"
+    },
+    {
+      "address": "https://nillion-api.lavenderfive.com:443",
+      "provider": "lavenderfive"
+    },
+    {
+      "address": "https://nillion-mainnet-lcd.autostake.com:443",
+      "provider": "AutoStake 🛡️ Slash Protected"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://rpc.nillion.nodestake.org:443",
+      "provider": "NodeStake"
+    },
+    {
+      "address": "https://nillion-rpc.lavenderfive.com:443",
+      "provider": "lavenderfive"
+    },
+    {
+      "address": "https://nillion-mainnet-rpc.autostake.com:443",
+      "provider": "AutoStake 🛡️ Slash Protected"
+    }
+  ],
+  "sdk_version": "0.50.11",
+  "addr_prefix": "nillion",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nillion/images/nil.svg",
+  "assets": [
+    {
+      "base": "unil",
+      "symbol": "NIL",
+      "exponent": "6",
+      "coingecko_id": "nillion",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nillion/images/nil.svg"
+    }
+  ]
+}
