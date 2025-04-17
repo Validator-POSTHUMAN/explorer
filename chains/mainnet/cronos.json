@@ -1,25 +1,33 @@
 {
-  "chain_name": "cronos",
+  "chain_name": "cronos pos chain",
   "theme_color": "#2e2e2e",
-  "registry_name": "cronos",
+  "registry_name": "cryptoorgchain",
   "api": [
     {
-      "address": "https://rest.cronos.org",
-      "provider": "cronos.org"
+      "address": "https://rest-cryptoorgchain.ecostake.com:443",
+      "provider": "ecostake"
     },
     {
-      "address": "https://cronos-api.polkachu.com",
+      "address": "https://cryptocom-api.polkachu.com:443",
       "provider": "Polkachu"
+    },
+    {
+      "address": "https://rest.mainnet.crypto.org:443",
+      "provider": "cronos.org"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.cronos.org",
-      "provider": "cronos.org"
+      "address": "https://rpc-cryptoorgchain.ecostake.com:443",
+      "provider": "ecostake"
     },
     {
-      "address": "https://cronos-rpc.polkachu.com",
+      "address": "https://cryptocom-rpc.polkachu.com:443",
       "provider": "Polkachu"
+    },
+    {
+      "address": "https://rpc.mainnet.crypto.org:443",
+      "provider": "cronos.org"
     }
   ],
   "sdk_version": "0.43.0",
@@ -30,7 +38,6 @@
       "base": "basecro",
       "symbol": "CRO",
       "exponent": "18",
-      "coingecko_id": "crypto-com-chain",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cronos/images/cro.svg"
     }
   ]
