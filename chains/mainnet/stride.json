@@ -1,0 +1,77 @@
+{
+  "chain_name": "stride",
+  "theme_color": "#2e2e2e",
+  "registry_name": "stride",
+  "api": [
+    {
+      "address": "https://lcd.stride.bronbro.io:443",
+      "provider": "Bro_n_Bro"
+    },
+    {
+      "address": "https://community.nuxian-node.ch:6797/stride/crpc",
+      "provider": "PRO Delegators"
+    },
+    {
+      "address": "https://stride-api.polkachu.com:443",
+      "provider": "Polkachu"
+    },
+    {
+      "address": "https://stride-api.w3coins.io:443",
+      "provider": "w3coins"
+    },
+    {
+      "address": "https://api-stride-01.stakeflow.io:443",
+      "provider": "Stakeflow"
+    },
+    {
+      "address": "https://stride.api.kjnodes.com:443",
+      "provider": "kjnodes"
+    },
+    {
+      "address": "https://stride-api.ibs.team:443",
+      "provider": "Inter Blockchain Services"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://rpc.stride.bronbro.io:443",
+      "provider": "Bro_n_Bro"
+    },
+    {
+      "address": "https://community.nuxian-node.ch:6797/stride/trpc",
+      "provider": "PRO Delegators"
+    },
+    {
+      "address": "https://stride-rpc.w3coins.io:443",
+      "provider": "w3coins"
+    },
+    {
+      "address": "https://stride-rpc.polkachu.com:443",
+      "provider": "Polkachu"
+    },
+    {
+      "address": "https://rpc-stride-01.stakeflow.io:443",
+      "provider": "Stakeflow"
+    },
+    {
+      "address": "https://stride-rpc.ibs.team:443",
+      "provider": "Inter Blockchain Services"
+    },
+    {
+      "address": "https://stride.rpc.kjnodes.com:443",
+      "provider": "kjnodes"
+    }
+  ],
+  "sdk_version": "0.47.16",
+  "addr_prefix": "stride",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.svg",
+  "assets": [
+    {
+      "base": "ustrd",
+      "symbol": "STRD",
+      "exponent": "6",
+      "coingecko_id": "stride",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.svg"
+    }
+  ]
+}
