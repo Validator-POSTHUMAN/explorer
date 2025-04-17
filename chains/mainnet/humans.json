@@ -4,12 +4,96 @@
     {
       "provider": "POSTHUMAN∞DVS",
       "address": "https://rest.humans.posthuman.digital"
+    },
+    {
+      "provider": "StakeAngle",
+      "address": "http://humans-rpc.stakeangle.com:41417"
+    },
+    {
+      "provider": "TheNOP.io",
+      "address": "https://api-humansai.thenop.io:443"
+    },
+    {
+      "provider": "KonsorTech",
+      "address": "https://mainnet-humans-api.konsortech.xyz:443"
+    },
+    {
+      "provider": "PPNV Service",
+      "address": "http://65.21.46.90:5317"
+    },
+    {
+      "provider": "kjnodes",
+      "address": "https://humans.api.kjnodes.com"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://humans-api.noders.services:443"
+    },
+    {
+      "provider": "itrocket",
+      "address": "https://humans-mainnet-api.itrocket.net:443"
+    },
+    {
+      "provider": "Staketab",
+      "address": "https://humans-rest.staketab.org:443"
+    },
+    {
+      "provider": "Cosmonaut Stakes",
+      "address": "https://humans-mainnet-rest.cosmonautstakes.com"
+    },
+    {
+      "provider": "NodeStake",
+      "address": "https://api.humans.nodestake.org:443"
     }
   ],
   "rpc": [
     {
       "provider": "POSTHUMAN∞DVS",
       "address": "https://rpc.humans.posthuman.digital"
+    },
+    {
+      "provider": "TheNOP.io",
+      "address": "https://rpc-humansai.thenop.io:443"
+    },
+    {
+      "provider": "StakeAngle",
+      "address": "https://humans-rpc.stakeangle.com/:443"
+    },
+    {
+      "provider": "KonsorTech",
+      "address": "https://mainnet-humans-rpc.konsortech.xyz:443"
+    },
+    {
+      "provider": "PPNV Service",
+      "address": "http://65.21.46.90:5657"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://humans-rpc.noders.services:443"
+    },
+    {
+      "provider": "kjnodes",
+      "address": "https://humans.rpc.kjnodes.com:443"
+    },
+    {
+      "provider": "AnyValid",
+      "address": "https://humans-rpc.anyvalid.com:26627"
+    },
+    {
+      "provider": "itrocket",
+      "address": "https://humans-mainnet-rpc.itrocket.net:443"
+    },
+    {
+      "provider": "Staketab",
+      "address": "https://humans-rpc.staketab.org:443"
+    },
+    {
+      "provider": "Cosmonaut Stakes",
+      "address": "https://humans-mainnet-rpc.cosmonautstakes.com:443"
+    },
+    {
+      "provider": "NodeStake",
+      "address": "https://rpc.humans.nodestake.org:443"
     }
   ],
   "sdk_version": "0.46.11",
