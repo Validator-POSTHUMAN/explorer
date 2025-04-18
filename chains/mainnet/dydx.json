@@ -1,0 +1,60 @@
+{
+  "chain_name": "dydx",
+  "theme_color": "#2e2e2e",
+  "registry_name": "dydx",
+  "api": [
+    {
+      "address": "https://community.nuxian-node.ch:6797/dydx/crpc",
+      "provider": "PRO Delegators"
+    },
+    {
+      "address": "https://dydx-dao-api.polkachu.com:443",
+      "provider": "Polkachu"
+    },
+    {
+      "address": "https://rest-dydx.ecostake.com:443",
+      "provider": "ecostake"
+    },
+    {
+      "address": "https://dydx-rest.kingnodes.com:443",
+      "provider": "Kingnodes 👑"
+    },
+    {
+      "address": "https://dydx-mainnet-lcd.autostake.com:443",
+      "provider": "AutoStake 🛡️ Slash Protected"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://community.nuxian-node.ch:6797/dydx/trpc",
+      "provider": "PRO Delegators"
+    },
+    {
+      "address": "https://rpc-dydx.ecostake.com:443",
+      "provider": "ecostake"
+    },
+    {
+      "address": "https://dydx-mainnet-rpc.autostake.com:443",
+      "provider": "AutoStake 🛡️ Slash Protected"
+    },
+    {
+      "address": "https://dydx-dao-rpc.polkachu.com:443",
+      "provider": "Polkachu"
+    },
+    {
+      "address": "https://dydx-rpc.kingnodes.com:443",
+      "provider": "Kingnodes 👑"
+    }
+  ],
+  "sdk_version": "0.50.6",
+  "addr_prefix": "dydx",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg",
+  "assets": [
+    {
+      "base": "adydx",
+      "symbol": "DYDX",
+      "exponent": "18",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg"
+    }
+  ]
+}
