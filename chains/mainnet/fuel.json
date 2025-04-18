@@ -21,6 +21,7 @@
     {
       "base": "fuel",
       "symbol": "FUEL",
+      "exponent": "9",
       "logo": "fuel.png"
     }
   ]
