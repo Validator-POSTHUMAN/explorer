@@ -1,0 +1,68 @@
+{
+  "chain_name": "babylon",
+  "theme_color": "#2e2e2e",
+  "registry_name": "babylon",
+  "api": [
+    {
+      "provider": "PRO Delegators",
+      "address": "https://community.nuxian-node.ch:6797/babylon/crpc"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-api.polkachu.com:443"
+    },
+    {
+      "provider": "Nodes.Guru",
+      "address": "https://babylon-archive.nodes.guru:443/api"
+    },
+    {
+      "provider": "AutoStake 🛡️ Slash Protected",
+      "address": "https://babylon-mainnet-lcd.autostake.com:443"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-archive-api.polkachu.com:443"
+    },
+    {
+      "provider": "Nodes.Guru",
+      "address": "https://babylon.nodes.guru:443/api"
+    }
+  ],
+  "rpc": [
+    {
+      "provider": "PRO Delegators",
+      "address": "https://community.nuxian-node.ch:6797/babylon/trpc"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-rpc.polkachu.com:443"
+    },
+    {
+      "provider": "Nodes.Guru",
+      "address": "https://babylon-archive.nodes.guru:443/rpc"
+    },
+    {
+      "provider": "AutoStake 🛡️ Slash Protected",
+      "address": "https://babylon-mainnet-rpc.autostake.com:443"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-archive-rpc.polkachu.com"
+    },
+    {
+      "provider": "Nodes.Guru",
+      "address": "https://babylon.nodes.guru:443/rpc"
+    }
+  ],
+  "assets": [
+    {
+      "base": "ubbn",
+      "symbol": "BBN",
+      "exponent": "6",
+      "logo": "babylon.jpg"
+    }
+  ],
+  "sdk_version": "0.50.9",
+  "addr_prefix": "bbn",
+  "logo": "babylon.jpg"
+}
