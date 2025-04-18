@@ -1,0 +1,27 @@
+{
+  "chain_name": "fuel",
+  "theme_color": "#2e2e2e",
+  "registry_name": "fuel",
+  "api": [
+    {
+      "address": "https://fuel-mainnet-api.itrocket.net",
+      "provider": "IT ROCKET"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://fuel-mainnet-rpc.itrocket.net",
+      "provider": "IT ROCKET"
+    }
+  ],
+  "sdk_version": "0.50.10",
+  "addr_prefix": "fuelsequencer",
+  "logo": "fuel.png",
+  "assets": [
+    {
+      "base": "fuel",
+      "symbol": "FUEL",
+      "logo": "fuel.png"
+    }
+  ]
+}
