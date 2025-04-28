@@ -19,9 +19,11 @@
     "tag_all": "Halaman Tidak Ditemukan",
     "slogan": "watch the cosmos",
     "description": "Cosmos Ecosystem Blockchains",
-    "search_placeholder": "Telusuri Rantai",
+    "search_placeholder": "搜索区块链",
     "description_all": "Kami tidak dapat menemukan halaman yang anda cari.",
-    "btn_index": "Kembali ke awal"
+    "btn_index": "Kembali ke awal",
+    "connect_wallet": "Connect wallet",
+    "add_network": "Add Favorite Network"
   },
   "account": {
     "type": "Tipe",

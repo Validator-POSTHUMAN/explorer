@@ -38,13 +38,33 @@ const tipMsg = computed(() => {
   <div class="dropdown dropdown-hover dropdown-end">
     <label
       tabindex="0"
-      class="btn btn-sm btn-[#222226] hover:bg-[#2E2C50] rounded-full m-1 lowercase truncate !inline-flex text-xs md:!text-sm"
+      class="xl:hidden btn btn-sm btn-[#222226] hover:bg-[#2E2C50] rounded-full m-1 lowercase truncate inline-flex text-xs md:!text-sm"
     >
       <Icon icon="mdi:wallet" class="text-[#D9D9D9]" />
     </label>
+
+    <label tabindex="0" >
+    <button
+        class="hidden min-w-80 w-80 h-full relative bg-wallet-button hover:bg-wallet-button-hover  xl:flex items-center gap-5 py-3 px-16 header-20 border-y-2 border-[#7300FF]
+                before:block before:absolute before:inset-0 before:border-r-2 before:border-[#7300FF] before:z-10 before:-top-0.5
+                after:block after:absolute after:inset-0 after:-skew-x-[33deg] after:border-l-2 after:border-[#7300FF] after:bg-wallet-button
+                after:hover:bg-wallet-button-hover after:translate-x-6 after:border-y-2 after:scale-x-125 after:-top-0.5 after:-bottom-0.5">
+        <Icon icon="mdi:wallet" class="h-6 w-7 text-[#D9D9D9]" />
+
+        <!-- <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
+        <span v-else class="header-16"> {{ walletStore.connectedWallet?.wallet }} </span> -->
+
+        <div class="absolute z-20 flex items-center gap-5 header-20">
+            <Icon icon="mdi:wallet" class="h-6 w-7 text-[#D9D9D9]" />
+            <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
+            <span v-else class="header-16"> {{ walletStore.connectedWallet?.wallet }} </span>
+        </div>
+    </button>
+    </label>
+
     <div
       tabindex="0"
-      class="dropdown-content menu shadow p-2 bg-[#171718] rounded w-52 md:!w-64 overflow-auto"
+      class="dropdown-content menu shadow p-2 bg-[#171718] rounded w-52 md:!w-64 overflow-auto z-30"
     >
       <label
         v-if="!walletStore?.currentAddress"

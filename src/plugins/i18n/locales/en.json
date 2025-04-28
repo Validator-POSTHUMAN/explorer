@@ -11,7 +11,9 @@
     "add_to_favorite": "Add to favorite",
     "all_blockchains": "All Blockchain",
     "sponsors": "Sponsors",
-    "links": "Links"
+    "links": "Links",
+    "connect_wallet": "Connect wallet",
+    "add_network": "Add Favorite Network"
   },
   "pages": {
     "title": "OCULO",
@@ -20,7 +22,7 @@
     "tag_all": "Page Not Found",
     "slogan": "watch the cosmos",
     "description": "Cosmos Ecosystem Blockchains",
-    "search_placeholder": "Search Chain",
+    "search_placeholder": "Enter network / address / etc",
     "description_all": "We couldn't find the page you are looking for.",
     "btn_index": "Back to Home"
   },

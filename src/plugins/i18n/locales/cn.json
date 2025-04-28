@@ -10,13 +10,15 @@
     "add_to_favorite": "加入收藏夹",
     "all_blockchains": "全部区块链",
     "sponsors": "赞助商",
-    "links": "链接"
+    "links": "链接",
+    "connect_wallet": "Connect wallet",
+    "add_network": "Add Favorite Network"
   },
   "pages": {
     "title": "OCULO",
     "slogan": "watch the cosmos",
     "description": "Cosmos Ecosystem Blockchains",
-    "search_placeholder": "搜索区块链",
+    "search_placeholder": "Enter network / address / etc",
     "add_to_favorite": "加入收藏夹",
     "title_all": "404",
     "tag": "测试版",

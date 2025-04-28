@@ -12,45 +12,42 @@ function changeEndpoint(item: Endpoint) {
 </script>
 
 <template>
-  <div class="dropdown">
-    <label tabindex="0" class="flex items-center">
-      <div class="p-1 relative mr-3 cursor-pointer">
-        <img v-lazy="chainStore.logo" class="w-9 h-9 rounded-full" />
-        <div
-          class="w-2 h-2 rounded-full absolute right-0 bottom-0 shadow"
-          :class="{
-            'bg-success': baseStore.connected,
-            'bg-error': !baseStore.connected,
-          }"
-        ></div>
+<div class="dropdown relative z-10 min-h-[72px] mx-7 body-text-14 text-addition
+  before:content-['You_explore:'] before:absolute before:bottom-0 before:md:right-24 before:-mb-1 before:truncate before:hidden before:md:block">
+  <label tabindex="0">
+    <div class="relative flex items-center justify-center w-[72px] min-h-[72px] bg-black regular-red-hat-14">
+      <p 
+        :key="chainStore.chainName"
+        class="absolute bottom-0 left-[90px] -mb-1 z-20 capitalize truncate hidden md:block">
+        {{
+          baseStore.latest?.block?.header?.height
+            ? `#${baseStore.latest.block.header.height}`
+            : chainStore.chainName || ''
+        }}
+      </p>
+      <img v-lazy="chainStore.logo" alt="icon" class="absolute z-10 cursor-pointer w-[60px] h-[72px] pb-2.5 pt-0.5 mx-1.5" />
+
+      <!-- network indicator -->
+      <div
+        class="w-2 h-2 rounded-full absolute right-2 bottom-2 shadow z-10"
+        :class="{
+          'bg-success': baseStore.connected,
+          'bg-error': !baseStore.connected,
+        }"
+      ></div>
+
+      <!-- trapezoid -->
+      <div class="absolute inset-0
+        before:absolute before:inset-0 before:skew-x-[33deg] before:border-l-2 before:border-b before:border-addition before:bg-black before:-translate-x-6
+        after:absolute after:inset-0 after:-skew-x-[33deg] after:border-r-2 after:border-b after:border-addition after:bg-black after:translate-x-6">
       </div>
-      <div class="flex-1 w-0">
-        <div
-          :key="
-            baseStore.latest?.block?.header?.height ||
-            chainStore.chainName ||
-            ''
-          "
-          class="capitalize whitespace-nowrap text-[#FFFFFF] font-semibold text-[#FFFFFF] dark:text-[#FFFFFF] hidden md:!block"
-        >
-          {{
-            baseStore.latest?.block?.header?.height
-              ? `#${baseStore.latest.block.header.height}`
-              : chainStore.chainName || ''
-          }}
-          <span class="text-error">{{
-            baseStore.connected ? '' : 'disconnected'
-          }}</span>
-        </div>
-        <div class="text-xs text-gray-400 whitespace-nowrap hidden md:!block">
-          {{ chainStore.connErr || chainStore.endpoint.address }}
-        </div>
-      </div>
-    </label>
-    <div
+      
+    </div>
+  </label>
+  <div
       tabindex="0"
-      class="dropdown-content -left-6 w-80 menu shadow bg-base-200 rounded-box overflow-auto"
-    >
+      class="dropdown-content -translate-x-1/2 md:translate-x-0 w-[100vw] left-6 md:w-80 menu shadow bg-base-200 rounded-box overflow-auto"
+     >
       <!-- rest -->
       <div
         class="px-4 py-2 text-sm text-[#686868]"
@@ -102,6 +99,8 @@ function changeEndpoint(item: Endpoint) {
       </div>
       <!-- bottom-->
       <div class="px-4 py-2">&nbsp;</div>
-    </div>
   </div>
+</div>
+
+                
 </template>
