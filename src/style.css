@@ -70,7 +70,7 @@ html[data-theme='dark'] {
     -moz-osx-font-smoothing: grayscale;
     @apply text-2xl md:text-4xl font-semibold;
   }
-  
+
   .header-24 {
     font-family: 'Red Hat Mono', monospace;
     -webkit-font-smoothing: antialiased;
@@ -78,65 +78,72 @@ html[data-theme='dark'] {
     @apply text-xl md:text-2xl font-medium;
 
   }
-  
+
   .header-20-medium-aa {
     font-family: 'Red Hat Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     @apply text-base md:text-xl font-medium;
   }
-  
+
   .header-20-medium {
     font-family: 'Red Hat Mono', monospace;
     @apply text-base md:text-xl font-medium;
   }
-  
+
   .header-20 {
     font-family: 'Red Hat Mono', monospace;
     @apply text-base md:text-xl font-normal;
   }
-  
+
   .header-16-medium {
     font-family: 'Red Hat Mono', monospace;
     @apply text-sm md:text-base font-medium;
   }
-  
+
   .header-16 {
     font-family: 'Red Hat Mono', monospace;
     @apply text-sm md:text-base font-normal;
   }
-  
+
   .header-14-medium-aa {
     font-family: 'Red Hat Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     @apply text-xs md:text-sm font-medium;
   }
-  
+
   .body-text-16 {
     font-family: 'Roboto Flex', sans-serif;
     @apply text-sm md:text-base font-light;
   }
-  
+
   .body-text-14 {
     font-family: 'Roboto Flex', sans-serif;
     @apply text-xs md:text-sm font-light;
   }
-  
+
   .regular-red-hat-14 {
     font-family: 'Red Hat Mono', monospace;
     @apply text-xs md:text-sm font-medium;
   }
-  
+
   .body-text-12 {
     font-family: 'Roboto Flex', sans-serif;
     @apply text-xs font-light;
   }
-  
+
   .addition-text {
     font-family: 'Red Hat Mono', monospace;
     @apply text-[10px] font-normal;
   }
-  
-}
 
+
+  .btn-outline {
+    @apply header-16-medium flex justify-center items-center px-12 py-0 rounded-full border border-header-text text-button-text hover:text-button-text bg-button-v2-hover hover:bg-button-v2;
+  }
+
+  .btn-fill {
+    @apply header-16-medium flex justify-center items-center py-1 rounded-full text-white cursor-pointer;
+  }
+}

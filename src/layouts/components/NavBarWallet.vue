@@ -45,7 +45,8 @@ const tipMsg = computed(() => {
 
     <label tabindex="0" >
     <button
-        class="hidden min-w-80 w-80 h-full relative bg-wallet-button hover:bg-wallet-button-hover  xl:flex items-center gap-5 py-3 px-16 header-20 border-y-2 border-[#7300FF]
+        class="hidden min-w-80 w-80 h-full relative bg-wallet-button hover:bg-wallet-button-hover
+                xl:flex justify-center items-center gap-5 py-3 px-3 header-20 border-y-2 border-[#7300FF]
                 before:block before:absolute before:inset-0 before:border-r-2 before:border-[#7300FF] before:z-10 before:-top-0.5
                 after:block after:absolute after:inset-0 after:-skew-x-[33deg] after:border-l-2 after:border-[#7300FF] after:bg-wallet-button
                 after:hover:bg-wallet-button-hover after:translate-x-6 after:border-y-2 after:scale-x-125 after:-top-0.5 after:-bottom-0.5">
@@ -54,10 +55,10 @@ const tipMsg = computed(() => {
         <!-- <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
         <span v-else class="header-16"> {{ walletStore.connectedWallet?.wallet }} </span> -->
 
-        <div class="absolute z-20 flex items-center gap-5 header-20">
-            <Icon icon="mdi:wallet" class="h-6 w-7 text-[#D9D9D9]" />
+        <div class="absolute z-20 flex items-center gap-5 header-20 ">
+            <Icon icon="mdi:wallet" class="h-7 w-7 text-[#D9D9D9]" />
             <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
-            <span v-else class="header-16"> {{ walletStore.connectedWallet?.wallet }} </span>
+            <span v-else class="header-16 tracking-wide"> {{ `${walletStore?.currentAddress.slice(0, 13)}...${walletStore?.currentAddress.slice(-4)}` }} </span>
         </div>
     </button>
     </label>

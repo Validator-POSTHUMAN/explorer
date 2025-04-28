@@ -72,7 +72,8 @@ function confirm() {
       />
     </button> -->
     <div class="w-full flex items-center">
-      <Icon icon="icon-park-outline:search" class="text-lg text-[#D9D9D9] dark:text-[#D9D9D9]" />
+      <Icon icon="icon-park-outline:search" class="text-lg text-[#D9D9D9] dark:text-[#D9D9D9]"
+      @click="openSearchModal" />
       <input :placeholder="$t('pages.search_placeholder')"
         class="md:px-4 bg-transparent flex-1 outline-none header-20 text-white min-w-[400px]" />
         <!-- v-model="keywords" -->

@@ -32,17 +32,17 @@ function changeChart(type: string) {
 </script>
 
 <template>
-  <div class="tabs tabs-boxed bg-transparent justify-end">
+  <div class="tabs tabs-boxed bg-transparent justify-end gap-2.5">
     <a
-      class="tab text-xs mr-2 text-[#FFFFFF] uppercase"
-      :class="{ 'tab-active': kind === 'price' }"
+      class="btn-fill w-full md:w-36 bg-[#131315]"
+      :class="{ '!bg-[#0D1A24]': kind === 'price' }"
       @click="changeChart('price')"
     >
       Price
     </a>
     <a
-      class="tab text-xs text-[#FFFFFF] uppercase"
-      :class="{ 'tab-active': kind === 'volume' }"
+      class="btn-fill w-full md:w-36 bg-[#131315]"
+      :class="{ '!bg-[#0D1A24]': kind === 'volume' }"
       @click="changeChart('volume')"
     >
       Volume
@@ -50,7 +50,7 @@ function changeChart(type: string) {
   </div>
   <ApexCharts
     type="area"
-    height="230"
+    height="176"
     :options="chartConfig"
     :series="series"
   />

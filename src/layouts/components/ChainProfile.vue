@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { useIndexModule } from '@/modules/[chain]/indexStore';
 import { useBlockchain, useBaseStore, type Endpoint } from '@/stores';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 const chainStore = useBlockchain();
+const store = useIndexModule();
+const coinInfo = computed(() => {
+  return store.coinInfo;
+});
 const baseStore = useBaseStore();
 chainStore.initial();
 const router = useRouter();
@@ -19,11 +25,7 @@ function changeEndpoint(item: Endpoint) {
       <p 
         :key="chainStore.chainName"
         class="absolute bottom-0 left-[90px] -mb-1 z-20 capitalize truncate hidden md:block">
-        {{
-          baseStore.latest?.block?.header?.height
-            ? `#${baseStore.latest.block.header.height}`
-            : chainStore.chainName || ''
-        }}
+        {{ coinInfo.name || '' }}
       </p>
       <img v-lazy="chainStore.logo" alt="icon" class="absolute z-10 cursor-pointer w-[60px] h-[72px] pb-2.5 pt-0.5 mx-1.5" />
 

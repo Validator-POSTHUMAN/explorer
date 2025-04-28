@@ -9,7 +9,7 @@ import NavbarSearch from '@/layouts/components/NavbarSearch.vue';
 import ChainProfile from '@/layouts/components/ChainProfile.vue';
 
 import { useDashboard } from '@/stores/useDashboard';
-import { useBlockchain } from '@/stores';
+import { useBlockchain, useWalletStore } from '@/stores';
 
 import NavBarI18n from './NavBarI18n.vue';
 import NavBarWallet from './NavBarWallet.vue';
@@ -20,6 +20,7 @@ import type {
   VerticalNavItems,
 } from '../types';
 
+const walletStore = useWalletStore();
 const dashboard = useDashboard();
 dashboard.initial();
 const blockchain = useBlockchain();
@@ -40,7 +41,7 @@ blockchain.$subscribe((m, s) => {
 
 const sidebarShow = ref(false);
 const sidebarOpen = ref(true);
-const showNawSearch = ref(true);
+const showNawSearch = ref(false);
 
 const changeOpen = (index: Number) => {
   if (index === 0) {
@@ -65,14 +66,6 @@ function selected(route: any, nav: NavLink) {
       nav.title.indexOf('dashboard') === -1);
   return b;
 }
-
-
-
-const navBarItems = [
-  { label: 'module.dashboard', href: '#', },
-  { label: 'module.staking', href: '#', },
-  { label: 'module.governance', href: '#', },
-];
 
 const socials = [
   {
@@ -241,10 +234,10 @@ const socials = [
         </div>
 
         <div class="flex items-center xl:w-full" :class="{
-          'xl:justify-between': showNawSearch,
-          'xl:justify-end': !showNawSearch
+          'xl:justify-between': !!walletStore?.currentAddress,
+          'xl:justify-end': !walletStore?.currentAddress
         }">
-          <NavbarSearch v-if="showNawSearch" class="hidden md:!inline-block xl:ml-4" />
+          <NavbarSearch v-if="!!walletStore?.currentAddress" class="hidden md:!inline-block xl:ml-4" />
           <NavBarWallet />
         </div>
 
