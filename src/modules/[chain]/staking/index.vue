@@ -252,118 +252,163 @@ base.$subscribe((_, s) => {
     fetchChange();
   }
 });
-
+//:style="`--value:${mintStore.inflation}`"
 loadAvatars();
 </script>
 <template>
-  <div>
-    <div class="bg-[#141415] rounded-lg grid sm:grid-cols-1 md:grid-cols-4 p-4">
-      <div class="flex">
-        <span>
-          <div
-            class="relative w-9 h-9 rounded overflow-hidden flex items-center justify-center mr-2"
-          >
-            <Icon class="text-[#D844E5]" icon="mdi:trending-up" size="32" />
-            <div
-              class="absolute top-0 left-0 bottom-0 right-0 opacity-50 bg-[#301935]"
-            ></div>
-          </div>
-        </span>
-        <span>
-          <div class="font-bold">{{ format.percent(mintStore.inflation) }}</div>
-          <div class="text-xs">{{ $t('staking.inflation') }}</div>
-        </span>
-      </div>
-      <div class="flex">
-        <span>
-          <div
-            class="relative w-9 h-9 rounded overflow-hidden flex items-center justify-center mr-2"
-          >
-            <Icon
-              class="text-[#E07223]"
-              icon="mdi:lock-open-outline"
-              size="32"
+  <div class="flex flex-row px-2 gap-4">
+    <div class="flex flex-col border-8 px-2 py-4 border-[#222226] rounded-lg gap-4 bg-black bg-opacity-50 fixed">
+      <div class="flex flex-row items-center">
+        <div
+          class="radial-progress text-[#3FB6A8]"
+          :style="`--value:70`"
+          role="progressbar"
+        >
+          <div class="p-4 rounded-full flex items-center justify-center">
+            <img
+              src="@/assets/staking/inflation.svg"
+              class="object-contain"
+              alt="image"
             />
-            <div
-              class="absolute top-0 left-0 bottom-0 right-0 opacity-50 bg-[#3D2011]"
-            ></div>
           </div>
-        </span>
-        <span>
-          <div class="font-bold">
-            {{ formatSeconds(staking.params?.unbonding_time) }}
+        </div>
+        <div class="border-2 border-l-0 rounded-l-none -ml-4 border-[#222226] px-8 py-2 rounded-lg">
+          <div class="uppercase text-[#71FFB8]">
+            {{ $t('staking.inflation') }}
           </div>
-          <div class="text-xs">{{ $t('staking.unbonding_time') }}</div>
-        </span>
+          <div class="font-bold text-white">
+            {{ format.percent(mintStore.inflation) }}
+          </div>
+        </div>
       </div>
-      <div class="flex">
-        <span>
-          <div
-            class="relative w-9 h-9 rounded overflow-hidden flex items-center justify-center mr-2"
-          >
-            <Icon
-              class="text-[#E84F4F]"
-              icon="mdi:alert-octagon-outline"
-              size="32"
+      <div class="flex flex-row items-center">
+        <div
+          class="radial-progress text-[#3FB6A8]"
+          :style="`--value:70`"
+          role="progressbar"
+        >
+          <div class="p-4 rounded-full flex items-center justify-center">
+            <img
+              src="@/assets/staking/unbonding-time.svg"
+              class="object-contain"
+              alt="image"
             />
-            <div
-              class="absolute top-0 left-0 bottom-0 right-0 opacity-50 bg-[#401011]"
-            ></div>
           </div>
-        </span>
-        <span>
-          <div class="font-bold">
-            {{ format.percent(slashing.slash_fraction_double_sign) }}
+        </div>
+        <div class="border-2 border-l-0 rounded-l-none -ml-4 border-[#222226] px-8 py-2 rounded-lg">
+          <div class="uppercase text-[#71FFB8]">
+            {{ $t('staking.unbonding_time') }}
           </div>
-          <div class="text-xs">{{ $t('staking.double_sign_slashing') }}</div>
-        </span>
+          <div class="font-bold text-white">
+            70%
+          </div>
+        </div>
       </div>
-      <div class="flex">
-        <span>
-          <div
-            class="relative w-9 h-9 rounded overflow-hidden flex items-center justify-center mr-2"
-          >
-            <Icon class="text-[#E84F4F]" icon="mdi:pause" size="32" />
-            <div
-              class="absolute top-0 left-0 bottom-0 right-0 opacity-50 bg-[#401011]"
-            ></div>
+      <div class="flex flex-row items-center">
+        <div
+          class="radial-progress text-[#3FB6A8]"
+          :style="`--value:11`"
+          role="progressbar"
+        >
+          <div class="p-4 rounded-full flex items-center justify-center">
+            <img
+              src="@/assets/staking/apr.svg"
+              class="object-contain"
+              alt="image"
+            />
           </div>
-        </span>
-        <span>
-          <div class="font-bold">
-            {{ format.percent(slashing.slash_fraction_downtime) }}
+        </div>
+        <div class="border-2 border-l-0 rounded-l-none -ml-4 border-[#222226] px-8 py-2 rounded-lg">
+          <div class="uppercase text-[#71FFB8]">
+            APR
           </div>
-          <div class="text-xs">{{ $t('staking.downtime_slashing') }}</div>
-        </span>
+          <div class="font-bold text-white">
+            11%
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-row items-center">
+        <div
+          class="radial-progress text-[#3FB6A8]"
+          :style="`--value:11`"
+          role="progressbar"
+        >
+          <div class="p-4 rounded-full flex items-center justify-center">
+            <img
+              src="@/assets/staking/hard-slashing.svg"
+              class="object-contain"
+              alt="image"
+            />
+          </div>
+        </div>
+        <div class="border-2 border-l-0 rounded-l-none -ml-4 border-[#222226] px-8 py-2 rounded-lg">
+          <div class="uppercase text-[#71FFB8]">
+            hard slashing
+          </div>
+          <div class="font-bold text-white">
+            11%
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-row items-center">
+        <div
+          class="radial-progress text-[#3FB6A8]"
+          :style="`--value:11`"
+          role="progressbar"
+        >
+          <div class="p-4 rounded-full flex items-center justify-center">
+            <img
+              src="@/assets/staking/soft-slashing.svg"
+              class="object-contain"
+              alt="image"
+            />
+          </div>
+        </div>
+        <div class="border-2 border-l-0 rounded-l-none -ml-4 border-[#222226] px-8 py-2 rounded-lg">
+          <div class="uppercase text-[#71FFB8]">
+            soft slashing
+          </div>
+          <div class="font-bold text-white">
+            11%
+          </div>
+        </div>
       </div>
     </div>
+    <div class="ml-[20rem]">
 
-    <div>
+    </div>
+    <div class="flex-1">
       <div class="flex items-center justify-between py-1">
         <div class="tabs tabs-boxed bg-transparent">
           <a
-            class="tab text-gray-400"
+            class="tab text-white px-8"
             :class="{ 'tab-active': tab === 'featured' }"
             @click="tab = 'featured'"
             >{{ $t('staking.popular') }}</a
           >
           <a
-            class="tab text-gray-400"
+            class="tab text-white px-8"
             :class="{ 'tab-active': tab === 'active' }"
             @click="tab = 'active'"
             >{{ $t('staking.active') }}</a
           >
           <a
-            class="tab text-gray-400"
+            class="tab text-white px-8"
             :class="{ 'tab-active': tab === 'inactive' }"
             @click="tab = 'inactive'"
             >{{ $t('staking.inactive') }}</a
           >
+          <a
+            class="tab text-white px-8"
+            :class="{ 'tab-active': tab === 'jailed' }"
+            @click="tab = 'jailed'"
+            >{{ $t('staking.jailed') }}</a
+          >
         </div>
 
-        <div class="text-lg font-semibold">
+        <!-- <div class="text-lg font-semibold">
           {{ list.length }}/{{ staking.params.max_validators }}
-        </div>
+        </div> -->
       </div>
 
       <div class="bg-[#141415] px-4 pt-3 pb-4 rounded shadow">
@@ -572,5 +617,11 @@ loadAvatars();
 .staking-table.table :where(th, td) {
   padding: 8px 5px;
   background: transparent;
+}
+</style>
+
+<style>
+.radial-progress::before {
+  stroke-linecap: butt !important; /* Делаем углы острыми */
 }
 </style>
