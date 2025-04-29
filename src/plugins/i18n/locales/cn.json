@@ -207,7 +207,14 @@
     "operator_addr": "操作员地址",
     "hex_addr": "Hex 地址",
     "signer_addr": "验证人地址",
-    "consensus_pub_key": "验证人公钥"
+    "consensus_pub_key": "验证人公钥",
+    "hard_slashing": "Hard slashing",
+    "soft_slashing": "Soft slashing",
+    "uptime": "Uptime",
+    "apr": "APR",
+    "operation": "Operation",
+    "stake": "Stake",
+    "unstake": "Unstake"
   },
   "statesync": {
     "title": "What's State Sync?",

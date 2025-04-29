@@ -140,10 +140,18 @@ html[data-theme='dark'] {
 
 
   .btn-outline {
-    @apply header-16-medium flex justify-center items-center px-12 py-0 rounded-full border border-header-text text-button-text hover:text-button-text bg-button-v2-hover hover:bg-button-v2;
+    @apply header-16-medium flex justify-center items-center px-12 py-0 rounded-full border border-header-text text-button-text hover:text-button-text bg-button-hover hover:bg-button;
   }
 
   .btn-fill {
-    @apply header-16-medium flex justify-center items-center py-1 rounded-full text-white cursor-pointer;
+    @apply header-16-medium flex justify-center items-center py-1 rounded-full text-white cursor-pointer hover:bg-button-v2 bg-button-v2-hover;
+  }
+
+  .thick-border-block {
+    @apply border-8 border-almost-black rounded;
+  }
+
+  .thin-border-block {
+    @apply border border-addition-1 rounded flex flex-col items-center justify-between px-4 py-2;
   }
 }

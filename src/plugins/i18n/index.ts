@@ -12,4 +12,9 @@ export default createI18n({
   locale: localStorage.getItem('lang') || 'en',
   fallbackLocale: 'en',
   messages,
+
+  
+
+  missingWarn: false,
+  fallbackWarn: false 
 });

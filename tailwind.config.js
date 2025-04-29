@@ -21,11 +21,11 @@ module.exports = {
         'header-text': '#71FFB8',
         'button': 'rgba(14, 255, 187, 20%)',
         'button-hover': 'rgba(2, 1, 1, 50%)',
-        'button-v2': 'rgba(14,255,187,0.2)',
-        'button-v2-hover': 'rgba(2,1,1,0.5)',
-        'red-thing': '#E41E1E',
-        'green-thing': '#61FF42',
-        'tx-status-pending': '#F48E28',
+        'button-v2': 'rgba(15, 51, 78, 100%)',
+        'button-v2-hover': 'rgba(28, 28, 33, 100%)',
+        'red-text': '#E41E1E',
+        'green-text': '#61FF42',
+        'tx-status-warning': '#F48E28',
         'tx-status-error': '#E41E1E',
         'tx-status-success': '#61FF42',
         'green-button': '#0A2B0C',
@@ -58,7 +58,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'),
+    require('tailwind-scrollbar'),
+  ],
   daisyui: {
     themes: [
       {

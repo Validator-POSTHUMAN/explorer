@@ -218,7 +218,14 @@
     "consensus_pub_key": "Consensus Public Key",
     "liquid_staking": "Liquid Staking",
     "liquid_staking_shares": "Liquid Shares",
-    "validator_bond_share": "Validator Bonded"
+    "validator_bond_share": "Validator Bonded",
+    "hard_slashing": "Hard slashing",
+    "soft_slashing": "Soft slashing",
+    "uptime": "Uptime",
+    "apr": "APR",
+    "operation": "Operation",
+    "stake": "Stake",
+    "unstake": "Unstake"
   },
   "statesync": {
     "title": "What's State Sync?",

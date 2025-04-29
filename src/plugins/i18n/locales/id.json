@@ -206,7 +206,14 @@
     "operator_addr": "Alamat Operator",
     "hex_addr": "Alamat Hex",
     "signer_addr": "Alamat Penandatangan",
-    "consensus_pub_key": "Kunci Publik Konsensus"
+    "consensus_pub_key": "Kunci Publik Konsensus",
+    "hard_slashing": "Hard slashing",
+    "soft_slashing": "Soft slashing",
+    "uptime": "Uptime",
+    "apr": "APR",
+    "operation": "Operation",
+    "stake": "Stake",
+    "unstake": "Unstake"
   },
   "statesync": {
     "title": "Apa itu State Sync?",

@@ -19,6 +19,8 @@ import type {
   NavSectionTitle,
   VerticalNavItems,
 } from '../types';
+import Socials from './Socials.vue';
+import AddNetworkComponent from './AddNetworkComponent.vue';
 
 const walletStore = useWalletStore();
 const dashboard = useDashboard();
@@ -69,25 +71,26 @@ function selected(route: any, nav: NavLink) {
 
 const socials = [
   {
-    label: 'twitter',
+    name: 'twitter',
     icon: 'prime:twitter',
     href: 'https://twitter.com/POSTHUMAN_DVS',
   },
   {
-    label: 'discord',
+    name: 'discord',
     icon: 'ic:baseline-discord',
     href: 'https://discord.gg/csWJMCjQHh',
   },
   // {
-  //   label: 'telegram',
+  //   name: 'telegram',
   //   icon: 'mdi:telegram',
   //   href: 'https://t.me/Crypto_Base_Chat',
   // },
 ];
+
 </script>
 
 <template>
-  <div class="relative min-h-screen w-full flex flex-col overflow-hidden" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)),
+  <div class="relative min-h-screen w-full flex flex-col" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)),
         url('./public/images/main-bg.png') center 50vh/cover no-repeat;
         background-attachment: fixed;
         ">
@@ -183,9 +186,9 @@ const socials = [
 
         <a v-for="social in socials"
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
-          :href="social.href" target="_blank" :key="social.label">
+          :href="social.href" target="_blank" :key="social.name">
           <Icon :icon="social.icon" class="text-xl mr-2" width="20" height="20" />
-          <span class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">{{ social.label }}</span>
+          <span class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">{{ social.name }}</span>
         </a>
 
       </div>
@@ -196,7 +199,7 @@ const socials = [
         <img class="w-32 h-53" src="../../assets/logo.svg" />
       </RouterLink>
 
-      <div class="text-2xl px-5 my-3 cursor-pointer xl:!hidden" @click="sidebarShow = true">
+      <div class="text-2xl text-white px-5 my-3 cursor-pointer xl:!hidden" @click="sidebarShow = true">
         <Icon icon="mdi-menu" />
       </div>
 
@@ -216,7 +219,7 @@ const socials = [
               <div
                 v-for="(el, key) of item?.children.filter(item => isNavLink(item) && item?.to.path !== '/cosmos/uptime')"
                 class="relative h-full pl-8 pr-10 pt-4 pb-2 hidden xl:block 
-                    before:hover:bg-menu-button-hover before:active:bg-menu-button-active
+                    before:hover:bg-menu-button-hover before:active:bg-menu-button-active before:scale-y-105
                     before:block before:absolute before:inset-0 before:-skew-x-[33deg] before:border-r-2 before:border-addition"
                 :class="{
                   'before:bg-menu-button-active': selected($route, el),
@@ -233,11 +236,11 @@ const socials = [
           </div>
         </div>
 
-        <div class="flex items-center xl:w-full" :class="{
+        <div class="flex items-center xl:w-full overflow-hidden" :class="{
           'xl:justify-between': !!walletStore?.currentAddress,
           'xl:justify-end': !walletStore?.currentAddress
         }">
-          <NavbarSearch v-if="!!walletStore?.currentAddress" class="hidden md:!inline-block xl:ml-4" />
+          <NavbarSearch v-if="!!walletStore?.currentAddress" class="hidden md:!inline-block xl:ml-4 pr-2" />
           <NavBarWallet />
         </div>
 
@@ -254,24 +257,9 @@ const socials = [
         </Transition>
       </RouterView>
 
-      <div class="absolute bottom-0 hidden xl:flex flex-col gap-4 text-base text-white p-4">
-        <p class="mb-3">{{ $t('module.links') }}</p>
-        <a class="flex items-center hover:text-addition" v-for="social in socials" :href="social.href" target="_blank"
-          :key="social.label">
-          <Icon :icon="social.icon" class="text-xl mr-2" width="20" height="20" />
-          <span>{{ social.label }}</span>
-        </a>
+      <Socials :list="socials" />
+      <AddNetworkComponent />
 
-      </div>
-
-
-      <div class="flex justify-center w-full mb-14">
-        <button
-          class="w-full md:w-[374px] mt-10 py-3.5 p header-16 text-white flex gap-4 justify-center items-center rounded-full bg-button-v2-hover hover:bg-button-v2 border border-addition">
-          <Icon icon="ic:baseline-plus" width="24" height="24" />
-          <span>{{ $t('module.add_network') }}</span>
-        </button>
-      </div>
     </div>
 
 
