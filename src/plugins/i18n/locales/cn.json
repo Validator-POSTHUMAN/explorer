@@ -117,6 +117,7 @@
     "tips_description_1": "This feature is available when deploying contracts via WELLDONE Code. For more information, please check the document at the link below."
   },
   "gov": {
+    "all": "All",
     "voting": "投票中",
     "passed": "已通过",
     "rejected": "已否决",

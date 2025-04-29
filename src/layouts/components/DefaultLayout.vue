@@ -250,8 +250,8 @@ const socials = [
     </header>
 
     <!-- 👉 Pages -->
-    <div class="grow px-3 xl:p-0 mt-4">
-      <RouterView v-slot="{ Component }">
+    <div class="flex flex-col grow px-3 xl:p-0 mt-4">
+      <RouterView v-slot="{ Component }" class="grow">
         <Transition mode="out-in">
           <Component :is="Component" />
         </Transition>

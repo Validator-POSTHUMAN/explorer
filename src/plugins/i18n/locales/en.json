@@ -125,6 +125,7 @@
     "tips_description_1": "This feature is available when deploying contracts via WELLDONE Code. For more information, please check the document at the link below."
   },
   "gov": {
+    "all": "All",
     "voting": "Voting",
     "passed": "Passed",
     "rejected": "Rejected",

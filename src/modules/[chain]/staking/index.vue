@@ -360,7 +360,7 @@ const widgetsInfo = computed(() => (
     <div class="xl:col-span-5">
       <div class="flex items-center justify-between py-1">
         <div class="w-full tabs tabs-boxed bg-transparent gap-2.5">
-          <a v-for="item in tabs" class="btn-fill w-full md:w-36 text-gray-400"
+          <a v-for="item in tabs" class="btn-fill w-full md:w-36"
             :class="{ 'bg-button-v2': tab === item.name }" @click="tab = item.name">{{ $t(item.value) }}</a>
         </div>
 

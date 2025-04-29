@@ -20,7 +20,7 @@ onMounted(() => {
     });
 });
 
-const changeTab = (val: '2' | '3' | '4') => {
+const changeTab = (val: '1' | '2' | '3' | '4') => {
     tab.value = val;
 };
 
@@ -29,14 +29,30 @@ function page(p: number) {
     store.fetchProposals(tab.value, pageRequest.value)
 }
 
+const tabs = [
+    {
+        name: 'gov.all',
+        value: '1',
+    },
+    {
+        name: 'gov.voting',
+        value: '2',
+    },
+    {
+        name: 'gov.passed',
+        value: '3',
+    },
+    {
+        name: 'gov.rejected',
+        value: '4',
+    },
+]
 </script>
 <template>
-    <div>
-        <div class="tabs tabs-boxed bg-transparent mb-4 text-center">
-            <a class="tab text-gray-400 uppercase" :class="{ 'tab-active': tab === '2' }" @click="changeTab('2')">{{ $t('gov.voting') }}</a>
-            <a class="tab text-gray-400 uppercase" :class="{ 'tab-active': tab === '3' }" @click="changeTab('3')">{{ $t('gov.passed') }}</a>
-            <a class="tab text-gray-400 uppercase" :class="{ 'tab-active': tab === '4' }"
-                @click="changeTab('4')">{{ $t('gov.rejected') }}</a>
+    <div class="flex flex-col">
+        <div class="tabs tabs-boxed bg-transparent mb-8 text-center w-full gap-2.5">
+            <a v-for="item in tabs" class="btn-fill w-full md:w-36" :class="{ 'bg-button-v2': tab === item.value }"
+                @click="changeTab(item.value as '1' | '2' | '3' | '4')">{{ $t(item.name) }}</a>
         </div>
         <ProposalListItem :proposals="store?.proposals[tab]" />
         <PaginationBar :total="store?.proposals[tab]?.pagination?.total" :limit="pageRequest.limit" :callback="page" />
