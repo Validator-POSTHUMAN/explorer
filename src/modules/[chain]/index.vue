@@ -11,13 +11,13 @@ import {
   useStakingStore,
   useParamStore,
 } from '@/stores';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useIndexModule, colorMap } from './indexStore';
-import { computed } from '@vue/reactivity';
 
 import CardStatisticsVertical from '@/components/CardStatisticsVertical.vue';
 import ProposalListItem from '@/components/ProposalListItem.vue';
 import ArrayObjectElement from '@/components/dynamic/ArrayObjectElement.vue';
+import AddressWithCopy from '@/components/AddressWithCopy.vue';
 
 const props = defineProps(['chain']);
 
@@ -156,19 +156,7 @@ const amount = computed({
 
           <div class="flex justify-center md:justify-between items-center mb-[50px] gap-6">
             <!-- address -->
-            <div class="hidden md:flex header-20-medium text-white tracking-wide gap-3 truncate">
-              <RouterLink v-if="walletStore.currentAddress" class="cursor-pointer no-underline max-w-[566px] truncate"
-                :to="`/${chain}/account/${walletStore.currentAddress}`">
-                <span class="max-w-[566px] truncate">{{
-                  walletStore.currentAddress || 'Not Connected'
-                }}</span>
-              </RouterLink>
-
-              <div
-                class="rounded-full min-w-9 w-9 h-9 flex justify-center items-center bg-button-v2-hover hover:bg-button-v2">
-                <Icon icon="bx:copy" width="24" height="24" />
-              </div>
-            </div>
+             <AddressWithCopy :href="`/${chain}/account/${walletStore.currentAddress}`" :address="walletStore.currentAddress" icon outline />
 
             <!-- buttons panel -->
             <div class="grid grid-cols-3 gap-4">
@@ -278,8 +266,7 @@ const amount = computed({
           <div>
             <div class="dropdown dropdown-hover w-full hover:z-30 ">
               <label>
-                <div
-                  class="w-full thin-border-block cursor-pointer">
+                <div class="w-full thin-border-block cursor-pointer">
                   <div class="w-full flex items-center justify-between">
                     <div class="text-addition body-text-16">
                       {{ shortName(ticker?.base, ticker?.coin_id) }}/{{

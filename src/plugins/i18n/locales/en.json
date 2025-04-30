@@ -193,7 +193,7 @@
     "inactive": "Inactive",
     "rank": "Rank",
     "validator": "Validator",
-    "voting_power": "Voting Power",
+    "voting_power": "Your voting power",
     "24h_changes": "24h Changes",
     "commission": "Commission",
     "actions": "Actions",
@@ -228,7 +228,8 @@
     "apr": "APR",
     "operation": "Operation",
     "stake": "Stake",
-    "unstake": "Unstake"
+    "unstake": "Unstake",
+    "btn_vote": "Vote"
   },
   "statesync": {
     "title": "What's State Sync?",

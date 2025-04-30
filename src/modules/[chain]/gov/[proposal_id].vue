@@ -22,6 +22,7 @@ import Countdown from '@/components/Countdown.vue';
 import PaginationBar from '@/components/PaginationBar.vue';
 import { fromBech32, toHex } from '@cosmjs/encoding';
 import { Icon } from '@iconify/vue';
+import AddressWithCopy from '@/components/AddressWithCopy.vue';
 
 
 const props = defineProps(['proposal_id', 'chain']);
@@ -217,11 +218,43 @@ function pageload(p: number) {
 function metaItem(metadata: string | undefined): { title: string; summary: string } {
   return metadata ? JSON.parse(metadata) : { title: '', summary: '' }
 }
+
+const statusData = [
+  {
+    isAddress: true,
+    value: 'address120asdj9a0sd0asd90asddasdasd0a9daaas0d',
+    label: 'Creator',
+    icon: '',
+  },
+  {
+    value: 'Open',
+    label: 'Status',
+    icon: '',
+  },
+  {
+    value: 'Enable',
+    label: 'Revoting',
+    icon: '',
+  },
+  {
+    value: '10 days',
+    label: 'Time left',
+    icon: '',
+  },
+];
+const votingData = [{
+  label: 'staking.voting_power',
+  value: '0.9999999999%',
+},
+{
+  label: 'staking.btn_vote',
+  value: 'none',
+},];
 </script>
 
 <template>
   <div class="md:px-4">
-    <h2 class=" flex flex-col md:!justify-between md:!flex-row mb-2">
+    <h2 class="flex flex-col items-center md:!justify-between md:!flex-row mb-2">
       <p class="truncate w-full header-20-medium-aa text-header-text tracking-wide uppercase">
         {{ `#${proposal_id}. ${proposal.title || proposal.content?.title || metaItem(proposal?.metadata)?.title}` }}
       </p>
@@ -238,17 +271,35 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
     <div class="flex flex-col md:flex-row gap-5">
 
       <!-- info -->
-      <div class="min-w-[420px]">
-        <div class=" bg-black/70 thick-border-block">
+      <div class="md:min-w-[420px]">
+        <div class=" bg-black/70 thick-border-block p-5">
 
-          <div>
-            <p>{{ $t('gov.status') }}</p>
-            <div></div>
-            <div></div>
+          <div class="text-button-text mb-9">
+            <p class="uppercase header-20-medium-aa mb-5">{{ $t('gov.status') }}</p>
 
+            <div class="w-full border-y border-addition py-4 px-2.5 flex flex-col gap-2.5">
+              <div v-for="item in statusData" class="grid grid-cols-5 gap-3" :key="item.label">
+                <p class="col-span-2 header-16 tracking-wide flex gap-2.5">
+                  <Icon class="text-addition/50" icon="ic:round-close" width="24" height="24" />
+                  <span>{{ item.label }}</span>
+                </p>
+                <div class="col-span-3 body-text-16 text-white">
+                  <AddressWithCopy v-if="item.isAddress" :address="item.value" icon styles="body-text-16 text-white"
+                    :size="16" />
+                  <span v-else>{{ item.value }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full border-b border-addition py-4 px-2.5 flex flex-col gap-2.5">
+              <div v-for="item in votingData" class="grid grid-cols-5 gap-3">
+                <p class="col-span-2 header-16 tracking-wide leading-5">{{ $t(item.label) }}</p>
+                <p class="col-span-3 body-text-16 text-white">{{ item.value }}</p>
+              </div>
+            </div>
           </div>
 
-          <div class="p-5 rounded shadow">
+          <div class=" rounded shadow">
             <!-- <h2 class="card-title mb-1">{{ $t('gov.tally') }}</h2> -->
             <div class="grid grid-cols-2 items-center gap-2.5 mb-1 header-16-medium tracking-wide"
               v-for="(item, index) of processList" :key="index">
@@ -279,6 +330,7 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
             </div> -->
           </div>
 
+          <!-- timeline -->
           <!-- <div class="px-4 pt-3 pb-5 rounded shadow lg:!!col-span-2">
             <h2 class="card-title">{{ $t('gov.timeline') }}</h2>
 
@@ -299,7 +351,7 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
                       proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
                         ? proposal.deposit_end_time
                         : proposal.voting_start_time
-                  )
+                    )
                   }}
                 </div>
                 <div class="text-sm">
@@ -308,7 +360,7 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
                       proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
                         ? proposal.deposit_end_time
                         : proposal.voting_start_time
-                  )
+                    )
                   }}
                 </div>
               </div>
@@ -352,7 +404,7 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
                       (EST)</span>
                     <span v-else>{{
                       format.toDay(proposal.content?.plan?.time)
-                      }}</span>
+                    }}</span>
                   </div>
                   <div class="text-sm">
                     {{ shortTime(proposal.voting_end_time) }}
@@ -370,7 +422,7 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
       <!-- text -->
       <div
         class="pt-3 pb-4 rounded mb-4 shadow overflow-auto thick-border-block bg-black/70 px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
-        :style="{ height: 'calc(100vh - 300px)' }">
+        :style="{ height: 'calc(100vh - 180px)' }">
 
         <div class="">
           <ObjectElement :value="proposal.content" />

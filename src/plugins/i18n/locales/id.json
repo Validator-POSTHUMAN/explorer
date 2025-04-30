@@ -216,7 +216,8 @@
     "apr": "APR",
     "operation": "Operation",
     "stake": "Stake",
-    "unstake": "Unstake"
+    "unstake": "Unstake",
+    "btn_vote": "Vote"
   },
   "statesync": {
     "title": "Apa itu State Sync?",

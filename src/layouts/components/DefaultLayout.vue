@@ -90,7 +90,7 @@ const socials = [
 </script>
 
 <template>
-  <div class="relative min-h-screen w-full flex flex-col" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)),
+  <div class="relative min-h-screen w-full flex flex-col overflow-x-hidden" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)),
         url('./public/images/main-bg.png') center 50vh/cover no-repeat;
         background-attachment: fixed;
         ">
@@ -236,7 +236,7 @@ const socials = [
           </div>
         </div>
 
-        <div class="flex items-center xl:w-full overflow-hidden" :class="{
+        <div class="flex items-center xl:w-full" :class="{
           'xl:justify-between': !!walletStore?.currentAddress,
           'xl:justify-end': !walletStore?.currentAddress
         }">
