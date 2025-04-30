@@ -18,7 +18,7 @@ function changeEndpoint(item: Endpoint) {
 </script>
 
 <template>
-<div class="dropdown relative z-10 min-h-[72px] mx-7 body-text-14 text-addition
+<div class="dropdown relative z-20 min-h-[72px] mx-7 body-text-14 text-addition
   before:content-['You_explore:'] before:absolute before:bottom-0 before:md:right-24 before:-mb-1 before:truncate before:hidden before:md:block">
   <label tabindex="0">
     <div class="relative flex items-center justify-center w-[72px] min-h-[72px] bg-black regular-red-hat-14">

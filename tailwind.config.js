@@ -25,6 +25,7 @@ module.exports = {
         'button-v2-hover': 'rgba(28, 28, 33, 100%)',
         'red-text': '#E41E1E',
         'green-text': '#61FF42',
+        'warning-text': '#F48E28',
         'tx-status-warning': '#F48E28',
         'tx-status-error': '#E41E1E',
         'tx-status-success': '#61FF42',

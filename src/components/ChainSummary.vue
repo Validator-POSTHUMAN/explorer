@@ -42,7 +42,7 @@ const addFavor = (e: Event) => {
       @click="addFavor"
       class="absolute top-0 right-0 m-2.5 text-sm"
       :class="{
-        'text-warning': dashboardStore?.favoriteMap?.[props.name],
+        'text-star-yellow': dashboardStore?.favoriteMap?.[props.name],
         'text-gray-500': !dashboardStore?.favoriteMap?.[props.name],
         'shadow-[0_0_2px_1px_rgba(238,187,78,0.2)] rounded-full before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full': dashboardStore?.favoriteMap?.[props.name],
       }"

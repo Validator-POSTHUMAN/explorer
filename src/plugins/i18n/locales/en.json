@@ -1,7 +1,7 @@
 {
   "module": {
     "dashboard": "Dashboard",
-    "staking": "Stake",
+    "staking": "Staking",
     "governance": "Governance",
     "uptime": "Uptime",
     "nft": "NFT",

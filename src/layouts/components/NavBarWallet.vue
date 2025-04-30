@@ -54,10 +54,10 @@ const tipMsg = computed(() => {
         <!-- <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
         <span v-else class="header-16"> {{ walletStore.connectedWallet?.wallet }} </span> -->
 
-        <div class="absolute z-20 flex items-center gap-5 header-20 ">
+        <div class="absolute z-20 text-white flex items-center gap-5 header-20 ">
           <Icon icon="mdi:wallet" class="h-7 w-7 text-[#D9D9D9]" />
           <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
-          <span v-else class="header-16 tracking-wide"> {{ `${walletStore?.currentAddress.slice(0,
+          <span v-else class="header-16  tracking-wide"> {{ `${walletStore?.currentAddress.slice(0,
             13)}...${walletStore?.currentAddress.slice(-4)}` }} </span>
         </div>
       </button>

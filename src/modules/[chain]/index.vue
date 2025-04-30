@@ -156,7 +156,8 @@ const amount = computed({
 
           <div class="flex justify-center md:justify-between items-center mb-[50px] gap-6">
             <!-- address -->
-             <AddressWithCopy :href="`/${chain}/account/${walletStore.currentAddress}`" :address="walletStore.currentAddress" icon outline />
+            <AddressWithCopy :href="`/${chain}/account/${walletStore.currentAddress}`"
+              :address="walletStore.currentAddress" icon outline />
 
             <!-- buttons panel -->
             <div class="grid grid-cols-3 gap-4">
@@ -330,7 +331,7 @@ const amount = computed({
                   'text-header-text': store.trustColor === 'green',
                   '!text-warning': store.trustColor === 'yellow',
                 }" :href="ticker.trade_url" target="_blank">
-                {{ $t('index.buy') }} {{ coinInfo.symbol || '' }}
+                {{ `${$t('index.buy')} ${coinInfo.symbol || ''} ` }}
               </a>
             </div>
           </div>

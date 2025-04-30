@@ -248,7 +248,7 @@ const votingData = [{
 },
 {
   label: 'staking.btn_vote',
-  value: 'none',
+  value: 'None',
 },];
 </script>
 

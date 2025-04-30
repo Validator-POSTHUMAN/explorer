@@ -307,8 +307,8 @@ const widgetsInfo = computed(() => (
     {
       name: 'staking.apr',
       icon: IconAPR,
-      numValue: 11,
-      formattedValue: format.percent(0.11),
+      numValue: (+mintStore.inflation * 100),
+      formattedValue: format.percent(mintStore.inflation),
     },
     {
       name: 'staking.hard_slashing',
@@ -325,6 +325,7 @@ const widgetsInfo = computed(() => (
   ]
 ));
 
+console.log(staking.params);
 </script>
 
 <template>
@@ -332,17 +333,19 @@ const widgetsInfo = computed(() => (
     <!-- widgets -->
     <div class="md:sticky top-0">
 
-      <div class="flex flex-col items-center md:items-start gap-7 thick-border-block px-2 py-5">
-        <div class="flex items-center" v-for="widget in widgetsInfo" :key="widget.name">
-          <CircleProgressComponent :value="widget.numValue">
+      <div class="grid grid-cols-2 md:flex flex-col items-center md:items-start gap-3 md:gap-7 thick-border-block px-2 py-5">
+        <div class="w-full md:w-auto flex items-center" v-for="widget in widgetsInfo" :key="widget.name">
+          <CircleProgressComponent class="hidden md:block" :value="widget.numValue">
             <component :is="widget.icon" />
           </CircleProgressComponent>
 
-          <span class="thin-border-block items-start -ml-8 pl-8">
-            <div class="header-14-medium-aa text-header-text tracking-wide truncate uppercase">{{ $t(widget.name) }}
-            </div>
-            <div class="header-20-medium text-white tracking-wide truncate">{{ widget.formattedValue }}</div>
-          </span>
+          <div class="w-full thin-border-block items-center md:items-start md:-ml-5 md:pl-8">
+            <CircleProgressComponent class="md:hidden mb-3" :value="widget.numValue" :size="50">
+              <component :is="widget.icon" width="24" height="24" />
+            </CircleProgressComponent>
+            <p class="header-14-medium-aa text-header-text tracking-wide truncate uppercase">{{ $t(widget.name) }}</p>
+            <p class="header-20-medium text-white tracking-wide truncate">{{ widget.formattedValue }}</p>
+          </div>
         </div>
       </div>
     </div>
