@@ -12,6 +12,7 @@ const props = defineProps({
       bonded_tokens: string;
     }>,
   },
+  status: {}
 });
 const total = computed(() => props.pool?.bonded_tokens);
 const format = useFormatter();
@@ -27,37 +28,38 @@ const abstain = computed(() =>
 const veto = computed(() =>
   format.calculatePercent(props.tally?.no_with_veto, total.value)
 );
+console.log('tally', props.tally);
+console.log('pool', props.pool);
+console.log('status', props.status);
 </script>
 
 <template>
   <div class="progress rounded-full h-6 text-xs flex items-center">
-    <div
+    <div v-if="status === 'PASSED'"
       class="h-6 bg-proposal-status-approved rounded-r-full flex items-center pl-2 text-white overflow-hidden"
-      :style="`width: ${yes}`"
-      :title="yes"
-    >
-      {{ yes }}
+      :style="`width: ${yes}`">
+      <!-- {{ yes }} -->
     </div>
-    <div
+    <div v-if="status === 'REJECTED'"
       class="h-6 bg-proposal-status-rejected rounded-r-full flex items-center text-white overflow-hidden"
-      :style="`width: ${no}`"
-      :title="no"
-    >
-      {{ no }}
+      :style="`width: ${no}`" :title="no">
+      <!-- {{ no }} -->
     </div>
-    <div
-      class="h-6 bg-[#B71C1C] rounded-r-full flex items-center text-white overflow-hidden"
-      :style="`width: ${veto};`"
-      :title="veto"
-    >
-      {{ veto }}
+    <div v-if="status === 'VETO'"
+      class="h-6 bg-proposal-status-veto rounded-r-full flex items-center text-white overflow-hidden"
+      :style="`width: ${veto};`" :title="veto">
+      <!-- {{ veto }} -->
     </div>
-    <div
+    <div v-if="status === 'VOTING'"
       class="h-6 bg-proposal-status-voting rounded-r-full flex items-center text-white overflow-hidden"
-      :style="`width: ${abstain}`"
-      :title="abstain"
-    >
-      {{ abstain }}
+      :style="`width: ${abstain}`" :title="abstain">
+      <!-- {{ abstain }} -->
+    </div>
+    <div class="header-16-medium ml-3">
+      <span v-if="status === 'PASSED'" class="text-status-text-approved">{{ yes }}</span>
+      <span v-if="status === 'REJECTED'" class="text-status-text-rejected">{{ no }}</span>
+      <span v-if="status === 'VETO'" class="text-status-text-veto">{{ veto }}</span>
+      <span v-if="status === 'VOTING'" class="text-status-text-voting">{{ abstain }}</span>
     </div>
   </div>
 </template>

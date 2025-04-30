@@ -19,6 +19,7 @@ import IconSoftSlashing from '@/components/icons/IconSoftSlashing.vue';
 import IconAPR from '@/components/icons/IconAPR.vue';
 import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 import dayjs from 'dayjs';
+import CircleProgressComponent from '@/components/CircleProgressComponent.vue';
 
 const staking = useStakingStore();
 const base = useBaseStore();
@@ -327,41 +328,31 @@ const widgetsInfo = computed(() => (
 </script>
 
 <template>
-  <div class="grid grid-cols-1 min-w-72 xl:grid-cols-6 gap-5 md:px-4">
+  <div class="flex flex-col md:flex-row gap-5 md:px-4">
     <!-- widgets -->
-    <div class="col-span-1 md:sticky top-0">
+    <div class="md:sticky top-0">
 
       <div class="flex flex-col items-center md:items-start gap-7 thick-border-block px-2 py-5">
         <div class="flex items-center" v-for="widget in widgetsInfo" :key="widget.name">
-        <span>
-          <div class="relative rounded overflow-hidden flex items-center justify-center mr-2 text-[#3FB6A8]">
-            <div class="absolute top-0 left-0 bottom-0 right-0 bg-almost-black rounded-full m-2"></div>
+          <CircleProgressComponent :value="widget.numValue">
+            <component :is="widget.icon" />
+          </CircleProgressComponent>
 
-            <div class="radial-progress
-              before:bg-[#17171C] before:outline before:outline-addition-1"
-              :style="`--value:${widget.numValue}; --size:90px;`" :ariaValuenow="widget.numValue" role="progressbar">
-              <component :is="widget.icon" />
+          <span class="thin-border-block items-start -ml-8 pl-8">
+            <div class="header-14-medium-aa text-header-text tracking-wide truncate uppercase">{{ $t(widget.name) }}
             </div>
-            <div
-              class="absolute top-0 left-0 bottom-0 right-0 border border-addition-1 rounded-full m-[9px] shadow-[0_0_2px_2px_rgba(0,0,0,0.6)]">
-            </div>
-          </div>
-        </span>
-
-        <span class="thin-border-block items-start -ml-8 pl-8">
-          <div class="header-14-medium-aa text-header-text tracking-wide truncate uppercase">{{ $t(widget.name) }}</div>
-          <div class="header-20-medium text-white tracking-wide truncate">{{ widget.formattedValue }}</div>
-        </span>
-      </div>
+            <div class="header-20-medium text-white tracking-wide truncate">{{ widget.formattedValue }}</div>
+          </span>
+        </div>
       </div>
     </div>
 
     <!-- table -->
-    <div class="xl:col-span-5">
+    <div class="w-full">
       <div class="flex items-center justify-between py-1">
         <div class="w-full tabs tabs-boxed bg-transparent gap-2.5">
-          <a v-for="item in tabs" class="btn-fill w-full md:w-36"
-            :class="{ 'bg-button-v2': tab === item.name }" @click="tab = item.name">{{ $t(item.value) }}</a>
+          <a v-for="item in tabs" class="btn-fill w-full md:w-36" :class="{ 'bg-button-v2': tab === item.name }"
+            @click="tab = item.name">{{ $t(item.value) }}</a>
         </div>
 
         <!-- <div class="text-lg font-semibold">
@@ -370,7 +361,8 @@ const widgetsInfo = computed(() => (
       </div>
 
       <div class="pt-3 pb-4">
-        <div class="overflow-auto thick-border-block px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
+        <div
+          class="overflow-auto thick-border-block px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
           :style="{ height: 'calc(100vh - 300px)' }">
           <table class="table bg-black/20 staking-table w-full">
             <thead class="bg-black sticky top-0 z-10">

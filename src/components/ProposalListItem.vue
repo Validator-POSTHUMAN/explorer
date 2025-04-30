@@ -75,28 +75,23 @@ function metaItem(metadata: string | undefined): {
 
           <td class="w-36">
             <div class="pl-4 body-text-16">
-              <div class="flex items-center" :class="statusMap?.[item?.status] === 'PASSED'
-                  ? 'text-proposal-status-approved'
-                  : statusMap?.[item?.status] === 'REJECTED'
-                    ? 'text-proposal-status-rejected'
-                    : 'text-proposal-status-voting'
+              <div class="flex items-center text-addition" :class="{
+                '!text-proposal-status-rejected': statusMap?.[item?.status] === 'REJECTED',
+                '!text-proposal-status-approved': statusMap?.[item?.status] === 'PASSED',
+                '!text-proposal-status-voting': statusMap?.[item?.status] === 'VOTING',
+              }
                 ">
-                <div class="w-1 h-1 rounded-full mr-2" :class="statusMap?.[item?.status] === 'PASSED'
-                    ? 'bg-proposal-status-approved'
-                    : statusMap?.[item?.status] === 'REJECTED'
-                      ? 'bg-proposal-status-rejected'
-                      : 'bg-proposal-status-voting'
+                <div class="w-1 h-1 rounded-full mr-2 bg-addition" :class="{
+                  '!bg-proposal-status-rejected': statusMap?.[item?.status] === 'REJECTED',
+                  '!bg-proposal-status-approved': statusMap?.[item?.status] === 'PASSED',
+                  '!bg-proposal-status-voting': statusMap?.[item?.status] === 'VOTING',
+                }
                   "></div>
-                <div 
-                :class="{
-                  'text-proposal-status-rejected': statusMap?.[item?.status] === 'REJECTED',
-                  'text-proposal-status-approved': statusMap?.[item?.status] === 'PASSED',
-                  'text-proposal-status-voting': statusMap?.[item?.status] === 'VOTING',
-                }">
-                  {{ statusMap?.[item?.status] || item?.status }}
+                <div class="capitalize">
+                  {{ statusMap?.[item?.status].toLowerCase() || item?.status.toLowerCase() }}
                 </div>
               </div>
-              <div
+              <div v-if="statusMap?.[item?.status] === 'VOTING'"
                 class="truncate col-span-2 md:!col-span-1 text-adddition-text dark:text-gray-400 text-right md:!flex md:!justify-start">
                 {{ format.toDay(item.voting_end_time, 'from') }}
               </div>
@@ -104,7 +99,8 @@ function metaItem(metadata: string | undefined): {
           </td>
 
           <td class="w-60">
-            <ProposalProcess :pool="staking.pool" :tally="item.final_tally_result"></ProposalProcess>
+            <ProposalProcess :key="item?.status" :pool="staking.pool" :tally="item.final_tally_result"
+              :status="statusMap?.[item?.status]"></ProposalProcess>
           </td>
 
           <td v-if="statusMap?.[item?.status] === 'VOTING'" class="w-40">
@@ -159,16 +155,16 @@ function metaItem(metadata: string | undefined): {
         <div class="mt-4" v-if="statusMap?.[item?.status] === 'VOTING'">
           <div class="flex justify-between">
             <div class="flex items-center" :class="statusMap?.[item?.status] === 'PASSED'
-                ? 'text-proposal-status-approved'
-                : statusMap?.[item?.status] === 'REJECTED'
-                  ? 'text-proposal-status-rejected'
-                  : 'text-proposal-status-voting'
+              ? 'text-proposal-status-approved'
+              : statusMap?.[item?.status] === 'REJECTED'
+                ? 'text-proposal-status-rejected'
+                : 'text-addition'
               ">
               <div class="w-1 h-1 rounded-full mr-2" :class="statusMap?.[item?.status] === 'PASSED'
-                  ? 'bg-proposal-status-approved'
-                  : statusMap?.[item?.status] === 'REJECTED'
-                    ? 'bg-proposal-status-rejected'
-                    : 'bg-proposal-status-voting'
+                ? 'bg-proposal-status-approved'
+                : statusMap?.[item?.status] === 'REJECTED'
+                  ? 'bg-proposal-status-rejected'
+                  : 'bg-addition'
                 "></div>
               <div class="text-xs flex items-center">
                 {{ statusMap?.[item?.status] || item?.status }}
@@ -200,12 +196,12 @@ function metaItem(metadata: string | undefined): {
             proposalInfo?.summary ||
             metaItem(proposalInfo?.metadata)?.summary
           " :is="select(
-              proposalInfo?.content?.description ||
-              proposalInfo?.summary ||
-              metaItem(proposalInfo?.metadata)?.summary,
-              'horizontal'
-            )
-              " :value="proposalInfo?.content?.description ||
+            proposalInfo?.content?.description ||
+            proposalInfo?.summary ||
+            metaItem(proposalInfo?.metadata)?.summary,
+            'horizontal'
+          )
+            " :value="proposalInfo?.content?.description ||
               proposalInfo?.summary ||
               metaItem(proposalInfo?.metadata)?.summary
               ">

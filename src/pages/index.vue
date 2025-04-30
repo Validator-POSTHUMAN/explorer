@@ -26,7 +26,7 @@ const chains = computed(() => {
   }
 });
 
-const favouriteChains = computed(() => chains.value.filter(chain => dashboard?.favoriteMap?.[chain.chainName]));
+const favoriteChains = computed(() => chains.value.filter(chain => dashboard?.favoriteMap?.[chain.chainName]));
 
 const chainStore = useBlockchain();
 </script>
@@ -65,15 +65,15 @@ const chainStore = useBlockchain();
     <div class="flex justify-center">
       <div class="w-full md:w-auto grid grid-cols-2 gap-5 mt-12 pt-0.5"
         :class="{
-          'md:!grid-cols-1 lg:!grid-cols-1 2xl:!grid-cols-1': favouriteChains.length === 1,
-          'md:!grid-cols-2 lg:!grid-cols-2 2xl:!grid-cols-2': favouriteChains.length === 2,
-          'md:!grid-cols-3 lg:!grid-cols-3 2xl:!grid-cols-3': favouriteChains.length === 3,
-          'md:!grid-cols-4 lg:!grid-cols-4 2xl:!grid-cols-4': favouriteChains.length === 4,
-          'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-5': favouriteChains.length === 5,
-          'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-6': favouriteChains.length >= 6,
+          'md:!grid-cols-1 lg:!grid-cols-1 2xl:!grid-cols-1': favoriteChains.length === 1,
+          'md:!grid-cols-2 lg:!grid-cols-2 2xl:!grid-cols-2': favoriteChains.length === 2,
+          'md:!grid-cols-3 lg:!grid-cols-3 2xl:!grid-cols-3': favoriteChains.length === 3,
+          'md:!grid-cols-4 lg:!grid-cols-4 2xl:!grid-cols-4': favoriteChains.length === 4,
+          'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-5': favoriteChains.length === 5,
+          'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-6': favoriteChains.length >= 6,
 
         }">
-        <ChainSummary v-for="(chain, index) in favouriteChains" :key="index" :name="chain.chainName" />
+        <ChainSummary v-for="(chain, index) in favoriteChains" :key="index" :name="chain.chainName" />
       </div>
     </div>
   </div>

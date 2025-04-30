@@ -21,6 +21,7 @@ import { ref, reactive } from 'vue';
 import Countdown from '@/components/Countdown.vue';
 import PaginationBar from '@/components/PaginationBar.vue';
 import { fromBech32, toHex } from '@cosmjs/encoding';
+import { Icon } from '@iconify/vue';
 
 
 const props = defineProps(['proposal_id', 'chain']);
@@ -161,11 +162,38 @@ const abstain = computed(() => {
 });
 const processList = computed(() => {
   return [
-    { name: 'Turnout', value: turnout.value, class: 'bg-info' },
-    { name: 'Yes', value: yes.value, class: 'bg-success' },
-    { name: 'No', value: no.value, class: 'bg-error' },
-    { name: 'No With Veto', value: veto.value, class: 'bg-red-800' },
-    { name: 'Abstain', value: abstain.value, class: 'bg-warning' },
+    // { name: 'Turnout', value: turnout.value, class: 'bg-info' },
+    {
+      name: 'YES',
+      value: yes.value,
+      class: 'bg-proposal-status-approved',
+      borderColor: 'border-proposal-status-approved hover:border-proposal-status-approved hover:text-white hover:bg-button-hover',
+      textColor: 'text-status-text-approved',
+      icon: 'tabler:check',
+    },
+    {
+      name: 'NO',
+      value: no.value,
+      class: 'bg-proposal-status-rejected',
+      borderColor: 'border-proposal-status-rejected hover:border-proposal-status-rejected hover:text-white hover:bg-button-hover',
+      textColor: 'text-status-text-rejected',
+      icon: 'ic:round-close',
+    },
+    {
+      name: 'No with veto',
+      value: veto.value,
+      class: 'bg-proposal-status-veto',
+      borderColor: 'border-proposal-status-veto hover:border-proposal-status-veto hover:text-white hover:bg-button-hover',
+      textColor: 'text-status-text-veto',
+    },
+    {
+      name: 'Abstain',
+      value: abstain.value,
+      class: 'bg-addition',
+      borderColor: 'border-addition hover:border-addition hover:text-white hover:bg-button-hover',
+      textColor: 'text-addition',
+      icon: 'akar-icons:dot-grid',
+    },
   ];
 });
 
@@ -192,132 +220,157 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
 </script>
 
 <template>
-  <div>
+  <div class="md:px-4">
     <h2 class=" flex flex-col md:!justify-between md:!flex-row mb-2">
       <p class="truncate w-full header-20-medium-aa text-header-text tracking-wide uppercase">
         {{ `#${proposal_id}. ${proposal.title || proposal.content?.title || metaItem(proposal?.metadata)?.title}` }}
       </p>
-      <div class="text-addition" >
-        {{ status }}
+      <div class="text-addition body-text-14 text-end">
+        <p>
+          {{ proposal.content['@type'] }}
+        </p>
+        <p>
+          {{ status }}
+        </p>
       </div>
     </h2>
 
-    <div class="grid grid-cols-1 min-w-72 xl:grid-cols-6 gap-5 md:px-4">
-
+    <div class="flex flex-col md:flex-row gap-5">
 
       <!-- info -->
-      <div class="col-span-1 thick-border-block gap-4 mb-4 grid lg:!!grid-cols-3 auto-rows-max">
-        <div class="bg-base-100 px-4 pt-3 pb-4 rounded shadow">
-          <h2 class="card-title mb-1">{{ $t('gov.tally') }}</h2>
-          <div class="mb-1" v-for="(item, index) of processList" :key="index">
-            <label class="block text-sm mb-1">{{ item.name }}</label>
-            <div class="h-5 w-full relative">
-              <div class="absolute inset-x-0 inset-y-0 w-full opacity-10 rounded-sm" :class="`${item.class}`"></div>
-              <div class="absolute inset-x-0 inset-y-0 rounded-sm" :class="`${item.class}`" :style="`width: ${item.value === '-' || item.value === 'NaN%' ? '0%' : item.value
-                }`"></div>
-              <p
-                class="absolute inset-x-0 inset-y-0 text-center text-sm text-[#666] dark:text-[#eee] flex items-center justify-center">
-                {{ item.value }}
-              </p>
-            </div>
-          </div>
-          <div class="mt-6 grid grid-cols-2">
-            <label for="vote" class="btn btn-primary float-right btn-sm mx-1"
-              @click="dialog.open('vote', { proposal_id })">{{ $t('gov.btn_vote') }}</label>
-            <label for="deposit" class="btn btn-primary float-right btn-sm mx-1"
-              @click="dialog.open('deposit', { proposal_id })">{{ $t('gov.btn_deposit') }}</label>
-          </div>
-        </div>
+      <div class="min-w-[420px]">
+        <div class=" bg-black/70 thick-border-block">
 
-        <div class="bg-base-100 px-4 pt-3 pb-5 rounded shadow lg:!!col-span-2">
-          <h2 class="card-title">{{ $t('gov.timeline') }}</h2>
+          <div>
+            <p>{{ $t('gov.status') }}</p>
+            <div></div>
+            <div></div>
 
-          <div class="px-1">
-            <div class="flex items-center mb-4 mt-2">
-              <div class="w-2 h-2 rounded-full bg-error mr-3"></div>
-              <div class="text-base flex-1 text-main">
-                {{ $t('gov.submit_at') }}: {{ format.toDay(proposal.submit_time) }}
+          </div>
+
+          <div class="p-5 rounded shadow">
+            <!-- <h2 class="card-title mb-1">{{ $t('gov.tally') }}</h2> -->
+            <div class="grid grid-cols-2 items-center gap-2.5 mb-1 header-16-medium tracking-wide"
+              v-for="(item, index) of processList" :key="index">
+              <label class="btn-outline px-7 py-4 text-white truncate justify-between" :class="item.borderColor">
+                <span>{{ item.name }}</span>
+                <Icon v-if="item.icon" :icon="item.icon" width="18" height="18" />
+              </label>
+              <div>
+                <p class="text-center flex items-center justify-center" :class="item.textColor">
+                  {{ item.value }}
+                </p>
+                <div class="h-3 w-full relative rounded-full overflow-hidden">
+                  <div class="absolute inset-x-0 inset-y-0 bg-addition  w-full opacity-20"></div>
+                  <div class="absolute inset-x-0 inset-y-0 rounded-sm" :class="`${item.class}`" :style="`width: ${item.value === '-' || item.value === 'NaN%' ? '0%' : item.value
+                    }`"></div>
+
+                </div>
               </div>
-              <div class="text-sm">{{ shortTime(proposal.submit_time) }}</div>
             </div>
-            <div class="flex items-center mb-4">
-              <div class="w-2 h-2 rounded-full bg-primary mr-3"></div>
-              <div class="text-base flex-1 text-main">
-                {{ $t('gov.deposited_at') }}:
-                {{
-                  format.toDay(
-                    proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
-                      ? proposal.deposit_end_time
-                      : proposal.voting_start_time
+            <label for="vote" class="btn-outline py-4 mb-7" @click="dialog.open('vote', { proposal_id })">{{
+              $t('gov.change_vote') }}</label>
+
+            <!-- <div class="mt-6 grid grid-cols-2">
+              <label for="vote" class="btn btn-primary float-right btn-sm mx-1"
+                @click="dialog.open('vote', { proposal_id })">{{ $t('gov.btn_vote') }}</label>
+              <label for="deposit" class="btn btn-primary float-right btn-sm mx-1"
+                @click="dialog.open('deposit', { proposal_id })">{{ $t('gov.btn_deposit') }}</label>
+            </div> -->
+          </div>
+
+          <!-- <div class="px-4 pt-3 pb-5 rounded shadow lg:!!col-span-2">
+            <h2 class="card-title">{{ $t('gov.timeline') }}</h2>
+
+            <div class="px-1">
+              <div class="flex items-center mb-4 mt-2">
+                <div class="w-2 h-2 rounded-full bg-error mr-3"></div>
+                <div class="text-base flex-1 text-main">
+                  {{ $t('gov.submit_at') }}: {{ format.toDay(proposal.submit_time) }}
+                </div>
+                <div class="text-sm">{{ shortTime(proposal.submit_time) }}</div>
+              </div>
+              <div class="flex items-center mb-4">
+                <div class="w-2 h-2 rounded-full bg-primary mr-3"></div>
+                <div class="text-base flex-1 text-main">
+                  {{ $t('gov.deposited_at') }}:
+                  {{
+                    format.toDay(
+                      proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
+                        ? proposal.deposit_end_time
+                        : proposal.voting_start_time
                   )
-                }}
-              </div>
-              <div class="text-sm">
-                {{
-                  shortTime(
-                    proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
-                      ? proposal.deposit_end_time
-                      : proposal.voting_start_time
+                  }}
+                </div>
+                <div class="text-sm">
+                  {{
+                    shortTime(
+                      proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
+                        ? proposal.deposit_end_time
+                        : proposal.voting_start_time
                   )
-                }}
-              </div>
-            </div>
-            <div class="mb-4">
-              <div class="flex items-center">
-                <div class="w-2 h-2 rounded-full bg-proposal-status-approved mr-3"></div>
-                <div class="text-base flex-1 text-main">
-                  {{ $t('gov.vote_start_from') }} {{ format.toDay(proposal.voting_start_time) }}
-                </div>
-                <div class="text-sm">
-                  {{ shortTime(proposal.voting_start_time) }}
+                  }}
                 </div>
               </div>
-              <div class="pl-5 text-sm mt-2">
-                <Countdown :time="votingCountdown" />
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center mb-1">
-                <div class="w-2 h-2 rounded-full bg-success mr-3"></div>
-                <div class="text-base flex-1 text-main">
-                  {{ $t('gov.vote_end') }} {{ format.toDay(proposal.voting_end_time) }}
+              <div class="mb-4">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 rounded-full bg-proposal-status-approved mr-3"></div>
+                  <div class="text-base flex-1 text-main">
+                    {{ $t('gov.vote_start_from') }} {{ format.toDay(proposal.voting_start_time) }}
+                  </div>
+                  <div class="text-sm">
+                    {{ shortTime(proposal.voting_start_time) }}
+                  </div>
                 </div>
-                <div class="text-sm">
-                  {{ shortTime(proposal.voting_end_time) }}
+                <div class="pl-5 text-sm mt-2">
+                  <Countdown :time="votingCountdown" />
                 </div>
               </div>
-              <div class="pl-5 text-sm">
-                {{ $t('gov.current_status') }}: {{ $t(`gov.proposal_statuses.${proposal.status}`) }}
+              <div>
+                <div class="flex items-center mb-1">
+                  <div class="w-2 h-2 rounded-full bg-success mr-3"></div>
+                  <div class="text-base flex-1 text-main">
+                    {{ $t('gov.vote_end') }} {{ format.toDay(proposal.voting_end_time) }}
+                  </div>
+                  <div class="text-sm">
+                    {{ shortTime(proposal.voting_end_time) }}
+                  </div>
+                </div>
+                <div class="pl-5 text-sm">
+                  {{ $t('gov.current_status') }}: {{ $t(`gov.proposal_statuses.${proposal.status}`) }}
+                </div>
               </div>
-            </div>
 
-            <div class="mt-4" v-if="
-              proposal?.content?.['@type']?.endsWith('SoftwareUpgradeProposal')
-            ">
-              <div class="flex items-center">
-                <div class="w-2 h-2 rounded-full bg-warning mr-3"></div>
-                <div class="text-base flex-1 text-main">
-                  {{ $t('gov.upgrade_plan') }}:
-                  <span v-if="Number(proposal.content?.plan?.height || '0') > 0">
-                    (EST)</span>
-                  <span v-else>{{
-                    format.toDay(proposal.content?.plan?.time)
-                  }}</span>
+              <div class="mt-4" v-if="
+                proposal?.content?.['@type']?.endsWith('SoftwareUpgradeProposal')
+              ">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 rounded-full bg-warning mr-3"></div>
+                  <div class="text-base flex-1 text-main">
+                    {{ $t('gov.upgrade_plan') }}:
+                    <span v-if="Number(proposal.content?.plan?.height || '0') > 0">
+                      (EST)</span>
+                    <span v-else>{{
+                      format.toDay(proposal.content?.plan?.time)
+                      }}</span>
+                  </div>
+                  <div class="text-sm">
+                    {{ shortTime(proposal.voting_end_time) }}
+                  </div>
                 </div>
-                <div class="text-sm">
-                  {{ shortTime(proposal.voting_end_time) }}
+                <div class="pl-5 text-sm mt-2">
+                  <Countdown :time="upgradeCountdown" />
                 </div>
-              </div>
-              <div class="pl-5 text-sm mt-2">
-                <Countdown :time="upgradeCountdown" />
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
       <!-- text -->
-      <div class="xl:col-span-5 thick-border-block px-4 pt-3 pb-4 rounded mb-4 shadow">
+      <div
+        class="pt-3 pb-4 rounded mb-4 shadow overflow-auto thick-border-block bg-black/70 px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
+        :style="{ height: 'calc(100vh - 300px)' }">
 
         <div class="">
           <ObjectElement :value="proposal.content" />
@@ -329,7 +382,7 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
       </div>
     </div>
 
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="px-4 pt-3 pb-4 rounded mb-4 shadow">
       <h2 class="card-title">{{ $t('gov.votes') }}</h2>
       <div class="overflow-x-auto">
         <table class="table w-full table-zebra">
@@ -351,6 +404,6 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
         </table>
         <PaginationBar :limit="pageRequest.limit" :total="pageResponse.total" :callback="pageload" />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>

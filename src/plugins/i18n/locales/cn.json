@@ -138,7 +138,9 @@
       "PROPOSAL_STATUS_FAILED": "失败"
     },
     "upgrade_plan": "升级计划",
-    "votes": "投票"
+    "votes": "投票",
+    "change_vote": "Change your vote",
+    "status": "Status"
   },
   "ibc": {
     "title": "IBC 连接",
