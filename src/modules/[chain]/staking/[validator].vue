@@ -21,6 +21,7 @@ import { fromBase64, toBase64 } from '@cosmjs/encoding';
 import { stringToUint8Array, uint8ArrayToString } from '@/libs/utils';
 import CircleProgressComponent from '@/components/CircleProgressComponent.vue';
 import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
+import ActionsPanel from '@/components/ActionsPanel.vue';
 
 const props = defineProps(['validator', 'chain']);
 
@@ -412,14 +413,7 @@ const airdropStatus = ref('high');
         </div>
 
         <!-- actions -->
-        <div class="flex flex-col justify-center md:flex-row gap-5">
-          <label v-for="item in btns" :for="item.id" class="min-w-44 btn-outline border-button-text text-header-text"
-            @click="item?.id &&
-              dialog.open(item?.id, {
-                validator_address: v.operator_address,
-              })
-              ">{{ $t(item.name) }}</label>
-        </div>
+        <ActionsPanel v-if="v.operator_address" :key="v.operator_address" :address="v.operator_address" />
       </div>
 
       <!-- bonus badge -->
@@ -451,17 +445,19 @@ const airdropStatus = ref('high');
 
         <p class="header-20-medium mb-0.5" :class="'text-star-yellow'">Bonus is possible</p>
         <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->
-        <p class="body-text-16 text-white leading-5 line-clamp-3"> You will  get any bonuses for delegating to this validator if you...
+        <p class="body-text-16 text-white leading-5 line-clamp-3"> You will get any bonuses for delegating to this
+          validator if you...
         </p>
       </div>
 
       <!-- NO Bonus -->
       <div v-if="airdropStatus === 'no'"
         class="w-80 h-[100px] absolute bottom-20 right-0 translate-x-1/2 rounded-full border border-red-text bg-black py-2.5 px-12">
-        
+
         <p class="header-20-medium mb-0.5" :class="'text-red-text'">NO Bonus</p>
         <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->
-        <p class="body-text-16 text-white leading-5 line-clamp-2"> You will not get any bonuses for delegating to this validator
+        <p class="body-text-16 text-white leading-5 line-clamp-2"> You will not get any bonuses for delegating to this
+          validator
         </p>
       </div>
     </div>

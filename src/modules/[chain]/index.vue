@@ -157,7 +157,7 @@ const amount = computed({
           <div class="flex justify-center md:justify-between items-center mb-[50px] gap-6">
             <!-- address -->
             <AddressWithCopy :href="`/${chain}/account/${walletStore.currentAddress}`"
-              :address="walletStore.currentAddress" icon outline />
+              :address="walletStore.currentAddress" icon hasIconOutline />
 
             <!-- buttons panel -->
             <div class="grid grid-cols-3 gap-4">

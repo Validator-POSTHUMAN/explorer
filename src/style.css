@@ -147,6 +147,10 @@ html[data-theme='dark'] {
     @apply header-16-medium flex justify-center items-center py-1 rounded-full text-white cursor-pointer hover:bg-button-v2 bg-button-v2-hover;
   }
 
+  .badge-transparent {
+    @apply bg-almost-black rounded-full text-button-text header-16 tracking-wide px-1 py-0.5 text-center;
+  }
+
   .thick-border-block {
     @apply border-8 border-almost-black rounded;
   }
