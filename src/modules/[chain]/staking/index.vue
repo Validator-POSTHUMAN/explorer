@@ -437,11 +437,13 @@ const widgetsInfo = computed(() => (
                     </span>
                   </td>
                   <td scope="col" class="text-right">
-                    {{ $t('staking.voting_power') }}
-                    <!-- <span class="text-base cursor-pointer self-center">
-                    <Icon icon="mynaui:chevron-up-solid" class="text-addition" />
-                    <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" />
-                  </span> -->
+                    <div class="flex gap-1 items-center justify-end">
+                      {{ $t('staking.voting_power') }}
+                      <span class="text-base cursor-pointer self-center">
+                        <Icon icon="mynaui:chevron-up-solid" class="text-addition" />
+                        <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" />
+                      </span>
+                    </div>
                   </td>
                   <td scope="col" class="text-right">
                     {{ $t('staking.24h_changes') }}

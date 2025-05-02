@@ -219,7 +219,7 @@ const socials = [
               <div
                 v-for="(el, key) of item?.children.filter(item => isNavLink(item) && item?.to.path !== '/cosmos/uptime')"
                 class="relative h-full pl-8 pr-10 pt-4 pb-2 hidden xl:block 
-                    before:hover:bg-menu-button-hover before:active:bg-menu-button-active before:scale-y-105
+                    before:hover:border-x before:hover:bg-menu-button-hover before:active:bg-menu-button-active before:scale-y-105
                     before:block before:absolute before:inset-0 before:-skew-x-[33deg] before:border-r-2 before:border-addition"
                 :class="{
                   'before:bg-menu-button-active': selected($route, el),

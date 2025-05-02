@@ -23,7 +23,8 @@
     "description_all": "Kami tidak dapat menemukan halaman yang anda cari.",
     "btn_index": "Kembali ke awal",
     "connect_wallet": "Connect wallet",
-    "add_network": "Add Favorite Network"
+    "add_network": "Add Favorite Network",
+    "back": "Back"
   },
   "account": {
     "type": "Tipe",
@@ -75,7 +76,8 @@
     "receive": "Receive",
     "send": "Send",
     "delegate": "Delegate",
-    "no_gas": "Not enough gas"
+    "no_gas": "Not enough gas",
+    "no_data": "No Data"
   },
   "block": {
     "estimated_time": "Estimasi Waktu",
@@ -260,7 +262,17 @@
     "gas": "Bahan bakar",
     "fee": "Biaya",
     "memo": "Memo",
-    "no_messages": "Tidak ada pesan"
+    "no_messages": "Tidak ada pesan",
+    "transaction_summary": "Transaction summary",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "transfer": "Transfer",
+    "from": "From",
+    "to" : "To",
+    "amount": "Amount",
+    "time": "Time",
+    "height": "Height"
   },
   "uptime": {
     "overall": "Secara keseluruhan",

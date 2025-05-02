@@ -23,6 +23,7 @@ import Countdown from '@/components/Countdown.vue';
 import { fromBase64 } from '@cosmjs/encoding';
 import AddressWithCopy from '@/components/AddressWithCopy.vue';
 import ActionsPanel from '@/components/ActionsPanel.vue';
+import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 
 const props = defineProps(['address', 'chain']);
 
@@ -153,13 +154,30 @@ const scaleData = computed(() => ([
   },
   {
     label: 'account.unbonding',
-    value: '111111111',
+    value: '333333333',
     bgColor: 'bg-[#BC36C3]',
     textColor: 'text-[#BC36C3]',
   },
 ]));
 
+const returnAmounItem = (amount: Coin | Coin[] | undefined) => {
+  if (!amount) return;
+  if (Array.isArray(amount)) {
+    return amount[0]
+  } else {
+    return amount
+  }
+};
+
+const activeValidator = ref('');
+
+const calcAmount = (amount: Coin | Coin[] | undefined, type: 'value' | 'token') => {
+  if (!amount) return '-';
+  return format.formatToken(returnAmounItem(amount), true, '0,0.[000000]').split(' ')[type === 'value' ? 0 : 1]
+};
+
 const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.value, 0));
+
 </script>
 <template>
   <div v-if="account" class="px-5 py-1">
@@ -176,7 +194,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           :style="{
             width: `${(+item.value * 790) / total}px`,
             zIndex: 10 - (i + 1),
-            // textAlign: i === 0 ? 'left' : i === scaleData.length-1 ? 'right' : 'center'
+            textAlign: i === 0 ? 'left' : i === scaleData.length - 1 ? 'right' : 'center'
           }">
           <p v-if="+item.value" class="">{{ `$${format.formatNumber(+item.value, '0,0')}` }}</p>
           <div v-if="+item.value" class="h-8 rounded-full my-3" :class="[item.bgColor, i !== 0 ? '-ml-8' : '']"></div>
@@ -192,8 +210,9 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
         <h3 class="header-20-medium-aa text-header-text uppercase mb-7">{{ $t('account.transactions') }}</h3>
         <div>
           <Icon icon="codicon:debug-restart" width="24" height="24"
-            class="inline-block bg-addition/20 rounded mr-2.5" />
-          <Icon icon="mynaui:filter" width="24" height="24" class="inline-block bg-addition/20 rounded" />
+            class="cursor-pointer inline-block bg-addition/20 rounded mr-2.5" />
+          <Icon icon="mynaui:filter" width="24" height="24"
+            class="cursor-pointer inline-block bg-addition/20 rounded" />
         </div>
       </div>
       <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-80">
@@ -226,14 +245,14 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </thead>
 
           <tbody class="">
-            <tr v-if="recentReceived.length === 0" class="border-addition/20">
-              <td colspan="10">
+            <tr v-if="recentReceived.length === 0 && txs.length === 0" class="border-addition/20">
+              <td colspan="10"> recentReceived
                 <div class="text-center">{{ $t('account.no_transactions') }}</div>
               </td>
             </tr>
 
             <tr v-for="(recentReceivedItem, index) in recentReceived" :key="index" class="border-addition/20">
-              <!-- 👉 result: v.code -->
+              <!-- 👉 result -->
               <td>
                 <div class="w-full">
                   <p class="header-16-medium tracking-wide" :class="{
@@ -277,14 +296,16 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 </div>
               </td>
               <!-- 👉 operation -->
-              <td>
+              <td class="w-[450px]">
+
                 <div class="w-full flex justify-center">
-                  <div class="badge-transparent w-60">
+                  <div v-if="recentReceivedItem.code === 1"
+                    class="text-red-text header-16 tracking-wide text-centerw-60">
+                    {{ $t('account.no_gas') }}
+                  </div>
+                  <div v-else class="badge-transparent w-60">
                     {{ format.messages(recentReceivedItem.tx.body.messages) }}
                   </div>
-                  <!-- <div class="text-red-text header-16 tracking-wide text-centerw-60">
-                  {{ $t('account.no_gas') }}
-                </div> -->
                 </div>
               </td>
               <!-- 👉 time -->
@@ -304,9 +325,10 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
               <td class="text-end">
                 <AddressWithCopy styles="header-14-medium-aa justify-end"
                   :href="`/${chain}/tx/${recentReceivedItem.txhash}`" :address="recentReceivedItem.txhash" :size="16"
-                  icon isShort />
+                  icon isShort isCopyHref />
               </td>
             </tr>
+
             <tr v-for="(txsItem, index) in txs" :key="index" class="border-addition/20">
               <!-- 👉 result: v.code -->
               <td>
@@ -332,33 +354,26 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 <div class="text-end">
                   <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
                     <span>{{
-                      format.formatTokens(
-                        txsItem.tx?.body.messages[0].amount,
-                        true,
-                        '0,0'
-                      ).split(' ')[0]
+                      calcAmount(txsItem.tx.body.messages[0].amount, 'value')
                     }}</span>
                     <span class="text-header-text header-14-medium-aa uppercase">{{
-                      ` [${format.formatTokens(
-                        txsItem.tx?.body.messages[0].amount,
-                        true,
-                        '0,0'
-                      ).split(' ')[1]}]`
+                      ` [${calcAmount(txsItem.tx.body.messages[0].amount, 'token')}]`
                     }}</span>
                   </h6>
                   <span class="body-text-14 text-[#80BDBD]">{{
-                    `$${format.tokenValueNumber(txsItem.tx?.body.messages[0].amount?.find(item => item))}`}}</span>
+                    `$${format.tokenValueNumber(returnAmounItem(txsItem.tx?.body.messages[0].amount))}` }}</span>
                 </div>
               </td>
               <!-- 👉 operation -->
               <td>
                 <div class="w-full flex justify-center">
-                  <div class="badge-transparent w-60">
+                  <div v-if="txsItem.code === 1" class="text-red-text header-16 tracking-wide text-centerw-60">
+                    {{ $t('account.no_gas') }}
+                  </div>
+                  <div v-else class="badge-transparent w-60">
                     {{ format.messages(txsItem.tx.body.messages) }}
                   </div>
-                  <!-- <div class="text-red-text header-16 tracking-wide text-centerw-60">
-                  {{ $t('account.no_gas') }}
-                </div> -->
+
                 </div>
               </td>
               <!-- 👉 time -->
@@ -377,66 +392,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
               <!-- 👉 TxHash -->
               <td class="text-end">
                 <AddressWithCopy styles="header-14-medium-aa justify-end" :href="`/${chain}/tx/${txsItem.txhash}`"
-                  :address="txsItem.txhash" :size="16" icon isShort />
-              </td>
-            </tr>
-            <tr v-for="(delegationItem, index) in delegations" :key="index" class="border-addition/20">
-              <!-- 👉 result: v.code -->
-              <td>
-                <div class="w-full">
-                  <p class="header-16-medium tracking-wide text-tx-status-success">
-                    {{ $t('account.success') }}
-                  </p>
-                </div>
-              </td>
-
-              <!-- 👉 amount -->
-              <td class="">
-                <div class="text-end">
-                  <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
-                    <span> {{ format.formatToken(delegationItem?.balance).split(' ')[0] }}
-                    </span>
-                    <span class="text-header-text header-14-medium-aa uppercase">{{
-                      ` [${format.formatToken(delegationItem?.balance).split(' ')[1]}]`
-                    }}</span>
-                  </h6>
-                  <span class="body-text-14 text-[#80BDBD]">{{
-                    `$${format.tokenValueNumber(delegationItem?.balance)}` }}</span>
-                </div>
-              </td>
-              <!-- 👉 operation -->
-              <td>
-                <div class="w-full flex justify-center">
-                  <div class="badge-transparent w-60">
-                    {{ $t('account.delegate') }}
-                  </div>
-                  <!-- <div class="text-red-text header-16 tracking-wide text-centerw-60">
-                  {{ $t('account.no_gas') }}
-                </div> -->
-                </div>
-              </td>
-              <!-- 👉 time -->
-              <td class="">
-                <div class="flex flex-col items-end body-text-14">
-                  <span class="text-white">
-                    {{ format.toDay(delegationItem.delegation.shares, 'advancedFormat') }}
-                  </span>
-                  <span class="text-[#8899AA]">
-                    {{ format.toDay(delegationItem.delegation.shares, 'time') }}
-                    ({{
-                      format.toDay(delegationItem.delegation.shares, 'from') }})
-                  </span>
-                </div>
-              </td>
-              <!-- 👉 TxHash -->
-              <td class="text-end">
-
-
-                <AddressWithCopy styles="header-14-medium-aa justify-end"
-                  :href="`/${chain}/tx/${delegationItem.delegation.delegator_address}`"
-                  :address="delegationItem.delegation.delegator_address" :size="16" icon isShort />
-
-
+                  :address="txsItem.txhash" :size="16" icon isShort isCopyHref />
               </td>
             </tr>
 
@@ -447,7 +403,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
     </div>
 
     <div class="flex gap-7 mb-8">
-      <!-- assets -->
+      <!-- Assets -->
       <div class="thick-border-block w-1/2 p-5">
         <div class="flex justify-between items-center mb-7">
           <h3 class="header-20-medium-aa text-header-text uppercase ">{{ $t('account.assets') }}</h3>
@@ -459,26 +415,30 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </div>
         </div>
 
-        <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-44">
+        <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-48">
           <table class=" table bg-black/20 staking-table w-full">
             <thead class="bg-black sticky top-0 z-10">
               <tr class="text-header-text body-text-14 border-addition/20">
                 <td scope="col">
                   {{ $t('account.chain') }}
                 </td>
-                <td scope="col" class="text-end">
-                  {{ $t('account.available') }}
-                  <span class="cursor-pointer inline-block">
-                    <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                    <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                  </span>
+                <td scope="col">
+                  <div class="flex gap-1 items-center justify-end">
+                    <span class="inline-block">{{ $t('account.available') }}</span>
+                    <span class="cursor-pointer inline-block">
+                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
+                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
+                    </span>
+                  </div>
                 </td>
-                <td scope="col" class="flex gap-1 items-center justify-end">
-                  {{ $t('account.market_price') }}
-                  <span class="cursor-pointer">
-                    <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                    <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                  </span>
+                <td scope="col">
+                  <div class="flex gap-1 items-center justify-end">
+                    {{ $t('account.market_price') }}
+                    <span class="cursor-pointer">
+                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
+                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
+                    </span>
+                  </div>
                 </td>
                 <td scope="col">
                   <div class="flex gap-1 items-center justify-end">
@@ -493,29 +453,54 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
             </thead>
 
             <tbody class="">
-              <tr v-if="recentReceived.length === 0" class="border-addition/20">
+              <tr v-if="rewards?.total?.length === 0" class="border-addition/20">
                 <td colspan="10">
-                  <div class="text-center">{{ $t('account.no_transactions') }}</div>
+                  <div class="text-center">{{ $t('account.no_data') }}</div>
                 </td>
               </tr>
 
-              <tr v-for="(recentReceivedItem, index) in recentReceived" :key="index" class="border-addition/20">
+              <tr v-for="(rewardItem, index) in rewards.total" :key="index" class="border-addition/20">
                 <!-- 👉 Chain -->
                 <td>
-                  <div class="w-full">
-                    <p class="header-16-medium tracking-wide" :class="{
-                      'text-tx-status-success': recentReceivedItem.code === 0,
-                      'text-tx-status-error': recentReceivedItem.code === 1,
-                      'text-tx-status-warning': recentReceivedItem.code !== 0 && recentReceivedItem.code !== 1
-                    }">
-                      {{
-                        recentReceivedItem.code === 0
-                          ? $t('account.success')
-                          : recentReceivedItem.code === 1
-                            ? $t('account.failed')
-                            : $t('account.processing')
-                      }}
-                    </p>
+                  <div class="max-w-[300px] flex gap-2.5 items-center overflow-hidden">
+                    <div class="avatar relative w-10 h-10 rounded-full">
+                      <div class="w-10 h-10 rounded-full bg-gray-400 absolute opacity-10"></div>
+                      <div class="w-10 h-10 rounded-full">
+                        <!-- <img :src="logo ? logo : defaultAvatar" class="object-contain" @error="
+                          (e) => {
+                            const identity = v.description?.identity;
+                            if (identity) loadAvatar(identity);
+                          }
+                        " /> -->
+                        <img :src="defaultAvatar" class="object-contain" />
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                      <span class="header-16-medium text-white uppercase">
+
+                        {{ calcAmount(rewardItem, 'token') }}
+
+                      </span>
+                      <span class="body-text-14 tracking-wide text-[#80BDBD]">
+
+                        Cosmoc Hub
+
+                      </span>
+                      <!-- <span class="max-w-[300px] text-button-text header-16-medium uppercase dark:invert truncate">
+                        <RouterLink class="block truncate" :to="{
+                          name: 'chain-staking-validator',
+                          params: {
+                            validator: v.operator_address,
+                          },
+                        }">
+                          {{ v.description?.moniker }}
+                        </RouterLink>
+                      </span> -->
+                      <!-- <span class="body-text-14 text-white truncate">{{
+                        v.description?.website || v.description?.identity || '-'
+                      }}</span> -->
+                    </div>
                   </div>
                 </td>
 
@@ -523,41 +508,42 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 <td class="">
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
-                      {{
-                        format.formatNumber(
-                          format.tokenDisplayNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item => item)),
-                          '0,0')
-                      }}
+                      {{ calcAmount(rewardItem, 'value') }}
                     </h6>
-                    <span class="body-text-14 text-[#80BDBD]">{{
-                      `$${format.tokenValueNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item =>
-                        item))}`}}</span>
+                    <span class="body-text-14 text-[#80BDBD]">
+                      {{ `$${format.tokenValue(rewardItem)}` }}
+                    </span>
                   </div>
                 </td>
+
                 <!-- 👉 Market price -->
                 <td>
-                  <div class="w-full flex justify-center">
-                    <div class="badge-transparent w-60">
-                      {{ format.messages(recentReceivedItem.tx.body.messages) }}
+                  <div class="text-end">
+                    <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
+                      {{
+                        `$ ${format.tokenValue(rewardItem)}` }}
+                    </h6>
+                    <span class="body-text-14 text-green-text">{{
+                      `+${format.calculatePercent(rewardItem.amount, totalAmount)}` }}</span>
+
+                    <!-- <div class="text-sm font-semibold">
+                      {{ format.formatToken(balanceItem) }}
                     </div>
-                    <!-- <div class="text-red-text header-16 tracking-wide text-centerw-60">
-                  {{ $t('account.no_gas') }}
-                </div> -->
+                    <div class="text-xs">
+                      {{ format.calculatePercent(balanceItem.amount, totalAmount) }}
+                    </div> -->
                   </div>
                 </td>
                 <!-- 👉 Total -->
                 <td class="">
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
-                      {{
-                        format.formatNumber(
-                          format.tokenDisplayNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item => item)),
-                          '0,0')
-                      }}
+                      {{ calcAmount(rewardItem, 'value') }}
                     </h6>
-                    <span class="body-text-14 text-[#80BDBD]">{{
-                      `$${format.tokenValueNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item =>
-                        item))}`}}</span>
+                    <span class="body-text-14 text-[#80BDBD]">
+                      {{ `$${format.tokenValue(rewardItem)}` }}
+                      <!-- format.tokenValue(rewardItem) -->
+                    </span>
                   </div>
                 </td>
 
@@ -590,7 +576,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           <h3 class="header-20-medium-aa text-header-text uppercase mb-7">{{ $t('account.delegations') }}</h3>
         </div>
 
-        <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-44">
+        <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-48">
           <table class=" table bg-black/20 staking-table w-full">
             <thead class="bg-black sticky top-0 z-10">
               <tr class="text-header-text body-text-14 border-addition/20">
@@ -607,29 +593,37 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
             </thead>
 
             <tbody class="">
-              <tr v-if="recentReceived.length === 0" class="border-addition/20">
+              <tr v-if="delegations.length === 0" class="border-addition/20">
                 <td colspan="10">
-                  <div class="text-center">{{ $t('account.no_transactions') }}</div>
+                  <div class="text-center">{{ $t('account.no_delegations') }}</div>
                 </td>
               </tr>
 
-              <tr v-for="(recentReceivedItem, index) in recentReceived" :key="index" class="border-addition/20">
+              <tr v-for="(v, index) in delegations" :key="index" class="border-addition/20"
+                :class="{ 'bg-addition/10': activeValidator === v.delegation.validator_address }"
+                @click="activeValidator = v.delegation.validator_address">
                 <!-- 👉 Validator -->
                 <td>
-                  <div class="w-full">
-                    <p class="header-16-medium tracking-wide" :class="{
-                      'text-tx-status-success': recentReceivedItem.code === 0,
-                      'text-tx-status-error': recentReceivedItem.code === 1,
-                      'text-tx-status-warning': recentReceivedItem.code !== 0 && recentReceivedItem.code !== 1
-                    }">
-                      {{
-                        recentReceivedItem.code === 0
-                          ? $t('account.success')
-                          : recentReceivedItem.code === 1
-                            ? $t('account.failed')
-                            : $t('account.processing')
-                      }}
-                    </p>
+                  <div class="max-w-[300px] flex gap-2.5 items-center overflow-hidden">
+                    <div class="avatar relative w-10 h-10 rounded-full">
+                      <div class="w-10 h-10 rounded-full bg-gray-400 absolute opacity-10"></div>
+                      <div class="w-10 h-10 rounded-full">
+                        <!-- <img :src="logo ? logo : defaultAvatar" class="object-contain" @error="
+                            (e) => {
+                              const identity = v.description?.identity;
+                              if (identity) loadAvatar(identity);
+                            }
+                          " /> -->
+                        <img :src="defaultAvatar" class="object-contain" />
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col">
+                      <RouterLink class="header-16-medium tracking-wide text-white truncate"
+                        :to="`/${chain}/staking/${v.delegation.validator_address}`">{{
+                          format.validatorFromBech32(v.delegation.validator_address) || v.delegation.validator_address
+                        }}</RouterLink>
+                    </div>
                   </div>
                 </td>
 
@@ -639,13 +633,12 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
                       {{
                         format.formatNumber(
-                          format.tokenDisplayNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item => item)),
+                          format.tokenDisplayNumber(v.balance),
                           '0,0')
                       }}
                     </h6>
                     <span class="body-text-14 text-[#80BDBD]">{{
-                      `$${format.tokenValueNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item =>
-                        item))}`}}</span>
+                      `$${format.tokenValueNumber(v.balance)}` }}</span>
                   </div>
                 </td>
                 <!-- 👉 Rewards -->
@@ -653,14 +646,18 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
                       {{
-                        format.formatNumber(
-                          format.tokenDisplayNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item => item)),
-                          '0,0')
+                        format.tokenDisplayNumber(rewards?.rewards?.find(
+                          (x) =>
+                            x.validator_address === v.delegation.validator_address
+                        )?.reward.find(item => item))
                       }}
+
                     </h6>
                     <span class="body-text-14 text-[#80BDBD]">{{
-                      `$${format.tokenValueNumber(recentReceivedItem.tx?.body.messages[0].amount?.find(item =>
-                        item))}`}}</span>
+                      `$${format.tokenValueNumber(rewards?.rewards?.find(
+                        (x) =>
+                          x.validator_address === v.delegation.validator_address
+                      )?.reward.find(item => item))}`}}</span>
                   </div>
                 </td>
               </tr>
@@ -669,11 +666,8 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </table>
         </div>
 
-        <ActionsPanel class="my-5" />
-
+        <ActionsPanel class="my-5" :key="activeValidator" :address="activeValidator" />
       </div>
-
-
     </div>
 
 
@@ -718,9 +712,9 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
         </div>
       </div>
       <div class="grid md:!grid-cols-3">
-        <div class="md:!col-span-1">
+        <!-- <div class="md:!col-span-1">
           <DonutChart :series="totalAmountByCategory" :labels="labels" />
-        </div>
+        </div> -->
         <div class="mt-4 md:!col-span-2 md:!mt-0 md:!ml-4">
           <!-- list-->
           <div class="">
@@ -848,15 +842,18 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 <div class="text-center">{{ $t('account.no_delegations') }}</div>
               </td>
             </tr>
+
             <tr v-for="(v, index) in delegations" :key="index">
               <td class="text-caption text-primary py-3">
                 <RouterLink :to="`/${chain}/staking/${v.delegation.validator_address}`">{{
                   format.validatorFromBech32(v.delegation.validator_address) || v.delegation.validator_address
                 }}</RouterLink>
               </td>
+
               <td class="py-3">
                 {{ format.formatToken(v.balance, true, '0,0.[000000]') }}
               </td>
+
               <td class="py-3">
                 {{
                   format.formatTokens(
@@ -867,6 +864,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                   )
                 }}
               </td>
+
               <td class="py-3">
                 <div v-if="v.balance" class="flex justify-end">
                   <label for="delegate" class="btn btn-primary btn-xs mr-2" @click="

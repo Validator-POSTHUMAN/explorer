@@ -22,6 +22,7 @@ import { stringToUint8Array, uint8ArrayToString } from '@/libs/utils';
 import CircleProgressComponent from '@/components/CircleProgressComponent.vue';
 import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 import ActionsPanel from '@/components/ActionsPanel.vue';
+import BackButton from '@/components/BackButton.vue';
 
 const props = defineProps(['validator', 'chain']);
 
@@ -263,25 +264,6 @@ const max = computed(
   () => Number(v.value.commission?.commission_rates.max_rate || 1) * 100
 );
 
-const btns = [
-  {
-    name: 'account.btn_unbond',
-    id: 'unbond',
-  },
-  {
-    name: 'account.btn_withdraw',
-    id: 'withdraw_commission',
-  },
-  {
-    name: 'account.btn_redelegate',
-    id: 'redelegate',
-  },
-  {
-    name: 'account.btn_delegate',
-    id: 'delegate',
-  },
-];
-
 const rates = computed(() => (
   [
     {
@@ -313,12 +295,7 @@ const airdropStatus = ref('high');
 <template>
   <div class="flex flex-col justify-center items-center px-20 pt-3">
 
-    <!-- hover:shadow-[0_0_5px_2px_rgba(255,255,255,0.3)] -->
-    <button
-      class="self-start border border-addition hover:bg-menu-button-hover active:bg-menu-button-active rounded-full header-16-medium py-1.5 pl-3 pr-5 text-white flex gap-1">
-      <Icon icon="mdi-light:chevron-left" width="24" height="24" />
-      <span>Back</span>
-    </button>
+    <BackButton />
 
     <div class="relative max-w-[1130px] thick-border-block p-10 mt-20 mb-20">
       <!-- account-badge -->

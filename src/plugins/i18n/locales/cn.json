@@ -24,7 +24,8 @@
     "tag": "测试版",
     "tag_all": "哦呦，页面搞丢了！",
     "description_all": "We couldn't find the page you are looking for.",
-    "btn_index": "返回主页"
+    "btn_index": "返回主页",
+    "back": "Back"
   },
   "account": {
     "type": "类型",
@@ -76,7 +77,8 @@
     "receive": "Receive",
     "send": "Send",
     "delegate": "Delegate",
-    "no_gas": "Not enough gas"
+    "no_gas": "Not enough gas",
+    "no_data": "No Data"
   },
   "block": {
     "estimated_time": "预计时间",
@@ -261,7 +263,17 @@
     "gas": "Gas",
     "fee": "手续费",
     "memo": "备注",
-    "no_messages": "没有消息"
+    "no_messages": "没有消息",
+    "transaction_summary": "Transaction summary",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "transfer": "Transfer",
+    "from": "From",
+    "to" : "To",
+    "amount": "Amount",
+    "time": "Time",
+    "height": "Height"
   },
   "uptime": {
     "overall": "整体",

@@ -351,6 +351,9 @@ export const useFormatter = defineStore('formatter', {
       if (format === 'advancedFormat') {
         return dayjs(time).format('MMM Do, YYYY');
       }
+      if (format === 'txFormat') {
+        return `${dayjs(time).format('D MMMM YYYY')}, ${dayjs(time).format('HH:mm')} (${dayjs(time).fromNow()})`
+      }
       return dayjs(time).format('YYYY-MM-DD HH:mm:ss');
     },
     messages(msgs: { '@type'?: string; typeUrl?: string }[]) {

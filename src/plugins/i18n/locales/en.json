@@ -24,7 +24,8 @@
     "description": "Cosmos Ecosystem Blockchains",
     "search_placeholder": "Enter network / address / etc",
     "description_all": "We couldn't find the page you are looking for.",
-    "btn_index": "Back to Home"
+    "btn_index": "Back to Home",
+    "back": "Back"
   },
   "account": {
     "amount": "Amount",
@@ -79,7 +80,8 @@
     "receive": "Receive",
     "send": "Send",
     "delegate": "Delegate",
-    "no_gas": "Not enough gas"
+    "no_gas": "Not enough gas",
+    "no_data": "No Data"
   },
   "block": {
     "estimated_time": "Estimated Time",
@@ -268,11 +270,21 @@
   },
   "tx": {
     "title": "Summary",
-    "tx_hash": "Tx Hash",
+    "tx_hash": "Transaction Hash",
     "gas": "Gas",
     "fee": "Fee",
     "memo": "Memo",
-    "no_messages": "No messages"
+    "no_messages": "No messages",
+    "transaction_summary": "Transaction summary",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "transfer": "Transfer",
+    "from": "From",
+    "to" : "To",
+    "amount": "Amount",
+    "time": "Time",
+    "height": "Height"
   },
   "uptime": {
     "overall": "Overall",

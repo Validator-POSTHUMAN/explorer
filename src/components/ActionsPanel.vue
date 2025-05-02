@@ -29,11 +29,13 @@ const btns = [
 
 <template>
     <div class="flex flex-col flex-wrap justify-center md:flex-row gap-5">
-        <label v-for="item in btns" :for="item.id" class="w-44 btn-outline border-button-text text-header-text"
-            @click="item?.id &&
-                dialog.open(item?.id, {
-                    validator_address: address,
-                })
-                ">{{ $t(item.name) }}</label>
+        <label v-for="item in btns" :for="item.id" class="w-44 btn-outline border-button-text text-header-text cursor-pointer"
+        :class="{'bg-addition/20 hover:bg-addition/20 hover:text-header-text cursor-not-allowed': !address?.length}"
+        @click="item?.id && address?.length &&
+            dialog.open(item?.id, {
+                validator_address: address,
+            })">
+            {{ $t(item.name) }}
+        </label>
     </div>
 </template>
