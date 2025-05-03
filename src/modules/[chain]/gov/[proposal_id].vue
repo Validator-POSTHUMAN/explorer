@@ -17,7 +17,7 @@ import {
   type PaginatedProposalDeposit,
   type Pagination,
 } from '@/types';
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import Countdown from '@/components/Countdown.vue';
 import PaginationBar from '@/components/PaginationBar.vue';
 import { fromBech32, toHex } from '@cosmjs/encoding';
@@ -219,37 +219,44 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
   return metadata ? JSON.parse(metadata) : { title: '', summary: '' }
 }
 
-const statusData = [
-  {
-    isAddress: true,
-    value: 'address120asdj9a0sd0asd90asddasdasd0a9daaas0d',
-    label: 'Creator',
-    icon: '',
-  },
-  {
-    value: 'Open',
-    label: 'Status',
-    icon: '',
-  },
-  {
-    value: 'Enable',
-    label: 'Revoting',
-    icon: '',
-  },
-  {
-    value: '10 days',
-    label: 'Time left',
-    icon: '',
-  },
-];
-const votingData = [{
+// <!-- FIXME: hardcode -->
+
+const statusData = computed(() => (
+  [
+    {
+      isAddress: true,
+      value: proposal.value?.proposer,
+      label: 'Creator',
+      icon: '',
+    },
+    {
+      value: proposal.value?.status,
+      label: 'Status',
+      icon: '',
+    },
+    {
+      value: 'Enable',
+      label: 'Revoting',
+      icon: '',
+    },
+    {
+      value: format.toDay(proposal.value?.voting_end_time, 'from'),
+      label: 'Time left',
+      icon: '',
+    },
+  ]
+));
+const votingData = computed(() => ([{
   label: 'staking.voting_power',
   value: '0.9999999999%',
 },
 {
   label: 'staking.btn_vote',
   value: 'None',
-},];
+}]));
+
+watch(() => proposal.value, newVal => { console.log('proposal', newVal) });
+
 </script>
 
 <template>
@@ -260,7 +267,7 @@ const votingData = [{
       </p>
       <div class="text-addition body-text-14 text-end">
         <p>
-          {{ proposal.content['@type'] }}
+          {{ proposal?.content && proposal?.content['@type'] }}
         </p>
         <p>
           {{ status }}
@@ -283,7 +290,7 @@ const votingData = [{
                   <Icon class="text-addition/50" icon="ic:round-close" width="24" height="24" />
                   <span>{{ item.label }}</span>
                 </p>
-                <div class="col-span-3 body-text-16 text-white">
+                <div class="col-span-3 body-text-16 text-white truncate">
                   <AddressWithCopy v-if="item.isAddress" :address="item.value" icon styles="body-text-16 text-white"
                     :size="16" />
                   <span v-else>{{ item.value }}</span>
@@ -459,4 +466,3 @@ const votingData = [{
     </div> -->
   </div>
 </template>
-

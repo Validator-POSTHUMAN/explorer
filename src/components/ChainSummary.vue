@@ -27,7 +27,7 @@ const addFavor = (e: Event) => {
 <template>
   <RouterLink
     :to="`/${name}`"
-    class="w-full md:w-[153px] relative bg-[#171718] hover:bg-[#242424] border border-addition rounded shadow flex justify-center items-center p-2.5 cursor-pointer"
+    class="w-full md:w-[153px] relative bg-almost-black/30 hover:bg-[#242424]/60 border border-addition rounded shadow flex justify-center items-center p-2.5 cursor-pointer"
   >
     <div class="flex flex-col gap-2.5 justify-center items-center">
       <div class="w-[50px] h-[50px] rounded-full overflow-hidden">

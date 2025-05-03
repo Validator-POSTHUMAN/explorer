@@ -96,11 +96,11 @@ watch(tx, (newVal) => console.log('tx', newVal))
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center px-20 pt-3">
-        <BackButton />
+    <div class="flex flex-col justify-center items-center md:px-20 pt-3">
+        <BackButton class="-mt-6 mb-5 md:mb-0 md:mt-0" />
 
-        <div class="thick-border-block p-7 pt-6 mb-7">
-            <div class="flex justify-between items-center w-[930px] mb-7">
+        <div class="overflow-auto w-full md:max-w-[930px] thick-border-block p-7 pt-6 mb-7">
+            <div class="flex justify-between items-center mb-7">
                 <h3 class="header-20-medium-aa text-header-text uppercase">{{ $t('tx.transaction_summary') }}</h3>
                 <div @click="() => copyAdress()"
                     class="cursor-pointer flex justify-center items-center gap-2 px-2
@@ -110,8 +110,8 @@ watch(tx, (newVal) => console.log('tx', newVal))
             </div>
 
             <div class="flex gap-4 mb-10">
-                <div class="badge-transparent w-[152px]">{{ $t('tx.transfer') }}</div>
-                <div class="badge-transparent w-[152px]" :class="{
+                <div class="badge-transparent md:w-[152px]">{{ $t('tx.transfer') }}</div>
+                <div class="badge-transparent md:w-[152px]" :class="{
                     'text-tx-status-success bg-tx-status-success/20': tx.tx_response.code === 0,
                     'text-tx-status-error bg-tx-status-error/20': tx.tx_response.code === 1,
                     'text-tx-status-warning bg-tx-status-warning/20': tx.tx_response.code !== 0 && tx.tx_response.code !== 1
@@ -130,8 +130,8 @@ watch(tx, (newVal) => console.log('tx', newVal))
             </div>
 
             <div v-for="item in data" class="flex border-b border-addition text-white pt-5 pb-0.5 px-0.5">
-                <p class="header-16-medium w-1/3 tracking-wide">{{ $t(item.label) }}</p>
-                <p class="flex items-center cursor-pointer body-text-14 w-2/3" @click="item.action">
+                <p class="header-16-medium w-1/3 tracking-wide truncate">{{ $t(item.label) }}</p>
+                <p class="flex items-center cursor-pointer body-text-14 w-2/3 truncate" @click="item.action">
                     <span v-if="item.action">
                         <Icon class="relative z-10" icon="bx:copy" />
                     </span>
@@ -172,7 +172,7 @@ watch(tx, (newVal) => console.log('tx', newVal))
     </div>
 
 
-    <div>
+    <!-- <div>
         <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow mb-4">
             <h2 class="card-title truncate mb-2">{{ $t('tx.title') }}</h2>
             <div class="overflow-auto-x">
@@ -257,5 +257,5 @@ watch(tx, (newVal) => console.log('tx', newVal))
             <JsonViewer :value="tx" :theme="baseStore.theme" style="background: transparent;" copyable boxed sort
                 expand-depth="5" />
         </div>
-    </div>
+    </div> -->
 </template>

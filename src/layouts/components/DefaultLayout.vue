@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 // Components
 import newFooter from '@/layouts/components/NavFooter.vue';
@@ -19,8 +19,10 @@ import type {
   NavSectionTitle,
   VerticalNavItems,
 } from '../types';
-import Socials from './Socials.vue';
 import AddNetworkComponent from './AddNetworkComponent.vue';
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const walletStore = useWalletStore();
 const dashboard = useDashboard();
@@ -86,6 +88,8 @@ const socials = [
   //   href: 'https://t.me/Crypto_Base_Chat',
   // },
 ];
+
+const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.path));
 
 </script>
 
@@ -240,6 +244,7 @@ const socials = [
           'xl:justify-between': !!walletStore?.currentAddress,
           'xl:justify-end': !walletStore?.currentAddress
         }">
+          <!-- <div></div> -->
           <NavbarSearch v-if="!!walletStore?.currentAddress" class="hidden md:!inline-block xl:ml-4 pr-2" />
           <NavBarWallet />
         </div>
@@ -256,12 +261,9 @@ const socials = [
           <Component :is="Component" />
         </Transition>
       </RouterView>
-
-      <Socials :list="socials" />
-      <AddNetworkComponent />
-
     </div>
 
+    <AddNetworkComponent v-if="shouldShow" />
 
 
     <!-- <newFooter /> -->

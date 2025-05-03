@@ -49,7 +49,8 @@ export interface GovProposal {
   voting_start_time: string;
   voting_end_time: string;
   is_expedited: boolean;
-  voterStatus?: string
+  voterStatus?: string;
+  proposer: string;
 //   VoteOption[];
 }
 

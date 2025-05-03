@@ -147,7 +147,7 @@ const amount = computed({
 
 <template>
   <div>
-    <div v-if="coinInfo && coinInfo.name" class="flex flex-col gap-3 rounded shadow mb-4 mt-1.5 mx-0 md:mx-3">
+    <div v-if="coinInfo && coinInfo.name" class="flex flex-col gap-3 rounded shadow mt-1.5 mx-0 md:mx-3 mb-48">
       <!-- Top block -->
       <div class="grid grid-cols-2 xl:grid-cols-12 gap-3.5">
 

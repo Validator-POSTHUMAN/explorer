@@ -6,7 +6,7 @@ import {
   useStakingStore,
   useTxDialog,
 } from '@/stores';
-import { onMounted, computed, ref } from 'vue';
+import { onMounted, computed, ref, watch } from 'vue';
 import { Icon } from '@iconify/vue';
 import CommissionRate from '@/components/ValidatorCommissionRate.vue';
 import {
@@ -267,6 +267,9 @@ const max = computed(
 const rates = computed(() => (
   [
     {
+
+
+      // <!-- FIXME: hardcode -->
       name: 'Participation Rate',
       value: '97%'.replace(/[^\d.]/g, ''),
       label: '252/260',
@@ -290,45 +293,51 @@ const rates = computed(() => (
 ));
 
 const airdropStatus = ref('high');
+
+const validatorApr = computed(() => (Number(apr.value.replace(/%/g, '')) / 100) * (1 - rate.value/100));
 </script>
 
 <template>
-  <div class="flex flex-col justify-center items-center px-20 pt-3">
+  <div class="flex flex-col items-center md:px-20 pt-6">
 
-    <BackButton />
+    <BackButton class="-mt-6 mb-5 md:mb-0 md:mt-0" />
 
-    <div class="relative max-w-[1130px] thick-border-block p-10 mt-20 mb-20">
+    <div class="relative flex flex-col items-center w-full md:max-w-[1130px] thick-border-block p-3 md:p-10 mt-8 mb-20">
       <!-- account-badge -->
-      <div class="flex items-start absolute -top-12 -left-20">
+      <div class="flex flex-col md:flex-row items-center md:items-start md:absolute md:-top-12 md:-left-20">
         <div class="relative thick-border-block rounded-full p-[25px] bg-black">
           <div
             class="absolute top-0 right-0 m-2.5 text-star-yellow rounded-full shadow-[0_0_2px_1px_rgba(238,187,78,0.2)]
             before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full">
             <Icon icon="mingcute:star-fill" width="25" height="25" />
           </div>
-          <div id="logo" class="w-[125px] h-[125px] rounded-full">
+          <div id="logo" class="w-20 h-20 md:w-[125px] md:h-[125px] rounded-full">
             <img v-if="identity && avatars[identity]" v-lazy="logo(identity)"
-              class="rounded-full w-[125px] h-[125px]object-contain" @error="
+              class="rounded-full w-20 h-20 md:w-[125px] md:h-[125px] object-contain" @error="
                 (e) => loadAvatar(identity)
               " />
-            <img v-if="!avatars[identity]" :src="defaultAvatar" class="w-[125px] h-[125px] object-cover" />
+            <img v-if="!avatars[identity]" :src="defaultAvatar"
+              class="w-20 h-20 md:w-[125px] md:h-[125px] object-cover" />
           </div>
         </div>
         <div>
-          <div class="max-w-[395px] thick-border-block p-5 -ml-14 pl-16 mt-4 mb-4 bg-black truncate">
+          <div class="md:max-w-[395px] md:thick-border-block p-5 md:-ml-14 md:pl-16 mt-4 mb-4 bg-black truncate">
             <p v-if="airdropStatus === 'high'" class="header-16 text-green-text tracking-wide mb-1">
+              <!-- FIXME: hardcode -->
 
               Airdrop High Probability
 
             </p>
 
             <p v-if="airdropStatus === 'no'" class="header-16 text-red-text tracking-wide mb-1">
+              <!-- FIXME: hardcode -->
 
               No airdrop
 
             </p>
 
             <p v-if="airdropStatus === 'low'" class="header-16 text-warning-text tracking-wide mb-1">
+              <!-- FIXME: hardcode -->
 
               Airdrop Low Probability
 
@@ -352,23 +361,28 @@ const airdropStatus = ref('high');
       </div>
 
       <div class="">
-        <div class="grid md:grid-cols-3 gap-x-10 gap-y-12 mb-12 mx-36">
+        <div class="grid md:grid-cols-3 gap-x-10 gap-y-12 mb-20 md:mx-36">
           <!-- firstLine -->
           <div class="flex gap-2.5 text-addition">
 
           </div>
 
-          <div class="flex flex-col gap-1 text-white tracking-wide header-16 pl-8">
+          <div class="flex flex-col gap-1 text-white tracking-wide header-16 md:pl-8">
             <p>
               Validator APR:
             </p>
-            <p class="text-header-text header-36">5%</p>
+            <p class="text-header-text header-36">
+              {{ `${Math.floor(validatorApr * 100)}%` }}
+            </p>
             <p class="text-addition body-text-14">
               Get 5% yield after deducting 20% validator fee
             </p>
           </div>
 
-          <div class="flex flex-col gap-1 text-white tracking-wide header-16 pl-8">
+
+
+          <!-- FIXME: hardcode -->
+          <div class="flex flex-col gap-1 text-white tracking-wide header-16 md:pl-8">
             <p>
               Delegators:
             </p>
@@ -396,7 +410,7 @@ const airdropStatus = ref('high');
       <!-- bonus badge -->
       <!-- Bonus -->
       <div v-if="airdropStatus === 'high'"
-        class="w-[300px] h-[100px] absolute bottom-20 right-0 translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
+        class="max-w-[300px] mt-10 md:mt-0 md:w-[300px] md:h-[100px] relative md:absolute md:bottom-20 md:right-0 md:translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
         <div
           class="absolute -top-7 -right-4 m-2.5 text-star-yellow rounded-full shadow-[0_0_2px_1px_rgba(238,187,78,0.2)]
             before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full">
@@ -412,7 +426,7 @@ const airdropStatus = ref('high');
 
       <!-- Bonus is possible -->
       <div v-if="airdropStatus === 'low'"
-        class="w-80 h-[115px] absolute bottom-20 right-0 translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
+        class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[115px] relative md:absolute md:bottom-20 md:right-0 md:translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
         <div
           class="absolute -top-7 -right-4 m-2.5 text-star-yellow rounded-full shadow-[0_0_2px_1px_rgba(238,187,78,0.2)]
             before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full">
@@ -429,7 +443,7 @@ const airdropStatus = ref('high');
 
       <!-- NO Bonus -->
       <div v-if="airdropStatus === 'no'"
-        class="w-80 h-[100px] absolute bottom-20 right-0 translate-x-1/2 rounded-full border border-red-text bg-black py-2.5 px-12">
+        class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[100px] relative md:absolute md:bottom-20 md:right-0 md:translate-x-1/2 rounded-full border border-red-text bg-black py-2.5 px-12">
 
         <p class="header-20-medium mb-0.5" :class="'text-red-text'">NO Bonus</p>
         <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->

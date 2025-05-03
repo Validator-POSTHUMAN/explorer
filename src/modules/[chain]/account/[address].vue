@@ -136,25 +136,27 @@ function mapAmount(events: { type: string, attributes: { key: string, value: str
 const scaleData = computed(() => ([
   {
     label: 'account.available',
-    value: '999999999',
+    value: format.tokenValueNumber(balances.value[0]),
     bgColor: 'bg-[#55B958]',
     textColor: 'text-[#55B958]',
   },
   {
     label: 'account.delegated',
-    value: '777777777',
+    value: format.tokenValueNumber(delegations.value[0]?.balance),
     bgColor: 'bg-[#2E878A]',
     textColor: 'text-[#2E878A]',
   },
   {
     label: 'account.rewards',
-    value: '333333333',
+    value: rewardsSum.value,
     bgColor: 'bg-[#743BA6]',
     textColor: 'text-[#743BA6]',
   },
   {
     label: 'account.unbonding',
-    value: '333333333',
+
+    // FIXME: unbounding
+    value: 5,
     bgColor: 'bg-[#BC36C3]',
     textColor: 'text-[#BC36C3]',
   },
@@ -170,6 +172,7 @@ const returnAmounItem = (amount: Coin | Coin[] | undefined) => {
 };
 
 const activeValidator = ref('');
+const rewardsSum = ref(0);
 
 const calcAmount = (amount: Coin | Coin[] | undefined, type: 'value' | 'token') => {
   if (!amount) return '-';
@@ -177,22 +180,39 @@ const calcAmount = (amount: Coin | Coin[] | undefined, type: 'value' | 'token') 
 };
 
 const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.value, 0));
+const keywords = ref('');
+watch(() => rewards.value, (newVal) => {
+  rewardsSum.value = newVal?.total?.map(item => format.tokenValueNumber(item)).reduce((sum, x) => {
+    return sum + x
+  });
+});
+
+
+async function copyUrl(url: string) {
+  if (!url) return;
+  const host = window.location.origin;
+  const newUrl = `${host}${url}`;
+  try {
+    await navigator.clipboard.writeText(newUrl);
+  } catch (err) {
+  }
+}
 
 </script>
 <template>
-  <div v-if="account" class="px-5 py-1">
+  <div v-if="account" class="md:px-5 py-1">
     <!-- headcer -->
-    <div class="flex justify-between">
+    <div class="flex flex-col xl:flex-row justify-between mb-5 xl:mb-0">
       <div class="text-white mb-5">
         <AddressWithCopy :href="`/${chain}/account/${address}`" :address="address" :size="20"
           styles="header-16 gap-6 mb-5" icon hasIconOutline hasQr />
-        <p class="header-36 tracking-wide">${{ totalValue }}</p>
+        <p class="header-36 tracking-wide">{{ `${totalValue} $` }}</p>
       </div>
 
-      <div id="scale" class="w-[790px] flex">
+      <div id="scale" class="w-full md:min-w-[500px] md:max-w-[650px] xl:max-w-[690px] flex">
         <div v-for="(item, i) in scaleData" class="relative header-14-medium-aa tracking-wide" :class="item.textColor"
           :style="{
-            width: `${(+item.value * 790) / total}px`,
+            width: `${(+item.value * 790) / (total ?? 1)}px`,
             zIndex: 10 - (i + 1),
             textAlign: i === 0 ? 'left' : i === scaleData.length - 1 ? 'right' : 'center'
           }">
@@ -296,11 +316,11 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 </div>
               </td>
               <!-- 👉 operation -->
-              <td class="w-[450px]">
+              <td class="md:w-[450px]">
 
                 <div class="w-full flex justify-center">
                   <div v-if="recentReceivedItem.code === 1"
-                    class="text-red-text header-16 tracking-wide text-centerw-60">
+                    class="text-red-text header-16 tracking-wide text-center w-60">
                     {{ $t('account.no_gas') }}
                   </div>
                   <div v-else class="badge-transparent w-60">
@@ -326,6 +346,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 <AddressWithCopy styles="header-14-medium-aa justify-end"
                   :href="`/${chain}/tx/${recentReceivedItem.txhash}`" :address="recentReceivedItem.txhash" :size="16"
                   icon isShort isCopyHref />
+                <Icon class="text-base md:hidden" icon="bx:copy" @click="() => copyUrl(`/${chain}/tx/${recentReceivedItem.txhash}`)" />
               </td>
             </tr>
 
@@ -393,6 +414,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
               <td class="text-end">
                 <AddressWithCopy styles="header-14-medium-aa justify-end" :href="`/${chain}/tx/${txsItem.txhash}`"
                   :address="txsItem.txhash" :size="16" icon isShort isCopyHref />
+                <Icon class="text-base md:hidden" icon="bx:copy" @click="() => copyUrl(`/${chain}/tx/${txsItem.txhash}`)" />
               </td>
             </tr>
 
@@ -402,14 +424,14 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
 
     </div>
 
-    <div class="flex gap-7 mb-8">
+    <div class="flex flex-col md:flex-row gap-7 mb-8">
       <!-- Assets -->
-      <div class="thick-border-block w-1/2 p-5">
-        <div class="flex justify-between items-center mb-7">
+      <div class="thick-border-block md:w-1/2 py-3 px-2 md:p-5">
+        <div class="flex flex-col xl:flex-row gap-3 justify-between md:items-center mb-7">
           <h3 class="header-20-medium-aa text-header-text uppercase ">{{ $t('account.assets') }}</h3>
           <div
             class="w-full max-w-[500px] border border-addition rounded-full flex justify-between items-center py-2 px-6">
-            <input :placeholder="$t('account.search_placeholder')" class="md:px-4 bg-transparent flex-1 outline-none header-20 text-white min-w-[400px]
+            <input v-model="keywords" :placeholder="$t('account.search_placeholder')" class="md:px-4 bg-transparent flex-1 outline-none header-20 text-white min-w-[400px]
               placeholder:text-addition placeholder:body-text-14 placeholder:text-xl" />
             <Icon icon="icon-park-outline:search" class="text-base text-addition" />
           </div>
@@ -459,7 +481,13 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 </td>
               </tr>
 
-              <tr v-for="(rewardItem, index) in rewards.total" :key="index" class="border-addition/20">
+
+
+
+
+              <!-- FIXME: filter for chain name -->
+              <tr v-for="(rewardItem, index) in rewards?.total?.filter(item => item?.denom?.includes(keywords))"
+                :key="index" class="border-addition/20">
                 <!-- 👉 Chain -->
                 <td>
                   <div class="max-w-[300px] flex gap-2.5 items-center overflow-hidden">
@@ -553,7 +581,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </table>
         </div>
 
-        <div class="flex justify-center gap-5 my-5">
+        <div class="flex flex-wrap justify-center gap-3 md:gap-5 my-5">
           <label for="send" class="btn-outline w-44" @click="dialog.open('send', {}, updateEvent)">{{
             $t('account.btn_send') }}</label>
 
@@ -571,7 +599,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
       </div>
 
       <!-- Delegations -->
-      <div class="thick-border-block w-1/2 p-5">
+      <div class="thick-border-block md:w-1/2 py-3 px-2 md:p-5">
         <div>
           <h3 class="header-20-medium-aa text-header-text uppercase mb-7">{{ $t('account.delegations') }}</h3>
         </div>
@@ -599,7 +627,7 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 </td>
               </tr>
 
-              <tr v-for="(v, index) in delegations" :key="index" class="border-addition/20"
+              <tr v-for="(v, index) in delegations" :key="index" class="border-addition/20    cursor-pointer"
                 :class="{ 'bg-addition/10': activeValidator === v.delegation.validator_address }"
                 @click="activeValidator = v.delegation.validator_address">
                 <!-- 👉 Validator -->
@@ -619,10 +647,13 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                     </div>
 
                     <div class="flex flex-col">
-                      <RouterLink class="header-16-medium tracking-wide text-white truncate"
+                      <!-- <RouterLink class="header-16-medium tracking-wide text-white truncate"
                         :to="`/${chain}/staking/${v.delegation.validator_address}`">{{
                           format.validatorFromBech32(v.delegation.validator_address) || v.delegation.validator_address
-                        }}</RouterLink>
+                        }}</RouterLink> -->
+                      <p class="header-16-medium tracking-wide text-white truncate">{{
+                        format.validatorFromBech32(v.delegation.validator_address) || v.delegation.validator_address
+                      }}</p>
                     </div>
                   </div>
                 </td>
@@ -1044,4 +1075,3 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
   </div>
   <div v-else class="text-no text-sm">{{ $t('account.error') }}</div>
 </template>
-

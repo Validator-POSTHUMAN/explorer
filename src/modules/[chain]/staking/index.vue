@@ -418,7 +418,7 @@ const widgetsInfo = computed(() => (
         <div class="overflow-x-auto">
           <div
             class="overflow-auto thick-border-block px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
-            :style="{ height: 'calc(100vh - 300px)' }">
+            :style="{ height: 'calc(100vh - 200px)' }">
             <table class="table bg-black/20 staking-table">
               <thead class=" bg-black sticky top-0 z-10">
                 <tr class="text-header-text body-text-14">

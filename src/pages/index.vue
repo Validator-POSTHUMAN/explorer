@@ -8,6 +8,7 @@ import {
 import ChainSummary from '@/components/ChainSummary.vue';
 import { computed, ref } from 'vue';
 import { useBlockchain } from '@/stores';
+import Socials from '@/layouts/components/Socials.vue';
 
 const dashboard = useDashboard();
 
@@ -28,11 +29,28 @@ const chains = computed(() => {
 
 const favoriteChains = computed(() => chains.value.filter(chain => dashboard?.favoriteMap?.[chain.chainName]));
 
-const chainStore = useBlockchain();
+
+const socials = [
+  {
+    name: 'twitter',
+    icon: 'prime:twitter',
+    href: 'https://twitter.com/POSTHUMAN_DVS',
+  },
+  {
+    name: 'discord',
+    icon: 'ic:baseline-discord',
+    href: 'https://discord.gg/csWJMCjQHh',
+  },
+  // {
+  //   name: 'telegram',
+  //   icon: 'mdi:telegram',
+  //   href: 'https://t.me/Crypto_Base_Chat',
+  // },
+];
 </script>
 <template>
   <div class="">
-    <div class="flex md:!flex-row flex-col items-center justify-center mt-12 md:mt-32 gap-2">
+    <div class="flex md:!flex-row flex-col items-center justify-center mt-0 md:mt-32 gap-2">
       <img class="w-453 h-153" src="../assets/logo-big.svg" />
       <!-- <h1 class="text-3xl md:!text-6xl w-453 h-153 rajdhani-regular">
         {{ $t('pages.title') }}
@@ -55,7 +73,8 @@ const chainStore = useBlockchain();
       <div
         class="flex w-full md:w-1/2 items-center rounded-[26px] bg-transparent mt-10 border border-addition text-addition py-2 px-2">
         <input :placeholder="$t('pages.search_placeholder')"
-          class="md:px-4 min-h-6 md:h-10 bg-transparent flex-1 outline-none text-xs md:text-xl placeholder:text-addition focus:text-white " v-model="keywords" />
+          class="md:px-4 min-h-6 md:h-10 bg-transparent flex-1 outline-none text-xs md:text-xl placeholder:text-addition focus:text-white "
+          v-model="keywords" />
         <div class="md:px-4 pr-2 md:!block order-first md:order-last">
           <Icon icon="icon-park-outline:search" width="20" height="20" class="ml-3" />
         </div>
@@ -63,20 +82,22 @@ const chainStore = useBlockchain();
     </div>
 
     <div class="flex justify-center">
-      <div class="w-full md:w-auto grid grid-cols-2 gap-5 mt-12 pt-0.5"
-        :class="{
-          'md:!grid-cols-1 lg:!grid-cols-1 2xl:!grid-cols-1': favoriteChains.length === 1,
-          'md:!grid-cols-2 lg:!grid-cols-2 2xl:!grid-cols-2': favoriteChains.length === 2,
-          'md:!grid-cols-3 lg:!grid-cols-3 2xl:!grid-cols-3': favoriteChains.length === 3,
-          'md:!grid-cols-4 lg:!grid-cols-4 2xl:!grid-cols-4': favoriteChains.length === 4,
-          'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-5': favoriteChains.length === 5,
-          'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-6': favoriteChains.length >= 6,
+      <div class="w-full md:w-auto grid grid-cols-2 gap-5 mt-12 pt-0.5" :class="{
+        'md:!grid-cols-1 lg:!grid-cols-1 2xl:!grid-cols-1': favoriteChains.length === 1,
+        'md:!grid-cols-2 lg:!grid-cols-2 2xl:!grid-cols-2': favoriteChains.length === 2,
+        'md:!grid-cols-3 lg:!grid-cols-3 2xl:!grid-cols-3': favoriteChains.length === 3,
+        'md:!grid-cols-4 lg:!grid-cols-4 2xl:!grid-cols-4': favoriteChains.length === 4,
+        'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-5': favoriteChains.length === 5,
+        'md:!grid-cols-4 lg:!grid-cols-5 2xl:!grid-cols-6': favoriteChains.length >= 6,
 
-        }">
+      }">
         <ChainSummary v-for="(chain, index) in favoriteChains" :key="index" :name="chain.chainName" />
       </div>
     </div>
   </div>
+
+  <Socials :list="socials" />
+
 </template>
 
 <style scoped>
