@@ -268,3 +268,95 @@ const socials = [
     <!-- </div> -->
   </div>
 </template>
+
+
+<style lang="scss">
+.modal-box {
+  background-color: #111113;
+  border: solid 1px #3FB6A8;
+
+  h3 {
+    color: #3FB6A8;
+    font-family: "Red Hat Mono";
+    text-transform: uppercase;
+  }
+
+  //  swap
+  div.flex.items-center.relative.h-14.bg-gray-100.dark\:bg-\[\#232333\].rounded-tl-lg.rounded-tr-lg.mt-4 {
+    border: 1px solid #686868;
+    border-radius: 50px;
+    overflow: hidden;
+
+    input {
+      border: none !important;
+    }
+  }
+
+  div:nth-child(1)>div:nth-child(6) {
+    border: 1px solid #686868;
+    border-radius: 50px;
+    overflow: hidden;
+
+  }
+
+  div.flex.items-center.justify-center.-mt-3.-mb-3 {
+    margin: 0 0 24px 0;
+  }
+
+  div {
+    background: #111113;
+  }
+
+  .dropdown {
+    background: #111113;
+    height: 100%;
+    border-right: 1px solid #686868;
+  }
+
+  div.absolute.right-4.top-4.dropdown.dropdown-end.dropdown-hover {
+    height: auto;
+    border-right: none !important;
+  }
+
+
+  .btn-primary {
+    font-family: "Red Hat Mono";
+    font-size: 16px;
+    border-radius: 100px;
+    border: 1px solid #3FB6A8;
+    color: #71FFB8;
+    cursor: pointer;
+    background-color: rgba(104, 104, 104, 10%);
+  }
+
+  .btn-primary:hover {
+    background-color: rgba(14, 255, 187, 20%);
+  }
+
+  // send, delegate, vote
+  input {
+    border-radius: 200px;
+    border: 1px solid #686868 !important;
+    border-color: #686868 !important;
+  }
+
+  select {
+    border-radius: 100px;
+    border-color: #686868 !important;
+  }
+
+  .input-group {
+    input {
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+      border-color: #686868 !important;
+    }
+
+    select {
+      border-top-right-radius: 100px;
+      border-bottom-right-radius: 100px;
+      border-color: #686868 !important;
+    }
+  }
+}
+</style>

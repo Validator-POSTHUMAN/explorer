@@ -670,33 +670,26 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
       </div>
     </div>
 
-
-
-
-
     <!-- address -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
       <div class="flex items-center">
-        <!-- img -->
         <div class="inline-flex relative w-11 h-11 rounded-md">
           <div class="w-11 h-11 absolute rounded-md opacity-10 bg-primary"></div>
           <div class="w-full inline-flex items-center align-middle flex-none justify-center">
             <Icon icon="mdi-qrcode" class="text-primary" style="width: 27px; height: 27px" />
           </div>
         </div>
-        <!-- content -->
         <div class="flex flex-1 flex-col truncate pl-4">
           <h2 class="text-sm card-title">{{ $t('account.address') }}:</h2>
           <span class="text-xs truncate"> {{ address }}</span>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Assets -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
       <div class="flex justify-between">
         <h2 class="card-title mb-4">{{ $t('account.assets') }}</h2>
-        <!-- button -->
         <div class="flex justify-end mb-4 pr-5">
           <label for="send" class="btn btn-primary btn-sm mr-2" @click="dialog.open('send', {}, updateEvent)">{{
             $t('account.btn_send') }}</label>
@@ -712,13 +705,11 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
         </div>
       </div>
       <div class="grid md:!grid-cols-3">
-        <!-- <div class="md:!col-span-1">
+        <div class="md:!col-span-1">
           <DonutChart :series="totalAmountByCategory" :labels="labels" />
-        </div> -->
+        </div>
         <div class="mt-4 md:!col-span-2 md:!mt-0 md:!ml-4">
-          <!-- list-->
           <div class="">
-            <!--balances  -->
             <div class="flex items-center px-4 mb-2" v-for="(balanceItem, index) in balances" :key="index">
               <div class="w-9 h-9 rounded overflow-hidden flex items-center justify-center relative mr-4">
                 <Icon icon="mdi-account-cash" class="text-info" size="20" />
@@ -737,7 +728,6 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 ${{ format.tokenValue(balanceItem) }}
               </div>
             </div>
-            <!--delegations  -->
             <div class="flex items-center px-4 mb-2" v-for="(delegationItem, index) in delegations" :key="index">
               <div class="w-9 h-9 rounded overflow-hidden flex items-center justify-center relative mr-4">
                 <Icon icon="mdi-user-clock" class="text-warning" size="20" />
@@ -761,7 +751,6 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
                 ${{ format.tokenValue(delegationItem?.balance) }}
               </div>
             </div>
-            <!-- rewards.total -->
             <div class="flex items-center px-4 mb-2" v-for="(rewardItem, index) in rewards.total" :key="index">
               <div class="w-9 h-9 rounded overflow-hidden flex items-center justify-center relative mr-4">
                 <Icon icon="mdi-account-arrow-up" class="text-success" size="20" />
@@ -779,7 +768,6 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
 
               </div>
             </div>
-            <!-- mdi-account-arrow-right -->
             <div class="flex items-center px-4">
               <div class="w-9 h-9 rounded overflow-hidden flex items-center justify-center relative mr-4">
                 <Icon icon="mdi-account-arrow-right" class="text-error" size="20" />
@@ -813,10 +801,10 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Delegations -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
       <div class="flex justify-between">
         <h2 class="card-title mb-4">{{ $t('account.delegations') }}</h2>
         <div class="flex justify-end mb-4">
@@ -900,10 +888,10 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <!-- Unbonding Delegations -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow" v-if="unbonding && unbonding.length > 0">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow" v-if="unbonding && unbonding.length > 0">
       <h2 class="card-title mb-4">{{ $t('account.unbonding_delegations') }}</h2>
       <div class="overflow-x-auto">
         <table class="table text-sm w-full">
@@ -956,10 +944,10 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <!-- Transactions -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
       <h2 class="card-title mb-4">{{ $t('account.transactions') }}</h2>
       <div class="overflow-x-auto">
         <table class="table w-full text-sm">
@@ -1001,10 +989,10 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <!-- Received -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
       <h2 class="card-title mb-4">{{ $t('account.received') }}</h2>
       <div class="overflow-x-auto">
         <table class="table w-full text-sm">
@@ -1046,13 +1034,14 @@ const total = computed(() => scaleData.value.reduce((sum, item) => sum + +item.v
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <!-- Account -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
       <h2 class="card-title mb-4">{{ $t('account.acc') }}</h2>
       <DynamicComponent :value="account" />
-    </div>
+    </div> -->
   </div>
   <div v-else class="text-no text-sm">{{ $t('account.error') }}</div>
 </template>
+

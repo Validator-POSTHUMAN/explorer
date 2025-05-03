@@ -28,9 +28,6 @@ const abstain = computed(() =>
 const veto = computed(() =>
   format.calculatePercent(props.tally?.no_with_veto, total.value)
 );
-console.log('tally', props.tally);
-console.log('pool', props.pool);
-console.log('status', props.status);
 </script>
 
 <template>

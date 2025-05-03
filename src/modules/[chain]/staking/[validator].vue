@@ -449,11 +449,9 @@ const airdropStatus = ref('high');
 
 
     <!-- old -->
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded shadow border-gray-500">
-      <!-- first block -->
+    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded shadow border-gray-500">
       <div class="flex flex-col lg:!flex-row pt-2 pb-1">
 
-        <!-- left panel -->
         <div class="flex-1">
           <div class="flex">
             <div class="avatar mr-4 relative w-24 rounded-lg overflow-hidden">
@@ -534,7 +532,6 @@ const airdropStatus = ref('high');
             </div>
           </div>
         </div>
-        <!-- right panel -->
         <div class="flex-1">
           <div class="flex flex-col mt-10">
             <div class="flex mb-2">
@@ -612,9 +609,9 @@ const airdropStatus = ref('high');
         </div>
       </div>
       <div class="text-sm px-4 pt-3 border-t">{{ v.description?.details }}</div>
-    </div>
+    </div> -->
 
-    <div class="mt-3 grid grid-cols-1 md:!grid-cols-3 gap-4">
+    <!-- <div class="mt-3 grid grid-cols-1 md:!grid-cols-3 gap-4">
       <div>
         <CommissionRate :commission="v.commission"></CommissionRate>
       </div>
@@ -690,9 +687,10 @@ const airdropStatus = ref('high');
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div v-if="delegations.delegation_responses" class="mt-5 bg-base-100 shadow rounded p-4 ">
+    <!-- <div v-if="delegations.delegation_responses" class="mt-5 bg-base-100 shadow rounded p-4 ">
+
       <div class="text-lg mb-4 font-semibold">{{ $t('account.delegations') }}
         <span class="float-right"> {{ delegations.delegation_responses?.length || 0 }} / {{
           delegations.pagination?.total || 0 }} </span>
@@ -812,8 +810,7 @@ const airdropStatus = ref('high');
         </table>
         <PaginationBar :total="events.pagination?.total" :limit="page.limit" :callback="pagePowerEvents" />
       </div>
-    </div>
-    <!-- end -->
+    </div> -->
     <div class="toast" v-show="showCopyToast === 1">
       <div class="alert alert-success">
         <div class="text-xs md:!text-sm">

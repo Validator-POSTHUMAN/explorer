@@ -21,6 +21,7 @@ import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 import dayjs from 'dayjs';
 import CircleProgressComponent from '@/components/CircleProgressComponent.vue';
 import { valconsToBase64 } from '@/libs';
+import { useIndexModule } from '../indexStore';
 
 const staking = useStakingStore();
 const base = useBaseStore();
@@ -28,6 +29,7 @@ const format = useFormatter();
 const dialog = useTxDialog();
 const chainStore = useBlockchain();
 const mintStore = useMintStore();
+const store = useIndexModule();
 
 const cache = JSON.parse(localStorage.getItem('avatars') || '{}');
 const avatars = ref(cache || {});
@@ -335,6 +337,9 @@ const tabs = [
     value: 'staking.jailed',
   },
 ];
+const supply = computed(() => store.stats.find(item => item.title === 'Supply')?.stats);
+const bonded_tokens = computed(() => store.stats.find(item => item.title === "Bonded Tokens")?.stats);
+const apr = computed(() => (Number(mintStore.inflation) * 100 * Number(supply.value?.replace(/,/g, ''))) / Number(bonded_tokens.value?.replace(/,/g, '')));
 
 const widgetsInfo = computed(() => (
   [
@@ -353,8 +358,8 @@ const widgetsInfo = computed(() => (
     {
       name: 'staking.apr',
       icon: IconAPR,
-      numValue: (+mintStore.inflation * 100),
-      formattedValue: format.percent(mintStore.inflation),
+      numValue: apr.value,
+      formattedValue: format.percent(apr.value / 100),
     },
     {
       name: 'staking.hard_slashing',

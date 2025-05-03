@@ -351,7 +351,7 @@ const amount = computed({
       </div>
     </div> -->
 
-    <div class="bg-[#141415] rounded mt-4 shadow">
+    <!-- <div class="bg-[#141415] rounded mt-4 shadow">
 
       <div v-if="walletStore.delegations.length > 0" class="px-4 pb-4 overflow-auto bg-[#141415]">
         <table class="table table-compact w-full table-zebra">
@@ -422,15 +422,16 @@ const amount = computed({
         <ping-token-convert :chain-name="blockchain?.current?.prettyName" :endpoint="blockchain?.endpoint?.address"
           :hd-path="walletStore?.connectedWallet?.hdPath"></ping-token-convert>
       </Teleport>
-    </div>
+    </div> -->
 
-    <div v-if="!store.coingeckoId" class="bg-base-100 rounded mt-4">
+    <!-- <div v-if="!store.coingeckoId" class="bg-base-100 rounded mt-4">
       <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
         {{ $t('index.node_info') }}
       </div>
       <ArrayObjectElement :value="paramStore.nodeVersion?.items" :thead="false" />
       <div class="h-4"></div>
-    </div>
+    </div> -->
+    
   </div>
 </template>
 
