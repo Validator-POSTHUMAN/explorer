@@ -172,6 +172,12 @@ const amount = computed({
                 $t('index.receive') }}
               </RouterLink>
             </div>
+            
+            <Teleport to="body">
+              <ping-token-convert :chain-name="blockchain?.current?.prettyName"
+                :endpoint="blockchain?.endpoint?.address"
+                :hd-path="walletStore?.connectedWallet?.hdPath"></ping-token-convert>
+            </Teleport>
           </div>
 
           <div class="grid grid-cols-1 md:!grid-cols-2 xl:!grid-cols-4 auto-cols-auto gap-2.5">
@@ -431,7 +437,7 @@ const amount = computed({
       <ArrayObjectElement :value="paramStore.nodeVersion?.items" :thead="false" />
       <div class="h-4"></div>
     </div> -->
-    
+
   </div>
 </template>
 

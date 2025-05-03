@@ -18,7 +18,8 @@ defineProps({
 
             <div class="radial-progress
               before:bg-[#17171C] before:outline before:outline-addition-1"
-                :style="`--value:${value}; --size:${size}px;`" :ariaValuenow="value" role="progressbar">
+                :style="`--value:${value ? +value : 0}; --size:${size}px;`" :ariaValuenow="value ? +value : 0"
+                role="progressbar">
                 <slot />
             </div>
             <div :style="{ margin: `${size / 10}px` }"

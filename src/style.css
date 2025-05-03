@@ -140,11 +140,11 @@ html[data-theme='dark'] {
 
 
   .btn-outline {
-    @apply header-16-medium flex justify-center items-center px-12 py-0 rounded-full border border-header-text text-button-text hover:text-button-text bg-button-hover hover:bg-button;
+    @apply cursor-pointer header-16-medium flex justify-center items-center px-12 py-0 rounded-full border border-header-text text-button-text hover:text-button-text bg-button-hover hover:bg-button;
   }
 
   .btn-fill {
-    @apply header-16-medium flex justify-center items-center py-1 rounded-full text-white cursor-pointer hover:bg-button-v2 bg-button-v2-hover;
+    @apply cursor-pointer header-16-medium flex justify-center items-center py-1 rounded-full text-white hover:bg-button-v2 bg-button-v2-hover;
   }
 
   .badge-transparent {

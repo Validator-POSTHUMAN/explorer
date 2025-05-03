@@ -141,26 +141,35 @@ watch(tx, (newVal) => console.log('tx', newVal))
 
         </div>
 
-
         <div class="toast" v-show="showCopyToast === 1">
-            <div class="alert alert-success">
-                <div class="text-xs md:!text-sm">
+            <div
+                class="relative bg-almost-black flex items-center gap-4 p-4 border border-button-text rounded text-green-text">
+                <Icon @click="showCopyToast = 0" class="absolute top-0 right-0 text-addition cursor-pointer"
+                    icon="codex:cross" width="16" height="16" />
+                <div
+                    class="flex justify-center items-center gap-2 before:z-[1] before:absolute before:rounded-full before:bg-[#0A2B0C] before:w-9 before:h-9">
+                    <Icon class="relative z-10 " icon="material-symbols:check-rounded" width="34" height="34" />
+                </div>
+                <div class="header-20 tracking-wide">
                     <span>{{ tipMsg.msg }}</span>
                 </div>
             </div>
         </div>
         <div class="toast" v-show="showCopyToast === 2">
-            <div class="alert alert-error">
-                <div class="text-xs md:!text-sm">
+            <div
+                class="relative bg-almost-black flex items-center gap-4 p-4 border border-button-text rounded text-red-text">
+                <Icon @click="showCopyToast = 0" class="absolute top-0 right-0 text-addition cursor-pointer"
+                    icon="codex:cross" width="16" height="16" />
+                <div
+                    class="flex justify-center items-center gap-2 before:z-[1] before:absolute before:rounded-full before:bg-[#480D0D] before:w-9 before:h-9">
+                    <Icon class="relative z-10 " icon="codex:cross" width="34" height="34" />
+                </div>
+                <div class="header-20 tracking-wide">
                     <span>{{ tipMsg.msg }}</span>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
 
     <div>
