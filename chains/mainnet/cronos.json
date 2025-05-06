@@ -1,7 +1,7 @@
 {
   "chain_name": "cronos pos chain",
   "theme_color": "#2e2e2e",
-  "registry_name": "cryptoorgchain",
+  "registry_name": "crypto-com-chain",
   "api": [
     {
       "address": "https://rest-cryptoorgchain.ecostake.com:443",
@@ -31,7 +31,7 @@
     }
   ],
   "sdk_version": "0.43.0",
-  "addr_prefix": "crc",
+  "addr_prefix": "cro",
   "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cronos/images/cro.svg",
   "assets": [
     {
