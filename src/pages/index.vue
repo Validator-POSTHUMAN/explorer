@@ -6,6 +6,7 @@ import {
   type ChainConfig,
 } from '@/stores/useDashboard';
 import ChainSummary from '@/components/ChainSummary.vue';
+import SearchMain from '@/layouts/components/SearchMain.vue';
 import { computed, ref } from 'vue';
 import { useBlockchain } from '@/stores';
 import Socials from '@/layouts/components/Socials.vue';
@@ -70,15 +71,7 @@ const socials = [
     </div> -->
 
     <div class="flex w-full justify-center">
-      <div
-        class="flex w-full md:w-1/2 items-center rounded-[26px] bg-transparent mt-10 border border-addition text-addition py-2 px-2">
-        <input :placeholder="$t('pages.search_placeholder')"
-          class="md:px-4 min-h-6 md:h-10 bg-transparent flex-1 outline-none text-xs md:text-xl placeholder:text-addition focus:text-white "
-          v-model="keywords" />
-        <div class="md:px-4 pr-2 md:!block order-first md:order-last">
-          <Icon icon="icon-park-outline:search" width="20" height="20" class="ml-3" />
-        </div>
-      </div>
+      <SearchMain />
     </div>
 
     <div class="flex justify-center">
