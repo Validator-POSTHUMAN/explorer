@@ -1,7 +1,6 @@
 {
-  "chain_name": "cronos pos chain",
+  "chain_name": "crypto-com-chain",
   "theme_color": "#2e2e2e",
-  "registry_name": "crypto-com-chain",
   "api": [
     {
       "address": "https://rest-cryptoorgchain.ecostake.com:443",
