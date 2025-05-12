@@ -71,9 +71,7 @@ const socials = [
       <h2 class="mb-6">{{ $t('pages.description') }}</h2>
     </div> -->
 
-    <div class="flex w-full justify-center">
       <SearchMain />
-    </div>
   </div>
     <AddNetworkComponent />
   

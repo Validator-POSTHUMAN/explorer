@@ -8,7 +8,7 @@ const vueRouters = useRouter();
 const blockStore = useBlockchain();
 let searchQuery = ref('');
 let errorMessage = ref('');
-onMounted(() => { });
+onMounted(() => {});
 
 function preventClick(event: any) {
   event.preventDefault();
@@ -54,14 +54,31 @@ function confirm() {
 <!-- @click="openSearchModal" -->
 
 <template>
+  <div class="flex flex-col w-full">
     <div
-        class="flex w-full md:w-1/2 items-center rounded-[26px] bg-transparent mt-10 border border-addition text-addition py-2 px-2">
-        <input :placeholder="$t('pages.search_placeholder')"
+      class="flex w-full self-center md:w-1/2 items-center rounded-[26px] bg-transparent mt-10 border border-addition text-addition py-2 px-2"
+    >
+      <input
+        :placeholder="$t('pages.search_placeholder')"
         @keyup.enter="confirm"
-          class="md:px-4 min-h-6 md:h-10 bg-transparent flex-1 outline-none text-xs md:text-xl placeholder:text-addition focus:text-white "
-          v-model="searchQuery" />
-        <div @click="confirm" class="md:px-4 pr-2 md:!block order-first md:order-last cursor-pointer">
-          <Icon icon="icon-park-outline:search" width="20" height="20" class="ml-3" />
-        </div>
+        class="md:px-4 min-h-6 md:h-10 bg-transparent flex-1 outline-none text-xs md:text-xl placeholder:text-addition focus:text-white"
+        v-model="searchQuery"
+      />
+      <div
+        @click="confirm"
+        class="md:px-4 pr-2 md:!block order-first md:order-last cursor-pointer"
+      >
+        <Icon
+          icon="icon-park-outline:search"
+          width="20"
+          height="20"
+          class="ml-3"
+        />
       </div>
+    </div>
+    <div class="mt-2  self-center text-right text-sm md:w-1/2 text-error" v-show="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+  </div>
 </template>
