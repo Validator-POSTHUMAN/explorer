@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import MdEditor from 'md-editor-v3';
 import PriceMarketChart from '@/components/charts/PriceMarketChart.vue';
+import AddNetworkComponent from '@/layouts/components/AddNetworkComponent.vue';
 
 import { Icon } from '@iconify/vue';
 import {
@@ -146,8 +147,8 @@ const amount = computed({
 </script>
 
 <template>
-  <div>
-    <div v-if="coinInfo && coinInfo.name" class="flex flex-col gap-3 rounded shadow mt-1.5 mx-0 md:mx-3 mb-48">
+  <div class="flex grow">
+    <div v-if="coinInfo && coinInfo.name" class="flex flex-col gap-3 rounded grow shadow mt-1.5 mx-0 md:mx-3">
       <!-- Top block -->
       <div class="grid grid-cols-2 xl:grid-cols-12 gap-3.5">
 
@@ -244,7 +245,7 @@ const amount = computed({
 
       <!-- Bottom block -->
       <div
-        class="relative grid grid-cols-1 md:grid-cols-10 gap-5 thick-border-block p-3 md:pt-6 md:pb-8 md:px-5 h-full">
+        class="relative grid grid-cols-1 md:grid-cols-10 gap-5 thick-border-block p-3 md:pt-6 md:pb-8 md:px-5">
         <div
           class="w-full md:w-auto md:absolute xl:top-6 left-0 md:translate-x-1/2 my-0 flex md:flex-wrap justify-center items-center md:px-12">
           <a v-for="(item, index) of comLinks" :key="index" :href="item.href"
@@ -349,8 +350,10 @@ const amount = computed({
         </div>
 
       </div>
-    </div>
 
+      <AddNetworkComponent />
+
+    </div>
     <!-- <div class="grid grid-cols-1 gap-4 md:!grid-cols-3 lg:!grid-cols-6">
       <div v-for="(item, key) in store.stats" :key="key">
         <CardStatisticsVertical v-bind="item" />

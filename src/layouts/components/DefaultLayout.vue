@@ -263,8 +263,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
       </RouterView>
     </div>
 
-    <AddNetworkComponent v-if="shouldShow" />
-
 
     <!-- <newFooter /> -->
     <!-- </div> -->

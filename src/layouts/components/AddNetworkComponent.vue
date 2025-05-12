@@ -37,8 +37,8 @@ function toggleShowFavoriteChains() {
 </script>
 
 <template>
-  <div class="px-3 mb-5 md:mb-14">
-    <div v-if="route.path !== '/'" class="flex justify-center mb-6">
+  <div class="flex flex-col content-between justify-between grow my-10">
+    <div class="flex justify-center mb-6">
       <div class="w-full md:w-auto grid grid-cols-2 gap-5 pt-0.5" :class="{
         'md:!grid-cols-1 lg:!grid-cols-1 2xl:!grid-cols-1': (showFavoriteChains ? favoriteChains : chains).length === 1,
         'md:!grid-cols-2 lg:!grid-cols-2 2xl:!grid-cols-2': (showFavoriteChains ? favoriteChains : chains).length === 2,
