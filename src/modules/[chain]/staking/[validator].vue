@@ -271,21 +271,25 @@ const rates = computed(() => (
 
       // <!-- FIXME: hardcode -->
       name: 'Participation Rate',
-      value: '97%'.replace(/[^\d.]/g, ''),
+      value: format.percent('97%'),
+      
       label: '252/260',
     },
     // {},
     {
       name: 'Total Bond',
-      value: selfRate.value.replace(/[^\d.]/g, ''),
-      label: format.formatToken2({
+      // Total Bond в % =
+      // Total Stake (количество монет  которые застейканы всети) / 
+      // Количество моонет, которое  заделегировано валидатору вообще со всех адресов
+      value: totalBond.value,
+      label: format.formatTokenAmount({
         amount: v.value.tokens,
         denom: staking.params.bond_denom,
       }),
     },
     {
       name: 'Commission Rate',
-      value: rate.value,
+      value: format.percent(rate.value / 100),
       label: rate.value < max.value ? 'Low commission' : 'Extra High Comission',
       styles: rate.value < max.value ? 'text-green-text' : 'text-red-text',
     },
@@ -295,12 +299,16 @@ const rates = computed(() => (
 const airdropStatus = ref('high');
 
 const validatorApr = computed(() => (Number(apr.value.replace(/%/g, '')) / 100) * (1 - rate.value/100));
+const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking.pool.bonded_tokens));
+
+// watch(() => v.value.tokens, newVal => console.log(newVal))
+
 </script>
 
 <template>
-  <div class="flex flex-col items-center md:px-20 pt-6">
+  <div class="flex flex-col items-center md:px-20 pt-6 gap-6">
 
-    <BackButton class="-mt-6 mb-5 md:mb-0 md:mt-0" />
+    <BackButton class="-mt-6 md:mt-0" />
 
     <div class="relative flex flex-col items-center w-full md:max-w-[1130px] thick-border-block p-3 md:p-10 mt-8 mb-20">
       <!-- account-badge -->
@@ -394,9 +402,11 @@ const validatorApr = computed(() => (Number(apr.value.replace(/%/g, '')) / 100) 
           <!-- secondLine -->
           <div v-for="item in rates" class="flex flex-col items-center text-white tracking-wide header-16 gap-5">
             <p v-if="item.name">{{ `${$t(item.name)}:` }}</p>
+            
             <CircleProgressComponent v-if="item.value" class="text-header-text header-36" :size="144"
               :value="(+item.value)">
-              {{ `${Math.round(+item.value)}%` }}
+              <!-- {{ `${Math.round(+item.value)}%` }} -->
+                {{ item.value }}
             </CircleProgressComponent>
 
             <p v-if="item.label" :class="item.styles">{{ item.label }}</p>

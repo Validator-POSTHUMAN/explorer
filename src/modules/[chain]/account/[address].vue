@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {
   useBlockchain,
+  useDashboard,
   useFormatter,
   useStakingStore,
   useTxDialog,
@@ -266,7 +267,7 @@ async function copyUrl(url: string) {
 
           <tbody class="">
             <tr v-if="recentReceived.length === 0 && txs.length === 0" class="border-addition/20">
-              <td colspan="10"> recentReceived
+              <td colspan="10">
                 <div class="text-center">{{ $t('account.no_transactions') }}</div>
               </td>
             </tr>

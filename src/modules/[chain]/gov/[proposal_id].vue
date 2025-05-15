@@ -17,12 +17,16 @@ import {
   type PaginatedProposalDeposit,
   type Pagination,
 } from '@/types';
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import Countdown from '@/components/Countdown.vue';
 import PaginationBar from '@/components/PaginationBar.vue';
 import { fromBech32, toHex } from '@cosmjs/encoding';
 import { Icon } from '@iconify/vue';
 import AddressWithCopy from '@/components/AddressWithCopy.vue';
+import IconEmojiHappy from '@/components/icons/IconEmojiHappy.vue';
+import IconStatus from '@/components/icons/IconStatus.vue';
+import IconRevoting from '@/components/icons/IconRevoting.vue';
+import IconTimeLeft from '@/components/icons/IconTimeLeft.vue';
 
 
 const props = defineProps(['proposal_id', 'chain']);
@@ -219,43 +223,64 @@ function metaItem(metadata: string | undefined): { title: string; summary: strin
   return metadata ? JSON.parse(metadata) : { title: '', summary: '' }
 }
 
-// <!-- FIXME: hardcode -->
-
 const statusData = computed(() => (
   [
     {
       isAddress: true,
       value: proposal.value?.proposer,
       label: 'Creator',
-      icon: '',
+      icon: IconEmojiHappy,
     },
     {
-      value: proposal.value?.status,
+      value: status.value,
       label: 'Status',
-      icon: '',
+      icon: IconStatus,
     },
     {
+      // <!-- FIXME: hardcode -->
       value: 'Enable',
       label: 'Revoting',
-      icon: '',
+      icon: IconRevoting,
     },
     {
       value: format.toDay(proposal.value?.voting_end_time, 'from'),
       label: 'Time left',
-      icon: '',
+      icon: IconTimeLeft,
     },
   ]
 ));
+
+watch(() => total.value, newVal => console.log(stakingStore))
+
+// <!-- FIXME: hardcode -->
 const votingData = computed(() => ([{
   label: 'staking.voting_power',
-  value: '0.9999999999%',
+  // как подсчитать voting power - это % соотношения:
+  // Total Stake Валидатора stakingStore.totalPower ??????? / Total bonded tokens (сколько всего токенов застейкано в сети stakingStore.pool.bonded_tokens) = Voting Power валидатора
+  value: format.calculatePercent(stakingStore.totalPower, stakingStore.pool.bonded_tokens)
 },
 {
   label: 'staking.btn_vote',
+  // ??????
   value: 'None',
 }]));
 
-watch(() => proposal.value, newVal => { console.log('proposal', newVal) });
+// onMounted(() => {
+//   stakingStore.fetchValidator(validator).then((res) => {
+//       v.value = res.validator;
+//       identity.value = res.validator?.description?.identity || '';
+//       if (identity.value && !avatars.value[identity.value]) loadAvatar(identity.value);
+
+//       const prefix = valoperToPrefix(v.value.operator_address) || '<Invalid>';
+//       addresses.value.hex = consensusPubkeyToHexAddress(
+//         v.value.consensus_pubkey
+//       );
+//       addresses.value.valCons = pubKeyToValcons(
+//         v.value.consensus_pubkey,
+//         prefix
+//       );
+//     });
+// })
 
 </script>
 
@@ -283,11 +308,12 @@ watch(() => proposal.value, newVal => { console.log('proposal', newVal) });
 
           <div class="text-button-text mb-9">
             <p class="uppercase header-20-medium-aa mb-5">{{ $t('gov.status') }}</p>
-
             <div class="w-full border-y border-addition py-4 px-2.5 flex flex-col gap-2.5">
               <div v-for="item in statusData" class="grid grid-cols-5 gap-3" :key="item.label">
                 <p class="col-span-2 header-16 tracking-wide flex gap-2.5">
-                  <Icon class="text-addition/50" icon="ic:round-close" width="24" height="24" />
+                  <!-- <Icon class="text-addition/50" icon="ic:round-close" width="24" height="24" /> -->
+                  <component class="text-addition/50" :is="item.icon" />
+
                   <span>{{ item.label }}</span>
                 </p>
                 <div class="col-span-3 body-text-16 text-white truncate">
@@ -428,7 +454,7 @@ watch(() => proposal.value, newVal => { console.log('proposal', newVal) });
 
       <!-- text -->
       <div
-        class="pt-3 pb-4 rounded mb-4 shadow overflow-auto thick-border-block bg-black/70 px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
+        class="w-full pt-3 pb-4 rounded mb-4 shadow overflow-auto thick-border-block bg-black/70 px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
         :style="{ height: 'calc(100vh - 180px)' }">
 
         <div class="">

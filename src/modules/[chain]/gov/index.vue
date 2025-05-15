@@ -27,7 +27,7 @@ const changeTab = (val: '1' | '2' | '3' | '4') => {
 function page(p: number) {
     pageRequest.value.setPage(p)
     store.fetchProposals(tab.value, pageRequest.value)
-}
+};
 
 const tabs = [
     {
@@ -47,6 +47,7 @@ const tabs = [
         value: '4',
     },
 ];
+
 const allProposals = computed(() => ({
     proposals: [
         ...(store.proposals[2]?.proposals || []),
@@ -58,11 +59,10 @@ const allProposals = computed(() => ({
             (Number(store.proposals[2]?.pagination?.total) || 0) +
             (Number(store.proposals[4]?.pagination?.total) || 0) +
             (Number(store.proposals[3]?.pagination?.total) || 0)
-        ).toString() // если тебе нужен total как строка
+        ).toString()
     }
-}))
+}));
 
-watch(allProposals, newVal => console.log(allProposals.value))
 </script>
 <template>
     <div class="flex flex-col md:px-5">

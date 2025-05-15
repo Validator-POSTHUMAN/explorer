@@ -92,7 +92,6 @@ const data = computed(() => ([
     { label: 'tx.tx_hash', value: tx.value.tx_response.txhash, action: () => copyAdress() },
 ]));
 
-watch(tx, (newVal) => console.log('tx', newVal))
 </script>
 
 <template>
