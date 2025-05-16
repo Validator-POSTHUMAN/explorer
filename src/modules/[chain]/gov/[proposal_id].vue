@@ -256,7 +256,7 @@ watch(() => total.value, newVal => console.log(stakingStore))
 const votingData = computed(() => ([{
   label: 'staking.voting_power',
   // как подсчитать voting power - это % соотношения:
-  // Total Stake Валидатора stakingStore.totalPower ??????? / Total bonded tokens (сколько всего токенов застейкано в сети stakingStore.pool.bonded_tokens) = Voting Power валидатора
+  // Total Stake Валидатора / Total bonded tokens (сколько всего токенов застейкано в сети stakingStore.pool.bonded_tokens) = Voting Power валидатора
   value: format.calculatePercent(stakingStore.totalPower, stakingStore.pool.bonded_tokens)
 },
 {

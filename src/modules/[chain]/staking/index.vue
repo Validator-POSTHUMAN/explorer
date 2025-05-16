@@ -379,7 +379,7 @@ const widgetsInfo = computed(() => (
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap-5 md:px-4">
+  <div class="flex flex-col xl:flex-row gap-5 md:px-4">
     <!-- widgets -->
     <div class="md:sticky top-0">
 

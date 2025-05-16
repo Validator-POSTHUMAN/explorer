@@ -272,7 +272,7 @@ const rates = computed(() => (
       // <!-- FIXME: hardcode -->
       name: 'Participation Rate',
       value: format.percent('97%'),
-      
+
       label: '252/260',
     },
     // {},
@@ -298,7 +298,7 @@ const rates = computed(() => (
 
 const airdropStatus = ref('high');
 
-const validatorApr = computed(() => (Number(apr.value.replace(/%/g, '')) / 100) * (1 - rate.value/100));
+const validatorApr = computed(() => (Number(apr.value.replace(/%/g, '')) / 100) * (1 - rate.value / 100));
 const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking.pool.bonded_tokens));
 
 // watch(() => v.value.tokens, newVal => console.log(newVal))
@@ -329,7 +329,7 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
           </div>
         </div>
         <div>
-          <div class="md:max-w-[395px] md:thick-border-block p-5 md:-ml-14 md:pl-16 mt-4 mb-4 bg-black truncate">
+          <div class="md:max-w-[395px] md:thick-border-block p-5 md:-ml-14 md:pl-16 mt-4 mb-4 bg-transparent md:bg-black truncate text-center md:text-start">
             <p v-if="airdropStatus === 'high'" class="header-16 text-green-text tracking-wide mb-1">
               <!-- FIXME: hardcode -->
 
@@ -353,7 +353,7 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
 
             <p class="uppercase header-36 text-white truncate">{{ v.description?.moniker }}</p>
           </div>
-          <div class="flex gap-2.5 text-addition">
+          <div class="hidden xl:flex gap-2.5 text-addition">
             <div class="bg-addition/30 rounded-full px-3.5 py-1">
               <Icon icon="mdi:web" width="24" height="24" />
             </div>
@@ -369,10 +369,20 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
       </div>
 
       <div class="">
-        <div class="grid md:grid-cols-3 gap-x-10 gap-y-12 mb-20 md:mx-36">
+        <div class="grid md:grid-cols-3 gap-x-10 gap-y-12 mb-20 xl:mx-36 mt-20 xl:mt-0">
           <!-- firstLine -->
-          <div class="flex gap-2.5 text-addition">
-
+          <div class="flex gap-2.5 text-addition truncate">
+            <div class="xl:hidden flex items-center gap-2.5 text-addition">
+              <div class="bg-addition/30 rounded-full px-3.5 py-1">
+                <Icon icon="mdi:web" width="24" height="24" />
+              </div>
+              <a class="self-center" :href="v?.description?.website || '#'" :class="v?.description?.website
+                ? 'cursor-pointer'
+                : 'cursor-default'
+                ">
+                {{ v.description?.website || '-' }}
+              </a>
+            </div>
           </div>
 
           <div class="flex flex-col gap-1 text-white tracking-wide header-16 md:pl-8">
@@ -400,13 +410,13 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
           </div>
 
           <!-- secondLine -->
-          <div v-for="item in rates" class="flex flex-col items-center text-white tracking-wide header-16 gap-5">
+          <div v-for="item in rates" class="flex flex-col items-center justify-end text-white tracking-wide header-16 gap-5">
             <p v-if="item.name">{{ `${$t(item.name)}:` }}</p>
-            
+
             <CircleProgressComponent v-if="item.value" class="text-header-text header-36" :size="144"
               :value="(+item.value)">
               <!-- {{ `${Math.round(+item.value)}%` }} -->
-                {{ item.value }}
+              {{ item.value }}
             </CircleProgressComponent>
 
             <p v-if="item.label" :class="item.styles">{{ item.label }}</p>
@@ -420,7 +430,7 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
       <!-- bonus badge -->
       <!-- Bonus -->
       <div v-if="airdropStatus === 'high'"
-        class="max-w-[300px] mt-10 md:mt-0 md:w-[300px] md:h-[100px] relative md:absolute md:bottom-20 md:right-0 md:translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
+        class="max-w-[300px] mt-10 xl:mt-0 md:w-[300px] md:h-[100px] relative xl:absolute xl:bottom-20 xl:right-0 xl:translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
         <div
           class="absolute -top-7 -right-4 m-2.5 text-star-yellow rounded-full shadow-[0_0_2px_1px_rgba(238,187,78,0.2)]
             before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full">
@@ -436,7 +446,7 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
 
       <!-- Bonus is possible -->
       <div v-if="airdropStatus === 'low'"
-        class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[115px] relative md:absolute md:bottom-20 md:right-0 md:translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
+        class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[115px] relative xl:absolute xl:bottom-20 xl:right-0 xl:translate-x-1/2 rounded-full border border-star-yellow bg-black py-2.5 px-12">
         <div
           class="absolute -top-7 -right-4 m-2.5 text-star-yellow rounded-full shadow-[0_0_2px_1px_rgba(238,187,78,0.2)]
             before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full">
@@ -453,7 +463,7 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
 
       <!-- NO Bonus -->
       <div v-if="airdropStatus === 'no'"
-        class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[100px] relative md:absolute md:bottom-20 md:right-0 md:translate-x-1/2 rounded-full border border-red-text bg-black py-2.5 px-12">
+        class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[100px] relative xl:absolute xl:bottom-20 xl:right-0 xl:translate-x-1/2 rounded-full border border-red-text bg-black py-2.5 px-12">
 
         <p class="header-20-medium mb-0.5" :class="'text-red-text'">NO Bonus</p>
         <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->
