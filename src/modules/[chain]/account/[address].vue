@@ -18,6 +18,8 @@ import type {
   TxResponse,
   DelegatorRewards,
   UnbondingResponses,
+  SigningInfo,
+  SlashingParam,
 } from '@/types';
 import type { Coin } from '@cosmjs/amino';
 import Countdown from '@/components/Countdown.vue';
@@ -25,6 +27,7 @@ import { fromBase64 } from '@cosmjs/encoding';
 import AddressWithCopy from '@/components/AddressWithCopy.vue';
 import ActionsPanel from '@/components/ActionsPanel.vue';
 import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
+import { valconsToBase64 } from '@/libs';
 
 const props = defineProps(['address', 'chain']);
 
@@ -40,6 +43,10 @@ const rewards = ref({} as DelegatorRewards);
 const balances = ref([] as Coin[]);
 const unbonding = ref([] as UnbondingResponses[]);
 const unbondingTotal = ref(0);
+const slashingParam = ref({} as SlashingParam);
+
+const signingInfo = ref({} as Record<string, SigningInfo>);
+
 const chart = {};
 onMounted(() => {
   loadAccount(props.address);
@@ -68,6 +75,23 @@ const totalAmountByCategory = computed(() => {
 
 const labels = ['Balance', 'Delegation', 'Reward', 'Unbonding'];
 
+const cache = JSON.parse(localStorage.getItem('avatars') || '{}');
+const avatars = ref(cache || {});
+
+const logo = (identity?: string) => {
+  if (!identity || !avatars.value[identity]) return '';
+  const url = avatars.value[identity] || '';
+  return url.startsWith('http')
+    ? url
+    : `https://s3.amazonaws.com/keybase_processed_uploads/${url}`;
+};
+const validators = stakingStore.validators.map((x, i) => {
+  return {
+    v: x,
+    logo: logo(x.description.identity),
+  }
+});
+
 const totalAmount = computed(() => {
   return totalAmountByCategory.value.reduce((p, c) => c + p, 0);
 });
@@ -90,7 +114,6 @@ const totalValue = computed(() => {
   });
   return format.formatNumber(value, '0,0.00');
 });
-
 
 function loadAccount(address: string) {
   blockchain.rpc.getAuthAccount(address).then((x) => {
@@ -116,6 +139,13 @@ function loadAccount(address: string) {
       });
     });
   });
+
+  watch(() => rewards.value, newVal => console.log('rewards', newVal));
+  watch(() => balances.value, newVal => console.log('balances', newVal));
+  watch(() => delegations.value, newVal => console.log('delegations', newVal));
+
+  balances.value.map((balance, i) => balance.amount + delegations.value[i].balance.amount)
+
 
   const receivedQuery = `?&pagination.reverse=true&query=coin_received.receiver='${address}'`;
   blockchain.rpc.getTxs(receivedQuery, {}).then((x) => {
@@ -197,6 +227,15 @@ async function copyUrl(url: string) {
     await navigator.clipboard.writeText(newUrl);
   } catch (err) {
   }
+}
+
+const getLogo = (v: Delegation) => {
+  const x = validators.find(item => {
+    if (item.v.operator_address === v.delegation.validator_address) {
+      return item.logo
+    }
+  })
+  return x?.logo || defaultAvatar
 }
 
 </script>
@@ -347,7 +386,8 @@ async function copyUrl(url: string) {
                 <AddressWithCopy styles="header-14-medium-aa justify-end"
                   :href="`/${chain}/tx/${recentReceivedItem.txhash}`" :address="recentReceivedItem.txhash" :size="16"
                   icon isShort isCopyHref />
-                <Icon class="text-base md:hidden" icon="bx:copy" @click="() => copyUrl(`/${chain}/tx/${recentReceivedItem.txhash}`)" />
+                <Icon class="text-base md:hidden" icon="bx:copy"
+                  @click="() => copyUrl(`/${chain}/tx/${recentReceivedItem.txhash}`)" />
               </td>
             </tr>
 
@@ -415,7 +455,8 @@ async function copyUrl(url: string) {
               <td class="text-end">
                 <AddressWithCopy styles="header-14-medium-aa justify-end" :href="`/${chain}/tx/${txsItem.txhash}`"
                   :address="txsItem.txhash" :size="16" icon isShort isCopyHref />
-                <Icon class="text-base md:hidden" icon="bx:copy" @click="() => copyUrl(`/${chain}/tx/${txsItem.txhash}`)" />
+                <Icon class="text-base md:hidden" icon="bx:copy"
+                  @click="() => copyUrl(`/${chain}/tx/${txsItem.txhash}`)" />
               </td>
             </tr>
 
@@ -643,7 +684,7 @@ async function copyUrl(url: string) {
                               if (identity) loadAvatar(identity);
                             }
                           " /> -->
-                        <img :src="defaultAvatar" class="object-contain" />
+                        <img :src="getLogo(v)" class="object-contain" />
                       </div>
                     </div>
 

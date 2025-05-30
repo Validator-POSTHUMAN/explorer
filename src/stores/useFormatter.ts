@@ -306,11 +306,8 @@ export const useFormatter = defineStore('formatter', {
       return validator?.description?.moniker;
     },
     calculatePercent(input?: string | number, total?: string | number) {
-      console.log('input', input);
-      console.log('total', total);
       if (!input || !total) return '0';
       const percent = Number(input) / Number(total);
-      console.log('percent', percent);
       return numeral(percent > 0.0001 ? percent : 0).format('0.[00]%');
     },
     formatDecimalToPercent(decimal: string) {

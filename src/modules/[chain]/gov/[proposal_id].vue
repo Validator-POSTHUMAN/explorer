@@ -250,14 +250,13 @@ const statusData = computed(() => (
   ]
 ));
 
-watch(() => total.value, newVal => console.log(stakingStore))
-
 // <!-- FIXME: hardcode -->
 const votingData = computed(() => ([{
   label: 'staking.voting_power',
   // как подсчитать voting power - это % соотношения:
   // Total Stake Валидатора / Total bonded tokens (сколько всего токенов застейкано в сети stakingStore.pool.bonded_tokens) = Voting Power валидатора
-  value: format.calculatePercent(stakingStore.totalPower, stakingStore.pool.bonded_tokens)
+  // votingPower = totalbonded validator-a / totalbonded сети
+  value: format.calculatePercent(stakingStore.pool.bonded_tokens, stakingStore.totalPower)
 },
 {
   label: 'staking.btn_vote',
