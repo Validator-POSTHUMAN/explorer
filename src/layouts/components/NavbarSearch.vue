@@ -65,7 +65,7 @@ function confirm() {
 <!-- @click="openSearchModal" -->
 
 <template>
-  <div>
+  <div class="w-full">
     <!-- <button
       class="btn btn-ghost btn-circle btn-sm mx-1"
     >
@@ -80,7 +80,7 @@ function confirm() {
       <input :placeholder="$t('pages.search_placeholder')"
         v-model="searchQuery"
         @keyup.enter="confirm"
-        class="md:px-4 bg-transparent flex-1 outline-none header-20 placeholder:text-white min-w-[400px]" />
+        class="md:px-4 bg-transparent flex-1 outline-none header-20 placeholder:text-white w-full placeholder:w-0 xl:placeholder:w-full" />
         <!-- v-model="keywords" -->
          <!-- <p class="md:px-4 flex-1 header-20 text-white min-w-[400px]">{{ $t('pages.search_placeholder') }}</p> -->
     </div>

@@ -199,8 +199,8 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
     </div>
 
     <header class="w-full flex justify-between border-y border-addition mt-[26px] mb-5 max-h-[52px]">
-      <RouterLink to="/" class=" hidden xl:flex items-center mx-8 min-w-32">
-        <img class="w-32 h-53" src="../../assets/logo.svg" />
+      <RouterLink to="/" class=" hidden xl:flex items-center mx-8 ">
+        <img class="w-full max-w-32 h-auto" src="../../assets/logo.svg" />
       </RouterLink>
 
       <div class="text-2xl text-white px-5 my-3 cursor-pointer xl:!hidden" @click="sidebarShow = true">
@@ -244,7 +244,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
           'xl:justify-between': !!walletStore?.currentAddress,
           'xl:justify-end': !walletStore?.currentAddress
         }">
-          <!-- <div></div> -->
           <NavbarSearch v-if="!!walletStore?.currentAddress" class="hidden md:!inline-block xl:ml-4 pr-2" />
           <NavBarWallet />
         </div>

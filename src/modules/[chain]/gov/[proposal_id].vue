@@ -236,12 +236,11 @@ const statusData = computed(() => (
       label: 'Status',
       icon: IconStatus,
     },
-    {
-      // <!-- FIXME: hardcode -->
-      value: 'Enable',
-      label: 'Revoting',
-      icon: IconRevoting,
-    },
+    // {
+    //   value: 'Enable',
+    //   label: 'Revoting',
+    //   icon: IconRevoting,
+    // },
     {
       value: format.toDay(proposal.value?.voting_end_time, 'from'),
       label: 'Time left',
@@ -250,18 +249,16 @@ const statusData = computed(() => (
   ]
 ));
 
-// <!-- FIXME: hardcode -->
 const votingData = computed(() => ([{
   label: 'staking.voting_power',
-  // как подсчитать voting power - это % соотношения:
-  // Total Stake Валидатора / Total bonded tokens (сколько всего токенов застейкано в сети stakingStore.pool.bonded_tokens) = Voting Power валидатора
-  // votingPower = totalbonded validator-a / totalbonded сети
+  // Total Stake Validator / Total bonded tokens (stakingStore.pool.bonded_tokens) = Voting Power Validator
   value: format.calculatePercent(stakingStore.pool.bonded_tokens, stakingStore.totalPower)
 },
 {
   label: 'staking.btn_vote',
-  // ??????
-  value: 'None',
+  value:
+    votes.value.find(item => item.voter === proposal.value?.proposer)?.option
+    ?? 'None',
 }]));
 
 // onMounted(() => {

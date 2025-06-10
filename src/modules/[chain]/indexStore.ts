@@ -32,6 +32,7 @@ export const useIndexModule = defineStore('module-index', {
       coinInfo: {
         name: '',
         symbol: '',
+        image: {thumb: ''},
         description: {
           en: '',
         },

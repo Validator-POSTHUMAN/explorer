@@ -1,15 +1,17 @@
 <script lang="ts" setup>
 import {
   useBlockchain,
+  useCoingecko,
   useDashboard,
   useFormatter,
   useStakingStore,
   useTxDialog,
+  useWalletStore,
 } from '@/stores';
 import DynamicComponent from '@/components/dynamic/DynamicComponent.vue';
 import DonutChart from '@/components/charts/DonutChart.vue';
 import { computed, ref } from '@vue/reactivity';
-import { onMounted, watch } from 'vue';
+import { nextTick, onBeforeUnmount, onMounted, watch } from 'vue';
 import { Icon } from '@iconify/vue';
 
 import type {
@@ -28,6 +30,7 @@ import AddressWithCopy from '@/components/AddressWithCopy.vue';
 import ActionsPanel from '@/components/ActionsPanel.vue';
 import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 import { valconsToBase64 } from '@/libs';
+import { useIndexModule } from '../indexStore';
 
 const props = defineProps(['address', 'chain']);
 
@@ -44,8 +47,12 @@ const balances = ref([] as Coin[]);
 const unbonding = ref([] as UnbondingResponses[]);
 const unbondingTotal = ref(0);
 const slashingParam = ref({} as SlashingParam);
-
+const dashboard = useDashboard();
+const store = useIndexModule();
+const ticker = computed(() => store.coinInfo.tickers[store.tickerIndex]);
+const coingecko = useCoingecko();
 const signingInfo = ref({} as Record<string, SigningInfo>);
+const walletStore = useWalletStore();
 
 const chart = {};
 onMounted(() => {
@@ -140,9 +147,19 @@ function loadAccount(address: string) {
     });
   });
 
-  watch(() => rewards.value, newVal => console.log('rewards', newVal));
-  watch(() => balances.value, newVal => console.log('balances', newVal));
-  watch(() => delegations.value, newVal => console.log('delegations', newVal));
+  // watch(() => rewards.value, newVal => console.log('rewards', newVal));
+  // watch(() => balances.value, newVal => console.log('balances', newVal));
+  // watch(() => delegations.value, newVal => console.log('delegations', newVal));
+  // watch(() => unbonding.value, newVal => console.log('unbonding', newVal));
+  // watch(() => recentReceived.value, newVal => console.log('recentReceived', newVal));
+  // watch(() => txs.value, newVal => console.log('txs', newVal));
+
+  // console.log('stakingStore', stakingStore);
+  // console.log('store.coinInfo', store.coingecko.prices)
+  // console.log('dashboard.loadingPrices()',);
+  // console.log('coingecko', coingecko);
+  // dashboard.loadingFromLocal().then(res => console.log('res', res));
+
 
   balances.value.map((balance, i) => balance.amount + delegations.value[i].balance.amount)
 
@@ -185,9 +202,7 @@ const scaleData = computed(() => ([
   },
   {
     label: 'account.unbonding',
-
-    // FIXME: unbounding
-    value: 5,
+    value: unbondingSum.value,
     bgColor: 'bg-[#BC36C3]',
     textColor: 'text-[#BC36C3]',
   },
@@ -218,6 +233,20 @@ watch(() => rewards.value, (newVal) => {
   });
 });
 
+function sumAllUnbondingBalances(responses: UnbondingResponses[]): number {
+  return responses.reduce((total, response) => {
+    const entriesSum = response.entries.reduce((entryTotal, entry) => {
+      return entryTotal + parseFloat(entry.balance);
+    }, 0);
+    return total + entriesSum;
+  }, 0);
+};
+
+const unbondingSum = ref(0);
+watch(() => unbonding.value, newVal => {
+  unbondingSum.value = sumAllUnbondingBalances(newVal);
+});
+
 
 async function copyUrl(url: string) {
   if (!url) return;
@@ -230,7 +259,12 @@ async function copyUrl(url: string) {
 }
 
 const getLogo = (v: Delegation) => {
-  const x = validators.find(item => {
+  const x = stakingStore.validators.map((x, i) => {
+    return {
+      v: x,
+      logo: logo(x.description.identity),
+    }
+  }).find(item => {
     if (item.v.operator_address === v.delegation.validator_address) {
       return item.logo
     }
@@ -238,18 +272,76 @@ const getLogo = (v: Delegation) => {
   return x?.logo || defaultAvatar
 }
 
+function groupAndSumByDenom(arr: Coin[]): Coin[] {
+  const grouped = Object.values(
+    arr.reduce((acc, item) => {
+      if (!acc[item.denom]) {
+        acc[item.denom] = { denom: item.denom, amount: 0 };
+      }
+      acc[item.denom].amount += parseFloat(item.amount);
+      return acc;
+    }, {} as Record<string, { denom: string; amount: number }>)
+  );
+
+  return grouped.map((item) => ({
+    denom: item.denom,
+    amount: item.amount.toString(),
+  }));
+}
+
+const assets = computed(() => ({
+  chain: {
+    name: store.coinInfo.name || '',
+    logo: store.coinInfo.image.thumb || defaultAvatar
+  },
+  available: walletStore.balanceOfStakingToken,
+  marketPrice: {
+    value: ticker.value?.converted_last?.usd,
+    priceChange: store.priceChange,
+  },
+  staking: walletStore.stakingAmount as Coin,
+  total: groupAndSumByDenom([walletStore.balanceOfStakingToken, walletStore.stakingAmount]),
+  getToken: (balanceItem: any) => calcAmount(balanceItem, 'token')
+}));
+
+const barContainers = ref<(HTMLElement | null)[]>([]);
+const containerWidths = ref<number[]>([]);
+
+const updateWidths = () => {
+  nextTick(() => {
+    containerWidths.value = barContainers.value.map(el => el?.offsetWidth || 0);
+  });
+};
+
+onMounted(() => {
+  store.loadDashboard();
+  walletStore.loadMyAsset();
+
+  updateWidths();
+  window.addEventListener('resize', updateWidths);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateWidths);
+});
+
+
+watch(() => scaleData, () => {
+  updateWidths();
+});
+
 </script>
 <template>
   <div v-if="account" class="md:px-5 py-1">
     <!-- headcer -->
-    <div class="flex flex-col xl:flex-row justify-between mb-5 xl:mb-0">
+    <div class="flex flex-col xl:flex-row justify-between mb-5 xl:mb-8">
       <div class="text-white mb-5">
         <AddressWithCopy :href="`/${chain}/account/${address}`" :address="address" :size="20"
           styles="header-16 gap-6 mb-5" icon hasIconOutline hasQr />
         <p class="header-36 tracking-wide">{{ `${totalValue} $` }}</p>
       </div>
 
-      <div id="scale" class="w-full md:min-w-[500px] md:max-w-[650px] xl:max-w-[690px] flex">
+      <!-- <div id="scale" class="w-full md:min-w-[500px] md:max-w-[650px] xl:max-w-[690px] flex">
         <div v-for="(item, i) in scaleData" class="relative header-14-medium-aa tracking-wide" :class="item.textColor"
           :style="{
             width: `${(+item.value * 790) / (total ?? 1)}px`,
@@ -260,7 +352,47 @@ const getLogo = (v: Delegation) => {
           <div v-if="+item.value" class="h-8 rounded-full my-3" :class="[item.bgColor, i !== 0 ? '-ml-8' : '']"></div>
           <p v-if="+item.value" class="uppercase">{{ $t(item.label) }}</p>
         </div>
+      </div> -->
+      <div id="scale" class="w-full xl:w-1/2 flex flex-col gap-2.5 md:gap-0">
+        <div v-for="(item, i) in scaleData" :key="i" :class="item.textColor"
+          class="grid grid-cols-6 items-center md:gap-5">
+          <div class="flex justify-between md:hidden col-span-6 ">
+            <p class="uppercase">{{ $t(item.label) }}</p>
+            <p>{{ item.value ? `$${format.formatNumber(+item.value, '0,0')}` : '$0' }}</p>
+          </div>
+
+          <div class="hidden md:grid col-span-2 gap-2.5 grid-cols-9 items-center">
+            <p class="col-span-4 uppercase text-right">{{ $t(item.label) }}</p>
+            <div class="w-full flex justify-center">
+              <p class="col-span-1 rounded-full w-3 h-3 text-center" :class="item.bgColor"></p>
+            </div>
+            <p class="col-span-4 text-left">{{ item.value ? `$${format.formatNumber(+item.value, '0,0')}` : '$0' }}</p>
+          </div>
+
+          <div :ref="el => barContainers[i] = el as HTMLElement | null"
+            :style="{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }"
+            class="h-3  col-span-6 md:col-span-4 items-center rounded-full relative overflow-hidden">
+            <div class="absolute rounded-full top-0 bottom-0 left-0" :class="item.bgColor" :style="{
+              width: containerWidths[i]
+                ? `${(+item.value * containerWidths[i]) / total}px`
+                : '0px'
+            }"></div>
+
+          </div>
+        </div>
       </div>
+      <!-- <div id="scale" class="w-full md:min-w-[500px] md:max-w-[650px] xl:max-w-[690px]">
+        <div v-for="(item, i) in scaleData" class="relative header-14-medium-aa tracking-wide" :class="item.textColor"
+          :style="{
+            width: `${(+item.value * 790) / (total ?? 1)}px`,
+            zIndex: 10 - (i + 1),
+            textAlign: i === 0 ? 'left' : i === scaleData.length - 1 ? 'right' : 'center'
+          }">
+          <p v-if="+item.value" class="">{{ `$${format.formatNumber(+item.value, '0,0')}` }}</p>
+          <div v-if="+item.value" class="h-8 rounded-full my-3" :class="[item.bgColor, i !== 0 ? '-ml-8' : '']"></div>
+          <p v-if="+item.value" class="uppercase">{{ $t(item.label) }}</p>
+        </div>
+      </div> -->
 
     </div>
 
@@ -517,18 +649,14 @@ const getLogo = (v: Delegation) => {
             </thead>
 
             <tbody class="">
-              <tr v-if="rewards?.total?.length === 0" class="border-addition/20">
+              <tr v-if="balances?.length === 0" class="border-addition/20">
                 <td colspan="10">
                   <div class="text-center">{{ $t('account.no_data') }}</div>
                 </td>
               </tr>
 
-
-
-
-
-              <!-- FIXME: filter for chain name -->
-              <tr v-for="(rewardItem, index) in rewards?.total?.filter(item => item?.denom?.includes(keywords))"
+              <tr
+                v-for="(balanceItem, index) in groupAndSumByDenom(balances)?.filter(item => item?.denom?.includes(keywords))"
                 :key="index" class="border-addition/20">
                 <!-- 👉 Chain -->
                 <td>
@@ -542,19 +670,19 @@ const getLogo = (v: Delegation) => {
                             if (identity) loadAvatar(identity);
                           }
                         " /> -->
-                        <img :src="defaultAvatar" class="object-contain" />
+                        <img :src="assets.chain.logo" class="object-contain" />
                       </div>
                     </div>
 
                     <div class="flex flex-col gap-1">
                       <span class="header-16-medium text-white uppercase">
 
-                        {{ calcAmount(rewardItem, 'token') }}
+                        {{ assets.getToken(balanceItem) }}
 
                       </span>
                       <span class="body-text-14 tracking-wide text-[#80BDBD]">
 
-                        Cosmoc Hub
+                        {{ assets.chain.name }}
 
                       </span>
                       <!-- <span class="max-w-[300px] text-button-text header-16-medium uppercase dark:invert truncate">
@@ -578,10 +706,12 @@ const getLogo = (v: Delegation) => {
                 <td class="">
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
-                      {{ calcAmount(rewardItem, 'value') }}
+                      <!-- {{ calcAmount(balanceItem, 'value') }} -->
+                      {{ format.formatToken(assets.available) }}
                     </h6>
                     <span class="body-text-14 text-[#80BDBD]">
-                      {{ `$${format.tokenValue(rewardItem)}` }}
+                      {{ `$${format.tokenValue(assets.available)}` }}
+
                     </span>
                   </div>
                 </td>
@@ -590,11 +720,17 @@ const getLogo = (v: Delegation) => {
                 <td>
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
-                      {{
-                        `$ ${format.tokenValue(rewardItem)}` }}
+                      <!-- {{
+                        `$ ${format.tokenValue(rewardItem)}` }} -->
+                      <!-- ${{ ticker?.converted_last?.usd }} -->
+                      {{ assets.marketPrice.value }}
+
                     </h6>
-                    <span class="body-text-14 text-green-text">{{
-                      `+${format.calculatePercent(rewardItem.amount, totalAmount)}` }}</span>
+                    <span class="body-text-14 text-green-text">
+                      <!-- {{ `+${format.calculatePercent(rewardItem.amount, totalAmount)}` }} -->
+                      <!-- {{ store.priceChange }}% -->
+                      {{ assets.marketPrice.priceChange }}%
+                    </span>
 
                     <!-- <div class="text-sm font-semibold">
                       {{ format.formatToken(balanceItem) }}
@@ -608,14 +744,32 @@ const getLogo = (v: Delegation) => {
                 <td class="">
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
-                      {{ calcAmount(rewardItem, 'value') }}
+                      <!-- {{ calcAmount(balanceItem, 'value') }} -->
+                      <!-- {{ format.formatToken(walletStore.stakingAmount) +
+                        format.formatToken(walletStore.balanceOfStakingToken) }} -->
+                      {{ format.formatToken(assets.total[0]) }}
                     </h6>
                     <span class="body-text-14 text-[#80BDBD]">
-                      {{ `$${format.tokenValue(rewardItem)}` }}
+                      <!-- {{ `$${format.tokenValue(walletStore.stakingAmount)}` }} -->
+                      {{ `$${format.tokenValue(assets.total[0])}` }}
+
+                      <!-- {{ `$${format.tokenValue(balanceItem)}` }} -->
                       <!-- format.tokenValue(rewardItem) -->
                     </span>
                   </div>
                 </td>
+
+                <!-- <td class="">
+                  <div class="text-end">
+                    <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
+                        {{ format.formatToken(walletStore.stakingAmount) }}
+                    </h6>
+                    <span class="body-text-14 text-[#80BDBD]">
+                      {{ `$${format.tokenValue(walletStore.stakingAmount)}` }}
+
+                    </span>
+                  </div>
+                </td> -->
 
               </tr>
 
@@ -741,6 +895,86 @@ const getLogo = (v: Delegation) => {
 
         <ActionsPanel class="my-5" :key="activeValidator" :address="activeValidator" />
       </div>
+    </div>
+
+    <!-- unbonding -->
+    <div class="thick-border-block pt-6 px-4 mb-7">
+      <h3 class="header-20-medium-aa text-header-text uppercase mb-7">{{ $t('account.unbonding') }}</h3>
+
+      <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-80">
+        <table class=" table bg-black/20 staking-table w-full">
+          <thead class="bg-black sticky top-0 z-10">
+            <tr class="text-header-text body-text-14 border-addition/20">
+              <td scope="col">
+                {{ $t('account.balance') }}
+              </td>
+              <td scope="col" class="text-end">
+                {{ $t('account.initial_balance') }}
+              </td>
+
+              <td scope="col">
+                <div class="flex gap-1 items-center justify-end">
+                  <span>{{ $t('account.completion_time') }}</span>
+                  <span class="cursor-pointer">
+                    <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
+                    <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
+                  </span>
+                </div>
+              </td>
+              <td scope="col" class="flex gap-1 items-center justify-end">{{ $t('account.creation_height') }}</td>
+
+            </tr>
+          </thead>
+
+          <tr v-if="unbonding.length === 0" class="border-addition/20">
+            <td colspan="10">
+              <div class="text-center">{{ $t('account.no_transactions') }}</div>
+            </td>
+          </tr>
+
+          <tbody class="text-sm" v-for="(v, index) in unbonding" :key="index">
+            <tr v-for="entry in v.entries">
+
+              <td class="py-3">
+                {{
+                  format.formatToken(
+                    {
+                      amount: entry.balance,
+                      denom: stakingStore.params.bond_denom,
+                    },
+                    true,
+                    '0,0.[00]'
+                  )
+                }}
+              </td>
+
+              <td class="py-3">
+                {{
+                  format.formatToken(
+                    {
+                      amount: entry.initial_balance,
+                      denom: stakingStore.params.bond_denom,
+                    },
+                    true,
+                    '0,0.[00]'
+                  )
+                }}
+              </td>
+
+
+              <td class="py-3">
+                <Countdown :time="new Date(entry.completion_time).getTime() - new Date().getTime()" />
+              </td>
+
+              <td class="py-3">{{ entry.creation_height }}</td>
+
+            </tr>
+          </tbody>
+
+
+        </table>
+      </div>
+
     </div>
 
     <!-- address -->
