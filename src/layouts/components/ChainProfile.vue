@@ -51,32 +51,33 @@ function changeEndpoint(item: Endpoint) {
       </div>
     </label>
     <div tabindex="0"
-      class="dropdown-content -translate-x-1/2 md:translate-x-0 w-[100vw] left-6 md:w-80 menu shadow bg-base-200 rounded-box overflow-auto">
+      class="p-0 dropdown-content -translate-x-1/2 md:translate-x-0 w-[100vw] left-6 md:w-90 max-w-[436px] menu shadow bg-chart-stroke rounded-box overflow-auto">
       <!-- rest -->
-      <div class="px-4 py-2 text-sm text-[#686868]" v-if="chainStore.current?.endpoints?.rest">
+      <div class="uppercase text-header-text header-14-medium-aa tracking-wide mb-5 px-6 pt-6" v-if="chainStore.current?.endpoints?.rest">
         Rest Endpoint
       </div>
       <div v-for="(item, index) in chainStore.current?.endpoints?.rest"
-        class="px-4 py-2 w-full hover:bg-gray-100 dark:hover:bg-[#384059] cursor-pointer" :key="index"
-        @click="changeEndpoint(item)">
+        class="px-6 py-1.5 w-full hover:bg-menu-button-hover dark:hover:bg-[#384059] cursor-pointer" :key="index"
+        @click="changeEndpoint(item)"
+        :class="{'bg-menu-button-active': item.address === chainStore.endpoint?.address}">
         <div class="flex flex-col">
           <div class="flex items-center justify-between w-full">
-            <div class="text-gray-500 dark:text-gray-200 capitalize">
+            <div class="header-16-medium text-button-text dark:text-gray-200 capitalize tracking-wide">
               {{ item.provider }}
             </div>
-            <span v-if="item.address === chainStore.endpoint?.address"
-              class="bg-yes inline-block h-2 w-2 rounded-full" />
+            <!-- <span v-if="item.address === chainStore.endpoint?.address"
+              class="bg-yes inline-block h-2 w-2 rounded-full" /> -->
           </div>
-          <div class="text-gray-400 text-xs whitespace-nowrap">
+          <div class="body-text-14 text-addition whitespace-nowrap">
             {{ item.address }}
           </div>
         </div>
       </div>
 
       <!-- rest -->
-      <div class="px-4 py-2 text-sm text-gray-400">Information</div>
+      <div class="mt-7 mb-4 px-6 uppercase text-header-text header-14-medium-aa tracking-wide">Information:</div>
       <div class="w-full">
-        <div class="py-2 px-4">
+        <div class="pb-1 px-6 header-16-medium text-button-text dark:text-gray-200 capitalize tracking-wide">
           Chain Id:
           {{
             baseStore.latest.block?.header.chain_id && baseStore.connected
@@ -84,7 +85,7 @@ function changeEndpoint(item: Endpoint) {
               : 'N/A'
           }}
         </div>
-        <div class="py-2 px-4">
+        <div class="px-6 header-16-medium text-button-text dark:text-gray-200 capitalize tracking-wide">
           Height:
           {{
             baseStore.latest.block?.header.height && baseStore.connected

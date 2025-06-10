@@ -21,6 +21,7 @@ import type {
 } from '../types';
 import AddNetworkComponent from './AddNetworkComponent.vue';
 import { useRoute } from 'vue-router'
+import Socials from '@/layouts/components/Socials.vue';
 
 const route = useRoute()
 
@@ -73,6 +74,11 @@ function selected(route: any, nav: NavLink) {
 
 const socials = [
   {
+    name: 'telegram',
+    icon: 'ic:baseline-telegram',
+    href: 'https://t.me/Crypto_Base_Chat',
+  },
+  {
     name: 'twitter',
     icon: 'prime:twitter',
     href: 'https://twitter.com/POSTHUMAN_DVS',
@@ -82,11 +88,6 @@ const socials = [
     icon: 'ic:baseline-discord',
     href: 'https://discord.gg/csWJMCjQHh',
   },
-  // {
-  //   name: 'telegram',
-  //   icon: 'mdi:telegram',
-  //   href: 'https://t.me/Crypto_Base_Chat',
-  // },
 ];
 
 const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.path));
@@ -99,92 +100,100 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
         background-attachment: fixed;
         ">
     <!-- sidebar -->
-    <div
-      class="w-64 fixed z-50 left-0 top-0 bottom-0 overflow-auto bg-[#171718] border-r border-[#171718] dark:border-[#171718]"
-      :class="{ block: sidebarShow, 'hidden': !sidebarShow }">
-      <div class="flex justify-center mt-1 py-4 mb-1">
-        <RouterLink to="/" class="flex items-center">
-          <img class="w-157 h-53" src="../../assets/logo.svg" />
-        </RouterLink>
-        <div class="pl-4 cursor-pointer xl:!hidden" @click="sidebarShow = false">
-          <Icon icon="mdi-close" class="text-2xl" />
-        </div>
-      </div>
-      <div v-for="(item, index) of blockchain.computedChainMenu" :key="index">
-        <div v-if="isNavGroup(item)" :tabindex="index" class="collapse" :class="{
-          'collapse-arrow': item?.children?.length > 0,
-          'collapse-open': index === 0 && sidebarOpen,
-          'collapse-close': index === 0 && !sidebarOpen,
-        }">
-          <input type="checkbox" class="cursor-pointer !h-10 block" @click="changeOpen(index)" />
-          <div
-            class="collapse-title !py-0 px-4 flex items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-[#535353]">
+    <div class="w-full fixed z-50 min-h-screen bg-menu-button/70" @click="sidebarShow = false" :class="{
+      block: sidebarShow,
+      // 'hidden': !sidebarShow
+    }">
+      <div @click.stop
+        class="w-2/3 h-screen left-0 top-0 bottom-0 overflow-auto bg-almost-black border-r rounded-r-2xl border-almost-black dark:border-[#171718]">
+        <!-- <div class="flex justify-center mt-1 py-4 mb-1">
+          <RouterLink to="/" class="flex items-center">
+            <img class="w-157 h-53" src="../../assets/logo.svg" />
+          </RouterLink>
+          <div class="pl-4 cursor-pointer xl:!hidden" @click="sidebarShow = false">
+            <Icon icon="mdi-close" class="text-2xl" />
+          </div>
+        </div> -->
+        <div v-for="(item, index) of blockchain.computedChainMenu" :key="index">
+          <div v-if="isNavGroup(item)" :tabindex="index" class="collapse" :class="{
+            'collapse-arrow': item?.children?.length > 0,
+            'collapse-open': index === 0 && sidebarOpen,
+            'collapse-close': index === 0 && !sidebarOpen,
+          }">
+            <input type="checkbox" class="cursor-pointer !h-10 block" @click="changeOpen(index)" />
+            <!-- <div
+              class="collapse-title !py-0 px-4 flex items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-[#535353]">
+              <Icon v-if="item?.icon?.icon" :icon="item?.icon?.icon" class="text-xl mr-2" :class="{
+                'text-yellow-500': item?.title === 'Favorite',
+                'text-gray-500': item?.title !== 'Favorite',
+              }" />
+              <img v-if="item?.icon?.image" :src="item?.icon?.image" class="w-6 h-6 rounded-full mr-3" />
+              <div class="text-base capitalize flex-1 text-[#FFFFFF] dark:text-[#FFFFFF] whitespace-nowrap">
+                {{ item?.title }}
+              </div>
+              <div v-if="item?.badgeContent" class="mr-6 badge badge-sm text-white border-none"
+                :class="item?.badgeClass">
+                {{ item?.badgeContent }}
+              </div>
+            </div> -->
+            <div class="collapse-content w-full py-0 px-6">
+              <div class="menu w-full py-2 px-4 mb-1">
+                <RouterLink class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300"
+                :to="{ path: '/' }">_Home</RouterLink>
+              </div>
+
+              <div v-for="(el, key) of item?.children?.filter(ch => ch.title !== 'module.uptime')"
+                class="menu w-full py-2 px-4 mb-1">
+                <RouterLink v-if="isNavLink(el)" @click="sidebarShow = false" class="flex items-center"
+                  :to="el.to">
+                  <!-- <Icon v-if="!el?.icon?.image" icon="mdi:rhombus-medium" class="mr-2 ml-3" :class="{
+                    'text-[#D9D9D9]':
+                      $route.path === el?.to?.path &&
+                      item?.title !== 'Favorite',
+                  }" /> -->
+                  <!-- <img v-if="el?.icon?.image" :src="el?.icon?.image" class="w-6 h-6 rounded-full mr-3 ml-4" :class="{
+                    'border border-gray-300 bg-white': selected($route, el),
+                  }" /> -->
+                  <div class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300" :class="{
+                    '!text-header-text': selected($route, el),
+                  }">
+                    {{ item?.title === 'Favorite' ? `_${el?.title}` : `_${$t(el?.title)}` }}
+                  </div>
+                </RouterLink>
+              </div>
+            </div>
+          </div>
+
+          <!-- <RouterLink v-if="isNavLink(item)" :to="item?.to" @click="sidebarShow = false"
+            class="cursor-pointer rounded-lg px-4 flex items-center py-2 hover:bg-gray-100 dark:hover:bg-[#373f59]">
             <Icon v-if="item?.icon?.icon" :icon="item?.icon?.icon" class="text-xl mr-2" :class="{
               'text-yellow-500': item?.title === 'Favorite',
               'text-gray-500': item?.title !== 'Favorite',
             }" />
-            <img v-if="item?.icon?.image" :src="item?.icon?.image" class="w-6 h-6 rounded-full mr-3" />
-            <div class="text-base capitalize flex-1 text-[#FFFFFF] dark:text-[#FFFFFF] whitespace-nowrap">
+            <img v-if="item?.icon?.image" :src="item?.icon?.image"
+              class="w-6 h-6 rounded-full mr-3 border border-blue-100" />
+            <div class="text-base capitalize flex-1 text-gray-700 dark:text-gray-200 whitespace-nowrap">
               {{ item?.title }}
             </div>
-            <div v-if="item?.badgeContent" class="mr-6 badge badge-sm text-white border-none" :class="item?.badgeClass">
+            <div v-if="item?.badgeContent" class="badge badge-sm text-white border-none" :class="item?.badgeClass">
               {{ item?.badgeContent }}
             </div>
-          </div>
-          <div class="collapse-content w-full !p-0">
-            <div v-for="(el, key) of item?.children" class="menu bg-[#141415] w-full !p-0">
-              <RouterLink v-if="isNavLink(el)" @click="sidebarShow = false"
-                class="hover:bg-[#19191C] cursor-pointer px-3 py-2 flex items-center" :class="{
-                  'bg-[#2B2A37]': selected($route, el),
-                }" :to="el.to">
-                <Icon v-if="!el?.icon?.image" icon="mdi:rhombus-medium" class="mr-2 ml-3" :class="{
-                  'text-[#D9D9D9]':
-                    $route.path === el?.to?.path &&
-                    item?.title !== 'Favorite',
-                }" />
-                <img v-if="el?.icon?.image" :src="el?.icon?.image" class="w-6 h-6 rounded-full mr-3 ml-4" :class="{
-                  'border border-gray-300 bg-white': selected($route, el),
-                }" />
-                <div class="text-base capitalize text-gray-500 dark:text-gray-300" :class="{
-                  '!text-white': selected($route, el),
-                }">
-                  {{ item?.title === 'Favorite' ? el?.title : $t(el?.title) }}
-                </div>
-              </RouterLink>
+          </RouterLink> -->
+          <!-- <div v-if="isNavTitle(item)" class="px-4 text-sm text-gray-400 pb-2 uppercase">
+            {{ item?.heading }}
+          </div> -->
+        </div>
+        <div class="px-2">
+          <!-- <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">Tools</div>
+          <RouterLink to="/wallet/suggest"
+            class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]">
+            <Icon icon="mdi:frequently-asked-questions" class="text-xl mr-2" />
+            <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">
+              Wallet Helper
             </div>
-          </div>
-        </div>
+          </RouterLink> -->
 
-        <RouterLink v-if="isNavLink(item)" :to="item?.to" @click="sidebarShow = false"
-          class="cursor-pointer rounded-lg px-4 flex items-center py-2 hover:bg-gray-100 dark:hover:bg-[#373f59]">
-          <Icon v-if="item?.icon?.icon" :icon="item?.icon?.icon" class="text-xl mr-2" :class="{
-            'text-yellow-500': item?.title === 'Favorite',
-            'text-gray-500': item?.title !== 'Favorite',
-          }" />
-          <img v-if="item?.icon?.image" :src="item?.icon?.image"
-            class="w-6 h-6 rounded-full mr-3 border border-blue-100" />
-          <div class="text-base capitalize flex-1 text-gray-700 dark:text-gray-200 whitespace-nowrap">
-            {{ item?.title }}
-          </div>
-          <div v-if="item?.badgeContent" class="badge badge-sm text-white border-none" :class="item?.badgeClass">
-            {{ item?.badgeContent }}
-          </div>
-        </RouterLink>
-        <div v-if="isNavTitle(item)" class="px-4 text-sm text-gray-400 pb-2 uppercase">
-          {{ item?.heading }}
-        </div>
-      </div>
-      <div class="px-2">
-        <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">Tools</div>
-        <RouterLink to="/wallet/suggest"
-          class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]">
-          <Icon icon="mdi:frequently-asked-questions" class="text-xl mr-2" />
-          <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">
-            Wallet Helper
-          </div>
-        </RouterLink>
-
-        <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
+          <!-- <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
           {{ $t('module.links') }}
         </div>
 
@@ -193,8 +202,11 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
           :href="social.href" target="_blank" :key="social.name">
           <Icon :icon="social.icon" class="text-xl mr-2" width="20" height="20" />
           <span class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">{{ social.name }}</span>
-        </a>
+        </a> -->
+          <Socials :list="socials" className="flex" />
 
+
+        </div>
       </div>
     </div>
 

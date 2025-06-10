@@ -65,7 +65,7 @@ const allProposals = computed(() => ({
 
 </script>
 <template>
-    <div class="flex flex-col md:px-5">
+    <div class="flex flex-col md:px-5" >
         <div class="tabs tabs-boxed bg-transparent mt-6 mb-8 text-center w-full gap-2.5">
             <a v-for="item in tabs" class="btn-fill w-full md:w-36" :class="{ 'bg-button-v2': tab === item.value }"
                 @click="changeTab(item.value as '1' | '2' | '3' | '4')">{{ $t(item.name) }}</a>

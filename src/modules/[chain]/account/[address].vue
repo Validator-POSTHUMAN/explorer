@@ -10,7 +10,7 @@ import {
 } from '@/stores';
 import DynamicComponent from '@/components/dynamic/DynamicComponent.vue';
 import DonutChart from '@/components/charts/DonutChart.vue';
-import { computed, ref } from '@vue/reactivity';
+import { computed, reactive, ref } from '@vue/reactivity';
 import { nextTick, onBeforeUnmount, onMounted, watch } from 'vue';
 import { Icon } from '@iconify/vue';
 
@@ -31,6 +31,7 @@ import ActionsPanel from '@/components/ActionsPanel.vue';
 import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 import { valconsToBase64 } from '@/libs';
 import { useIndexModule } from '../indexStore';
+import QrcodeVue from 'qrcode.vue'
 
 const props = defineProps(['address', 'chain']);
 
@@ -313,6 +314,54 @@ const updateWidths = () => {
   });
 };
 
+const isOpenQR = ref(false);
+const isOpenFilters = ref(false);
+
+const filters = reactive([
+  { name: 'account.send_receive', value: false },
+  { name: 'account.multi_send', value: false },
+  { name: 'account.get_reward', value: false },
+  { name: 'account.get_commission', value: false },
+  { name: 'account.vote', value: false },
+  { name: 'account.delegate', value: false },
+  { name: 'account.redelegate', value: false },
+  { name: 'account.undelegate', value: false },
+  { name: 'account.IBC_transfer', value: false },
+  { name: 'account.IBC_receive', value: false },
+  { name: 'account.IBC_timeout', value: false },
+  { name: 'account.IBC_ack', value: false },
+  { name: 'account.grant_authz', value: false },
+  { name: 'account.revoke_authz', value: false },
+  { name: 'account.execute_contract', value: false },
+]);
+const selectedFilters = ref<any>([]);
+
+const selectAllFilters = () => {
+  if (filters.some(item => item.value === false)) {
+    filters.map(item => item.value = true)
+  } else
+    filters.map(item => item.value = !item.value);
+};
+
+const applyFilters = () => {
+  selectedFilters.value = filters.filter(item => item.value);
+
+
+  isOpenFilters.value = false;
+  console.log(selectedFilters);
+}
+
+const closeFiltersModal = () => {
+  filters.map(item => {
+    if (selectedFilters.value?.find((sf: any) => sf?.name === item.name)) {
+      item.value = true
+    } else item.value = false
+  });
+
+  isOpenFilters.value = false;
+
+};
+
 onMounted(() => {
   store.loadDashboard();
   walletStore.loadMyAsset();
@@ -332,12 +381,12 @@ watch(() => scaleData, () => {
 
 </script>
 <template>
-  <div v-if="account" class="md:px-5 py-1">
+  <div v-if="account" class="md:px-5 py-1 relative">
     <!-- headcer -->
     <div class="flex flex-col xl:flex-row justify-between mb-5 xl:mb-8">
       <div class="text-white mb-5">
         <AddressWithCopy :href="`/${chain}/account/${address}`" :address="address" :size="20"
-          styles="header-16 gap-6 mb-5" icon hasIconOutline hasQr />
+          styles="header-16 gap-6 mb-5" icon hasIconOutline :openQR="() => isOpenQR = true" />
         <p class="header-36 tracking-wide">{{ `${totalValue} $` }}</p>
       </div>
 
@@ -403,8 +452,11 @@ watch(() => scaleData, () => {
         <div>
           <Icon icon="codicon:debug-restart" width="24" height="24"
             class="cursor-pointer inline-block bg-addition/20 rounded mr-2.5" />
-          <Icon icon="mynaui:filter" width="24" height="24"
-            class="cursor-pointer inline-block bg-addition/20 rounded" />
+          <div class="cursor-pointer inline-block bg-addition/20 rounded relative"
+            :class="{ 'before:block before:absolute before:top-0 before:right-0 content-none before:w-1.5 before:h-1.5 before:bg-red-text before:rounded-full before:translate-x-1/2 ': selectedFilters.length }">
+            <Icon icon="mynaui:filter" width="24" height="24"
+              class="cursor-pointer inline-block bg-addition/20 rounded " @click="isOpenFilters = true" />
+          </div>
         </div>
       </div>
       <div class="overflow-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin max-h-80">
@@ -838,7 +890,7 @@ watch(() => scaleData, () => {
                               if (identity) loadAvatar(identity);
                             }
                           " /> -->
-                        <img :src="getLogo(v)" class="object-contain" />
+                        <img :src="getLogo(v)" class="object-cover w-full h-full" />
                       </div>
                     </div>
 
@@ -973,6 +1025,76 @@ watch(() => scaleData, () => {
 
 
         </table>
+      </div>
+
+    </div>
+
+    <!-- QR -->
+    <div v-if="isOpenQR" class="fixed top-0 bottom-0 left-0 right-0 bg-menu-button/70 z-10" @click="isOpenQR = false">
+      <div
+        class="absolute flex items-center flex-col top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 p-6 bg-chart-stroke border border-button-text rounded"
+        @click.stop>
+        <div class="w-full mb-6 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full overflow-hidden">
+            <img :src="assets.chain.logo" class="object-cover w-full h-full" />
+          </div>
+          <h3 class="w-60 header-20-medium text-header-text flex-1 uppercase">{{ assets.chain.name }}</h3>
+          <!-- <div></div> -->
+          <Icon icon="codex:cross" width="24" height="24"
+            class="cursor-pointer inline-block bg-addition/20 rounded text-white" @click="isOpenQR = false" />
+        </div>
+        <div class="flex justify-center p-2 bg-white mb-4">
+          <qrcode-vue :value="`/${chain}/account/${address}`" :size="200" :level="'H'" />
+        </div>
+      </div>
+    </div>
+
+    <!-- filters -->
+    <div v-if="isOpenFilters" class="fixed top-0 bottom-0 left-0 right-0 bg-menu-button/70 z-10"
+      @click="closeFiltersModal">
+      <div
+        class="w-full max-w-[514px] absolute flex items-center flex-col top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 p-6 bg-chart-stroke border border-button-text rounded"
+        @click.stop>
+        <div class="w-full mb-6 flex items-center gap-2.5">
+
+          <h3 class="header-20-medium text-header-text flex-1 uppercase">{{ $t('account.event_type') }}</h3>
+          <!-- <div></div> -->
+          <Icon icon="codex:cross" width="24" height="24"
+            class="cursor-pointer inline-block bg-addition/20 rounded text-white" @click="closeFiltersModal" />
+        </div>
+
+        <div class="w-full pr-4 mb-5">
+          <div class="w-full flex items-center gap-2 rounded-[10px] border border-addition/40 p-2.5">
+            <span class="w-7 h-7 relative border border-addition/40 rounded-full bg-black cursor-pointer" :class="{
+              'before:block before:absolute before:top-1/2 before:left-1/2 content-none before:w-2.5 before:h-2.5 before:bg-white before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2':
+                filters.every(item => item.value)
+            }" @click="selectAllFilters"></span>
+            <span class="text-white"> {{ $t('account.all_select') }} </span>
+          </div>
+        </div>
+
+        <div
+          class="w-full flex flex-col flex-1 gap-1 h-full max-h-96 pr-1 mb-4 overflow-y-auto scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin">
+          <div v-for="(item, i) in filters"
+            class="w-full flex items-center gap-2 rounded-[10px] border border-addition/40 p-2.5">
+            <span class="w-7 h-7 relative border border-addition/40 rounded-full bg-black cursor-pointer" :class="{
+              'before:block before:absolute before:top-1/2 before:left-1/2 content-none before:w-2.5 before:h-2.5 before:bg-white before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2':
+                item.value
+            }" @click="() => filters[i].value = !filters[i].value"></span>
+            <span class="text-white">
+              {{ $t(item.name) }}
+            </span>
+          </div>
+          <!-- <qrcode-vue :value="`/${chain}/account/${address}`" :size="200" :level="'H'" /> -->
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 md:gap-5">
+          <label class="btn-outline w-44" @click="() => filters.map(item => item.value = false)">{{
+            $t('account.btn_clear') }}</label>
+
+          <label class="btn-outline w-44" @click="applyFilters">{{ $t('account.btn_confirm') }}</label>
+
+        </div>
       </div>
 
     </div>

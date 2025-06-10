@@ -34,6 +34,11 @@ const favoriteChains = computed(() => chains.value.filter(chain => dashboard?.fa
 
 const socials = [
   {
+    name: 'telegram',
+    icon: 'ic:baseline-telegram',
+    href: 'https://t.me/Crypto_Base_Chat',
+  },
+  {
     name: 'twitter',
     icon: 'prime:twitter',
     href: 'https://twitter.com/POSTHUMAN_DVS',
@@ -43,11 +48,6 @@ const socials = [
     icon: 'ic:baseline-discord',
     href: 'https://discord.gg/csWJMCjQHh',
   },
-  // {
-  //   name: 'telegram',
-  //   icon: 'mdi:telegram',
-  //   href: 'https://t.me/Crypto_Base_Chat',
-  // },
 ];
 </script>
 <template>
@@ -76,7 +76,7 @@ const socials = [
     <AddNetworkComponent />
   
 
-  <Socials :list="socials" />
+  <Socials :list="socials" className="hidden" />
 
 </template>
 

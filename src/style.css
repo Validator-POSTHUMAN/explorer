@@ -158,4 +158,7 @@ html[data-theme='dark'] {
   .thin-border-block {
     @apply border border-addition-1 rounded flex flex-col items-center justify-between px-4 py-2;
   }
+  .content-none {
+    @apply before:content-[''];
+  }
 }

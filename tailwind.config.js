@@ -47,8 +47,8 @@ module.exports = {
         'star-yellow': '#EEBB4E',
         'blue-gradient': 'linear-gradient(to bottom, #3FB6A8, #1C504A)',
         'blue-transparent-gradient': 'linear-gradient(to bottom, rgba(31, 161, 217, 80%), rgba(6, 32, 42, 0%))',
-        'сhart-line': '#03C6F2',
-        'сhart-stroke': '#141415',
+        'chart-line': '#03C6F2',
+        'chart-stroke': '#141415',
        
       },
       backgroundImage: {

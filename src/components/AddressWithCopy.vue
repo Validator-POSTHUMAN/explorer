@@ -12,7 +12,7 @@ defineProps({
         default: 24
     },
     hasIconOutline: { type: Boolean },
-    hasQr: { type: Boolean },
+    openQR: { type: Function },
     isShort: { type: Boolean },
     isCopyHref: { type: Boolean },
 });
@@ -59,7 +59,7 @@ const tipMsg = computed(() => {
             <Icon class="relative z-10" icon="bx:copy" :width="size" :height="size" />
         </div>
 
-        <div v-if="hasQr" class="cursor-pointer flex justify-center items-center gap-2"
+        <div v-if="openQR" class="cursor-pointer flex justify-center items-center gap-2"  @click="openQR(true)"
             :class="{ 'before:z-[1] before:absolute before:rounded-full before:bg-button-v2-hover before:hover:bg-button-v2 before:w-9 before:h-9': hasIconOutline }">
             <Icon class="relative z-10" icon="tabler:qrcode" :width="size" :height="size" />
         </div>
