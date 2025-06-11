@@ -102,10 +102,10 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
     <!-- sidebar -->
     <div class="w-full fixed z-50 min-h-screen bg-menu-button/70" @click="sidebarShow = false" :class="{
       block: sidebarShow,
-      // 'hidden': !sidebarShow
+      'hidden': !sidebarShow
     }">
       <div @click.stop
-        class="w-2/3 h-screen left-0 top-0 bottom-0 overflow-auto bg-almost-black border-r rounded-r-2xl border-almost-black dark:border-[#171718]">
+        class="w-3/4 h-screen left-0 top-0 bottom-0 overflow-auto bg-almost-black border-r rounded-r-2xl border-almost-black dark:border-[#171718]">
         <!-- <div class="flex justify-center mt-1 py-4 mb-1">
           <RouterLink to="/" class="flex items-center">
             <img class="w-157 h-53" src="../../assets/logo.svg" />
@@ -114,6 +114,9 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
             <Icon icon="mdi-close" class="text-2xl" />
           </div>
         </div> -->
+
+        <NavBarWallet :isSidebar="true" />
+
         <div v-for="(item, index) of blockchain.computedChainMenu" :key="index">
           <div v-if="isNavGroup(item)" :tabindex="index" class="collapse" :class="{
             'collapse-arrow': item?.children?.length > 0,
@@ -137,15 +140,22 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
               </div>
             </div> -->
             <div class="collapse-content w-full py-0 px-6">
-              <div class="menu w-full py-2 px-4 mb-1">
-                <RouterLink class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300"
-                :to="{ path: '/' }">_Home</RouterLink>
+              <div class="menu w-auto p-0 mb-1">
+                <RouterLink class="flex p-0 items-center" :to="{ path: '/' }" active-class="!text-header-text"
+                  exact-active-class="!text-header-text">
+                  <div
+                    class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300 py-2 px-4 rounded-full"
+                    :class="{
+                      '!text-header-text shadow-[0_3px_2px_-1px_rgba(113,255,184,0.4)]': route.path === '/',
+                    }">
+                    _Home
+                  </div>
+                </RouterLink>
               </div>
 
               <div v-for="(el, key) of item?.children?.filter(ch => ch.title !== 'module.uptime')"
-                class="menu w-full py-2 px-4 mb-1">
-                <RouterLink v-if="isNavLink(el)" @click="sidebarShow = false" class="flex items-center"
-                  :to="el.to">
+                class="menu w-full p-0 mb-1 rounded-full">
+                <RouterLink v-if="isNavLink(el)" @click="sidebarShow = false" class="flex items-center" :to="el.to">
                   <!-- <Icon v-if="!el?.icon?.image" icon="mdi:rhombus-medium" class="mr-2 ml-3" :class="{
                     'text-[#D9D9D9]':
                       $route.path === el?.to?.path &&
@@ -154,9 +164,11 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
                   <!-- <img v-if="el?.icon?.image" :src="el?.icon?.image" class="w-6 h-6 rounded-full mr-3 ml-4" :class="{
                     'border border-gray-300 bg-white': selected($route, el),
                   }" /> -->
-                  <div class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300" :class="{
-                    '!text-header-text': selected($route, el),
-                  }">
+                  <div
+                    class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300 py-2 px-4 rounded-full"
+                    :class="{
+                      '!text-header-text shadow-[0_3px_2px_-1px_rgba(113,255,184,0.4)]': selected($route, el),
+                    }">
                     {{ item?.title === 'Favorite' ? `_${el?.title}` : `_${$t(el?.title)}` }}
                   </div>
                 </RouterLink>

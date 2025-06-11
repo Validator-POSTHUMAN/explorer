@@ -8,9 +8,9 @@ import {
   useTxDialog,
 } from '@/stores';
 import { computed } from '@vue/reactivity';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { Icon } from '@iconify/vue';
-import type { Key, SigningInfo, SlashingParam, Validator } from '@/types';
+import type { Coin, Key, SigningInfo, SlashingParam, Validator } from '@/types';
 import { formatSeconds } from '@/libs/utils';
 import IconTrendUp from '@/components/icons/IconTrendUp.vue';
 import IconLock from '@/components/icons/IconLock.vue';
@@ -22,6 +22,7 @@ import dayjs from 'dayjs';
 import CircleProgressComponent from '@/components/CircleProgressComponent.vue';
 import { valconsToBase64 } from '@/libs';
 import { useIndexModule } from '../indexStore';
+import SortButton from '@/layouts/components/SortButton.vue';
 
 const staking = useStakingStore();
 const base = useBaseStore();
@@ -376,6 +377,90 @@ const widgetsInfo = computed(() => (
   ]
 ));
 
+const returnAmounItem = (amount: Coin | Coin[] | undefined) => {
+  if (!amount) return;
+  if (Array.isArray(amount)) {
+    return amount[0]
+  } else {
+    return amount
+  }
+};
+
+const calcAmount = (amount: Coin | Coin[] | undefined, type: 'value' | 'token') => {
+  if (!amount) return '-';
+  return format.formatToken(returnAmounItem(amount), true, '0,0.[000000]').split(' ')[type === 'value' ? 0 : 1]
+};
+
+const listForTable = computed(() => list.value.map((item, key) => ({
+  id: key + 1,
+  rank: item.rank,
+  validator: {
+    logo: item.logo || defaultAvatar,
+    name: item.v.description?.moniker,
+    address: item.v.description?.website || item.v.description?.identity || '-',
+    operator_address: item.v.operator_address,
+    description: { ...item.v.description },
+    jailed: item.v.jailed,
+  },
+  uptime: item.uptime,
+
+  voting_power_value: parseInt(item.v.tokens).toString(),
+  voting_power: {
+    value: calcAmount({
+      amount: parseInt(item.v.tokens).toString(),
+      denom: staking.params.bond_denom,
+    }, 'value'),
+    token: calcAmount({
+      amount: parseInt(item.v.tokens).toString(),
+      denom: staking.params.bond_denom,
+    }, 'token'),
+    percent: format.calculatePercent(
+      item.v.delegator_shares,
+      staking.totalPower
+    )
+  },
+
+  changes: item.v.consensus_pubkey,
+  commission_value: item.v.commission?.commission_rates?.rate,
+  commission: format.formatCommissionRate(
+    item.v.commission?.commission_rates?.rate
+  ),
+
+})));
+
+
+
+
+
+const sortByField = ref<string>('');
+const sortDirection = ref<'asc' | 'desc'>('asc');
+
+const sortedList = computed(() => {
+  if (sortByField.value === '') return listForTable.value;
+
+  return [...listForTable.value].sort((a, b) => {
+    const varA = (a as any)[sortByField.value] ?? 0;
+    const varB = (b as any)[sortByField.value] ?? 0;
+
+    if (sortDirection.value === 'asc') {
+      return varA - varB;
+    } else {
+      return varB - varA;
+    }
+  });
+});
+
+const toggleSortDirection = (field: string) => {
+
+  if (sortByField.value === field) {
+    sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortByField.value = field;
+    sortDirection.value = 'asc';
+  }
+
+};
+
 </script>
 
 <template>
@@ -424,10 +509,7 @@ const widgetsInfo = computed(() => (
                 <tr class="text-header-text body-text-14">
                   <td scope="col" class="w-15 relative flex items-center gap-1">
                     {{ $t('staking.rank') }}
-                    <span class="text-base cursor-pointer">
-                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" />
-                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" />
-                    </span>
+                    <SortButton @click="() => toggleSortDirection('id')" />
                   </td>
                   <td scope="col" id="avatar">
                   </td>
@@ -436,18 +518,12 @@ const widgetsInfo = computed(() => (
                   </td>
                   <td scope="col" class="flex justify-end items-center gap-1">
                     {{ $t('staking.uptime') }}
-                    <span class="text-base cursor-pointer">
-                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" />
-                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" />
-                    </span>
+                    <SortButton @click="() => toggleSortDirection('uptime')" />
                   </td>
                   <td scope="col" class="text-right">
                     <div class="flex gap-1 items-center justify-end">
                       {{ $t('staking.voting_power') }}
-                      <span class="text-base cursor-pointer self-center">
-                        <Icon icon="mynaui:chevron-up-solid" class="text-addition" />
-                        <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" />
-                      </span>
+                      <SortButton @click="() => toggleSortDirection('voting_power_value')" />
                     </div>
                   </td>
                   <td scope="col" class="text-right">
@@ -455,10 +531,7 @@ const widgetsInfo = computed(() => (
                   </td>
                   <td scope="col" class="flex justify-end items-center gap-1">
                     {{ $t('staking.commission') }}
-                    <span class="text-base cursor-pointer">
-                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" />
-                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" />
-                    </span>
+                    <SortButton @click="() => toggleSortDirection('commission_value')" />
                   </td>
                   <td scope="col" class="text-right">
                     <span class="pr-5">
@@ -468,13 +541,13 @@ const widgetsInfo = computed(() => (
                 </tr>
               </thead>
               <tbody class="">
-                <tr v-for="({ v, rank, logo, uptime }, i) in list" :key="v.operator_address"
-                  class="mx-2 border-addition">
+                <tr v-for="{ id, changes, commission, rank, uptime, validator, voting_power } in sortedList"
+                  :key="validator.operator_address" class="mx-2 border-addition">
                   <!-- 👉 rank -->
                   <td>
                     <div class="body-text-14 text-button-text truncate relative px-2 py-1 rounded-full w-fit"
-                      :class="`${calculateText(rank)}`">
-                      {{ `#${i + 1}` }}
+                      :class="`text-${calculateText(rank)}`">
+                      {{ `#${id}` }}
                     </div>
                   </td>
                   <!-- 👉 Avatar -->
@@ -483,13 +556,7 @@ const widgetsInfo = computed(() => (
                       <div class="avatar relative w-10 h-10 rounded-full">
                         <div class="w-10 h-10 rounded-full bg-gray-400 absolute opacity-10"></div>
                         <div class="w-10 h-10 rounded-full">
-                          <img :src="logo ? logo : defaultAvatar" class="object-contain" @error="
-                            (e) => {
-                              const identity = v.description?.identity;
-                              if (identity) loadAvatar(identity);
-                            }
-                          " />
-                          <!-- <Icon v-else class="text-[40px]" :icon="`mdi-help-circle-outline`" /> -->
+                          <img :src="validator.logo" class="object-contain" />
                         </div>
                       </div>
                     </div>
@@ -502,14 +569,14 @@ const widgetsInfo = computed(() => (
                           <RouterLink class="block truncate" :to="{
                             name: 'chain-staking-validator',
                             params: {
-                              validator: v.operator_address,
+                              validator: validator.operator_address,
                             },
                           }">
-                            {{ v.description?.moniker }}
+                            {{ validator.description?.moniker }}
                           </RouterLink>
                         </span>
                         <span class="body-text-14 text-white truncate">{{
-                          v.description?.website || v.description?.identity || '-'
+                          validator.description?.website || validator.description?.identity || '-'
                         }}</span>
                       </div>
                     </div>
@@ -523,56 +590,37 @@ const widgetsInfo = computed(() => (
                     <div class="flex flex-col">
                       <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
                         <span>{{
-                          format.formatToken(
-                            {
-                              amount: parseInt(v.tokens).toString(),
-                              denom: staking.params.bond_denom,
-                            },
-                            true,
-                            '0,0'
-                          ).split(' ')[0]
+                          voting_power.value
                         }}</span>
                         <span class="text-header-text header-14-medium-aa">{{
-                          ` [${format.formatToken(
-                            {
-                              amount: parseInt(v.tokens).toString(),
-                              denom: staking.params.bond_denom,
-                            },
-                            true,
-                            '0,0'
-                          ).split(' ')[1]}]`
+                          ` [${voting_power.token}]`
                         }}</span>
                       </h6>
                       <span class="body-text-14 text-white">{{
-                        format.calculatePercent(
-                          v.delegator_shares,
-                          staking.totalPower
-                        )
+                        voting_power.percent
                       }}</span>
                     </div>
                   </td>
                   <!-- 👉 24h Changes -->
-                  <td class="text-right body-text-14" :class="change24Color(v.consensus_pubkey)">
-                    {{ change24Text(v.consensus_pubkey) }}
+                  <td class="text-right body-text-14" :class="change24Color(changes)">
+                    {{ change24Text(changes) }}
                   </td>
                   <!-- 👉 commission -->
                   <td class="text-right body-text-14 text-white">
                     {{
-                      format.formatCommissionRate(
-                        v.commission?.commission_rates?.rate
-                      )
+                      commission
                     }}
                   </td>
                   <!-- 👉 operation -->
                   <td class="text-right">
                     <div class="flex justify-end">
-                      <div v-if="v.jailed"
+                      <div v-if="validator.jailed"
                         class="w-36 btn-outline border-red-text text-red-text hover:bg-red-text/20 hover:border-red-text hover:text-red-text">
                         {{ $t('staking.unstake') }}
                       </div>
                       <label v-else for="delegate" class="w-36 btn-outline border-button-text" @click="
                         dialog.open('delegate', {
-                          validator_address: v.operator_address,
+                          validator_address: validator.operator_address,
                         })
                         ">{{ $t('staking.stake') }}</label>
                     </div>

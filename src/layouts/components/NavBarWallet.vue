@@ -3,6 +3,12 @@ import { useBaseStore, useBlockchain, useWalletStore } from '@/stores';
 import { Icon } from '@iconify/vue';
 import { ref, computed } from 'vue';
 
+
+const props = defineProps({
+  isSidebar: { type: Boolean, default: false },
+});
+
+
 const walletStore = useWalletStore();
 const chainStore = useBlockchain();
 const baseStore = useBaseStore();
@@ -36,10 +42,17 @@ const tipMsg = computed(() => {
 
 <template>
   <div class="dropdown dropdown-hover dropdown-end">
-    <label tabindex="0" class="inline-flex xl:hidden px-4 m-1 text-2xl text-white">
+    <label tabindex="0" class="inline-flex xl:hidden px-4 m-1 text-2xl text-white" :class="{ 'mt-20': isSidebar }">
+      <div v-if="isSidebar" class="text-status-text-voting flex items-center gap-5 header-20">
+        <Icon icon="mdi:wallet" class="h-6 w-6 text-status-text-voting" />
+        <span v-if="!walletStore?.currentAddress" class="tracking-wide">{{ $t('module.connect_wallet') }}</span>
+        <span v-else class="header-16  tracking-wide"> {{ `${walletStore?.currentAddress.slice(0,
+          13)}...${walletStore?.currentAddress.slice(-4)}` }} </span>
+      </div>
+
       <!-- :class="walletStore?.currentAddress ? 'bg-wallet-button py-1 border-2 border-[#7300FF] rounded-full' : ''" -->
       <!-- btn btn-sm btn-[#222226] hover:bg-[#2E2C50] rounded-full -->
-      <Icon icon="mdi:wallet" />
+      <Icon v-else icon="mdi:wallet" />
     </label>
 
     <label tabindex="0">

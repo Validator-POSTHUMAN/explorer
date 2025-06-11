@@ -59,7 +59,8 @@ export interface TxResponse {
     "events": {
             "type": string,
             "attributes": Attributes[]
-        }[]
+        }[],
+    "selected"?: Boolean,
 }
 
 export interface PaginatedTxs extends PaginatedResponse {

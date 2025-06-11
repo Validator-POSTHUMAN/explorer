@@ -32,6 +32,7 @@ import defaultAvatar from '@/assets/images/redesign/defaultAvatar.png';
 import { valconsToBase64 } from '@/libs';
 import { useIndexModule } from '../indexStore';
 import QrcodeVue from 'qrcode.vue'
+import SortButton from '@/layouts/components/SortButton.vue';
 
 const props = defineProps(['address', 'chain']);
 
@@ -334,7 +335,7 @@ const filters = reactive([
   { name: 'account.revoke_authz', value: false },
   { name: 'account.execute_contract', value: false },
 ]);
-const selectedFilters = ref<any>([]);
+const selectedFilters = computed(() => filters.filter(item => item.value) ?? []);
 
 const selectAllFilters = () => {
   if (filters.some(item => item.value === false)) {
@@ -343,12 +344,110 @@ const selectAllFilters = () => {
     filters.map(item => item.value = !item.value);
 };
 
+const clearFilters = () => filters.map(item => item.value = false);
+
 const applyFilters = () => {
-  selectedFilters.value = filters.filter(item => item.value);
-
-
   isOpenFilters.value = false;
-  console.log(selectedFilters);
+
+  updateEvent();
+
+  txs.value = txs.value.map(item => {
+    if (selectedFilters.value?.length) {
+
+      // Send/Receive
+      if (selectedFilters.value.find(filter => filter.name === "account.send_receive")
+        &&
+        item.tx['@type']?.includes('MsgSend')) {
+        return item
+      }
+      // Multi Send
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.multi_send")
+        &&
+        item.tx['@type']?.includes('MsgMultiSend')) {
+        return item
+      }
+      // Get Reward
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.get_reward")
+        &&
+        item.tx['@type']?.includes('MsgWithdrawDelegatorReward')) {
+        return item
+      }
+      // Get Commission
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.get_commission")
+        &&
+        item.tx['@type']?.includes('MsgWithdrawValidatorCommission')) {
+        return item
+      }
+      // Vote
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.vote")
+        &&
+        item.tx['@type']?.includes('MsgVote')) {
+        return item
+      }
+      // Delegate
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.delegate")
+        &&
+        item.tx['@type']?.includes('MsgDelegate')) {
+        return item
+      }
+      // Redelegate
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.redelegate")
+        &&
+        item.tx['@type']?.includes('MsgBeginRedelegate')) {
+        return item
+      }
+      // Undelegate
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.undelegate")
+        &&
+        item.tx['@type']?.includes('MsgUndelegate')) {
+        return item
+      }
+      // IBC Transfer
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.IBC_transfer")
+        &&
+        item.tx['@type']?.includes('MsgTransfer')) {
+        return item
+      }
+      // Grant Authz
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.grant_authz")
+        &&
+        item.tx['@type']?.includes('MsgGrant')) {
+        return item
+      }
+      // Revoke Authz
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.revoke_authz")
+        &&
+        item.tx['@type']?.includes('MsgRevoke')) {
+        return item
+      }
+      // Execute Contract
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.execute_contract")
+        &&
+        item.tx['@type']?.includes('MsgExecuteContract')) {
+        return item
+      }
+      // IBC Receive
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.IBC_receive")
+        &&
+        item.events.some(event => event.type === 'recv_packet')) {
+        return item
+      }
+      // IBC Timeout
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.IBC_timeout")
+        &&
+        item.events.some(event => event.type === 'timeout_packet')) {
+        return item
+      }
+      // IBC Ack
+      if (selectedFilters.value.find((filter: { name: string, value: boolean }) => filter.name === "account.IBC_ack")
+        &&
+        item.events.some(event => event.type === 'write_acknowledgement')) {
+        return item
+      }
+    }
+    return item
+  });
+
 }
 
 const closeFiltersModal = () => {
@@ -360,6 +459,28 @@ const closeFiltersModal = () => {
 
   isOpenFilters.value = false;
 
+};
+
+const updateTransactionsList = () => {
+  clearFilters();
+  applyFilters();
+  updateEvent();
+};
+const sortDirections: Record<string, boolean> = {};
+
+const sortData = (data: any[], field: string): void => {
+  const ascending = sortDirections[field] ?? true;
+
+  const sorted = [...data].sort((a, b) => {
+    if (a[field] < b[field]) return ascending ? -1 : 1;
+    if (a[field] > b[field]) return ascending ? 1 : -1;
+    return 0;
+  });
+
+  sortDirections[field] = !ascending;
+
+  console.log(sorted);
+  data = [...sorted];
 };
 
 onMounted(() => {
@@ -450,12 +571,15 @@ watch(() => scaleData, () => {
       <div class="flex justify-between items-center">
         <h3 class="header-20-medium-aa text-header-text uppercase mb-7">{{ $t('account.transactions') }}</h3>
         <div>
-          <Icon icon="codicon:debug-restart" width="24" height="24"
-            class="cursor-pointer inline-block bg-addition/20 rounded mr-2.5" />
-          <div class="cursor-pointer inline-block bg-addition/20 rounded relative"
+
+          <div class="cursor-pointer p-0.5 inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded relative mr-2.5">
+            <Icon icon="codicon:debug-restart" width="24" height="24"
+              @click="updateTransactionsList" />
+          </div>
+          <div class="cursor-pointer p-0.5 inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded relative"
             :class="{ 'before:block before:absolute before:top-0 before:right-0 content-none before:w-1.5 before:h-1.5 before:bg-red-text before:rounded-full before:translate-x-1/2 ': selectedFilters.length }">
             <Icon icon="mynaui:filter" width="24" height="24"
-              class="cursor-pointer inline-block bg-addition/20 rounded " @click="isOpenFilters = true" />
+              @click="isOpenFilters = true" />
           </div>
         </div>
       </div>
@@ -475,10 +599,7 @@ watch(() => scaleData, () => {
               <td scope="col">
                 <div class="flex gap-1 items-center justify-end">
                   <span>{{ $t('account.time') }}</span>
-                  <span class="cursor-pointer">
-                    <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                    <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                  </span>
+                  <SortButton @click="() => sortData(txs, 'timestamp')" />
                 </div>
               </td>
               <td scope="col" class="text-end">
@@ -673,28 +794,23 @@ watch(() => scaleData, () => {
                 <td scope="col">
                   <div class="flex gap-1 items-center justify-end">
                     <span class="inline-block">{{ $t('account.available') }}</span>
-                    <span class="cursor-pointer inline-block">
-                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                    </span>
+
+
+                    <SortButton @click="() => sortData(balances, 'denom')"/>
+
+
                   </div>
                 </td>
                 <td scope="col">
                   <div class="flex gap-1 items-center justify-end">
                     {{ $t('account.market_price') }}
-                    <span class="cursor-pointer">
-                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                    </span>
+                    <SortButton @click="() => sortData(balances, 'market_price')" />
                   </div>
                 </td>
                 <td scope="col">
                   <div class="flex gap-1 items-center justify-end">
                     <span>{{ $t('account.total') }}</span>
-                    <span class="cursor-pointer">
-                      <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                      <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                    </span>
+                    <SortButton @click="() => sortData(balances, 'total')" />
                   </div>
                 </td>
               </tr>
@@ -967,10 +1083,9 @@ watch(() => scaleData, () => {
               <td scope="col">
                 <div class="flex gap-1 items-center justify-end">
                   <span>{{ $t('account.completion_time') }}</span>
-                  <span class="cursor-pointer">
-                    <Icon icon="mynaui:chevron-up-solid" class="text-addition" width="16" height="16" />
-                    <Icon icon="mynaui:chevron-down-solid" class="text-addition -mt-2.5" width="16" height="16" />
-                  </span>
+
+                  <SortButton @click="() => sortData(unbonding, 'completion_time')" />
+
                 </div>
               </td>
               <td scope="col" class="flex gap-1 items-center justify-end">{{ $t('account.creation_height') }}</td>
@@ -1041,7 +1156,7 @@ watch(() => scaleData, () => {
           <h3 class="w-60 header-20-medium text-header-text flex-1 uppercase">{{ assets.chain.name }}</h3>
           <!-- <div></div> -->
           <Icon icon="codex:cross" width="24" height="24"
-            class="cursor-pointer inline-block bg-addition/20 rounded text-white" @click="isOpenQR = false" />
+            class="cursor-pointer inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded text-white" @click="isOpenQR = false" />
         </div>
         <div class="flex justify-center p-2 bg-white mb-4">
           <qrcode-vue :value="`/${chain}/account/${address}`" :size="200" :level="'H'" />
@@ -1060,7 +1175,7 @@ watch(() => scaleData, () => {
           <h3 class="header-20-medium text-header-text flex-1 uppercase">{{ $t('account.event_type') }}</h3>
           <!-- <div></div> -->
           <Icon icon="codex:cross" width="24" height="24"
-            class="cursor-pointer inline-block bg-addition/20 rounded text-white" @click="closeFiltersModal" />
+            class="cursor-pointer inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded text-white" @click="closeFiltersModal" />
         </div>
 
         <div class="w-full pr-4 mb-5">
@@ -1089,7 +1204,7 @@ watch(() => scaleData, () => {
         </div>
 
         <div class="flex flex-wrap justify-center gap-3 md:gap-5">
-          <label class="btn-outline w-44" @click="() => filters.map(item => item.value = false)">{{
+          <label class="btn-outline w-44" @click="clearFilters">{{
             $t('account.btn_clear') }}</label>
 
           <label class="btn-outline w-44" @click="applyFilters">{{ $t('account.btn_confirm') }}</label>
