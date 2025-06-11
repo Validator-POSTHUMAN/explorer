@@ -428,19 +428,15 @@ const listForTable = computed(() => list.value.map((item, key) => ({
 
 })));
 
-
-
-
-
-const sortByField = ref<string>('');
+const sortTrByField = ref<string>('');
 const sortDirection = ref<'asc' | 'desc'>('asc');
 
 const sortedList = computed(() => {
-  if (sortByField.value === '') return listForTable.value;
+  if (sortTrByField.value === '') return listForTable.value;
 
   return [...listForTable.value].sort((a, b) => {
-    const varA = (a as any)[sortByField.value] ?? 0;
-    const varB = (b as any)[sortByField.value] ?? 0;
+    const varA = (a as any)[sortTrByField.value] ?? 0;
+    const varB = (b as any)[sortTrByField.value] ?? 0;
 
     if (sortDirection.value === 'asc') {
       return varA - varB;
@@ -451,14 +447,12 @@ const sortedList = computed(() => {
 });
 
 const toggleSortDirection = (field: string) => {
-
-  if (sortByField.value === field) {
+  if (sortTrByField.value === field) {
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
   } else {
-    sortByField.value = field;
+    sortTrByField.value = field;
     sortDirection.value = 'asc';
   }
-
 };
 
 </script>

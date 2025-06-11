@@ -33,6 +33,7 @@ import { valconsToBase64 } from '@/libs';
 import { useIndexModule } from '../indexStore';
 import QrcodeVue from 'qrcode.vue'
 import SortButton from '@/layouts/components/SortButton.vue';
+import { useSortableList } from '@/stores/useSortableList';
 
 const props = defineProps(['address', 'chain']);
 
@@ -41,9 +42,9 @@ const stakingStore = useStakingStore();
 const dialog = useTxDialog();
 const format = useFormatter();
 const account = ref({} as AuthAccount);
-const txs = ref({} as TxResponse[]);
+const txs = ref<TxResponse[]>([]);
 const delegations = ref([] as Delegation[]);
-const recentReceived = ref([] as TxResponse[]);
+const recentReceived = ref<TxResponse[]>([]);
 const rewards = ref({} as DelegatorRewards);
 const balances = ref([] as Coin[]);
 const unbonding = ref([] as UnbondingResponses[]);
@@ -291,20 +292,39 @@ function groupAndSumByDenom(arr: Coin[]): Coin[] {
   }));
 }
 
-const assets = computed(() => ({
-  chain: {
-    name: store.coinInfo.name || '',
-    logo: store.coinInfo.image.thumb || defaultAvatar
-  },
-  available: walletStore.balanceOfStakingToken,
-  marketPrice: {
-    value: ticker.value?.converted_last?.usd,
-    priceChange: store.priceChange,
-  },
-  staking: walletStore.stakingAmount as Coin,
-  total: groupAndSumByDenom([walletStore.balanceOfStakingToken, walletStore.stakingAmount]),
-  getToken: (balanceItem: any) => calcAmount(balanceItem, 'token')
-}));
+const assets = computed(() => {
+  const filteredAssets = groupAndSumByDenom(balances.value)?.filter(item => item?.denom?.includes(keywords.value))
+    .map(balanceItem => ({
+      balance: balanceItem,
+      chain: {
+        name: store.coinInfo.name || '',
+        logo: store.coinInfo.image.thumb || defaultAvatar
+      },
+      available_amount: walletStore.balanceOfStakingToken.amount,
+      available: walletStore.balanceOfStakingToken,
+      market_price_value: ticker.value?.converted_last?.usd,
+      marketPrice: {
+        value: ticker.value?.converted_last?.usd,
+        priceChange: store.priceChange,
+      },
+      staking: walletStore.stakingAmount as Coin,
+      total_value: +walletStore.stakingAmount.amount,
+      total: groupAndSumByDenom([walletStore.balanceOfStakingToken, walletStore.stakingAmount]),
+      getToken: (balanceItem: any) => calcAmount(balanceItem, 'token')
+    }));
+
+  return filteredAssets
+});
+
+const unbondingList = computed(() =>
+  unbonding.value.flatMap(v =>
+    v.entries.map(entry => ({
+      ...entry,
+      validator_address: v.validator_address,
+      delegator_address: v.delegator_address,
+    }))
+  )
+);
 
 const barContainers = ref<(HTMLElement | null)[]>([]);
 const containerWidths = ref<number[]>([]);
@@ -450,6 +470,13 @@ const applyFilters = () => {
 
 }
 
+const transactionsList = computed(() => {
+  const trList = txs.value.map(item => ({ ...item, amount: item.tx.body.messages[0].amount, messages: [...item.tx.body.messages] })) ?? [];
+  const recentList = recentReceived.value.map(item => ({ ...item, amount: item.tx.body.messages[0].amount, messages: [...item.tx.body.messages] })) ?? [];
+
+  return [...trList, ...recentList]
+})
+
 const closeFiltersModal = () => {
   filters.map(item => {
     if (selectedFilters.value?.find((sf: any) => sf?.name === item.name)) {
@@ -466,22 +493,108 @@ const updateTransactionsList = () => {
   applyFilters();
   updateEvent();
 };
-const sortDirections: Record<string, boolean> = {};
 
-const sortData = (data: any[], field: string): void => {
-  const ascending = sortDirections[field] ?? true;
+// const sortTrByField = ref<string>('');
+// const sortTrDirection = ref<'asc' | 'desc'>('asc');
 
-  const sorted = [...data].sort((a, b) => {
-    if (a[field] < b[field]) return ascending ? -1 : 1;
-    if (a[field] > b[field]) return ascending ? 1 : -1;
-    return 0;
-  });
+// const sortedTransactionsList = computed(() => {
+//   if (sortTrByField.value === '') return transactionsList.value;
 
-  sortDirections[field] = !ascending;
+//   return [...transactionsList.value].sort((a, b) => {
+//     const varA = (a as any)[sortTrByField.value] ?? 0;
+//     const varB = (b as any)[sortTrByField.value] ?? 0;
 
-  console.log(sorted);
-  data = [...sorted];
-};
+//     if (sortTrDirection.value === 'asc') {
+//       return varA - varB;
+//     } else {
+//       return varB - varA;
+//     }
+//   });
+// });
+
+// const toggleTxsSortDirection = (field: string) => {
+
+//   if (sortTrByField.value === field) {
+//     sortTrDirection.value = sortTrDirection.value === 'asc' ? 'desc' : 'asc';
+//   } else {
+//     sortTrByField.value = field;
+//     sortTrDirection.value = 'asc';
+//   }
+
+// };
+
+// const sortAssetsByField = ref<string>('');
+// const sortAssetsDirection = ref<'asc' | 'desc'>('asc');
+
+// const sortedAssetsList = computed(() => {
+//   if (sortAssetsByField.value === '') return assets.value;
+
+//   return [...assets.value].sort((a, b) => {
+//     const varA = (a as any)[sortAssetsByField.value] ?? 0;
+//     const varB = (b as any)[sortAssetsByField.value] ?? 0;
+
+//     if (sortAssetsDirection.value === 'asc') {
+//       return varA - varB;
+//     } else {
+//       return varB - varA;
+//     }
+//   });
+// });
+
+// const toggleAssetsSortDirection = (field: string) => {
+
+//   if (sortAssetsByField.value === field) {
+//     sortAssetsDirection.value = sortAssetsDirection.value === 'asc' ? 'desc' : 'asc';
+//   } else {
+//     sortAssetsByField.value = field;
+//     sortAssetsDirection.value = 'asc';
+//   }
+
+// };
+
+// const sortUnbondingByField = ref<string>('');
+// const sortUnbondingDirection = ref<'asc' | 'desc'>('asc');
+
+// const sortedUnbondingList = computed(() => {
+//   if (sortUnbondingByField.value === '') return unbondingList.value;
+
+//   return [...unbondingList.value].sort((a, b) => {
+//     const varA = (a as any)[sortUnbondingByField.value] ?? 0;
+//     const varB = (b as any)[sortUnbondingByField.value] ?? 0;
+
+//     if (sortUnbondingDirection.value === 'asc') {
+//       return varA - varB;
+//     } else {
+//       return varB - varA;
+//     }
+//   });
+// });
+
+// const toggleUnbondingSortDirection = (field: string) => {
+
+//   if (sortUnbondingByField.value === field) {
+//     sortUnbondingDirection.value = sortUnbondingDirection.value === 'asc' ? 'desc' : 'asc';
+//   } else {
+//     sortUnbondingByField.value = field;
+//     sortUnbondingDirection.value = 'asc';
+//   }
+
+// };
+
+const {
+  sortedList: sortedTransactionsList,
+  toggleSort: toggleTxsSortDirection
+} = useSortableList(() => transactionsList.value);
+
+const {
+  sortedList: sortedAssetsList,
+  toggleSort: toggleAssetsSortDirection
+} = useSortableList(() => assets.value);
+
+const {
+  sortedList: sortedUnbondingList,
+  toggleSort: toggleUnbondingSortDirection
+} = useSortableList(() => unbondingList.value);
 
 onMounted(() => {
   store.loadDashboard();
@@ -572,14 +685,14 @@ watch(() => scaleData, () => {
         <h3 class="header-20-medium-aa text-header-text uppercase mb-7">{{ $t('account.transactions') }}</h3>
         <div>
 
-          <div class="cursor-pointer p-0.5 inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded relative mr-2.5">
-            <Icon icon="codicon:debug-restart" width="24" height="24"
-              @click="updateTransactionsList" />
+          <div
+            class="cursor-pointer p-0.5 inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded relative mr-2.5">
+            <Icon icon="codicon:debug-restart" width="24" height="24" @click="updateTransactionsList" />
           </div>
-          <div class="cursor-pointer p-0.5 inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded relative"
+          <div
+            class="cursor-pointer p-0.5 inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded relative"
             :class="{ 'before:block before:absolute before:top-0 before:right-0 content-none before:w-1.5 before:h-1.5 before:bg-red-text before:rounded-full before:translate-x-1/2 ': selectedFilters.length }">
-            <Icon icon="mynaui:filter" width="24" height="24"
-              @click="isOpenFilters = true" />
+            <Icon icon="mynaui:filter" width="24" height="24" @click="isOpenFilters = true" />
           </div>
         </div>
       </div>
@@ -599,7 +712,7 @@ watch(() => scaleData, () => {
               <td scope="col">
                 <div class="flex gap-1 items-center justify-end">
                   <span>{{ $t('account.time') }}</span>
-                  <SortButton @click="() => sortData(txs, 'timestamp')" />
+                  <SortButton @click="() => toggleTxsSortDirection('timestamp')" />
                 </div>
               </td>
               <td scope="col" class="text-end">
@@ -610,14 +723,13 @@ watch(() => scaleData, () => {
           </thead>
 
           <tbody class="">
-            <tr v-if="recentReceived.length === 0 && txs.length === 0" class="border-addition/20">
+            <tr v-if="transactionsList.length === 0" class="border-addition/20">
               <td colspan="10">
                 <div class="text-center">{{ $t('account.no_transactions') }}</div>
               </td>
             </tr>
 
-            <tr v-for="(recentReceivedItem, index) in recentReceived" :key="index" class="border-addition/20">
-              <!-- 👉 result -->
+            <!-- <tr v-for="(recentReceivedItem, index) in recentReceived" :key="index" class="border-addition/20">
               <td>
                 <div class="w-full">
                   <p class="header-16-medium tracking-wide" :class="{
@@ -636,7 +748,6 @@ watch(() => scaleData, () => {
                 </div>
               </td>
 
-              <!-- 👉 amount -->
               <td class="">
                 <div class="text-end">
                   <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
@@ -660,7 +771,6 @@ watch(() => scaleData, () => {
                       item))}`}}</span>
                 </div>
               </td>
-              <!-- 👉 operation -->
               <td class="md:w-[450px]">
 
                 <div class="w-full flex justify-center">
@@ -673,7 +783,6 @@ watch(() => scaleData, () => {
                   </div>
                 </div>
               </td>
-              <!-- 👉 time -->
               <td class="">
                 <div class="flex flex-col items-end body-text-14">
                   <span class="text-white">
@@ -686,7 +795,6 @@ watch(() => scaleData, () => {
                   </span>
                 </div>
               </td>
-              <!-- 👉 TxHash -->
               <td class="text-end">
                 <AddressWithCopy styles="header-14-medium-aa justify-end"
                   :href="`/${chain}/tx/${recentReceivedItem.txhash}`" :address="recentReceivedItem.txhash" :size="16"
@@ -694,21 +802,22 @@ watch(() => scaleData, () => {
                 <Icon class="text-base md:hidden" icon="bx:copy"
                   @click="() => copyUrl(`/${chain}/tx/${recentReceivedItem.txhash}`)" />
               </td>
-            </tr>
+            </tr> -->
 
-            <tr v-for="(txsItem, index) in txs" :key="index" class="border-addition/20">
+            <tr v-for="({ code, messages, amount, timestamp, txhash }, index) in sortedTransactionsList" :key="index"
+              class="border-addition/20">
               <!-- 👉 result: v.code -->
               <td>
                 <div class="w-full">
                   <p class="header-16-medium tracking-wide" :class="{
-                    'text-tx-status-success': txsItem.code === 0,
-                    'text-tx-status-error': txsItem.code === 1,
-                    'text-tx-status-warning': txsItem.code !== 0 && txsItem.code !== 1
+                    'text-tx-status-success': code === 0,
+                    'text-tx-status-error': code === 1,
+                    'text-tx-status-warning': code !== 0 && code !== 1
                   }">
                     {{
-                      txsItem.code === 0
+                      code === 0
                         ? $t('account.success')
-                        : txsItem.code === 1
+                        : code === 1
                           ? $t('account.failed')
                           : $t('account.processing')
                     }}
@@ -721,24 +830,24 @@ watch(() => scaleData, () => {
                 <div class="text-end">
                   <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
                     <span>{{
-                      calcAmount(txsItem.tx.body.messages[0].amount, 'value')
+                      calcAmount(amount, 'value')
                     }}</span>
                     <span class="text-header-text header-14-medium-aa uppercase">{{
-                      ` [${calcAmount(txsItem.tx.body.messages[0].amount, 'token')}]`
+                      ` [${calcAmount(amount, 'token')}]`
                     }}</span>
                   </h6>
                   <span class="body-text-14 text-[#80BDBD]">{{
-                    `$${format.tokenValueNumber(returnAmounItem(txsItem.tx?.body.messages[0].amount))}` }}</span>
+                    `$${format.tokenValueNumber(returnAmounItem(amount))}` }}</span>
                 </div>
               </td>
               <!-- 👉 operation -->
               <td>
                 <div class="w-full flex justify-center">
-                  <div v-if="txsItem.code === 1" class="text-red-text header-16 tracking-wide text-centerw-60">
+                  <div v-if="code === 1" class="text-red-text header-16 tracking-wide text-centerw-60">
                     {{ $t('account.no_gas') }}
                   </div>
                   <div v-else class="badge-transparent w-60">
-                    {{ format.messages(txsItem.tx.body.messages) }}
+                    {{ format.messages(messages) }}
                   </div>
 
                 </div>
@@ -747,21 +856,20 @@ watch(() => scaleData, () => {
               <td class="">
                 <div class="flex flex-col items-end body-text-14">
                   <span class="text-white">
-                    {{ format.toDay(txsItem.timestamp, 'advancedFormat') }}
+                    {{ format.toDay(timestamp, 'advancedFormat') }}
                   </span>
                   <span class="text-[#8899AA]">
-                    {{ format.toDay(txsItem.timestamp, 'time') }}
+                    {{ format.toDay(timestamp, 'time') }}
                     ({{
-                      format.toDay(txsItem.timestamp, 'from') }})
+                      format.toDay(timestamp, 'from') }})
                   </span>
                 </div>
               </td>
               <!-- 👉 TxHash -->
               <td class="text-end">
-                <AddressWithCopy styles="header-14-medium-aa justify-end" :href="`/${chain}/tx/${txsItem.txhash}`"
-                  :address="txsItem.txhash" :size="16" icon isShort isCopyHref />
-                <Icon class="text-base md:hidden" icon="bx:copy"
-                  @click="() => copyUrl(`/${chain}/tx/${txsItem.txhash}`)" />
+                <AddressWithCopy styles="header-14-medium-aa justify-end" :href="`/${chain}/tx/${txhash}`"
+                  :address="txhash" :size="16" icon isShort isCopyHref />
+                <Icon class="text-base md:hidden" icon="bx:copy" @click="() => copyUrl(`/${chain}/tx/${txhash}`)" />
               </td>
             </tr>
 
@@ -796,7 +904,7 @@ watch(() => scaleData, () => {
                     <span class="inline-block">{{ $t('account.available') }}</span>
 
 
-                    <SortButton @click="() => sortData(balances, 'denom')"/>
+                    <SortButton @click="() => toggleAssetsSortDirection('available_amount')" />
 
 
                   </div>
@@ -804,13 +912,13 @@ watch(() => scaleData, () => {
                 <td scope="col">
                   <div class="flex gap-1 items-center justify-end">
                     {{ $t('account.market_price') }}
-                    <SortButton @click="() => sortData(balances, 'market_price')" />
+                    <SortButton @click="() => toggleAssetsSortDirection('market_price_value')" />
                   </div>
                 </td>
                 <td scope="col">
                   <div class="flex gap-1 items-center justify-end">
                     <span>{{ $t('account.total') }}</span>
-                    <SortButton @click="() => sortData(balances, 'total')" />
+                    <SortButton @click="() => toggleAssetsSortDirection('total_value')" />
                   </div>
                 </td>
               </tr>
@@ -823,9 +931,7 @@ watch(() => scaleData, () => {
                 </td>
               </tr>
 
-              <tr
-                v-for="(balanceItem, index) in groupAndSumByDenom(balances)?.filter(item => item?.denom?.includes(keywords))"
-                :key="index" class="border-addition/20">
+              <tr v-for="(balanceItem, index) in sortedAssetsList" :key="index" class="border-addition/20">
                 <!-- 👉 Chain -->
                 <td>
                   <div class="max-w-[300px] flex gap-2.5 items-center overflow-hidden">
@@ -838,19 +944,19 @@ watch(() => scaleData, () => {
                             if (identity) loadAvatar(identity);
                           }
                         " /> -->
-                        <img :src="assets.chain.logo" class="object-contain" />
+                        <img :src="balanceItem.chain.logo" class="object-contain" />
                       </div>
                     </div>
 
                     <div class="flex flex-col gap-1">
                       <span class="header-16-medium text-white uppercase">
 
-                        {{ assets.getToken(balanceItem) }}
+                        {{ balanceItem.getToken(balanceItem.balance) }}
 
                       </span>
                       <span class="body-text-14 tracking-wide text-[#80BDBD]">
 
-                        {{ assets.chain.name }}
+                        {{ balanceItem.chain.name }}
 
                       </span>
                       <!-- <span class="max-w-[300px] text-button-text header-16-medium uppercase dark:invert truncate">
@@ -875,10 +981,10 @@ watch(() => scaleData, () => {
                   <div class="text-end">
                     <h6 class="header-14-medium-aa tracking-wide whitespace-nowrap text-white">
                       <!-- {{ calcAmount(balanceItem, 'value') }} -->
-                      {{ format.formatToken(assets.available) }}
+                      {{ format.formatToken(balanceItem.available) }}
                     </h6>
                     <span class="body-text-14 text-[#80BDBD]">
-                      {{ `$${format.tokenValue(assets.available)}` }}
+                      {{ `$${format.tokenValue(balanceItem.available)}` }}
 
                     </span>
                   </div>
@@ -891,13 +997,13 @@ watch(() => scaleData, () => {
                       <!-- {{
                         `$ ${format.tokenValue(rewardItem)}` }} -->
                       <!-- ${{ ticker?.converted_last?.usd }} -->
-                      {{ assets.marketPrice.value }}
+                      {{ balanceItem.marketPrice.value }}
 
                     </h6>
                     <span class="body-text-14 text-green-text">
                       <!-- {{ `+${format.calculatePercent(rewardItem.amount, totalAmount)}` }} -->
                       <!-- {{ store.priceChange }}% -->
-                      {{ assets.marketPrice.priceChange }}%
+                      {{ balanceItem.marketPrice.priceChange }}%
                     </span>
 
                     <!-- <div class="text-sm font-semibold">
@@ -915,11 +1021,11 @@ watch(() => scaleData, () => {
                       <!-- {{ calcAmount(balanceItem, 'value') }} -->
                       <!-- {{ format.formatToken(walletStore.stakingAmount) +
                         format.formatToken(walletStore.balanceOfStakingToken) }} -->
-                      {{ format.formatToken(assets.total[0]) }}
+                      {{ format.formatToken(balanceItem.total[0]) }}
                     </h6>
                     <span class="body-text-14 text-[#80BDBD]">
                       <!-- {{ `$${format.tokenValue(walletStore.stakingAmount)}` }} -->
-                      {{ `$${format.tokenValue(assets.total[0])}` }}
+                      {{ `$${format.tokenValue(balanceItem.total[0])}` }}
 
                       <!-- {{ `$${format.tokenValue(balanceItem)}` }} -->
                       <!-- format.tokenValue(rewardItem) -->
@@ -1084,7 +1190,7 @@ watch(() => scaleData, () => {
                 <div class="flex gap-1 items-center justify-end">
                   <span>{{ $t('account.completion_time') }}</span>
 
-                  <SortButton @click="() => sortData(unbonding, 'completion_time')" />
+                  <SortButton @click="() => toggleUnbondingSortDirection('completion_time')" />
 
                 </div>
               </td>
@@ -1099,8 +1205,8 @@ watch(() => scaleData, () => {
             </td>
           </tr>
 
-          <tbody class="text-sm" v-for="(v, index) in unbonding" :key="index">
-            <tr v-for="entry in v.entries">
+          <tbody class="text-sm">
+            <tr v-for="(entry, index) in sortedUnbondingList" :key="index">
 
               <td class="py-3">
                 {{
@@ -1151,12 +1257,13 @@ watch(() => scaleData, () => {
         @click.stop>
         <div class="w-full mb-6 flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-full overflow-hidden">
-            <img :src="assets.chain.logo" class="object-cover w-full h-full" />
+            <img :src="store.coinInfo.image.thumb ?? defaultAvatar" class="object-cover w-full h-full" />
           </div>
-          <h3 class="w-60 header-20-medium text-header-text flex-1 uppercase">{{ assets.chain.name }}</h3>
+          <h3 class="w-60 header-20-medium text-header-text flex-1 uppercase">{{ store.coinInfo.name || '' }}</h3>
           <!-- <div></div> -->
           <Icon icon="codex:cross" width="24" height="24"
-            class="cursor-pointer inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded text-white" @click="isOpenQR = false" />
+            class="cursor-pointer inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded text-white"
+            @click="isOpenQR = false" />
         </div>
         <div class="flex justify-center p-2 bg-white mb-4">
           <qrcode-vue :value="`/${chain}/account/${address}`" :size="200" :level="'H'" />
@@ -1165,17 +1272,18 @@ watch(() => scaleData, () => {
     </div>
 
     <!-- filters -->
-    <div v-if="isOpenFilters" class="fixed top-0 bottom-0 left-0 right-0 bg-menu-button/70 z-10"
+    <div v-if="isOpenFilters" class="fixed z-50 top-0 bottom-0 left-0 right-0 bg-menu-button/70"
       @click="closeFiltersModal">
       <div
-        class="w-full max-w-[514px] absolute flex items-center flex-col top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 p-6 bg-chart-stroke border border-button-text rounded"
+        class="w-full h-screen md:h-auto max-w-[514px] absolute flex justify-center items-center flex-col top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 p-6 bg-chart-stroke md:border border-button-text rounded-none md:rounded"
         @click.stop>
         <div class="w-full mb-6 flex items-center gap-2.5">
 
           <h3 class="header-20-medium text-header-text flex-1 uppercase">{{ $t('account.event_type') }}</h3>
           <!-- <div></div> -->
           <Icon icon="codex:cross" width="24" height="24"
-            class="cursor-pointer inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded text-white" @click="closeFiltersModal" />
+            class="cursor-pointer inline-block bg-addition/20 hover:bg-button-v2 active:scale-90 rounded text-white"
+            @click="closeFiltersModal" />
         </div>
 
         <div class="w-full pr-4 mb-5">
