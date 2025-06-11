@@ -57,32 +57,19 @@ function confirm() {
       errorMessage.value = 'The input not recognized';
     }
   }
-  if(!!errorMessage.value && searchModalShow.value == false){
+  if (!!errorMessage.value && searchModalShow.value == false) {
     openSearchModal();
   }
 }
 </script>
-<!-- @click="openSearchModal" -->
 
 <template>
   <div class="w-full">
-    <!-- <button
-      class="btn btn-ghost btn-circle btn-sm mx-1"
-    >
-      <Icon
-        icon="icon-park-outline:search"
-        class="text-lg text-[#D9D9D9] dark:text-[#D9D9D9]"
-      />
-    </button> -->
     <div class="w-full flex items-center">
       <Icon icon="icon-park-outline:search" class="text-lg text-[#D9D9D9] dark:text-[#D9D9D9]"
-      @click="openSearchModal" />
-      <input :placeholder="$t('pages.search_placeholder')"
-        v-model="searchQuery"
-        @keyup.enter="confirm"
+        @click="openSearchModal" />
+      <input :placeholder="$t('pages.search_placeholder')" v-model="searchQuery" @keyup.enter="confirm"
         class="md:px-4 bg-transparent flex-1 outline-none header-20 placeholder:text-white w-full placeholder:w-0 xl:placeholder:w-full" />
-        <!-- v-model="keywords" -->
-         <!-- <p class="md:px-4 flex-1 header-20 text-white min-w-[400px]">{{ $t('pages.search_placeholder') }}</p> -->
     </div>
 
     <!-- modal -->
@@ -102,9 +89,8 @@ function confirm() {
         <!-- body -->
         <div class="mt-4">
           <div class="">
-            <input class="input flex-1 w-full !input-bordered text-[#FFFFFF]" v-model="searchQuery" 
-              @keyup.enter="confirm"
-              placeholder="Height/Transaction/Account Address" />
+            <input class="input flex-1 w-full !input-bordered text-[#FFFFFF]" v-model="searchQuery"
+              @keyup.enter="confirm" placeholder="Height/Transaction/Account Address" />
             <div class="mt-2 text-right text-sm text-error" v-show="errorMessage">
               {{ errorMessage }}
             </div>

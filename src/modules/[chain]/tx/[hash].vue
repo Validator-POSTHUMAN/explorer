@@ -9,7 +9,6 @@ import { JsonViewer } from "vue3-json-viewer"
 // if you used v1.0.5 or latster ,you should add import "vue3-json-viewer/dist/index.css"
 import "vue3-json-viewer/dist/index.css";
 import BackButton from '@/components/BackButton.vue';
-import { watch } from 'vue';
 
 const props = defineProps(['hash', 'chain']);
 
@@ -97,7 +96,6 @@ const data = computed(() => ([
 <template>
     <div class="flex flex-col justify-center items-center md:px-20 pt-3">
         <BackButton class="-mt-6 mb-5 md:mb-0 md:mt-0" />
-
         <div class="overflow-auto w-full md:max-w-[930px] thick-border-block p-7 pt-6 mb-7">
             <div class="flex justify-between items-center mb-7">
                 <h3 class="header-20-medium-aa text-header-text uppercase">{{ $t('tx.transaction_summary') }}</h3>
@@ -107,7 +105,6 @@ const data = computed(() => ([
                     <Icon class="relative z-10" icon="bx:copy" :width="18" :height="18" />
                 </div>
             </div>
-
             <div class="flex gap-4 mb-10">
                 <div class="badge-transparent md:w-[152px]">{{ $t('tx.transfer') }}</div>
                 <div class="badge-transparent md:w-[152px]" :class="{
@@ -127,7 +124,6 @@ const data = computed(() => ([
                     {{ $t('account.no_gas') }}
                 </div>
             </div>
-
             <div v-for="item in data" class="flex border-b border-addition text-white pt-5 pb-0.5 px-0.5">
                 <p class="header-16-medium w-1/3 tracking-wide truncate">{{ $t(item.label) }}</p>
                 <p class="flex items-center cursor-pointer body-text-14 w-2/3 truncate" @click="item.action">
@@ -137,9 +133,7 @@ const data = computed(() => ([
                     <span>{{ item.value }}</span>
                 </p>
             </div>
-
         </div>
-
         <div class="toast" v-show="showCopyToast === 1">
             <div
                 class="relative bg-almost-black flex items-center gap-4 p-4 border border-button-text rounded text-green-text">
@@ -169,92 +163,4 @@ const data = computed(() => ([
             </div>
         </div>
     </div>
-
-
-    <!-- <div>
-        <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow mb-4">
-            <h2 class="card-title truncate mb-2">{{ $t('tx.title') }}</h2>
-            <div class="overflow-auto-x">
-                <table class="table text-sm">
-                    <tbody>
-                        <tr>
-                            <td>{{ $t('tx.tx_hash') }}</td>
-                            <td>{{ tx.tx_response.txhash }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ $t('account.height') }}</td>
-                            <td>
-                                <RouterLink :to="`/${props.chain}/block/${tx.tx_response.height}`"
-                                    class="text-primary dark:invert">{{ tx.tx_response.height
-                                    }}
-                                </RouterLink>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{ $t('staking.status') }}</td>
-                            <td>
-                                <span class="text-xs truncate relative py-2 px-4 w-fit mr-2 rounded" :class="`text-${tx.tx_response.code === 0 ? 'success' : 'error'
-                                    }`">
-                                    <span class="inset-x-0 inset-y-0 opacity-10 absolute" :class="`bg-${tx.tx_response.code === 0 ? 'success' : 'error'
-                                        }`"></span>
-                                    {{ tx.tx_response.code === 0 ? 'Success' : 'Failed' }}
-                                </span>
-                                <span>
-                                    {{ tx.tx_response.code === 0 ? '' : tx?.tx_response?.raw_log }}
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{ $t('account.time') }}</td>
-                            <td>
-                                {{ format.toLocaleDate(tx.tx_response.timestamp) }} ({{
-                                    format.toDay(tx.tx_response.timestamp, 'from')
-                                }})
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{ $t('tx.gas') }}</td>
-                            <td>
-                                {{ tx.tx_response.gas_used }} / {{ tx.tx_response.gas_wanted }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{ $t('tx.fee') }}</td>
-                            <td>
-                                {{
-                                    format.formatTokens(
-                                        tx.tx?.auth_info?.fee?.amount,
-                                        true,
-                                        '0,0.[00]'
-                                    )
-                                }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{ $t('tx.memo') }}</td>
-                            <td>{{ tx.tx.body.memo }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow mb-4">
-            <h2 class="card-title truncate mb-2">
-                {{ $t('account.messages') }}: ({{ messages.length }})
-            </h2>
-            <div v-for="(msg, i) in messages">
-                <div class="border border-slate-400 rounded-md mt-4">
-                    <DynamicComponent :value="msg" />
-                </div>
-            </div>
-            <div v-if="messages.length === 0">{{ $t('tx.no_messages') }}</div>
-        </div>
-
-        <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow">
-            <h2 class="card-title truncate mb-2">JSON</h2>
-            <JsonViewer :value="tx" :theme="baseStore.theme" style="background: transparent;" copyable boxed sort
-                expand-depth="5" />
-        </div>
-    </div> -->
 </template>

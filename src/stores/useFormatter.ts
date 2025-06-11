@@ -310,6 +310,11 @@ export const useFormatter = defineStore('formatter', {
       const percent = Number(input) / Number(total);
       return numeral(percent > 0.0001 ? percent : 0).format('0.[00]%');
     },
+    roundedDisplayPercent(input?: string | number, total?: string | number) {
+      if (!input || !total) return '0';
+      const percent = Number(input) / Number(total);
+      return numeral(percent > 0.0001 ? percent : 0).format('0%');
+    },
     formatDecimalToPercent(decimal: string) {
       return numeral(decimal).format('0.[00]%');
     },

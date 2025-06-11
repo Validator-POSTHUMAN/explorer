@@ -40,33 +40,23 @@ function changeEndpoint(item: Endpoint) {
           'bg-error': !baseStore.connected,
         }"></div>
 
-        <!-- trapezoid -->
-        <!-- <div
-          class="absolute inset-0
-        hover:before:bg-menu-button-hover hover:after:bg-menu-button-hover 
-          before:cursor-pointer before:absolute before:inset-0 before:skew-x-[33deg] before:border-l-2 before:border-b before:border-addition before:bg-black before:-translate-x-6
-          after:cursor-pointer after:absolute after:inset-0 after:-skew-x-[33deg] after:border-r-2 after:border-b after:border-addition after:bg-black after:translate-x-6">
-        </div> -->
-
       </div>
     </label>
     <div tabindex="0"
       class="p-0 dropdown-content -translate-x-1/2 md:translate-x-0 w-[100vw] left-6 md:w-90 max-w-[436px] menu shadow bg-chart-stroke rounded-box overflow-auto">
       <!-- rest -->
-      <div class="uppercase text-header-text header-14-medium-aa tracking-wide mb-5 px-6 pt-6" v-if="chainStore.current?.endpoints?.rest">
+      <div class="uppercase text-header-text header-14-medium-aa tracking-wide mb-5 px-6 pt-6"
+        v-if="chainStore.current?.endpoints?.rest">
         Rest Endpoint
       </div>
       <div v-for="(item, index) in chainStore.current?.endpoints?.rest"
         class="px-6 py-1.5 w-full hover:bg-menu-button-hover dark:hover:bg-[#384059] cursor-pointer" :key="index"
-        @click="changeEndpoint(item)"
-        :class="{'bg-menu-button-active': item.address === chainStore.endpoint?.address}">
+        @click="changeEndpoint(item)" :class="{ 'bg-menu-button-active': item.address === chainStore.endpoint?.address }">
         <div class="flex flex-col">
           <div class="flex items-center justify-between w-full">
             <div class="header-16-medium text-button-text dark:text-gray-200 capitalize tracking-wide">
               {{ item.provider }}
             </div>
-            <!-- <span v-if="item.address === chainStore.endpoint?.address"
-              class="bg-yes inline-block h-2 w-2 rounded-full" /> -->
           </div>
           <div class="body-text-14 text-addition whitespace-nowrap">
             {{ item.address }}

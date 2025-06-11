@@ -36,11 +36,6 @@ const veto = computed(() =>
       <span v-if="status === 'REJECTED'" class="text-status-text-rejected">{{ no }}</span>
       <span v-if="status === 'VETO'" class="text-status-text-veto">{{ veto }}</span>
       <span v-if="status === 'VOTING'" class="text-status-text-voting">{{ abstain }}</span>
-      
-      <!-- <span class="text-status-text-approved">{{ yes }}</span>
-      <span class="text-status-text-rejected">{{ no }}</span>
-      <span class="text-status-text-veto">{{ veto }}</span>
-      <span class="text-status-text-voting">{{ abstain }}</span> -->
     </div>
   <div class="progress rounded-full h-6 text-xs flex items-center">
     <div

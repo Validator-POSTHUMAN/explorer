@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useGovStore } from '@/stores';
 import ProposalListItem from '@/components/ProposalListItem.vue';
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import PaginationBar from '@/components/PaginationBar.vue';
 import { PageRequest } from '@/types';
 

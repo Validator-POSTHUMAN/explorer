@@ -18,14 +18,11 @@ import {
   type Pagination,
 } from '@/types';
 import { ref, reactive, watch, onMounted } from 'vue';
-import Countdown from '@/components/Countdown.vue';
-import PaginationBar from '@/components/PaginationBar.vue';
 import { fromBech32, toHex } from '@cosmjs/encoding';
 import { Icon } from '@iconify/vue';
 import AddressWithCopy from '@/components/AddressWithCopy.vue';
 import IconEmojiHappy from '@/components/icons/IconEmojiHappy.vue';
 import IconStatus from '@/components/icons/IconStatus.vue';
-import IconRevoting from '@/components/icons/IconRevoting.vue';
 import IconTimeLeft from '@/components/icons/IconTimeLeft.vue';
 
 
@@ -62,14 +59,6 @@ store.fetchProposal(props.proposal_id).then((res) => {
   }
 });
 
-const color = computed(() => {
-  if (proposal.value.status === 'PROPOSAL_STATUS_PASSED') {
-    return 'success';
-  } else if (proposal.value.status === 'PROPOSAL_STATUS_REJECTED') {
-    return 'error';
-  }
-  return '';
-});
 const status = computed(() => {
   if (proposal.value.status) {
     return proposal.value.status.replace('PROPOSAL_STATUS_', '');
@@ -167,7 +156,6 @@ const abstain = computed(() => {
 });
 const processList = computed(() => {
   return [
-    // { name: 'Turnout', value: turnout.value, class: 'bg-info' },
     {
       name: 'YES',
       value: yes.value,
@@ -236,11 +224,6 @@ const statusData = computed(() => (
       label: 'Status',
       icon: IconStatus,
     },
-    // {
-    //   value: 'Enable',
-    //   label: 'Revoting',
-    //   icon: IconRevoting,
-    // },
     {
       value: format.toDay(proposal.value?.voting_end_time, 'from'),
       label: 'Time left',
@@ -260,24 +243,6 @@ const votingData = computed(() => ([{
     votes.value.find(item => item.voter === proposal.value?.proposer)?.option
     ?? 'None',
 }]));
-
-// onMounted(() => {
-//   stakingStore.fetchValidator(validator).then((res) => {
-//       v.value = res.validator;
-//       identity.value = res.validator?.description?.identity || '';
-//       if (identity.value && !avatars.value[identity.value]) loadAvatar(identity.value);
-
-//       const prefix = valoperToPrefix(v.value.operator_address) || '<Invalid>';
-//       addresses.value.hex = consensusPubkeyToHexAddress(
-//         v.value.consensus_pubkey
-//       );
-//       addresses.value.valCons = pubKeyToValcons(
-//         v.value.consensus_pubkey,
-//         prefix
-//       );
-//     });
-// })
-
 </script>
 
 <template>
@@ -297,11 +262,9 @@ const votingData = computed(() => ([{
     </h2>
 
     <div class="flex flex-col md:flex-row gap-5">
-
       <!-- info -->
       <div class="md:min-w-[420px]">
         <div class=" bg-black/70 thick-border-block p-5">
-
           <div class="text-button-text mb-9">
             <p class="uppercase header-20-medium-aa mb-5">{{ $t('gov.status') }}</p>
             <div class="w-full border-y border-addition py-4 px-2.5 flex flex-col gap-2.5">
@@ -309,7 +272,6 @@ const votingData = computed(() => ([{
                 <p class="col-span-2 header-16 tracking-wide flex gap-2.5">
                   <!-- <Icon class="text-addition/50" icon="ic:round-close" width="24" height="24" /> -->
                   <component class="text-addition/50" :is="item.icon" />
-
                   <span>{{ item.label }}</span>
                 </p>
                 <div class="col-span-3 body-text-16 text-white truncate">
@@ -319,7 +281,6 @@ const votingData = computed(() => ([{
                 </div>
               </div>
             </div>
-
             <div class="w-full border-b border-addition py-4 px-2.5 flex flex-col gap-2.5">
               <div v-for="item in votingData" class="grid grid-cols-5 gap-3">
                 <p class="col-span-2 header-16 tracking-wide leading-5">{{ $t(item.label) }}</p>
@@ -350,101 +311,7 @@ const votingData = computed(() => ([{
             </div>
             <label for="vote" class="btn-outline py-4 mb-7" @click="dialog.open('vote', { proposal_id })">{{
               $t('gov.change_vote') }}</label>
-
-            <!-- <div class="mt-6 grid grid-cols-2">
-              <label for="vote" class="btn btn-primary float-right btn-sm mx-1"
-                @click="dialog.open('vote', { proposal_id })">{{ $t('gov.btn_vote') }}</label>
-              <label for="deposit" class="btn btn-primary float-right btn-sm mx-1"
-                @click="dialog.open('deposit', { proposal_id })">{{ $t('gov.btn_deposit') }}</label>
-            </div> -->
           </div>
-
-          <!-- timeline -->
-          <!-- <div class="px-4 pt-3 pb-5 rounded shadow lg:!!col-span-2">
-            <h2 class="card-title">{{ $t('gov.timeline') }}</h2>
-
-            <div class="px-1">
-              <div class="flex items-center mb-4 mt-2">
-                <div class="w-2 h-2 rounded-full bg-error mr-3"></div>
-                <div class="text-base flex-1 text-main">
-                  {{ $t('gov.submit_at') }}: {{ format.toDay(proposal.submit_time) }}
-                </div>
-                <div class="text-sm">{{ shortTime(proposal.submit_time) }}</div>
-              </div>
-              <div class="flex items-center mb-4">
-                <div class="w-2 h-2 rounded-full bg-primary mr-3"></div>
-                <div class="text-base flex-1 text-main">
-                  {{ $t('gov.deposited_at') }}:
-                  {{
-                    format.toDay(
-                      proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
-                        ? proposal.deposit_end_time
-                        : proposal.voting_start_time
-                    )
-                  }}
-                </div>
-                <div class="text-sm">
-                  {{
-                    shortTime(
-                      proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
-                        ? proposal.deposit_end_time
-                        : proposal.voting_start_time
-                    )
-                  }}
-                </div>
-              </div>
-              <div class="mb-4">
-                <div class="flex items-center">
-                  <div class="w-2 h-2 rounded-full bg-proposal-status-approved mr-3"></div>
-                  <div class="text-base flex-1 text-main">
-                    {{ $t('gov.vote_start_from') }} {{ format.toDay(proposal.voting_start_time) }}
-                  </div>
-                  <div class="text-sm">
-                    {{ shortTime(proposal.voting_start_time) }}
-                  </div>
-                </div>
-                <div class="pl-5 text-sm mt-2">
-                  <Countdown :time="votingCountdown" />
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center mb-1">
-                  <div class="w-2 h-2 rounded-full bg-success mr-3"></div>
-                  <div class="text-base flex-1 text-main">
-                    {{ $t('gov.vote_end') }} {{ format.toDay(proposal.voting_end_time) }}
-                  </div>
-                  <div class="text-sm">
-                    {{ shortTime(proposal.voting_end_time) }}
-                  </div>
-                </div>
-                <div class="pl-5 text-sm">
-                  {{ $t('gov.current_status') }}: {{ $t(`gov.proposal_statuses.${proposal.status}`) }}
-                </div>
-              </div>
-
-              <div class="mt-4" v-if="
-                proposal?.content?.['@type']?.endsWith('SoftwareUpgradeProposal')
-              ">
-                <div class="flex items-center">
-                  <div class="w-2 h-2 rounded-full bg-warning mr-3"></div>
-                  <div class="text-base flex-1 text-main">
-                    {{ $t('gov.upgrade_plan') }}:
-                    <span v-if="Number(proposal.content?.plan?.height || '0') > 0">
-                      (EST)</span>
-                    <span v-else>{{
-                      format.toDay(proposal.content?.plan?.time)
-                    }}</span>
-                  </div>
-                  <div class="text-sm">
-                    {{ shortTime(proposal.voting_end_time) }}
-                  </div>
-                </div>
-                <div class="pl-5 text-sm mt-2">
-                  <Countdown :time="upgradeCountdown" />
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -462,29 +329,5 @@ const votingData = computed(() => ([{
         </div>
       </div>
     </div>
-
-    <!-- <div class="px-4 pt-3 pb-4 rounded mb-4 shadow">
-      <h2 class="card-title">{{ $t('gov.votes') }}</h2>
-      <div class="overflow-x-auto">
-        <table class="table w-full table-zebra">
-          <tbody>
-            <tr v-for="(item, index) of votes" :key="index">
-              <td class="py-2 text-sm">{{ showValidatorName(item.voter) }}</td>
-              <td v-if="item.option" class="py-2 text-sm" :class="{
-                'text-proposal-status-approved': item.option === 'VOTE_OPTION_YES',
-                'text-gray-400': item.option === 'VOTE_OPTION_ABSTAIN',
-              }">
-                {{ String(item.option).replace('VOTE_OPTION_', '') }}
-              </td>
-              <td v-if="item.options" class="py-2 text-sm">
-                {{item.options.map(x =>
-                  `${x.option.replace('VOTE_OPTION_', '')}:${format.percent(x.weight)}`).join(', ')}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <PaginationBar :limit="pageRequest.limit" :total="pageResponse.total" :callback="pageload" />
-      </div>
-    </div> -->
   </div>
 </template>

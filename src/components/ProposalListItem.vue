@@ -9,7 +9,7 @@ import { select } from '@/components/dynamic/index';
 import type { PaginatedProposals } from '@/types';
 import ProposalProcess from './ProposalProcess.vue';
 import type { PropType } from 'vue';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 const dialog = useTxDialog();
 defineProps({
   proposals: { type: Object as PropType<PaginatedProposals> },
@@ -29,12 +29,6 @@ const statusMap: Record<string, string> = {
   PROPOSAL_STATUS_VOTING_PERIOD: 'VOTING',
   PROPOSAL_STATUS_PASSED: 'PASSED',
   PROPOSAL_STATUS_REJECTED: 'REJECTED',
-};
-const voterStatusMap: Record<string, string> = {
-  VOTE_OPTION_NO_WITH_VETO: '',
-  VOTE_OPTION_YES: 'success',
-  VOTE_OPTION_NO: 'error',
-  VOTE_OPTION_ABSTAIN: 'warning',
 };
 
 const proposalInfo = ref();
@@ -159,22 +153,6 @@ function metaItem(metadata: string | undefined): {
 
         <div class="mt-4" v-if="statusMap?.[item?.status] === 'VOTING'">
           <div class="flex justify-between">
-            <!-- <div class="flex items-center" :class="statusMap?.[item?.status] === 'PASSED'
-              ? 'text-proposal-status-approved'
-              : statusMap?.[item?.status] === 'REJECTED'
-                ? 'text-proposal-status-rejected'
-                : 'text-addition'
-              ">
-              <div class="w-1 h-1 rounded-full mr-2" :class="statusMap?.[item?.status] === 'PASSED'
-                ? 'bg-proposal-status-approved'
-                : statusMap?.[item?.status] === 'REJECTED'
-                  ? 'bg-proposal-status-rejected'
-                  : 'bg-addition'
-                "></div>
-              <div class="text-xs flex items-center">
-                {{ statusMap?.[item?.status] || item?.status }}
-              </div>
-            </div> -->
 
             <div class="pl-4 body-text-16">
               <div class="flex items-center text-addition" :class="{

@@ -32,18 +32,18 @@ function confirm() {
     if (height.test(key)) {
       vueRouters.push({ path: `/${current}/block/${key}` });
       setTimeout(() => {
-        closeSearchModal();
+        // closeSearchModal();
       }, 1000);
     } else if (txhash.test(key)) {
       vueRouters.push({ path: `/${current}/tx/${key}` });
       setTimeout(() => {
-        closeSearchModal();
+        // closeSearchModal();
       }, 1000);
       //     this.$router.push({ name: 'transaction', params: { chain: c.chain_name, hash: key } })
     } else if (addr.test(key)) {
       vueRouters.push({ path: `/${current}/account/${key}` });
       setTimeout(() => {
-        closeSearchModal();
+        // closeSearchModal();
       }, 1000);
     } else {
       errorMessage.value = 'The input not recognized';

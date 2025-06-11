@@ -3,15 +3,12 @@ import { Icon } from '@iconify/vue';
 import { computed, ref } from 'vue';
 
 // Components
-import newFooter from '@/layouts/components/NavFooter.vue';
-import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue';
 import NavbarSearch from '@/layouts/components/NavbarSearch.vue';
 import ChainProfile from '@/layouts/components/ChainProfile.vue';
 
 import { useDashboard } from '@/stores/useDashboard';
 import { useBlockchain, useWalletStore } from '@/stores';
 
-import NavBarI18n from './NavBarI18n.vue';
 import NavBarWallet from './NavBarWallet.vue';
 import type {
   NavGroup,
@@ -19,7 +16,6 @@ import type {
   NavSectionTitle,
   VerticalNavItems,
 } from '../types';
-import AddNetworkComponent from './AddNetworkComponent.vue';
 import { useRoute } from 'vue-router'
 import Socials from '@/layouts/components/Socials.vue';
 
@@ -46,23 +42,18 @@ blockchain.$subscribe((m, s) => {
 
 const sidebarShow = ref(false);
 const sidebarOpen = ref(true);
-const showNawSearch = ref(false);
 
 const changeOpen = (index: Number) => {
   if (index === 0) {
     sidebarOpen.value = !sidebarOpen.value;
   }
 };
-const showDiscord = window.location.host.search('ping.pub') > -1;
 
 function isNavGroup(nav: VerticalNavItems | any): nav is NavGroup {
   return (<NavGroup>nav).children !== undefined;
 }
 function isNavLink(nav: VerticalNavItems | any): nav is NavLink {
   return (<NavLink>nav).to !== undefined;
-}
-function isNavTitle(nav: VerticalNavItems | any): nav is NavSectionTitle {
-  return (<NavSectionTitle>nav).heading !== undefined;
 }
 function selected(route: any, nav: NavLink) {
   const b =
@@ -90,8 +81,6 @@ const socials = [
   },
 ];
 
-const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.path));
-
 </script>
 
 <template>
@@ -106,17 +95,7 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
     }">
       <div @click.stop
         class="w-3/4 h-screen left-0 top-0 bottom-0 overflow-auto bg-almost-black border-r rounded-r-2xl border-almost-black dark:border-[#171718]">
-        <!-- <div class="flex justify-center mt-1 py-4 mb-1">
-          <RouterLink to="/" class="flex items-center">
-            <img class="w-157 h-53" src="../../assets/logo.svg" />
-          </RouterLink>
-          <div class="pl-4 cursor-pointer xl:!hidden" @click="sidebarShow = false">
-            <Icon icon="mdi-close" class="text-2xl" />
-          </div>
-        </div> -->
-
         <NavBarWallet :isSidebar="true" />
-
         <div v-for="(item, index) of blockchain.computedChainMenu" :key="index">
           <div v-if="isNavGroup(item)" :tabindex="index" class="collapse" :class="{
             'collapse-arrow': item?.children?.length > 0,
@@ -124,21 +103,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
             'collapse-close': index === 0 && !sidebarOpen,
           }">
             <input type="checkbox" class="cursor-pointer !h-10 block" @click="changeOpen(index)" />
-            <!-- <div
-              class="collapse-title !py-0 px-4 flex items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-[#535353]">
-              <Icon v-if="item?.icon?.icon" :icon="item?.icon?.icon" class="text-xl mr-2" :class="{
-                'text-yellow-500': item?.title === 'Favorite',
-                'text-gray-500': item?.title !== 'Favorite',
-              }" />
-              <img v-if="item?.icon?.image" :src="item?.icon?.image" class="w-6 h-6 rounded-full mr-3" />
-              <div class="text-base capitalize flex-1 text-[#FFFFFF] dark:text-[#FFFFFF] whitespace-nowrap">
-                {{ item?.title }}
-              </div>
-              <div v-if="item?.badgeContent" class="mr-6 badge badge-sm text-white border-none"
-                :class="item?.badgeClass">
-                {{ item?.badgeContent }}
-              </div>
-            </div> -->
             <div class="collapse-content w-full py-0 px-6">
               <div class="menu w-auto p-0 mb-1">
                 <RouterLink class="flex p-0 items-center" :to="{ path: '/' }" active-class="!text-header-text"
@@ -156,14 +120,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
               <div v-for="(el, key) of item?.children?.filter(ch => ch.title !== 'module.uptime')"
                 class="menu w-full p-0 mb-1 rounded-full">
                 <RouterLink v-if="isNavLink(el)" @click="sidebarShow = false" class="flex items-center" :to="el.to">
-                  <!-- <Icon v-if="!el?.icon?.image" icon="mdi:rhombus-medium" class="mr-2 ml-3" :class="{
-                    'text-[#D9D9D9]':
-                      $route.path === el?.to?.path &&
-                      item?.title !== 'Favorite',
-                  }" /> -->
-                  <!-- <img v-if="el?.icon?.image" :src="el?.icon?.image" class="w-6 h-6 rounded-full mr-3 ml-4" :class="{
-                    'border border-gray-300 bg-white': selected($route, el),
-                  }" /> -->
                   <div
                     class="header-16-medium tracking-wide capitalize text-[#C9C9C9] dark:text-gray-300 py-2 px-4 rounded-full"
                     :class="{
@@ -175,64 +131,20 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
               </div>
             </div>
           </div>
-
-          <!-- <RouterLink v-if="isNavLink(item)" :to="item?.to" @click="sidebarShow = false"
-            class="cursor-pointer rounded-lg px-4 flex items-center py-2 hover:bg-gray-100 dark:hover:bg-[#373f59]">
-            <Icon v-if="item?.icon?.icon" :icon="item?.icon?.icon" class="text-xl mr-2" :class="{
-              'text-yellow-500': item?.title === 'Favorite',
-              'text-gray-500': item?.title !== 'Favorite',
-            }" />
-            <img v-if="item?.icon?.image" :src="item?.icon?.image"
-              class="w-6 h-6 rounded-full mr-3 border border-blue-100" />
-            <div class="text-base capitalize flex-1 text-gray-700 dark:text-gray-200 whitespace-nowrap">
-              {{ item?.title }}
-            </div>
-            <div v-if="item?.badgeContent" class="badge badge-sm text-white border-none" :class="item?.badgeClass">
-              {{ item?.badgeContent }}
-            </div>
-          </RouterLink> -->
-          <!-- <div v-if="isNavTitle(item)" class="px-4 text-sm text-gray-400 pb-2 uppercase">
-            {{ item?.heading }}
-          </div> -->
         </div>
         <div class="px-2">
-          <!-- <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">Tools</div>
-          <RouterLink to="/wallet/suggest"
-            class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]">
-            <Icon icon="mdi:frequently-asked-questions" class="text-xl mr-2" />
-            <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">
-              Wallet Helper
-            </div>
-          </RouterLink> -->
-
-          <!-- <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
-          {{ $t('module.links') }}
-        </div>
-
-        <a v-for="social in socials"
-          class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
-          :href="social.href" target="_blank" :key="social.name">
-          <Icon :icon="social.icon" class="text-xl mr-2" width="20" height="20" />
-          <span class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">{{ social.name }}</span>
-        </a> -->
           <Socials :list="socials" className="flex" />
-
-
         </div>
       </div>
     </div>
-
     <header class="w-full flex justify-between border-y border-addition mt-[26px] mb-5 max-h-[52px]">
       <RouterLink to="/" class=" hidden xl:flex items-center mx-8 ">
         <img class="w-full max-w-32 h-auto" src="../../assets/logo.svg" />
       </RouterLink>
-
       <div class="text-2xl text-white px-5 my-3 cursor-pointer xl:!hidden" @click="sidebarShow = true">
         <Icon icon="mdi-menu" />
       </div>
-
       <ChainProfile />
-
       <div class="flex items-center xl:w-full xl:justify-between">
         <div
           v-for="(item, index) of blockchain.computedChainMenu.filter(item => isNavGroup(item) && !item.badgeContent)"
@@ -242,7 +154,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
             'collapse-open': index === 0 && sidebarOpen,
             'collapse-close': index === 0 && !sidebarOpen,
           }">
-
             <div class="collapse-content flex w-full h-full !p-0">
               <div
                 v-for="(el, key) of item?.children.filter(item => isNavLink(item) && item?.to.path !== '/cosmos/uptime')"
@@ -263,7 +174,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
             </div>
           </div>
         </div>
-
         <div class="flex items-center xl:w-full" :class="{
           'xl:justify-between': !!walletStore?.currentAddress,
           'xl:justify-end': !walletStore?.currentAddress
@@ -271,10 +181,7 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
           <NavbarSearch v-if="!!walletStore?.currentAddress" class="hidden md:!inline-block xl:ml-4 pr-2" />
           <NavBarWallet />
         </div>
-
       </div>
-
-
     </header>
 
     <!-- 👉 Pages -->
@@ -285,10 +192,6 @@ const shouldShow = computed(() => route.path === '/' || /^\/[^/]+$/.test(route.p
         </Transition>
       </RouterView>
     </div>
-
-
-    <!-- <newFooter /> -->
-    <!-- </div> -->
   </div>
 </template>
 

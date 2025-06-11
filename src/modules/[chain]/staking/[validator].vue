@@ -266,21 +266,9 @@ const max = computed(
 
 const rates = computed(() => (
   [
-    {
-
-
-      // <!-- FIXME: hardcode -->
-      name: 'Participation Rate',
-      value: format.percent('97%'),
-
-      label: '252/260',
-    },
-    // {},
+    {},
     {
       name: 'Total Bond',
-      // Total Bond в % =
-      // Total Stake (количество монет  которые застейканы всети) / 
-      // Количество моонет, которое  заделегировано валидатору вообще со всех адресов
       value: totalBond.value,
       label: format.formatTokenAmount({
         amount: v.value.tokens,
@@ -295,14 +283,9 @@ const rates = computed(() => (
     },
   ]
 ));
-
 const airdropStatus = ref('high');
-
 const validatorApr = computed(() => (Number(apr.value.replace(/%/g, '')) / 100) * (1 - rate.value / 100));
-const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking.pool.bonded_tokens));
-
-// watch(() => v.value.tokens, newVal => console.log(newVal))
-
+const totalBond = computed(() => format.roundedDisplayPercent(v.value.tokens, staking.pool.bonded_tokens));
 </script>
 
 <template>
@@ -332,23 +315,17 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
           <div class="md:max-w-[395px] md:thick-border-block p-5 md:-ml-14 md:pl-16 mt-4 mb-4 bg-transparent md:bg-black truncate text-center md:text-start">
             <p v-if="airdropStatus === 'high'" class="header-16 text-green-text tracking-wide mb-1">
               <!-- FIXME: hardcode -->
-
               Airdrop High Probability
-
             </p>
 
             <p v-if="airdropStatus === 'no'" class="header-16 text-red-text tracking-wide mb-1">
               <!-- FIXME: hardcode -->
-
               No airdrop
-
             </p>
 
             <p v-if="airdropStatus === 'low'" class="header-16 text-warning-text tracking-wide mb-1">
               <!-- FIXME: hardcode -->
-
               Airdrop Low Probability
-
             </p>
 
             <p class="uppercase header-36 text-white truncate">{{ v.description?.moniker }}</p>
@@ -397,8 +374,6 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
             </p>
           </div>
 
-
-
           <!-- FIXME: hardcode -->
           <div class="flex flex-col gap-1 text-white tracking-wide header-16 md:pl-8">
             <p>
@@ -415,7 +390,6 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
 
             <CircleProgressComponent v-if="item.value" class="text-header-text header-36" :size="144"
               :value="(+item.value)">
-              <!-- {{ `${Math.round(+item.value)}%` }} -->
               {{ item.value }}
             </CircleProgressComponent>
 
@@ -439,7 +413,6 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
         <Icon icon="mingcute:star-fill" class="absolute -top-2.5 right-0.5  text-white" width="35" height="35" />
 
         <p class="header-20-medium mb-0.5" :class="'text-star-yellow'">Bonus</p>
-        <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->
         <p class="body-text-16 text-white leading-5 line-clamp-2"> You will get $PHMN for delegating to this validator
         </p>
       </div>
@@ -455,7 +428,6 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
         <Icon icon="mingcute:star-fill" class="absolute -top-2.5 right-0.5  text-white" width="35" height="35" />
 
         <p class="header-20-medium mb-0.5" :class="'text-star-yellow'">Bonus is possible</p>
-        <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->
         <p class="body-text-16 text-white leading-5 line-clamp-3"> You will get any bonuses for delegating to this
           validator if you...
         </p>
@@ -466,385 +438,11 @@ const totalBond = computed(() => format.calculatePercent(v.value.tokens, staking
         class="max-w-80 mt-10 md:mt-0 md:w-80 md:h-[100px] relative xl:absolute xl:bottom-20 xl:right-0 xl:translate-x-1/2 rounded-full border border-red-text bg-black py-2.5 px-12">
 
         <p class="header-20-medium mb-0.5" :class="'text-red-text'">NO Bonus</p>
-        <!-- <p class="body-text-16 text-white leading-5 line-clamp-2">{{ v.description?.details }}</p> -->
         <p class="body-text-16 text-white leading-5 line-clamp-2"> You will not get any bonuses for delegating to this
           validator
         </p>
       </div>
     </div>
-
-    <!-- text for badge??? -->
-
-
-
-
-
-
-
-
-    <!-- old -->
-    <!-- <div class="bg-base-100 px-4 pt-3 pb-4 rounded shadow border-gray-500">
-      <div class="flex flex-col lg:!flex-row pt-2 pb-1">
-
-        <div class="flex-1">
-          <div class="flex">
-            <div class="avatar mr-4 relative w-24 rounded-lg overflow-hidden">
-              <div class="w-24 rounded-lg absolute opacity-10"></div>
-              <div class="w-24 rounded-lg">
-                <img v-if="identity && avatars[identity] !== 'undefined'" v-lazy="logo(identity)" class="object-contain"
-                  @error="
-                    (e) => {
-                      loadAvatar(identity);
-                    }
-                  " />
-                <Icon v-else class="text-8xl" :icon="`mdi-help-circle-outline`" />
-              </div>
-            </div>
-            <div class="mx-2">
-              <h4>{{ v.description?.moniker }}</h4>
-              <div class="text-sm mb-4">
-                {{ v.description?.identity || '-' }}
-              </div>
-              <label for="delegate" class="btn btn-primary btn-sm w-full" @click="
-                dialog.open('delegate', {
-                  validator_address: v.operator_address,
-                })
-                ">{{ $t('account.btn_delegate') }}</label>
-            </div>
-          </div>
-          <div class="m-4 text-sm">
-            <p class="text-sm mb-3 font-medium">{{ $t('staking.about_us') }}</p>
-            <div class="card-list">
-              <div class="flex items-center mb-2">
-                <Icon icon="mdi-web" class="text-xl mr-1" />
-                <span class="font-bold mr-2">{{ $t('staking.website') }}: </span>
-                <a :href="v?.description?.website || '#'" :class="v?.description?.website
-                  ? 'cursor-pointer'
-                  : 'cursor-default'
-                  ">
-                  {{ v.description?.website || '-' }}
-                </a>
-              </div>
-              <div class="flex items-center">
-                <Icon icon="mdi-email-outline" class="text-xl mr-1" />
-                <span class="font-bold mr-2">{{ $t('staking.contact') }}: </span>
-                <a v-if="v.description?.security_contact" :href="'mailto:' + v.description.security_contact || '#'"
-                  class="cursor-pointer">
-                  {{ v.description?.security_contact || '-' }}
-                </a>
-              </div>
-            </div>
-            <p class="text-sm mt-4 mb-3 font-medium">{{ $t('staking.validator_status') }}</p>
-            <div class="card-list">
-              <div class="flex items-center mb-2">
-                <Icon icon="mdi-shield-account-outline" class="text-xl mr-1" />
-                <span class="font-bold mr-2">{{ $t('staking.status') }}: </span><span>
-                  {{ String(v.status).replace('BOND_STATUS_', '') }}
-                </span>
-              </div>
-              <div class="flex items-center">
-                <Icon icon="mdi-shield-alert-outline" class="text-xl mr-1" />
-                <span class="font-bold mr-2">{{ $t('staking.jailed') }}: </span>
-                <span> {{ v.jailed || '-' }} </span>
-              </div>
-            </div>
-            <p class="text-sm mt-4 mb-3 font-medium">{{ $t('staking.liquid_staking') }}</p>
-            <div class="card-list">
-              <div class="flex items-center mb-2">
-                <Icon icon="mdi-lock" class="text-xl mr-1" />
-                <span class="font-bold mr-2">{{ $t('staking.validator_bond_share') }}: </span>
-                <span> {{ format.formatToken({ amount: v.validator_bond_shares, denom: staking.params.bond_denom },
-                  false) }} </span>
-              </div>
-              <div class="flex items-center">
-                <Icon icon="mdi-waves-arrow-right" class="text-xl mr-1" />
-                <span class="font-bold mr-2">{{ $t('staking.liquid_staking_shares') }}: </span>
-                <span>
-                  {{ format.formatToken({ amount: v.liquid_shares, denom: staking.params.bond_denom }, false) }}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex-1">
-          <div class="flex flex-col mt-10">
-            <div class="flex mb-2">
-              <div class="flex items-center justify-center rounded w-10 h-10" style="border: 1px solid #666">
-                <Icon icon="mdi-coin" class="text-3xl" />
-              </div>
-              <div class="ml-3 flex flex-col justify-center">
-                <h4>
-                  {{
-                    format.formatToken2({
-                      amount: v.tokens,
-                      denom: staking.params.bond_denom,
-                    })
-                  }}
-                </h4>
-                <span class="text-sm">{{ $t('staking.total_bonded') }}</span>
-              </div>
-            </div>
-            <div class="flex mb-2">
-              <div class="flex items-center justify-center rounded w-10 h-10" style="border: 1px solid #666">
-                <Icon icon="mdi-percent" class="text-3xl" />
-              </div>
-              <div class="ml-3 flex flex-col justify-center">
-                <h4>
-                  {{ format.formatToken(selfBonded.balance) }} ({{ selfRate }})
-                </h4>
-                <span class="text-sm">{{ $t('staking.self_bonded') }}</span>
-              </div>
-            </div>
-
-            <div class="flex mb-2">
-              <div class="flex items-center justify-center rounded w-10 h-10" style="border: 1px solid #666">
-                <Icon icon="mdi-account-tie" class="text-3xl" />
-              </div>
-
-              <div class="ml-3 flex flex-col">
-                <h4>
-                  {{ v.min_self_delegation }} {{ staking.params.bond_denom }}
-                </h4>
-                <span class="text-sm">{{ $t('staking.min_self') }}</span>
-              </div>
-            </div>
-            <div class="flex mb-2">
-              <div class="flex items-center justify-center rounded w-10 h-10" style="border: 1px solid #666">
-                <Icon icon="mdi-finance" class="text-3xl" />
-              </div>
-              <div class="ml-3 flex flex-col justify-center">
-                <h4>{{ apr }}</h4>
-                <span class="text-sm">{{ $t('staking.annual_profit') }}</span>
-              </div>
-            </div>
-
-            <div class="flex mb-2">
-              <div class="flex items-center justify-center rounded w-10 h-10" style="border: 1px solid #666">
-                <Icon icon="mdi:arrow-down-bold-circle-outline" class="text-3xl" />
-              </div>
-              <div class="ml-3 flex flex-col justify-center">
-                <h4>{{ v.unbonding_height }}</h4>
-                <span class="text-sm">{{ $t('staking.unbonding_height') }}</span>
-              </div>
-            </div>
-
-            <div class="flex mb-2">
-              <div class="flex items-center justify-center rounded w-10 h-10" style="border: 1px solid #666">
-                <Icon icon="mdi-clock" class="text-3xl" />
-              </div>
-              <div class="ml-3 flex flex-col justify-center">
-                <h4 v-if="v.unbonding_time && !v.unbonding_time.startsWith('1970')">{{ format.toDay(v.unbonding_time,
-                  'from') }}</h4>
-                <h4 v-else>-</h4>
-                <span class="text-sm">{{ $t('staking.unbonding_time') }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-sm px-4 pt-3 border-t">{{ v.description?.details }}</div>
-    </div> -->
-
-    <!-- <div class="mt-3 grid grid-cols-1 md:!grid-cols-3 gap-4">
-      <div>
-        <CommissionRate :commission="v.commission"></CommissionRate>
-      </div>
-      <div class="bg-base-100 rounded shadow relative overflow-auto">
-        <div class="text-lg font-semibold text-main px-4 pt-4">
-          {{ $t('staking.commissions_&_rewards') }}
-        </div>
-        <div class="px-4 mt-1 flex flex-col justify-between pb-4 max-h-72" style="height: calc(100% - 50px)">
-          <div class="overflow-auto flex-1">
-            <div class="text-sm mb-2">{{ $t('staking.commissions') }}</div>
-            <div v-for="(i, k) in commission" :key="`reward-${k}`" color="info" label variant="outlined"
-              class="mr-1 mb-1 badge text-xs">
-              {{ format.formatToken2(i) }}
-            </div>
-            <div class="text-sm mb-2 mt-2">{{ $t('staking.outstanding') }} {{ $t('account.rewards') }}</div>
-            <div v-for="(i, k) in rewards" :key="`reward-${k}`" class="mr-1 mb-1 badge text-xs">
-              {{ format.formatToken2(i) }}
-            </div>
-          </div>
-          <div class="">
-            <label for="withdraw_commission" class="btn btn-primary w-full" @click="
-              dialog.open('withdraw_commission', {
-                validator_address: v.operator_address,
-              })
-              ">{{ $t('account.btn_withdraw') }}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-base-100 rounded shadow overflow-x-auto">
-        <div class="px-4 pt-4 mb-2 text-main font-lg font-semibold">
-          {{ $t('staking.addresses') }}
-        </div>
-        <div class="px-4 pb-4">
-          <div class="mb-3">
-            <div class="text-sm flex">{{ $t('staking.account_addr') }}
-              <Icon icon="mdi:content-copy" class="ml-2 cursor-pointer" v-show="addresses.account"
-                @click="copyWebsite(addresses.account || '')" />
-            </div>
-            <RouterLink class="text-xs text-primary" :to="`/${chain}/account/${addresses.account}`">
-              {{ addresses.account }}
-            </RouterLink>
-          </div>
-          <div class="mb-3">
-            <div class="text-sm flex">{{ $t('staking.operator_addr') }}
-              <Icon icon="mdi:content-copy" class="ml-2 cursor-pointer" v-show="v.operator_address"
-                @click="copyWebsite(v.operator_address || '')" />
-            </div>
-            <div class="text-xs">
-              {{ v.operator_address }}
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="text-sm flex">{{ $t('staking.hex_addr') }}
-              <Icon icon="mdi:content-copy" class="ml-2 cursor-pointer" v-show="addresses.hex"
-                @click="copyWebsite(addresses.hex || '')" />
-            </div>
-            <div class="text-xs">{{ addresses.hex }}</div>
-          </div>
-          <div class="mb-3">
-            <div class="text-sm flex">{{ $t('staking.signer_addr') }}
-              <Icon icon="mdi:content-copy" class="ml-2 cursor-pointer" v-show="addresses.valCons"
-                @click="copyWebsite(addresses.valCons || '')" />
-            </div>
-            <div class="text-xs">{{ addresses.valCons }}</div>
-          </div>
-          <div>
-            <div class="text-sm flex">{{ $t('staking.consensus_pub_key') }}
-              <Icon icon="mdi:content-copy" class="ml-2 cursor-pointer" v-show="v.consensus_pubkey"
-                @click="copyWebsite(JSON.stringify(v.consensus_pubkey) || '')" />
-            </div>
-            <div class="text-xs">{{ v.consensus_pubkey }}</div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div v-if="delegations.delegation_responses" class="mt-5 bg-base-100 shadow rounded p-4 ">
-
-      <div class="text-lg mb-4 font-semibold">{{ $t('account.delegations') }}
-        <span class="float-right"> {{ delegations.delegation_responses?.length || 0 }} / {{
-          delegations.pagination?.total || 0 }} </span>
-      </div>
-      <div class="rounded overflow-auto">
-        <table class="table validatore-table w-full">
-          <thead>
-            <th class="text-left pl-4" style="position: relative; z-index: 2">
-              {{ $t('account.delegator') }}
-            </th>
-            <th class="text-left pl-4">{{ $t('account.delegation') }}</th>
-          </thead>
-          <tbody>
-            <tr v-for="{ balance, delegation } in delegations.delegation_responses">
-              <td class="text-sm text-primary">
-                {{ delegation.delegator_address }}
-              </td>
-              <td class="truncate text-primary">
-                {{ format.formatToken(balance) }}
-              </td>
-
-            </tr>
-          </tbody>
-        </table>
-        <PaginationBar :total="delegations.pagination?.total" :limit="page.limit" :callback="pageload" />
-      </div>
-    </div>
-
-    <div class="mt-5 bg-base-100 shadow rounded p-4">
-      <div class="text-lg mb-4 font-semibold">{{ $t('account.transactions') }}</div>
-      <div class="rounded overflow-auto">
-        <table class="table validatore-table w-full">
-          <thead>
-            <th class="text-left pl-4" style="position: relative; z-index: 2">
-              {{ $t('account.height') }}
-            </th>
-            <th class="text-left pl-4">{{ $t('account.hash') }}</th>
-            <th class="text-left pl-4" width="40%">{{ $t('account.messages') }}</th>
-            <th class="text-left pl-4">{{ $t('account.time') }}</th>
-          </thead>
-          <tbody>
-            <tr v-for="(item, i) in txs.tx_responses">
-              <td class="text-sm text-primary">
-                <RouterLink :to="`/${props.chain}/block/${item.height}`">{{
-                  item.height
-                }}</RouterLink>
-              </td>
-              <td class="truncate text-primary" style="max-width: 200px">
-                <RouterLink :to="`/${props.chain}/tx/${item.txhash}`">
-                  {{ item.txhash }}
-                </RouterLink>
-              </td>
-              <td>
-                <div class="flex items-center">
-                  <span class="mr-2">{{
-                    format.messages(item.tx.body.messages)
-                  }}</span>
-                  <Icon v-if="item.code === 0" icon="mdi-check" class="text-yes" />
-                  <Icon v-else icon="mdi-multiply" class="text-no" />
-                </div>
-              </td>
-              <td width="150">{{ format.toDay(item.timestamp, 'from') }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="mt-5 bg-base-100 shadow rounded p-4">
-      <div class="text-lg mb-4 font-semibold">
-        <div class="tabs tabs-boxed bg-transparent">
-
-          <span class="mr-10">Voting Power Events: </span>
-          <a class="tab text-gray-400" :class="{ 'tab-active': selectedEventType === EventType.Delegate }"
-            @click="loadPowerEvents(1, EventType.Delegate)">{{ $t('account.btn_delegate') }}</a>
-          <a class="tab text-gray-400" :class="{ 'tab-active': selectedEventType === EventType.Unbond }"
-            @click="loadPowerEvents(1, EventType.Unbond)">{{ $t('account.btn_unbond') }}</a>
-        </div>
-      </div>
-      <div class="rounded overflow-auto">
-        <table class="table validatore-table w-full">
-          <thead>
-            <th class="text-left pl-4">{{ $t('account.delegator') }}</th>
-            <th class="text-left pl-4">{{ $t('account.amount') }}</th>
-            <th class="text-left pl-4">{{ $t('account.height') }} / {{ $t('account.time') }}</th>
-          </thead>
-          <tbody>
-            <tr v-for="(item, i) in events.tx_responses">
-              <td class="pr-2 truncate text-primary" style="max-width: 250px">
-                <RouterLink v-for="d in mapDelegators(item.tx?.body?.messages)" :to="`/${props.chain}/account/${d}`">
-                  {{ d }}
-                </RouterLink>
-              </td>
-              <td>
-                <div class="flex items-center" :class="{
-                  'text-yes': selectedEventType === EventType.Delegate,
-                  'text-no': selectedEventType === EventType.Unbond,
-                }">
-                  <RouterLink :to="`/${props.chain}/tx/${item.txhash}`">
-                    <span class="mr-2">
-                      {{ (selectedEventType === EventType.Delegate ? '+' : '-') }} {{
-                        mapEvents(item.events).map((x: any) => x.amount).join(", ")
-                      }}</span>
-                  </RouterLink>
-                  <Icon v-if="item.code === 0" icon="mdi-check" class="text-yes" />
-                  <Icon v-else icon="mdi-multiply" class="text-no" />
-                </div>
-              </td>
-              <td width="150">
-                <RouterLink class="text-primary mb-0" :to="`/${props.chain}/block/${item.height}`">{{
-                  item.height
-                }}</RouterLink><br>
-                <span class="text-xs pt-0 mt-0">{{ format.toDay(item.timestamp, 'from') }}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <PaginationBar :total="events.pagination?.total" :limit="page.limit" :callback="pagePowerEvents" />
-      </div>
-    </div> -->
     <div class="toast" v-show="showCopyToast === 1">
       <div
         class="relative bg-almost-black flex items-center gap-4 p-4 border border-button-text rounded text-green-text">

@@ -9,10 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <div :style="{
-        // width: `${size}px`,
-        // height: `${size}px`,
-    }">
+    <div>
         <div class="relative rounded overflow-hidden flex items-center justify-center text-[#3FB6A8]">
             <div class="absolute top-0 left-0 bottom-0 right-0 bg-almost-black rounded-full m-2"></div>
 

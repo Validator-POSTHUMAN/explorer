@@ -285,7 +285,6 @@ const amount = computed({
                       {{ ticker?.market?.name || '' }}
                     </div>
                   </div>
-
                   <div class="w-full">
                     <div class="header-24 tracking-wide text-[#FFFFFF]">
                       ${{ ticker?.converted_last?.usd }}
@@ -294,8 +293,6 @@ const amount = computed({
                       {{ store.priceChange }}%
                     </div>
                   </div>
-
-
                 </div>
               </label>
               <div class="dropdown-content pt-1">
@@ -327,7 +324,6 @@ const amount = computed({
             <div class="flex">
               <!-- Put this part before </body> tag -->
               <input type="checkbox" id="calculator" class="modal-toggle" />
-
               <div class="modal">
                 <label class="modal-backdrop" for="calculator">{{
                   $t('index.close')
@@ -348,99 +344,9 @@ const amount = computed({
         <div class="col-span-1 md:col-span-7 xl:col-span-8">
           <PriceMarketChart />
         </div>
-
       </div>
-
       <AddNetworkComponent />
-
     </div>
-    <!-- <div class="grid grid-cols-1 gap-4 md:!grid-cols-3 lg:!grid-cols-6">
-      <div v-for="(item, key) in store.stats" :key="key">
-        <CardStatisticsVertical v-bind="item" />
-      </div>
-    </div> -->
-
-    <!-- <div class="bg-[#141415] rounded mt-4 shadow">
-
-      <div v-if="walletStore.delegations.length > 0" class="px-4 pb-4 overflow-auto bg-[#141415]">
-        <table class="table table-compact w-full table-zebra">
-          <thead>
-            <tr>
-              <th>{{ $t('account.validator') }}</th>
-              <th>{{ $t('account.delegations') }}</th>
-              <th>{{ $t('account.rewards') }}</th>
-              <th>{{ $t('staking.actions') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, index) in walletStore.delegations" :key="index">
-              <td>
-                <RouterLink class="link link-primary no-underline"
-                  :to="`/${chain}/staking/${item?.delegation?.validator_address}`">
-                  {{
-                    format.validatorFromBech32(
-                      item?.delegation?.validator_address
-                    )
-                  }}
-                </RouterLink>
-              </td>
-              <td>{{ format.formatToken(item?.balance) }}</td>
-              <td>
-                {{
-                  format.formatTokens(
-                    walletStore?.rewards?.rewards?.find(
-                      (el) =>
-                        el?.validator_address ===
-                        item?.delegation?.validator_address
-                    )?.reward
-                  )
-                }}
-              </td>
-              <td>
-                <div>
-                  <label for="delegate" class="btn !btn-xs !btn-primary btn-ghost rounded-sm mr-2" @click="
-                    dialog.open(
-                      'delegate',
-                      {
-                        validator_address: item.delegation.validator_address,
-                      },
-                      updateState
-                    )
-                    ">
-                    {{ $t('account.btn_delegate') }}
-                  </label>
-                  <label for="withdraw" class="btn !btn-xs !btn-primary btn-ghost rounded-sm" @click="
-                    dialog.open(
-                      'withdraw',
-                      {
-                        validator_address: item.delegation.validator_address,
-                      },
-                      updateState
-                    )
-                    ">
-                    {{ $t('index.btn_withdraw_reward') }}
-                  </label>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <Teleport to="body">
-        <ping-token-convert :chain-name="blockchain?.current?.prettyName" :endpoint="blockchain?.endpoint?.address"
-          :hd-path="walletStore?.connectedWallet?.hdPath"></ping-token-convert>
-      </Teleport>
-    </div> -->
-
-    <!-- <div v-if="!store.coingeckoId" class="bg-base-100 rounded mt-4">
-      <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
-        {{ $t('index.node_info') }}
-      </div>
-      <ArrayObjectElement :value="paramStore.nodeVersion?.items" :thead="false" />
-      <div class="h-4"></div>
-    </div> -->
-
   </div>
 </template>
 

@@ -8,8 +8,7 @@ import {
   useTxDialog,
 } from '@/stores';
 import { computed } from '@vue/reactivity';
-import { onMounted, ref, watch } from 'vue';
-import { Icon } from '@iconify/vue';
+import { onMounted, ref, } from 'vue';
 import type { Coin, Key, SigningInfo, SlashingParam, Validator } from '@/types';
 import { formatSeconds } from '@/libs/utils';
 import IconTrendUp from '@/components/icons/IconTrendUp.vue';
@@ -487,10 +486,6 @@ const toggleSortDirection = (field: string) => {
           <a v-for="item in tabs" class="btn-fill w-full md:w-36" :class="{ 'bg-button-v2': tab === item.name }"
             @click="tab = item.name">{{ $t(item.value) }}</a>
         </div>
-
-        <!-- <div class="text-lg font-semibold">
-          {{ list.length }}/{{ staking.params.max_validators }}
-        </div> -->
       </div>
 
       <div class="pt-3 pb-4">
@@ -625,21 +620,6 @@ const toggleSortDirection = (field: string) => {
             </table>
           </div>
         </div>
-
-        <!-- <div class="divider"></div>
-        <div class="flex flex-row items-center">
-          <div class="text-xs truncate relative py-2 px-4 rounded-md w-fit text-error mr-2">
-            <span class="inset-x-0 inset-y-0 opacity-10 absolute bg-error"></span>
-            {{ $t('staking.top') }} 33%
-          </div>
-          <div class="text-xs truncate relative py-2 px-4 rounded-md w-fit text-warning">
-            <span class="inset-x-0 inset-y-0 opacity-10 absolute bg-warning"></span>
-            {{ $t('staking.top') }} 67%
-          </div>
-          <div class="text-xs hidden md:!block pl-2">
-            {{ $t('staking.description') }}
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
