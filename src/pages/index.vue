@@ -6,6 +6,7 @@ import {
   type ChainConfig,
 } from '@/stores/useDashboard';
 import ChainSummary from '@/components/ChainSummary.vue';
+
 import { computed, ref } from 'vue';
 import { useBlockchain } from '@/stores';
 

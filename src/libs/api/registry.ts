@@ -5,8 +5,13 @@ import type {
   Coin,
   ConnectionWithProof,
   DenomTrace,
+  Group,
+  GroupProposal,
+  GroupTallyResult,
   NodeInfo,
   PaginabledAccounts,
+  PaginatedGroupProposals,
+  PaginatedGroups,
   PaginatedIBCChannels,
   PaginatedIBCConnections,
   PaginatedTendermintValidator,
@@ -45,7 +50,7 @@ import type { PaginatedTxs, Tx, TxResponse } from '@/types';
 import semver from 'semver'
 export interface Request<T> {
   url: string;
-  adapter: (source: any) => T;
+  adapter: (source: any) => Promise<T>;
 }
 
 export interface AbstractRegistry {
@@ -126,6 +131,13 @@ export interface RequestRegistry extends AbstractRegistry {
 
   params: Request<{param: any}>;
 
+  group_groups: Request<PaginatedGroups>;
+  group_groups_by_admin: Request<PaginatedGroups>;
+  group_groups_by_member: Request<PaginatedGroups>;
+  group_proposal: Request<{ proposal: GroupProposal }>;
+  group_proposal_tally: Request<{ tally: GroupTallyResult }>;
+  group_proposals_by_group_policy: Request<PaginatedGroupProposals>;
+
   tx_txs: Request<PaginatedTxs>;
   tx_txs_block: Request<Tx>;
   tx_hash: Request<{ tx: Tx; tx_response: TxResponse }>;
@@ -152,9 +164,11 @@ export interface RequestRegistry extends AbstractRegistry {
   ibc_core_connection_connections_connection_id: Request<ConnectionWithProof>;
   ibc_core_connection_connections_connection_id_client_state: Request<ClientStateWithProof>;
   interchain_security_ccv_provider_validator_consumer_addr: Request<{consumer_address: string}>
+  interchain_security_provider_opted_in_validators: Request<{validators_provider_addresses: string[]}>
+  interchain_security_consumer_validators: Request<{validators: {provider_address: string, consumer_key: {ed25519: string}, power: string}[]}>
 }
 
-export function adapter<T>(source: any): T {
+export function adapter<T>(source: any): Promise<T> {
   return source;
 }
 
@@ -195,11 +209,10 @@ export function findApiProfileBySDKVersion(
   version: string,
 ): RequestRegistry | undefined {
   let closestVersion: string | null = null;
-
+  const chain_version = version.match(/(\d+\.\d+\.?\d*)/g) || [""];
   for (const k in VERSION_REGISTRY) {
     const key = k.replace('v', "")
-    // console.log(semver.gt(key, version), semver.gte(version, key), key, version)
-    if (semver.lte(key, version)) {
+    if (semver.lte(key, chain_version[0])) {
       if (!closestVersion || semver.gt(key, closestVersion)) {
         closestVersion = k;
       }

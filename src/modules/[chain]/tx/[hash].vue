@@ -23,19 +23,35 @@ if (props.hash) {
     blockchain.rpc.getTx(props.hash).then((x) => (tx.value = x));
 }
 const messages = computed(() => {
-    return tx.value.tx?.body?.messages || [];
+    return tx.value.tx?.body?.messages.map(x=> {
+        if(x.packet?.data) {
+            // @ts-ignore
+            x.message = format.base64ToString(x.packet.data)
+        }
+        return x
+    }) || [];
 });
 </script>
 <template>
     <div>
+        <div class="tabs tabs-boxed bg-transparent mb-4">
+            <RouterLink class="tab text-gray-400 uppercase" 
+                :to="`/${chain}/tx/?tab=recent`"
+                >{{ $t('block.recent') }}</RouterLink>
+            <RouterLink class="tab text-gray-400 uppercase" 
+                :to="`/${chain}/tx/?tab=search`"
+                >Search</RouterLink>
+            <a class="tab text-gray-400 uppercase tab-active">Transaction</a>
+        </div>
+
         <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow mb-4">
             <h2 class="card-title truncate mb-2">{{ $t('tx.title') }}</h2>
-            <div class="overflow-auto-x">
+            <div class="overflow-hidden">
                 <table class="table text-sm">
                     <tbody>
                         <tr>
                             <td>{{ $t('tx.tx_hash') }}</td>
-                            <td>{{ tx.tx_response.txhash }}</td>
+                            <td class="overflow-hidden">{{ tx.tx_response.txhash }}</td>
                         </tr>
                         <tr>
                             <td>{{ $t('account.height') }}</td>

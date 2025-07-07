@@ -1,17 +1,15 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 // Components
 import newFooter from '@/layouts/components/NavFooter.vue';
-import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue';
 import NavbarSearch from '@/layouts/components/NavbarSearch.vue';
 import ChainProfile from '@/layouts/components/ChainProfile.vue';
 
 import { useDashboard } from '@/stores/useDashboard';
 import { useBlockchain } from '@/stores';
 
-import NavBarI18n from './NavBarI18n.vue';
 import NavBarWallet from './NavBarWallet.vue';
 import type {
   NavGroup,
@@ -19,6 +17,7 @@ import type {
   NavSectionTitle,
   VerticalNavItems,
 } from '../types';
+
 
 const dashboard = useDashboard();
 dashboard.initial();
@@ -30,6 +29,7 @@ const temp = ref('');
 blockchain.$subscribe((m, s) => {
   if (current.value === s.chainName && temp.value != s.endpoint.address) {
     temp.value = s.endpoint.address;
+
     blockchain.initial();
   }
   if (current.value != s.chainName) {
@@ -64,6 +64,7 @@ function selected(route: any, nav: NavLink) {
       nav.title.indexOf('dashboard') === -1);
   return b;
 }
+
 </script>
 
 <template>
@@ -80,10 +81,7 @@ function selected(route: any, nav: NavLink) {
             POSTHUMAN
           </h1> -->
         </RouterLink>
-        <div
-          class="pr-4 cursor-pointer xl:!hidden"
-          @click="sidebarShow = false"
-        >
+        <div class="pr-4 cursor-pointer xl:!hidden" @click="sidebarShow = false">
           <Icon icon="mdi-close" class="text-2xl" />
         </div>
       </div>
@@ -125,11 +123,7 @@ function selected(route: any, nav: NavLink) {
             >
               {{ item?.title }}
             </div>
-            <div
-              v-if="item?.badgeContent"
-              class="mr-6 badge badge-sm text-white border-none"
-              :class="item?.badgeClass"
-            >
+            <div v-if="item?.badgeContent" class="mr-6 badge badge-sm text-white border-none" :class="item?.badgeClass">
               {{ item?.badgeContent }}
             </div>
           </div>
@@ -211,10 +205,7 @@ function selected(route: any, nav: NavLink) {
             {{ item?.badgeContent }}
           </div>
         </RouterLink>
-        <div
-          v-if="isNavTitle(item)"
-          class="px-4 text-sm text-gray-400 pb-2 uppercase"
-        >
+        <div v-if="isNavTitle(item)" class="px-4 text-sm text-gray-400 pb-2 uppercase">
           {{ item?.heading }}
         </div>
       </div>
@@ -241,9 +232,7 @@ function selected(route: any, nav: NavLink) {
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
         >
           <Icon icon="mdi:twitter" class="text-xl mr-2" />
-          <div
-            class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200"
-          >
+          <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">
             Twitter
           </div>
         </a>
@@ -253,9 +242,7 @@ function selected(route: any, nav: NavLink) {
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
         >
           <Icon icon="mdi:discord" class="text-xl mr-2" />
-          <div
-            class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200"
-          >
+          <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">
             Discord
           </div>
         </a>

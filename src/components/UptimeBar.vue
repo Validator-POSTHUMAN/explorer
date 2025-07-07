@@ -2,9 +2,10 @@
 import type { Commit } from '@/types';
 import { computed, type PropType } from 'vue';
 
+
 const props = defineProps({
-  blocks: { type: Array as PropType<Commit[]> },
-  validator: { type: String },
+    blocks: { type: Array as PropType<Commit[]> },
+    validator: { type: String },
 });
 
 const bars = computed(() => {

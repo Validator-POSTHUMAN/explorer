@@ -1,7 +1,6 @@
 import {
   fromBase64,
   fromBech32,
-  fromHex,
   toBase64,
   toBech32,
   toHex,
@@ -10,13 +9,6 @@ import { Ripemd160, sha256 } from '@cosmjs/crypto';
 
 export function decodeAddress(address: string) {
   return fromBech32(address);
-}
-
-export function valoperToPrefix(valoper?: string) {
-  if (!valoper) return '';
-  const prefixIndex = valoper.indexOf('valoper');
-  if (prefixIndex === -1) return null;
-  return valoper.slice(0, prefixIndex);
 }
 
 export function operatorAddressToAccount(operAddress?: string) {
@@ -51,6 +43,23 @@ export function consensusPubkeyToHexAddress(consensusPubkey?: {
   return raw;
 }
 
+// not work as expected, will fix later or remove
+export function consumerKeyToBase64Address(consumerKey?: Record<string, string>) {
+
+  if (!consumerKey) return '';
+  let raw = '';
+  if (consumerKey.ed25519) {
+    const pubkey = fromBase64(consumerKey.ed25519);
+    if (pubkey) return toBase64(sha256(pubkey)).slice(0, 40);
+  }
+
+  if (consumerKey.secp256k1) {
+    const pubkey = fromBase64(consumerKey.secp256k1);
+    if (pubkey) return toBase64(new Ripemd160().update(sha256(pubkey)).digest());
+  }
+  return raw;
+}
+
 export function pubKeyToValcons(
   consensusPubkey: { '@type': string; key: string },
   prefix: string
@@ -59,14 +68,14 @@ export function pubKeyToValcons(
     const pubkey = fromBase64(consensusPubkey.key);
     if (pubkey) {
       const addressData = sha256(pubkey).slice(0, 20);
-      return toBech32(`${prefix}valcons`, addressData);
+      return toBech32(prefix, addressData);
     }
   }
   return '';
 }
 
 export function valconsToBase64(address: string) {
-  if (address) return toHex(fromBech32(address).data).toUpperCase();
+  if (address) return toBase64(fromBech32(address).data);
   return '';
 }
 

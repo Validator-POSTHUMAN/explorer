@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { useDashboard, type ChainConfig, useBlockchain } from '@/stores';
 import { CosmosRestClient } from '@/libs/client';
 import { onMounted } from 'vue';
-import AdBanner from '@/components/ad/AdBanner.vue';
 
 const error = ref("")
 const conf = ref("")
@@ -12,9 +11,7 @@ const selected = ref({} as ChainConfig)
 
 onMounted(() => {
     const chainStore = useBlockchain()
-    selected.value = chainStore.current || Object.values(dashboard.chains)[0]
-  debugger;
-    initParamsForKeplr()
+    selected.value = chainStore.current || Object.values(dashboard.chains)[0];
 })
 async function initParamsForKeplr() {
     const chain = selected.value
@@ -76,9 +73,9 @@ async function initParamsForKeplr() {
 
 function suggest() {
     // @ts-ignore
-    if (window.keplr) {
+    if (window.unisat) {
         // @ts-ignore
-        window.keplr.experimentalSuggestChain(JSON.parse(conf.value)).catch(e => {
+        window.unisat.experimentalSuggestChain(JSON.parse(conf.value)).catch(e => {
             error.value = e
         })
     }
@@ -87,14 +84,13 @@ function suggest() {
 
 <template>
     <div class="bg-base-100 p-4 rounded text-center">
-        <AdBanner id="keplr-banner-ad" unit="banner" width="970px" height="90px" />
         <div class="flex">
             <select v-model="selected" class="select select-bordered mx-5" @change="initParamsForKeplr">
                 <option v-for="c in dashboard.chains" :value="c">
                     {{ c.chainName }}
                 </option>
             </select>
-            <button class="btn !bg-yes !border-yes text-white px-10" @click="suggest">Add {{ selected.chainName }} TO Keplr Wallet</button>
+            <button class="btn !bg-yes !border-yes text-white px-10" @click="suggest">Add {{ selected.chainName }} TO Unisat Wallet</button>
         </div>
         <div class="text-main mt-5">
             <textarea v-model="conf" class="textarea textarea-bordered w-full" rows="15"></textarea>

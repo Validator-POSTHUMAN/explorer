@@ -32,7 +32,7 @@ const stakingStore = useStakingStore();
 const chainStore = useBlockchain();
 
 store.fetchProposal(props.proposal_id).then((res) => {
-  const proposalDetail = reactive(res.proposal);
+  let proposalDetail = reactive(res.proposal);
   // when status under the voting, final_tally_result are no data, should request fetchTally
   if (res.proposal?.status === 'PROPOSAL_STATUS_VOTING_PERIOD') {
     store.fetchTally(props.proposal_id).then((tallRes) => {
@@ -54,8 +54,35 @@ store.fetchProposal(props.proposal_id).then((res) => {
         })
     })
   }
+
+  const msgType = proposalDetail.content?.['@type'] || '';
+  if(msgType.endsWith('MsgUpdateParams')) {
+    if(msgType.indexOf('staking') > -1) {
+      chainStore.rpc.getStakingParams().then((res) => {
+        addCurrentParams(res);
+      });
+    } else if(msgType.indexOf('gov') > -1) {
+      chainStore.rpc.getGovParamsVoting().then((res) => {
+        addCurrentParams(res);
+      });
+    } else if(msgType.indexOf('distribution') > -1) {
+      chainStore.rpc.getDistributionParams().then((res) => {
+        addCurrentParams(res);
+      });
+    } else if(msgType.indexOf('slashing') > -1) {
+      chainStore.rpc.getSlashingParams().then((res) => {
+        addCurrentParams(res);
+      });
+    }
+  }
 });
 
+function addCurrentParams(res: any) {
+  if(proposal.value.content && res.params) {
+    proposal.value.content.params = [proposal.value.content?.params];
+    proposal.value.content.current = [res.params];
+  }
+}
 const color = computed(() => {
   if (proposal.value.status === 'PROPOSAL_STATUS_PASSED') {
     return 'success';
@@ -101,7 +128,7 @@ const upgradeCountdown = computed((): number => {
   if (height > 0) {
     const base = useBaseStore();
     const current = Number(base.latest?.block?.header?.height || 0);
-    return (height - current) * 6 * 1000;
+    return (height - current) * Number((base.blocktime / 1000).toFixed()) * 1000;
   }
   const now = new Date();
   const end = new Date(proposal.value.content?.plan?.time || '');
@@ -170,12 +197,16 @@ const processList = computed(() => {
 });
 
 function showValidatorName(voter: string) {
-  const { data } = fromBech32(voter);
-  const hex = toHex(data);
-  const v = stakingStore.validators.find(
-    (x) => toHex(fromBech32(x.operator_address).data) === hex
-  );
-  return v ? v.description.moniker : voter;
+  try {
+      const { data } = fromBech32(voter);
+      const hex = toHex(data);
+      const v = stakingStore.validators.find(
+        (x) => toHex(fromBech32(x.operator_address).data) === hex
+      );
+      return v ? v.description.moniker : voter;
+  } catch(e){
+      return voter;
+  }
 }
 
 function pageload(p: number) {
@@ -187,7 +218,12 @@ function pageload(p: number) {
 }
 
 function metaItem(metadata: string|undefined): { title: string; summary: string } {
-  return metadata ? JSON.parse(metadata) : {}
+  if (!metadata) {
+    return { title: '', summary: '' }
+  } else if (metadata.startsWith('{') && metadata.endsWith('}')) {
+    return JSON.parse(metadata)
+  }
+  return { title: metadata, summary: '' }
 }
 </script>
 
@@ -364,7 +400,7 @@ function metaItem(metadata: string|undefined): { title: string; summary: string 
             <tr v-for="(item, index) of votes" :key="index">
               <td class="py-2 text-sm">{{ showValidatorName(item.voter) }}</td>
               <td
-                v-if="item.option"
+                v-if="item.option && item.option !== 'VOTE_OPTION_UNSPECIFIED'"
                 class="py-2 text-sm"
                 :class="{
                   'text-yes': item.option === 'VOTE_OPTION_YES',

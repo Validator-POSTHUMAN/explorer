@@ -12,7 +12,7 @@ import {
   useParamStore,
 } from '@/stores';
 import { onMounted, ref } from 'vue';
-import { useIndexModule, colorMap } from './indexStore';
+import { useIndexModule, colorMap, tickerUrl } from './indexStore';
 import { computed } from '@vue/reactivity';
 
 import CardStatisticsVertical from '@/components/CardStatisticsVertical.vue';
@@ -57,7 +57,8 @@ function shortName(name: string, id: string) {
     : name;
 }
 
-const comLinks = [
+const comLinks = computed(()=> {
+  return [
   {
     name: 'Website',
     icon: 'mdi-web',
@@ -79,6 +80,7 @@ const comLinks = [
     href: store.github,
   },
 ];
+})
 
 // wallet box
 const change = computed(() => {
@@ -298,15 +300,8 @@ const amount = computed({
                   $t('index.close')
                 }}</label>
               </div>
-              <a
-                class="my-5 '!btn-[#334358] btn grow"
-                :class="{
-                  '!text-[#71FFB8]': store.trustColor === 'green',
-                  '!text-warning': store.trustColor === 'yellow',
-                }"
-                :href="ticker.trade_url"
-                target="_blank"
-              >
+              <a class="my-5 !text-white btn grow" :class="{'!btn-success': store.trustColor === 'green', '!btn-warning': store.trustColor === 'yellow'}" :href="tickerUrl(ticker.trade_url)"
+                target="_blank">
                 {{ $t('index.buy') }} {{ coinInfo.symbol || '' }}
               </a>
             </div>
@@ -320,7 +315,7 @@ const amount = computed({
       <div class="h-[1px] w-full bg-[#384059]"></div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:!grid-cols-3 lg:!grid-cols-6">
+    <div class="grid grid-cols-1 gap-4 md:!grid-cols-3 lg:!grid-cols-6 mt-4">
       <div v-for="(item, key) in store.stats" :key="key">
         <CardStatisticsVertical v-bind="item" />
       </div>

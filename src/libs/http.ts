@@ -2,11 +2,11 @@ import fetch from 'cross-fetch';
 
 export async function fetchData<T>(
   url: string,
-  adapter: (source: any) => T
+  adapter: (source: any) => Promise<T>
 ): Promise<T> {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`HTTP error: ${response.status}`);
+    throw new Error(`HTTP error: ${response.status}, ${response.statusText}`);
   }
   const data = await response.json();
   return adapter(data);
@@ -28,26 +28,12 @@ try {
   console.error(error.message);
 }
 // */
-const policies = [
-  // Referer will never be set.
-  // 'no-referrer',
-
-  // Referer will be set to just the origin except when navigating from HTTPS to HTTP,
-  // in which case no Referer is sent.
-  // 'strict-origin',
-
-  // Full Referer for same-origin requests, and bare origin for cross-origin requests.
-  // 'origin-when-cross-origin',
-
-  // Full Referer for same-origin requests, and bare origin for cross-origin requests
-  // except when navigating from HTTPS to HTTP, in which case no Referer is sent.
-  // 'strict-origin-when-cross-origin',
-
-  // Full Referer for all requests, whether same- or cross-origin.
-  'unsafe-url'
-];
 export async function get(url: string) {
-  return (await fetch(url, {referrerPolicy: 'unsafe-url'})).json();
+  return (await fetch(url, {referrerPolicy: 'origin-when-cross-origin'})).json();
+}
+
+export async function getB(url: string) {
+  return (await fetch(url, {referrerPolicy: 'origin-when-cross-origin'})).arrayBuffer();
 }
 
 export async function post(url: string, data: any) {
@@ -55,11 +41,11 @@ export async function post(url: string, data: any) {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     // mode: 'cors', // no-cors, *cors, same-origin
     // credentials: 'same-origin', // redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'unsafe-url', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    referrerPolicy: 'origin-when-cross-origin', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     headers: {
       'Content-Type': 'application/json',
       Accept: '*/*',
-      'Accept-Encoding': 'gzip, deflate, br',
+      // 'Accept-Encoding': 'gzip, deflate, br',
     },
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
