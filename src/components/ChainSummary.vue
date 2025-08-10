@@ -27,23 +27,27 @@ const addFavor = (e: Event) => {
 <template>
   <RouterLink
     :to="`/${name}`"
-    class="bg-[#171718] hover:bg-[#242424] rounded shadow flex items-center px-3 py-3 cursor-pointer"
+    class="w-full md:w-[153px] relative bg-almost-black/30 hover:bg-[#242424]/60 border border-addition rounded shadow flex justify-center items-center p-2.5 cursor-pointer"
   >
-    <div class="w-8 h-8 rounded-full overflow-hidden">
-      <img :src="conf.logo" />
+    <div class="flex flex-col gap-2.5 justify-center items-center">
+      <div class="w-[50px] h-[50px] rounded-full overflow-hidden">
+        <img :src="conf.logo"  />
+      </div>
+      <div class="font-semibold text-[#FFFFFF] header-14-medium-aa flex-1 truncate uppercase">
+        {{ conf?.prettyName || props.name }}
+      </div>
     </div>
-    <div class="font-semibold ml-4 text-[#FFFFFF] flex-1 truncate capitalize">
-      {{ conf?.prettyName || props.name }}
-    </div>
+
     <div
       @click="addFavor"
-      class="pl-4 text-xl"
+      class="absolute top-0 right-0 m-2.5 text-sm"
       :class="{
-        'text-warning': dashboardStore?.favoriteMap?.[props.name],
+        'text-star-yellow': dashboardStore?.favoriteMap?.[props.name],
         'text-gray-500': !dashboardStore?.favoriteMap?.[props.name],
+        'shadow-[0_0_2px_1px_rgba(238,187,78,0.2)] rounded-full before:bg-[radial-gradient(circle,rgba(238,187,78,0.5)_30%,transparent_90%)] before:absolute before:w-full before:h-full before:rounded-full': dashboardStore?.favoriteMap?.[props.name],
       }"
     >
-      <Icon icon="mdi-star" />
+      <Icon icon="mingcute:star-fill" />
     </div>
   </RouterLink>
 </template>

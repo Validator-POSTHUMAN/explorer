@@ -12,6 +12,7 @@ const props = defineProps({
       bonded_tokens: string;
     }>,
   },
+  status: {}
 });
 const total = computed(() => props.pool?.bonded_tokens);
 const format = useFormatter();
@@ -30,36 +31,37 @@ const veto = computed(() =>
 </script>
 
 <template>
-  <div class="progress rounded-[3px] h-6 text-xs flex items-center">
+  <div class="z-10 header-16-medium ml-3">
+      <span v-if="status === 'PASSED'" class="text-status-text-approved">{{ yes }}</span>
+      <span v-if="status === 'REJECTED'" class="text-status-text-rejected">{{ no }}</span>
+      <span v-if="status === 'VETO'" class="text-status-text-veto">{{ veto }}</span>
+      <span v-if="status === 'VOTING'" class="text-status-text-voting">{{ abstain }}</span>
+    </div>
+  <div class="progress rounded-full h-6 text-xs flex items-center">
     <div
-      class="h-6 bg-yes flex items-center pl-2 text-white overflow-hidden"
-      :style="`width: ${yes}`"
-      :title="yes"
-    >
-      {{ yes }}
+      class="z-[4] h-6 bg-proposal-status-approved rounded-r-full flex items-center pl-2 text-white overflow-hidden"
+      :class="{'bg-proposal-status-voting': status === 'VOTING'}"
+      :style="`width: ${yes}`">
+      <!-- {{ yes }} -->
     </div>
     <div
-      class="h-6 bg-no flex items-center text-white overflow-hidden"
-      :style="`width: ${no}`"
-      :title="no"
-    >
-      {{ no }}
+      class="z-[3] h-6 bg-proposal-status-rejected rounded-r-full flex items-center text-white overflow-hidden -ml-6"
+      :style="`width: ${no}`" :title="no">
+      <!-- {{ no }} -->
     </div>
     <div
-      class="h-6 bg-[#B71C1C] flex items-center text-white overflow-hidden"
-      :style="`width: ${veto};`"
-      :title="veto"
-    >
-      {{ veto }}
+      class="z-[2] h-6 bg-proposal-status-veto rounded-r-full flex items-center text-white overflow-hidden -ml-6"
+      :style="`width: ${veto};`" :title="veto">
+      <!-- {{ veto }} -->
     </div>
     <div
-      class="h-6 bg-secondary flex items-center text-white overflow-hidden"
-      :style="`width: ${abstain}`"
-      :title="abstain"
-    >
-      {{ abstain }}
+      class="z-[1] h-6 bg-proposal-status-voting rounded-r-full flex items-center text-white overflow-hidden -ml-6"
+      :style="`width: ${abstain}`" :title="abstain">
+      <!-- {{ abstain }} -->
     </div>
+    
   </div>
+  
 </template>
 <style scoped>
 .progress {

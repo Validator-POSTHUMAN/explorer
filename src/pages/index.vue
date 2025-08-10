@@ -6,9 +6,11 @@ import {
   type ChainConfig,
 } from '@/stores/useDashboard';
 import ChainSummary from '@/components/ChainSummary.vue';
-
+import SearchMain from '@/layouts/components/SearchMain.vue';
 import { computed, ref } from 'vue';
 import { useBlockchain } from '@/stores';
+import Socials from '@/layouts/components/Socials.vue';
+import AddNetworkComponent from '../layouts/components/AddNetworkComponent.vue';
 
 const dashboard = useDashboard();
 
@@ -27,19 +29,39 @@ const chains = computed(() => {
   }
 });
 
-const chainStore = useBlockchain();
+const favoriteChains = computed(() =>
+  chains.value.filter((chain) => dashboard?.favoriteMap?.[chain.chainName])
+);
+
+const socials = [
+  {
+    name: 'telegram',
+    icon: 'ic:baseline-telegram',
+    href: 'https://t.me/Crypto_Base_Chat',
+  },
+  {
+    name: 'twitter',
+    icon: 'prime:twitter',
+    href: 'https://twitter.com/POSTHUMAN_DVS',
+  },
+  {
+    name: 'discord',
+    icon: 'ic:baseline-discord',
+    href: 'https://discord.gg/csWJMCjQHh',
+  },
+];
 </script>
 <template>
   <div class="">
     <div
-      class="flex md:!flex-row flex-col items-center justify-center mb-6 mt-14 gap-2"
+      class="flex md:!flex-row flex-col items-center justify-center mt-0 md:mt-32 gap-2"
     >
       <img class="w-453 h-153" src="../assets/logo-big.svg" />
       <!-- <h1 class="text-3xl md:!text-6xl w-453 h-153 rajdhani-regular">
         {{ $t('pages.title') }}
       </h1> -->
     </div>
-    <div class="text-center text-[#FFFFFF]">
+    <div class="text-center text-white header-20 tracking-wide">
       <p class="mb-1">
         {{ $t('pages.slogan') }}
       </p>
@@ -55,27 +77,11 @@ const chainStore = useBlockchain();
       <h2 class="mb-6">{{ $t('pages.description') }}</h2>
     </div> -->
 
-    <div class="flex items-center rounded-full bg-[#171718] mt-10">
-      <input
-        :placeholder="$t('pages.search_placeholder')"
-        class="px-4 h-10 bg-transparent flex-1 outline-none text-base"
-        v-model="keywords"
-      />
-      <div class="px-4 text-base hidden md:!block">
-        <Icon icon="mdi:magnify" class="text-2xl text-[#686868] ml-3" />
-      </div>
-    </div>
-
-    <div
-      class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5"
-    >
-      <ChainSummary
-        v-for="(chain, index) in chains"
-        :key="index"
-        :name="chain.chainName"
-      />
-    </div>
+    <SearchMain />
   </div>
+  <AddNetworkComponent />
+
+  <Socials :list="socials" className="hidden" />
 </template>
 
 <style scoped>

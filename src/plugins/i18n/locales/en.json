@@ -1,7 +1,7 @@
 {
   "module": {
     "dashboard": "Dashboard",
-    "staking": "Stake",
+    "staking": "Staking",
     "governance": "Governance",
     "uptime": "Uptime",
     "nft": "NFT",
@@ -11,7 +11,9 @@
     "add_to_favorite": "Add to favorite",
     "all_blockchains": "All Blockchain",
     "sponsors": "Sponsors",
-    "links": "Links"
+    "links": "Links",
+    "connect_wallet": "Connect wallet",
+    "add_network": "Add Favorite Network"
   },
   "pages": {
     "title": "OCULO",
@@ -20,9 +22,10 @@
     "tag_all": "Page Not Found",
     "slogan": "watch the cosmos",
     "description": "Cosmos Ecosystem Blockchains",
-    "search_placeholder": "Search Chain",
+    "search_placeholder": "Enter network / address / etc",
     "description_all": "We couldn't find the page you are looking for.",
-    "btn_index": "Back to Home"
+    "btn_index": "Back to Home",
+    "back": "Back"
   },
   "account": {
     "amount": "Amount",
@@ -59,7 +62,44 @@
     "hash": "Hash",
     "messages": "Messages",
     "time": "Time",
-    "error": "Account does not exists on chain"
+    "error": "Account does not exists on chain",
+    "available": "Available",
+    "delegated": "Delegated",
+    "unbonding": "Unbonding",
+    "search_placeholder": "Search asset by name",
+    "result": "Result",
+    "operation_message": "Operation/Message",
+    "tx_hash": "TxHash",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "chain": "Chain",
+    "market_price": "Market price",
+    "total": "Total",
+    "staked_amount": "Staked amount",
+    "receive": "Receive",
+    "send": "Send",
+    "delegate": "Delegate",
+    "no_gas": "Not enough gas",
+    "no_data": "No Data",
+    "event_type": "event type",
+    "btn_clear": "Clear",
+    "btn_confirm": "Confirm",
+    "all_select": "All Select",
+    "send_receive": "Send/Receive",
+    "multi_send": "Multi Send",
+    "get_reward": "Get Reward",
+    "get_commission": "Get Commission",
+    "vote": "Vote",
+    "redelegate": "Redelegate",
+    "undelegate": "Undelegate",
+    "IBC_transfer": "IBC Transfer",
+    "IBC_receive": "IBC Receive",
+    "IBC_timeout": "IBC Timeout",
+    "IBC_ack": "IBC Ack",
+    "grant_authz": "Grant Authz",
+    "revoke_authz": "Revoke Authz",
+    "execute_contract": "Execute Contract"
   },
   "block": {
     "estimated_time": "Estimated Time",
@@ -123,6 +163,7 @@
     "tips_description_1": "This feature is available when deploying contracts via WELLDONE Code. For more information, please check the document at the link below."
   },
   "gov": {
+    "all": "All",
     "voting": "Voting",
     "passed": "Passed",
     "rejected": "Rejected",
@@ -143,7 +184,9 @@
       "PROPOSAL_STATUS_FAILED": "Failed"
     },
     "upgrade_plan": "Upgrade Plan",
-    "votes": "Votes"
+    "votes": "Votes",
+    "change_vote": "Change your vote",
+    "status": "Status"
   },
   "ibc": {
     "title": "IBC Connections",
@@ -188,7 +231,7 @@
     "inactive": "Inactive",
     "rank": "Rank",
     "validator": "Validator",
-    "voting_power": "Voting Power",
+    "voting_power": "Your voting power",
     "24h_changes": "24h Changes",
     "commission": "Commission",
     "actions": "Actions",
@@ -216,7 +259,15 @@
     "consensus_pub_key": "Consensus Public Key",
     "liquid_staking": "Liquid Staking",
     "liquid_staking_shares": "Liquid Shares",
-    "validator_bond_share": "Validator Bonded"
+    "validator_bond_share": "Validator Bonded",
+    "hard_slashing": "Hard slashing",
+    "soft_slashing": "Soft slashing",
+    "uptime": "Uptime",
+    "apr": "APR",
+    "operation": "Operation",
+    "stake": "Stake",
+    "unstake": "Unstake",
+    "btn_vote": "Vote"
   },
   "statesync": {
     "title": "What's State Sync?",
@@ -237,11 +288,21 @@
   },
   "tx": {
     "title": "Summary",
-    "tx_hash": "Tx Hash",
+    "tx_hash": "Transaction Hash",
     "gas": "Gas",
     "fee": "Fee",
     "memo": "Memo",
-    "no_messages": "No messages"
+    "no_messages": "No messages",
+    "transaction_summary": "Transaction summary",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "transfer": "Transfer",
+    "from": "From",
+    "to" : "To",
+    "amount": "Amount",
+    "time": "Time",
+    "height": "Height"
   },
   "uptime": {
     "overall": "Overall",

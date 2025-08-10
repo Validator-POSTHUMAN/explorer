@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import updateLocale from 'dayjs/plugin/updateLocale';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
 import utc from 'dayjs/plugin/utc';
 import localeData from 'dayjs/plugin/localeData';
 import { useStakingStore } from './useStakingStore';
@@ -37,6 +38,7 @@ dayjs.updateLocale('en', {
     yy: '%d years',
   },
 });
+dayjs.extend(advancedFormat);
 
 export const useFormatter = defineStore('formatter', {
   state: () => {
@@ -327,6 +329,11 @@ export const useFormatter = defineStore('formatter', {
       const percent = Number(input) / Number(total);
       return numeral(percent > 0.0001 ? percent : 0).format('0.[00]%');
     },
+    roundedDisplayPercent(input?: string | number, total?: string | number) {
+      if (!input || !total) return '0';
+      const percent = Number(input) / Number(total);
+      return numeral(percent > 0.0001 ? percent : 0).format('0%');
+    },
     formatDecimalToPercent(decimal: string) {
       return numeral(decimal).format('0.[00]%');
     },
@@ -364,6 +371,12 @@ export const useFormatter = defineStore('formatter', {
       }
       if (format === 'to') {
         return dayjs(time).toNow();
+      }
+      if (format === 'advancedFormat') {
+        return dayjs(time).format('MMM Do, YYYY');
+      }
+      if (format === 'txFormat') {
+        return `${dayjs(time).format('D MMMM YYYY')}, ${dayjs(time).format('HH:mm')} (${dayjs(time).fromNow()})`
       }
       return dayjs(time).format('YYYY-MM-DD HH:mm:ss');
     },

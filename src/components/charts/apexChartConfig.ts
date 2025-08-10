@@ -222,10 +222,15 @@ export const getMarketPriceChartConfig = (
       },
     },
 
-    colors: ['#146B90'],
+    colors: ['#1FA1D9', '#06202A'],
     fill: {
-      opacity: 0.25,
-      type: '',
+      // opacity: 0.25,
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.7,
+        opacityTo: 0.1,
+      },
     },
     grid: {
       show: true,

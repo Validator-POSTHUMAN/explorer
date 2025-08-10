@@ -19,9 +19,12 @@
     "tag_all": "Halaman Tidak Ditemukan",
     "slogan": "watch the cosmos",
     "description": "Cosmos Ecosystem Blockchains",
-    "search_placeholder": "Telusuri Rantai",
+    "search_placeholder": "搜索区块链",
     "description_all": "Kami tidak dapat menemukan halaman yang anda cari.",
-    "btn_index": "Kembali ke awal"
+    "btn_index": "Kembali ke awal",
+    "connect_wallet": "Connect wallet",
+    "add_network": "Add Favorite Network",
+    "back": "Back"
   },
   "account": {
     "type": "Tipe",
@@ -55,7 +58,44 @@
     "hash": "Hash",
     "messages": "Pesan",
     "time": "Waktu",
-    "error": "Akun tidak ada di dalam rantai"
+    "error": "Akun tidak ada di dalam rantai",
+    "available": "Available",
+    "delegated": "Delegated",
+    "unbonding": "Unbonding",
+    "search_placeholder": "Search asset by name",
+    "result": "Result",
+    "operation/message": "",
+    "tx_hash": "TxHash",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "chain": "Chain",
+    "market_price": "Market price",
+    "total": "Total",
+    "staked_amount": "Staked amount",
+    "receive": "Receive",
+    "send": "Send",
+    "delegate": "Delegate",
+    "no_gas": "Not enough gas",
+    "no_data": "No Data",
+    "event_type": "event type",
+    "btn_clear": "Clear",
+    "btn_confirm": "Confirm",
+    "all_select": "All Select",
+    "send_receive": "Send/Receive",
+    "multi_send": "Multi Send",
+    "get_reward": "Get Reward",
+    "get_commission": "Get Commission",
+    "vote": "Vote",
+    "redelegate": "Redelegate",
+    "undelegate": "Undelegate",
+    "IBC_transfer": "IBC Transfer",
+    "IBC_receive": "IBC Receive",
+    "IBC_timeout": "IBC Timeout",
+    "IBC_ack": "IBC Ack",
+    "grant_authz": "Grant Authz",
+    "revoke_authz": "Revoke Authz",
+    "execute_contract": "Execute Contract"
   },
   "block": {
     "estimated_time": "Estimasi Waktu",
@@ -114,6 +154,7 @@
     "tips_description_1": "This feature is available when deploying contracts via WELLDONE Code. For more information, please check the document at the link below."
   },
   "gov": {
+    "all": "All",
     "voting": "Voting",
     "passed": "Disetujui",
     "rejected": "Ditolak",
@@ -134,7 +175,9 @@
       "PROPOSAL_STATUS_FAILED": "Gagal"
     },
     "upgrade_plan": "Peningkatan Rencana",
-    "votes": "Suara"
+    "votes": "Suara",
+    "change_vote": "Change your vote",
+    "status": "Status"
   },
   "ibc": {
     "title": "Koneksi IBC",
@@ -204,7 +247,15 @@
     "operator_addr": "Alamat Operator",
     "hex_addr": "Alamat Hex",
     "signer_addr": "Alamat Penandatangan",
-    "consensus_pub_key": "Kunci Publik Konsensus"
+    "consensus_pub_key": "Kunci Publik Konsensus",
+    "hard_slashing": "Hard slashing",
+    "soft_slashing": "Soft slashing",
+    "uptime": "Uptime",
+    "apr": "APR",
+    "operation": "Operation",
+    "stake": "Stake",
+    "unstake": "Unstake",
+    "btn_vote": "Vote"
   },
   "statesync": {
     "title": "Apa itu State Sync?",
@@ -229,7 +280,17 @@
     "gas": "Bahan bakar",
     "fee": "Biaya",
     "memo": "Memo",
-    "no_messages": "Tidak ada pesan"
+    "no_messages": "Tidak ada pesan",
+    "transaction_summary": "Transaction summary",
+    "processing": "Processing",
+    "failed": "Failed",
+    "success": "Success",
+    "transfer": "Transfer",
+    "from": "From",
+    "to" : "To",
+    "amount": "Amount",
+    "time": "Time",
+    "height": "Height"
   },
   "uptime": {
     "overall": "Secara keseluruhan",

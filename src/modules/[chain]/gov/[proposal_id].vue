@@ -17,11 +17,13 @@ import {
   type PaginatedProposalDeposit,
   type Pagination,
 } from '@/types';
-import { ref, reactive } from 'vue';
-import Countdown from '@/components/Countdown.vue';
-import PaginationBar from '@/components/PaginationBar.vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import { fromBech32, toHex } from '@cosmjs/encoding';
-
+import { Icon } from '@iconify/vue';
+import AddressWithCopy from '@/components/AddressWithCopy.vue';
+import IconEmojiHappy from '@/components/icons/IconEmojiHappy.vue';
+import IconStatus from '@/components/icons/IconStatus.vue';
+import IconTimeLeft from '@/components/icons/IconTimeLeft.vue';
 
 const props = defineProps(['proposal_id', 'chain']);
 const proposal = ref({} as GovProposal);
@@ -41,35 +43,35 @@ store.fetchProposal(props.proposal_id).then((res) => {
   }
   proposal.value = proposalDetail;
   // load origin params if the proposal is param change
-  if(proposalDetail.content?.changes) {
-    proposalDetail.content?.changes.forEach((item) => {  
-        chainStore.rpc.getParams(item.subspace, item.key).then((res) => {
-          if(proposal.value.content && res.param) {
-            if(proposal.value.content.current){
-              proposal.value.content.current.push(res.param);
-            } else {
-              proposal.value.content.current = [res.param];
-            };
+  if (proposalDetail.content?.changes) {
+    proposalDetail.content?.changes.forEach((item) => {
+      chainStore.rpc.getParams(item.subspace, item.key).then((res) => {
+        if (proposal.value.content && res.param) {
+          if (proposal.value.content.current) {
+            proposal.value.content.current.push(res.param);
+          } else {
+            proposal.value.content.current = [res.param];
           }
-        })
-    })
+        }
+      });
+    });
   }
 
   const msgType = proposalDetail.content?.['@type'] || '';
-  if(msgType.endsWith('MsgUpdateParams')) {
-    if(msgType.indexOf('staking') > -1) {
+  if (msgType.endsWith('MsgUpdateParams')) {
+    if (msgType.indexOf('staking') > -1) {
       chainStore.rpc.getStakingParams().then((res) => {
         addCurrentParams(res);
       });
-    } else if(msgType.indexOf('gov') > -1) {
+    } else if (msgType.indexOf('gov') > -1) {
       chainStore.rpc.getGovParamsVoting().then((res) => {
         addCurrentParams(res);
       });
-    } else if(msgType.indexOf('distribution') > -1) {
+    } else if (msgType.indexOf('distribution') > -1) {
       chainStore.rpc.getDistributionParams().then((res) => {
         addCurrentParams(res);
       });
-    } else if(msgType.indexOf('slashing') > -1) {
+    } else if (msgType.indexOf('slashing') > -1) {
       chainStore.rpc.getSlashingParams().then((res) => {
         addCurrentParams(res);
       });
@@ -78,19 +80,12 @@ store.fetchProposal(props.proposal_id).then((res) => {
 });
 
 function addCurrentParams(res: any) {
-  if(proposal.value.content && res.params) {
+  if (proposal.value.content && res.params) {
     proposal.value.content.params = [proposal.value.content?.params];
     proposal.value.content.current = [res.params];
   }
 }
-const color = computed(() => {
-  if (proposal.value.status === 'PROPOSAL_STATUS_PASSED') {
-    return 'success';
-  } else if (proposal.value.status === 'PROPOSAL_STATUS_REJECTED') {
-    return 'error';
-  }
-  return '';
-});
+
 const status = computed(() => {
   if (proposal.value.status) {
     return proposal.value.status.replace('PROPOSAL_STATUS_', '');
@@ -128,7 +123,9 @@ const upgradeCountdown = computed((): number => {
   if (height > 0) {
     const base = useBaseStore();
     const current = Number(base.latest?.block?.header?.height || 0);
-    return (height - current) * Number((base.blocktime / 1000).toFixed()) * 1000;
+    return (
+      (height - current) * Number((base.blocktime / 1000).toFixed()) * 1000
+    );
   }
   const now = new Date();
   const end = new Date(proposal.value.content?.plan?.time || '');
@@ -188,24 +185,54 @@ const abstain = computed(() => {
 });
 const processList = computed(() => {
   return [
-    { name: 'Turnout', value: turnout.value, class: 'bg-info' },
-    { name: 'Yes', value: yes.value, class: 'bg-success' },
-    { name: 'No', value: no.value, class: 'bg-error' },
-    { name: 'No With Veto', value: veto.value, class: 'bg-red-800' },
-    { name: 'Abstain', value: abstain.value, class: 'bg-warning' },
+    {
+      name: 'YES',
+      value: yes.value,
+      class: 'bg-proposal-status-approved',
+      borderColor:
+        'border-proposal-status-approved hover:border-proposal-status-approved hover:text-white hover:bg-button-hover',
+      textColor: 'text-status-text-approved',
+      icon: 'tabler:check',
+    },
+    {
+      name: 'NO',
+      value: no.value,
+      class: 'bg-proposal-status-rejected',
+      borderColor:
+        'border-proposal-status-rejected hover:border-proposal-status-rejected hover:text-white hover:bg-button-hover',
+      textColor: 'text-status-text-rejected',
+      icon: 'ic:round-close',
+    },
+    {
+      name: 'No with veto',
+      value: veto.value,
+      class: 'bg-proposal-status-veto',
+      borderColor:
+        'border-proposal-status-veto hover:border-proposal-status-veto hover:text-white hover:bg-button-hover',
+      textColor: 'text-status-text-veto',
+    },
+    {
+      name: 'Abstain',
+      value: abstain.value,
+      class: 'bg-addition',
+      borderColor:
+        'border-addition hover:border-addition hover:text-white hover:bg-button-hover',
+      textColor: 'text-addition',
+      icon: 'akar-icons:dot-grid',
+    },
   ];
 });
 
 function showValidatorName(voter: string) {
   try {
-      const { data } = fromBech32(voter);
-      const hex = toHex(data);
-      const v = stakingStore.validators.find(
-        (x) => toHex(fromBech32(x.operator_address).data) === hex
-      );
-      return v ? v.description.moniker : voter;
-  } catch(e){
-      return voter;
+    const { data } = fromBech32(voter);
+    const hex = toHex(data);
+    const v = stakingStore.validators.find(
+      (x) => toHex(fromBech32(x.operator_address).data) === hex
+    );
+    return v ? v.description.moniker : voter;
+  } catch (e) {
+    return voter;
   }
 }
 
@@ -217,212 +244,199 @@ function pageload(p: number) {
   });
 }
 
-function metaItem(metadata: string|undefined): { title: string; summary: string } {
-  if (!metadata) {
-    return { title: '', summary: '' }
-  } else if (metadata.startsWith('{') && metadata.endsWith('}')) {
-    return JSON.parse(metadata)
-  }
-  return { title: metadata, summary: '' }
+function metaItem(metadata: string | undefined): {
+  title: string;
+  summary: string;
+} {
+  return metadata ? JSON.parse(metadata) : { title: '', summary: '' };
 }
+
+const statusData = computed(() => [
+  {
+    isAddress: true,
+    value: proposal.value?.proposer,
+    label: 'Creator',
+    icon: IconEmojiHappy,
+  },
+  {
+    value: status.value,
+    label: 'Status',
+    icon: IconStatus,
+  },
+  {
+    value: format.toDay(proposal.value?.voting_end_time, 'from'),
+    label: 'Time left',
+    icon: IconTimeLeft,
+  },
+]);
+
+const votingData = computed(() => [
+  {
+    label: 'staking.voting_power',
+    // Total Stake Validator / Total bonded tokens (stakingStore.pool.bonded_tokens) = Voting Power Validator
+    value: format.calculatePercent(
+      stakingStore.pool.bonded_tokens,
+      stakingStore.totalPower
+    ),
+  },
+  {
+    label: 'staking.btn_vote',
+    value:
+      votes.value.find((item) => item.voter === proposal.value?.proposer)
+        ?.option ?? 'None',
+  },
+]);
 </script>
 
 <template>
-  <div>
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
-      <h2 class="card-title flex flex-col md:!justify-between md:!flex-row mb-2">
-        <p class="truncate w-full">
-          {{ proposal_id }}. {{ proposal.title || proposal.content?.title || metaItem(proposal?.metadata)?.title  }}
+  <div class="md:px-4">
+    <h2
+      class="flex flex-col items-center md:!justify-between md:!flex-row mb-2"
+    >
+      <p
+        class="truncate w-full header-20-medium-aa text-header-text tracking-wide uppercase"
+      >
+        {{
+          `#${proposal_id}. ${
+            proposal.title ||
+            proposal.content?.title ||
+            metaItem(proposal?.metadata)?.title
+          }`
+        }}
+      </p>
+      <div class="text-addition body-text-14 text-end">
+        <p>
+          {{ proposal?.content && proposal?.content['@type'] }}
         </p>
+        <p>
+          {{ status }}
+        </p>
+      </div>
+    </h2>
+
+    <div class="flex flex-col md:flex-row gap-5">
+      <!-- info -->
+      <div class="md:min-w-[420px]">
+        <div class="bg-black/70 thick-border-block p-5">
+          <div class="text-button-text mb-9">
+            <p class="uppercase header-20-medium-aa mb-5">
+              {{ $t('gov.status') }}
+            </p>
+            <div
+              class="w-full border-y border-addition py-4 px-2.5 flex flex-col gap-2.5"
+            >
+              <div
+                v-for="item in statusData"
+                class="grid grid-cols-5 gap-3"
+                :key="item.label"
+              >
+                <p class="col-span-2 header-16 tracking-wide flex gap-2.5">
+                  <!-- <Icon class="text-addition/50" icon="ic:round-close" width="24" height="24" /> -->
+                  <component class="text-addition/50" :is="item.icon" />
+                  <span>{{ item.label }}</span>
+                </p>
+                <div class="col-span-3 body-text-16 text-white truncate">
+                  <AddressWithCopy
+                    v-if="item.isAddress"
+                    :address="item.value"
+                    icon
+                    styles="body-text-16 text-white"
+                    :size="16"
+                  />
+                  <span v-else>{{ item.value }}</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full border-b border-addition py-4 px-2.5 flex flex-col gap-2.5"
+            >
+              <div v-for="item in votingData" class="grid grid-cols-5 gap-3">
+                <p class="col-span-2 header-16 tracking-wide leading-5">
+                  {{ $t(item.label) }}
+                </p>
+                <p class="col-span-3 body-text-16 text-white">
+                  {{ item.value }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded shadow">
+            <!-- <h2 class="card-title mb-1">{{ $t('gov.tally') }}</h2> -->
+            <div
+              class="grid grid-cols-2 items-center gap-2.5 mb-1 header-16-medium tracking-wide"
+              v-for="(item, index) of processList"
+              :key="index"
+            >
+              <label
+                class="btn-outline px-7 py-4 text-white truncate justify-between"
+                :class="item.borderColor"
+              >
+                <span>{{ item.name }}</span>
+                <Icon
+                  v-if="item.icon"
+                  :icon="item.icon"
+                  width="18"
+                  height="18"
+                />
+              </label>
+              <div>
+                <p
+                  class="text-center flex items-center justify-center"
+                  :class="item.textColor"
+                >
+                  {{ item.value }}
+                </p>
+                <div class="h-3 w-full relative rounded-full overflow-hidden">
+                  <div
+                    class="absolute inset-x-0 inset-y-0 bg-addition w-full opacity-20"
+                  ></div>
+                  <div
+                    class="absolute inset-x-0 inset-y-0 rounded-sm"
+                    :class="`${item.class}`"
+                    :style="`width: ${
+                      item.value === '-' || item.value === 'NaN%'
+                        ? '0%'
+                        : item.value
+                    }`"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <label
+              for="vote"
+              class="btn-outline py-4 mb-7"
+              @click="dialog.open('vote', { proposal_id })"
+              >{{ $t('gov.change_vote') }}</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- text -->
+      <div
+        class="w-full pt-3 pb-4 rounded mb-4 shadow overflow-auto thick-border-block bg-black/70 px-2 scrollbar-thumb-addition scrollbar-track-transparent scrollbar-thin"
+        :style="{ height: 'calc(100vh - 180px)' }"
+      >
+        <div class="">
+          <ObjectElement :value="proposal.content" />
+        </div>
         <div
-          class="badge badge-ghost"
-          :class="
-            color === 'success'
-              ? 'text-yes'
-              : color === 'error'
-              ? 'text-no'
-              : 'text-info'
+          v-if="
+            (proposal.summary && !proposal.content?.description) ||
+            metaItem(proposal?.metadata)?.summary
           "
         >
-          {{ status }}
-        </div>
-      </h2>
-      <div class="">
-        <ObjectElement :value="proposal.content" />
-      </div>
-      <div v-if="proposal.summary && !proposal.content?.description || metaItem(proposal?.metadata)?.summary ">
-        <MdEditor
-          :model-value="format.multiLine(proposal.summary || metaItem(proposal?.metadata)?.summary)"
-          previewOnly
-          class="md-editor-recover"
-        ></MdEditor>
-      </div>
-    </div>
-    <!-- grid lg:!!grid-cols-3 auto-rows-max-->
-    <!-- flex-col lg:!!flex-row flex -->
-    <div class="gap-4 mb-4 grid lg:!!grid-cols-3 auto-rows-max">
-      <!-- flex-1 -->
-      <div class="bg-base-100 px-4 pt-3 pb-4 rounded shadow">
-        <h2 class="card-title mb-1">{{ $t('gov.tally') }}</h2>
-        <div class="mb-1" v-for="(item, index) of processList" :key="index">
-          <label class="block text-sm mb-1">{{ item.name }}</label>
-          <div class="h-5 w-full relative">
-            <div
-              class="absolute inset-x-0 inset-y-0 w-full opacity-10 rounded-sm"
-              :class="`${item.class}`"
-            ></div>
-            <div
-              class="absolute inset-x-0 inset-y-0 rounded-sm"
-              :class="`${item.class}`"
-              :style="`width: ${
-                item.value === '-' || item.value === 'NaN%' ? '0%' : item.value
-              }`"
-            ></div>
-            <p
-              class="absolute inset-x-0 inset-y-0 text-center text-sm text-[#666] dark:text-[#eee] flex items-center justify-center"
-            >
-              {{ item.value }}
-            </p>
-          </div>
-        </div>
-        <div class="mt-6 grid grid-cols-2">
-          <label
-            for="vote"
-            class="btn btn-primary float-right btn-sm mx-1"
-            @click="dialog.open('vote', { proposal_id })"
-            >{{ $t('gov.btn_vote') }}</label
-          >
-          <label
-            for="deposit"
-            class="btn btn-primary float-right btn-sm mx-1"
-            @click="dialog.open('deposit', { proposal_id })"
-            >{{ $t('gov.btn_deposit') }}</label
-          >
-        </div>
-      </div>
-
-      <div class="bg-base-100 px-4 pt-3 pb-5 rounded shadow lg:!!col-span-2">
-        <h2 class="card-title">{{ $t('gov.timeline') }}</h2>
-
-        <div class="px-1">
-          <div class="flex items-center mb-4 mt-2">
-            <div class="w-2 h-2 rounded-full bg-error mr-3"></div>
-            <div class="text-base flex-1 text-main">
-              {{ $t('gov.submit_at') }}: {{ format.toDay(proposal.submit_time) }}
-            </div>
-            <div class="text-sm">{{ shortTime(proposal.submit_time) }}</div>
-          </div>
-          <div class="flex items-center mb-4">
-            <div class="w-2 h-2 rounded-full bg-primary mr-3"></div>
-            <div class="text-base flex-1 text-main">
-              {{ $t('gov.deposited_at') }}:
-              {{
-                format.toDay(
-                  proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
-                    ? proposal.deposit_end_time
-                    : proposal.voting_start_time
-                )
-              }}
-            </div>
-            <div class="text-sm">
-              {{
-                shortTime(
-                  proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'
-                    ? proposal.deposit_end_time
-                    : proposal.voting_start_time
-                )
-              }}
-            </div>
-          </div>
-          <div class="mb-4">
-            <div class="flex items-center">
-              <div class="w-2 h-2 rounded-full bg-yes mr-3"></div>
-              <div class="text-base flex-1 text-main">
-                {{ $t('gov.vote_start_from') }} {{ format.toDay(proposal.voting_start_time) }}
-              </div>
-              <div class="text-sm">
-                {{ shortTime(proposal.voting_start_time) }}
-              </div>
-            </div>
-            <div class="pl-5 text-sm mt-2">
-              <Countdown :time="votingCountdown" />
-            </div>
-          </div>
-          <div>
-            <div class="flex items-center mb-1">
-              <div class="w-2 h-2 rounded-full bg-success mr-3"></div>
-              <div class="text-base flex-1 text-main">
-                {{ $t('gov.vote_end') }} {{ format.toDay(proposal.voting_end_time) }}
-              </div>
-              <div class="text-sm">
-                {{ shortTime(proposal.voting_end_time) }}
-              </div>
-            </div>
-            <div class="pl-5 text-sm">
-              {{ $t('gov.current_status') }}: {{ $t(`gov.proposal_statuses.${proposal.status}`) }}
-            </div>
-          </div>
-
-          <div
-            class="mt-4"
-            v-if="
-              proposal?.content?.['@type']?.endsWith('SoftwareUpgradeProposal')
+          <MdEditor
+            :model-value="
+              format.multiLine(
+                proposal.summary || metaItem(proposal?.metadata)?.summary
+              )
             "
-          >
-            <div class="flex items-center">
-              <div class="w-2 h-2 rounded-full bg-warning mr-3"></div>
-              <div class="text-base flex-1 text-main">
-                {{ $t('gov.upgrade_plan') }}:
-                <span v-if="Number(proposal.content?.plan?.height || '0') > 0">
-                  (EST)</span
-                >
-                <span v-else>{{
-                  format.toDay(proposal.content?.plan?.time)
-                }}</span>
-              </div>
-              <div class="text-sm">
-                {{ shortTime(proposal.voting_end_time) }}
-              </div>
-            </div>
-            <div class="pl-5 text-sm mt-2">
-              <Countdown :time="upgradeCountdown" />
-            </div>
-          </div>
+            previewOnly
+            class="md-editor-recover"
+          ></MdEditor>
         </div>
-      </div>
-    </div>
-
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded mb-4 shadow">
-      <h2 class="card-title">{{ $t('gov.votes') }}</h2>
-      <div class="overflow-x-auto">
-        <table class="table w-full table-zebra">
-          <tbody>
-            <tr v-for="(item, index) of votes" :key="index">
-              <td class="py-2 text-sm">{{ showValidatorName(item.voter) }}</td>
-              <td
-                v-if="item.option && item.option !== 'VOTE_OPTION_UNSPECIFIED'"
-                class="py-2 text-sm"
-                :class="{
-                  'text-yes': item.option === 'VOTE_OPTION_YES',
-                  'text-gray-400': item.option === 'VOTE_OPTION_ABSTAIN',
-                }"
-              >
-                {{ String(item.option).replace('VOTE_OPTION_', '') }}
-              </td>
-              <td
-                v-if="item.options"
-                class="py-2 text-sm"
-              >
-                {{ item.options.map(x => `${x.option.replace('VOTE_OPTION_', '')}:${format.percent(x.weight)}`).join(', ') }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <PaginationBar
-          :limit="pageRequest.limit"
-          :total="pageResponse.total"
-          :callback="pageload"
-        />
       </div>
     </div>
   </div>
