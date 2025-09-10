@@ -1,0 +1,30 @@
+{
+  "chain_name": "cosmos-testnet",
+  "theme_color": "#2e2e2e",
+  "api": [
+    {
+      "provider": "IT ROCKET",
+      "address": "https://cosmos-testnet-api.itrocket.net"
+    }
+  ],
+  "rpc": [
+    {
+      "provider": "IT ROCKET",
+      "address": "https://cosmos-testnet-rpc.itrocket.net"
+    }
+  ],
+  "sdk_version": "0.45.1",
+  "coin_type": "118",
+  "min_tx_fee": "800",
+  "addr_prefix": "cosmos",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg",
+  "assets": [
+    {
+      "base": "uatom",
+      "symbol": "ATOM",
+      "exponent": "6",
+      "coingecko_id": "cosmos",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
+    }
+  ]
+}
