@@ -1,0 +1,28 @@
+{
+  "chain_name": "atomone-testnet",
+  "theme_color": "#2e2e2e",
+  "api": [
+    {
+      "address": "https://atomone-testnet-api.itrocket.net",
+      "provider": "IT ROCKET"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://atomone-testnet-rpc.itrocket.net",
+      "provider": "IT ROCKET"
+    }
+  ],
+  "sdk_version": "0.47.13",
+  "addr_prefix": "atone",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg",
+  "assets": [
+    {
+      "base": "uatone",
+      "symbol": "ATONE",
+      "exponent": "6",
+      "coingecko_id": "atomone",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/atomone/images/atomone.svg"
+    }
+  ]
+}
