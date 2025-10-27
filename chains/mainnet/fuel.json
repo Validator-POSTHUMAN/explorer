@@ -16,13 +16,13 @@
   ],
   "sdk_version": "0.50.10",
   "addr_prefix": "fuelsequencer",
-  "logo": "fuel.png",
+  "logo": "./fuel.png",
   "assets": [
     {
       "base": "fuel",
       "symbol": "FUEL",
       "exponent": "9",
-      "logo": "fuel.png"
+      "logo": "./fuel.png"
     }
   ]
 }
