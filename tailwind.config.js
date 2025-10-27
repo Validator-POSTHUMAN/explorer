@@ -52,7 +52,7 @@ module.exports = {
         'chart-stroke': '#141415',
       },
       backgroundImage: {
-        'main-image': "url('./public/images/main-bg.jpg')",
+        'main-image': "url('./images/main-bg.jpg')",
       },
       fontFamily: {
         main: ['Inter'],

@@ -92,7 +92,7 @@ const socials = [
           rgba(0, 0, 0, 1),
           rgba(0, 0, 0, 0.2)
         ),
-        url('./public/images/main-bg.jpg') center 50vh / cover no-repeat;
+        url('./images/main-bg.jpg') center 50vh / cover no-repeat;
       background-attachment: fixed;
     "
   >
