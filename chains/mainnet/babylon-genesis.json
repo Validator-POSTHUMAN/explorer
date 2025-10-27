@@ -59,10 +59,10 @@
       "base": "ubbn",
       "symbol": "BBN",
       "exponent": "6",
-      "logo": "babylon.jpg"
+      "logo": "./babylon.jpg"
     }
   ],
   "sdk_version": "0.50.9",
   "addr_prefix": "bbn",
-  "logo": "babylon.jpg"
+  "logo": "./babylon.jpg"
 }
