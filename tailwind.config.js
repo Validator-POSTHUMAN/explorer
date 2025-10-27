@@ -13,13 +13,13 @@ module.exports = {
         active: '#7a7c7d',
 
         // REDESIGN
-        'almost-black': '#111113' ,
-        'addition': '#686868',
+        'almost-black': '#111113',
+        addition: '#686868',
         'addition-1': '#222226',
         'main-text': '#FFFFFF',
         'button-text': '#3FB6A8',
         'header-text': '#71FFB8',
-        'button': 'rgba(14, 255, 187, 20%)',
+        button: 'rgba(14, 255, 187, 20%)',
         'button-hover': 'rgba(2, 1, 1, 50%)',
         'button-v2': 'rgba(15, 51, 78, 100%)',
         'button-v2-hover': 'rgba(28, 28, 33, 100%)',
@@ -46,24 +46,22 @@ module.exports = {
         'status-text-veto': '#E41E1E',
         'star-yellow': '#EEBB4E',
         'blue-gradient': 'linear-gradient(to bottom, #3FB6A8, #1C504A)',
-        'blue-transparent-gradient': 'linear-gradient(to bottom, rgba(31, 161, 217, 80%), rgba(6, 32, 42, 0%))',
+        'blue-transparent-gradient':
+          'linear-gradient(to bottom, rgba(31, 161, 217, 80%), rgba(6, 32, 42, 0%))',
         'chart-line': '#03C6F2',
         'chart-stroke': '#141415',
-       
       },
       backgroundImage: {
-        'main-image': "url('./public/images/main-bg.png')",
+        'main-image': "url('./public/images/main-bg.jpg')",
       },
       fontFamily: {
-        'main': ['Inter'],
+        main: ['Inter'],
         'red-hat-mono': ['"Red Hat Mono"', 'monospace'],
         'roboto-flex': ['"Roboto Flex"', 'sans-serif'],
       },
     },
   },
-  plugins: [require('daisyui'),
-    require('tailwind-scrollbar'),
-  ],
+  plugins: [require('daisyui'), require('tailwind-scrollbar')],
   daisyui: {
     themes: [
       {
