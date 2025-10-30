@@ -30,6 +30,12 @@ const coinInfo = computed(() => {
 });
 
 onMounted(() => {
+  console.log('coinInfo', coinInfo);
+  console.log('store', store);
+  console.log('walletStore', walletStore);
+  console.log('format', format);
+  console.log('paramStore', paramStore);
+
   store.loadDashboard();
   walletStore.loadMyAsset();
   paramStore.handleAbciInfo();
