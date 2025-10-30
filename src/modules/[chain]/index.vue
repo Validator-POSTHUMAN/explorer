@@ -30,12 +30,6 @@ const coinInfo = computed(() => {
 });
 
 onMounted(() => {
-  console.log('coinInfo', coinInfo);
-  console.log('store', store);
-  console.log('walletStore', walletStore);
-  console.log('format', format);
-  console.log('paramStore', paramStore);
-
   store.loadDashboard();
   walletStore.loadMyAsset();
   paramStore.handleAbciInfo();
@@ -149,6 +143,12 @@ const amount = computed({
     quantity.value = val / ticker.value.converted_last.usd || 0;
   },
 });
+
+console.log('coinInfo', coinInfo);
+console.log('store', store);
+console.log('walletStore', walletStore);
+console.log('format', format);
+console.log('paramStore', paramStore);
 </script>
 
 <template>
