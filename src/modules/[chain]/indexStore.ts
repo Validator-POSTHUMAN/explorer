@@ -25,11 +25,10 @@ export function colorMap(color: string) {
 }
 
 const CODEMAP: Record<string, string[]> = {
-  "binance.com": ["ref", "CPA_004JZGRX6A"],
-  "gate.com": ["ref", "U1gVBl9a"],
-  "bybit": ["affiliate_id", "JKRRZX9"],
-
-}
+  'binance.com': ['ref', 'CPA_004JZGRX6A'],
+  'gate.com': ['ref', 'U1gVBl9a'],
+  bybit: ['affiliate_id', 'JKRRZX9'],
+};
 
 export const useIndexModule = defineStore('module-index', {
   state: () => {
@@ -39,7 +38,7 @@ export const useIndexModule = defineStore('module-index', {
       coinInfo: {
         name: '',
         symbol: '',
-        image: {thumb: ''},
+        image: { thumb: '' },
         description: {
           en: '',
         },
@@ -224,7 +223,7 @@ export const useIndexModule = defineStore('module-index', {
     async loadDashboard() {
       this.$reset();
       this.initCoingecko();
-      useMintStore().fetchInflation();
+      // useMintStore().fetchInflation();
       useDistributionStore()
         .fetchCommunityPool()
         .then((x) => {
@@ -260,7 +259,7 @@ export const useIndexModule = defineStore('module-index', {
     },
     selectTicker(i: number) {
       this.tickerIndex = i;
-    }
+    },
   },
 });
 
@@ -271,7 +270,11 @@ export const useIndexModule = defineStore('module-index', {
  * @param value - The value to set for the parameter.
  * @returns The new URL with the parameter added or replaced.
  */
-export function addOrReplaceUrlParam(url: string, param: string, value: string): string {
+export function addOrReplaceUrlParam(
+  url: string,
+  param: string,
+  value: string
+): string {
   // Parse the URL
   const urlObj = new URL(url, window.location.origin);
 
@@ -282,13 +285,12 @@ export function addOrReplaceUrlParam(url: string, param: string, value: string):
   return urlObj.toString();
 }
 
-
 export function tickerUrl(url: string) {
   for (const domain of Object.keys(CODEMAP)) {
     if (url.indexOf(domain) > -1) {
       const v = CODEMAP[domain];
-      return addOrReplaceUrlParam(url, v[0], v[1])
+      return addOrReplaceUrlParam(url, v[0], v[1]);
     }
   }
-  return url
+  return url;
 }
