@@ -33,8 +33,9 @@ onMounted(() => {
   store.loadDashboard();
   walletStore.loadMyAsset();
   paramStore.handleAbciInfo();
-  // if(!(coinInfo.value && coinInfo.value.name)) {
-  // }
+  if (!(coinInfo.value && coinInfo.value.name)) {
+    console.log('coinInfo', coinInfo);
+  }
 });
 const ticker = computed(() => store.coinInfo.tickers[store.tickerIndex]);
 
