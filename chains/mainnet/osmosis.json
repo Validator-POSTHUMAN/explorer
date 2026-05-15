@@ -1,32 +1,122 @@
 {
-    "chain_name": "osmosis",
-    "coingecko": "osmosis",
-    "api": ["https://lcd.osmosis.zone","https://api-osmosis-ia.cosmosia.notional.ventures", "https://osmosis-api.polkachu.com", "https://lcd-osmosis.blockapsis.com"],
-    "rpc": ["https://rpc.osmosis.zone", "https://rpc-osmosis-ia.cosmosia.notional.ventures:443", "https://osmosis-rpc.polkachu.com:443", "https://osmosis.validator.network:443", "https://rpc-osmosis.blockapsis.com:443"],
-    "snapshot_provider": "",
-    "sdk_version": "0.46.1",
-    "coin_type": "118",
-    "min_tx_fee": "800",
-    "addr_prefix": "osmo",
-    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-    "theme_color": "#2e2e2e",
-    "assets": [{
-        "base": "uosmo",
-        "symbol": "OSMO",
-        "exponent": "6",
-        "coingecko_id": "osmosis", 
-        "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
-    },{
-        "base": "uion",
-        "symbol": "ION",
-        "exponent": "6",
-        "coingecko_id": "ion", 
-        "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
-    },{
-        "base": "usomm",
-        "symbol": "SOMM",
-        "exponent": "6",
-        "coingecko_id": "somm", 
-        "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sommelier/images/somm.svg"
-    }]
+  "chain_name": "osmosis",
+  "coingecko": "osmosis",
+  "api": [
+    {
+      "provider": "unknown",
+      "address": "https://lcd.osmosis.zone"
+    },
+    {
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rest.lavenderfive.com:443/osmosis"
+    },
+    {
+      "provider": "ecostake",
+      "address": "https://rest-osmosis.ecostake.com"
+    },
+    {
+      "provider": "Stakin",
+      "address": "https://osmosis.rest.stakin-nodes.com"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://osmosis-rest.publicnode.com"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://api.osmosis.validatus.com:443"
+    },
+    {
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/osmosis/rest"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://osmosis-api.noders.services"
+    },
+    {
+      "provider": "Pocket Network",
+      "address": "https://osmosis.api.pocket.network"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://osmosis-api.polkachu.com"
+    }
+  ],
+  "rpc": [
+    {
+      "provider": "unknown",
+      "address": "https://rpc.osmosis.zone"
+    },
+    {
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rpc.lavenderfive.com:443/osmosis"
+    },
+    {
+      "provider": "ecostake",
+      "address": "https://rpc-osmosis.ecostake.com"
+    },
+    {
+      "provider": "Stakin",
+      "address": "https://osmosis.rpc.stakin-nodes.com"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://osmosis-rpc.publicnode.com:443"
+    },
+    {
+      "provider": "FreshSTAKING",
+      "address": "http://rpc-osmosis.freshstaking.com:31657"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://rpc.osmosis.validatus.com"
+    },
+    {
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/osmosis/rpc"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://osmosis-rpc.noders.services"
+    },
+    {
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://osmosis-rpc.highstakes.ch"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://osmosis-rpc.polkachu.com"
+    }
+  ],
+  "snapshot_provider": "",
+  "sdk_version": "0.46.1",
+  "coin_type": "118",
+  "min_tx_fee": "800",
+  "addr_prefix": "osmo",
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
+  "theme_color": "#2e2e2e",
+  "assets": [
+    {
+      "base": "uosmo",
+      "symbol": "OSMO",
+      "exponent": "6",
+      "coingecko_id": "osmosis",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+    },
+    {
+      "base": "uion",
+      "symbol": "ION",
+      "exponent": "6",
+      "coingecko_id": "ion",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+    },
+    {
+      "base": "usomm",
+      "symbol": "SOMM",
+      "exponent": "6",
+      "coingecko_id": "somm",
+      "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sommelier/images/somm.svg"
+    }
+  ]
 }

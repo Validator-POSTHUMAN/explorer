@@ -2,90 +2,74 @@
   "chain_name": "dymension",
   "api": [
     {
-      "provider": "POSTHUMAN∞DVS",
-      "address": "https://rest.dymension.posthuman.digital"
-    },
-    {
       "provider": "lesnik | UTSA",
       "address": "https://m-dymension.api.utsa.tech:443"
-    },
-    {
-      "provider": "AVIAONE 🟢",
-      "address": "https://api.mainnet.dymension.aviaone.com:443"
-    },
-    {
-      "provider": "Wave",
-      "address": "https://dymension.0xwave.com:443"
     },
     {
       "provider": "NodeStake",
       "address": "https://api.dymension.nodestake.org:443"
     },
     {
-      "provider": "🔥STAVR🔥",
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "https://dymension.api.m.stavr.tech:443"
-    },
-    {
-      "provider": "NODEJUMPER",
-      "address": "https://dymension.nodejumper.io:1317"
     },
     {
       "provider": "[NODERS]TEAM",
       "address": "https://dymension-api.noders.services:443"
     },
     {
-      "provider": "DTEAM",
-      "address": "https://api.archive.dymension.mainnet.dteam.tech:443"
-    },
-    {
-      "provider": "silent",
-      "address": "https://api.dymension.silentvalidator.com:443"
-    },
-    {
       "provider": "Pro-Nodes75",
       "address": "https://api.dymension.node75.org:443"
     },
     {
-      "provider": "kjnodes.com 🦄",
-      "address": "https://dymension.api.kjnodes.com:443"
-    },
-    {
-      "provider": "Stake&Relax 🦥",
+      "provider": "Stake&Relax \ud83e\udda5",
       "address": "https://dymension-api.stakeandrelax.net:443"
     },
     {
-      "provider": "AutoStake 🛡️ Slash Protected",
-      "address": "https://dymension-mainnet-lcd.autostake.com:443"
+      "provider": "NodeStake",
+      "address": "https://api.dymension.nodestake.org"
     },
     {
-      "provider": "Cumulo",
-      "address": "https://api.dym.cumulo.com.es"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rest.lavenderfive.com:443/dymension"
+    },
+    {
+      "provider": "Kynraze",
+      "address": "https://dymension-api.kynraze.com"
+    },
+    {
+      "provider": "lesnik | UTSA",
+      "address": "https://m-dymension.api.utsa.tech"
+    },
+    {
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://dymension.api.m.stavr.tech"
+    },
+    {
+      "provider": "Stake&Relax \ud83e\udda5",
+      "address": "https://dymension-api.stakeandrelax.net"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://dymension-rest.publicnode.com"
     },
     {
       "provider": "Inter Blockchain Services",
-      "address": "https://dymension-api.ibs.team:443"
+      "address": "https://dymension.ibs.team:443/api"
     },
     {
-      "provider": "Bro_n_Bro",
-      "address": "https://lcd.dymension.bronbro.io:443"
+      "provider": "Pro-Nodes75",
+      "address": "https://api.dymension.node75.org"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://dymension-api.noders.services"
     }
   ],
   "rpc": [
     {
-      "provider": "POSTHUMAN∞DVS",
-      "address": "https://rpc.dymension.posthuman.digital"
-    },
-    {
       "provider": "lesnik | UTSA",
       "address": "https://m-dymension.rpc.utsa.tech:443"
-    },
-    {
-      "provider": "AVIAONE 🟢",
-      "address": "https://rpc.mainnet.dymension.aviaone.com:443"
-    },
-    {
-      "provider": "Wave",
-      "address": "https://dymension.0xwave.com:2053"
     },
     {
       "provider": "Bro_n_Bro",
@@ -100,44 +84,48 @@
       "address": "https://rpc.dymension.nodestake.org:443"
     },
     {
-      "provider": "Stake&Relax 🦥",
+      "provider": "Stake&Relax \ud83e\udda5",
       "address": "https://dymension-rpc.stakeandrelax.net:443"
-    },
-    {
-      "provider": "DTEAM",
-      "address": "https://rpc.archive.dymension.mainnet.dteam.tech:443"
     },
     {
       "provider": "Pro-Nodes75",
       "address": "https://rpc.dymension.node75.org:443"
     },
     {
-      "provider": "silent",
-      "address": "https://rpc.dymension.silentvalidator.com:443"
-    },
-    {
-      "provider": "NODEJUMPER",
-      "address": "https://dymension.nodejumper.io:443"
-    },
-    {
-      "provider": "kjnodes.com 🦄",
-      "address": "https://dymension.rpc.kjnodes.com:443"
-    },
-    {
-      "provider": "🔥STAVR🔥",
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "https://dym.rpc.m.stavr.tech:443"
     },
     {
-      "provider": "AutoStake 🛡️ Slash Protected",
-      "address": "https://dymension-mainnet-rpc.autostake.com:443"
+      "provider": "NodeStake",
+      "address": "https://rpc.dymension.nodestake.org"
     },
     {
-      "provider": "Cumulo",
-      "address": "https://archive.rpc.dym.cumulo.com.es:443"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rpc.lavenderfive.com:443/dymension"
+    },
+    {
+      "provider": "lesnik | UTSA",
+      "address": "https://m-dymension.rpc.utsa.tech"
+    },
+    {
+      "provider": "Stake&Relax \ud83e\udda5",
+      "address": "https://dymension-rpc.stakeandrelax.net"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://dymension-rpc.publicnode.com:443"
     },
     {
       "provider": "Inter Blockchain Services",
-      "address": "https://dymension-rpc.ibs.team:443"
+      "address": "https://dymension.ibs.team:443/rpc"
+    },
+    {
+      "provider": "Pro-Nodes75",
+      "address": "https://rpc.dymension.node75.org"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://dymension-rpc.noders.services"
     }
   ],
   "sdk_version": "0.46.15",

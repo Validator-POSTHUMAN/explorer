@@ -4,102 +4,82 @@
   "registry_name": "fetchhub",
   "api": [
     {
-      "address": "https://api.fetchhub-4.fetch.aviaone.com",
-      "provider": "AVIAONE 🟢"
+      "provider": "AVIAONE \ud83d\udfe2",
+      "address": "https://api.fetchhub-4.fetch.aviaone.com"
     },
     {
-      "address": "https://fetch-api.cosmosrescue.com",
-      "provider": "cosmosrescue"
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/fetchhub/rest"
     },
     {
-      "address": "https://public.stakewolle.com/cosmos/fetchhub/rest",
-      "provider": "Stakewolle"
+      "provider": "Polkachu",
+      "address": "https://fetch-api.polkachu.com"
     },
     {
-      "address": "https://fetch-api.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "fetch.ai",
+      "address": "https://rest-fetchhub.fetch.ai"
     },
     {
-      "address": "https://fetch-api.w3coins.io",
-      "provider": "w3coins"
+      "provider": "BlueStake \ud83d\ude80",
+      "address": "https://fetchai-api.bluestake.net"
     },
     {
-      "address": "https://rest-fetchhub.fetch.ai",
-      "provider": "fetch.ai"
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://fetch-api.highstakes.ch"
     },
     {
-      "address": "https://fetchai-api.bluestake.net",
-      "provider": "BlueStake 🚀"
+      "provider": "Inter Blockchain Services",
+      "address": "https://fetch.ibs.team:443/api"
     },
     {
-      "address": "https://fetchhub-mainnet-lcd.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://fetch-rest.publicnode.com"
     },
     {
-      "address": "https://fetch-api.ibs.team",
-      "provider": "Inter Blockchain Services"
-    },
-    {
-      "address": "https://fetchai-api.kleomedes.network",
-      "provider": "Kleomedes"
-    },
-    {
-      "address": "https://fetch-api.highstakes.ch",
-      "provider": "High Stakes 🇨🇭"
-    },
-    {
-      "address": "https://rest-fetch.architectnodes.com",
-      "provider": "Architect Nodes"
+      "provider": "Pocket Network",
+      "address": "https://fetch.api.pocket.network"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.fetchhub-4.fetch.aviaone.com",
-      "provider": "AVIAONE 🟢"
+      "provider": "AVIAONE \ud83d\udfe2",
+      "address": "https://rpc.fetchhub-4.fetch.aviaone.com"
     },
     {
-      "address": "https://fetch-rpc.cosmosrescue.com",
-      "provider": "cosmosrescue"
+      "provider": "cosmosrescue",
+      "address": "https://fetch-rpc.cosmosrescue.com"
     },
     {
-      "address": "https://fetch-rpc.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "Polkachu",
+      "address": "https://fetch-rpc.polkachu.com"
     },
     {
-      "address": "https://rpc-fetchhub.fetch.ai:443",
-      "provider": "fetch.ai"
+      "provider": "fetch.ai",
+      "address": "https://rpc-fetchhub.fetch.ai:443"
     },
     {
-      "address": "https://fetch-rpc.w3coins.io",
-      "provider": "w3coins"
+      "provider": "BlueStake \ud83d\ude80",
+      "address": "https://fetchai-rpc.bluestake.net:443"
     },
     {
-      "address": "https://fetchai-rpc.bluestake.net:443",
-      "provider": "BlueStake 🚀"
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/fetchhub/rpc"
     },
     {
-      "address": "https://fetchhub-mainnet-rpc.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://fetch-rpc.highstakes.ch"
     },
     {
-      "address": "https://fetchai-rpc.kleomedes.network",
-      "provider": "Kleomedes"
+      "provider": "Inter Blockchain Services",
+      "address": "https://fetch.ibs.team:443/rpc"
     },
     {
-      "address": "https://public.stakewolle.com/cosmos/fetchhub/rpc",
-      "provider": "Stakewolle"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://fetch-rpc.publicnode.com:443"
     },
     {
-      "address": "https://fetch-rpc.ibs.team",
-      "provider": "Inter Blockchain Services"
-    },
-    {
-      "address": "https://rpc-fetch.architectnodes.com",
-      "provider": "Architect Nodes"
-    },
-    {
-      "address": "https://fetch-rpc.highstakes.ch",
-      "provider": "High Stakes 🇨🇭"
+      "provider": "Pocket Network",
+      "address": "https://fetch.api.pocket.network"
     }
   ],
   "sdk_version": "0.45.6",

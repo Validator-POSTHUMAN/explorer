@@ -4,62 +4,54 @@
   "registry_name": "oraichain",
   "api": [
     {
-      "address": "https://api-orai.blockval.io",
-      "provider": "Blockval"
+      "provider": "KonsorTech",
+      "address": "https://mainnet-orai-api.konsortech.xyz"
     },
     {
-      "address": "https://mainnet-orai-api.konsortech.xyz",
-      "provider": "KonsorTech"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://orai.api.m.stavr.tech"
     },
     {
-      "address": "https://orai.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "OWALLET",
+      "address": "https://orai-rest.owallet.io"
     },
     {
-      "address": "https://orai-rest.owallet.io",
-      "provider": "OWALLET"
+      "provider": "ITRocket",
+      "address": "https://oraichain-mainnet-api.itrocket.net"
     },
     {
-      "address": "https://oraichain-mainnet-api.itrocket.net",
-      "provider": "ITRocket"
+      "provider": "oraichain-team",
+      "address": "http://lcd.orai.io"
     },
     {
-      "address": "http://lcd.orai.io",
-      "provider": "oraichain-team"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://oraichain-rest.publicnode.com"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc-orai.blockval.io",
-      "provider": "Blockval"
+      "provider": "KonsorTech",
+      "address": "https://mainnet-orai-rpc.konsortech.xyz"
     },
     {
-      "address": "https://mainnet-orai-rpc.konsortech.xyz",
-      "provider": "KonsorTech"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://orai.rpc.m.stavr.tech"
     },
     {
-      "address": "https://orai.rpc.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "OWALLET",
+      "address": "https://orai-rpc.owallet.io"
     },
     {
-      "address": "https://orai-rpc.owallet.io",
-      "provider": "OWALLET"
+      "provider": "ITRocket",
+      "address": "https://oraichain-mainnet-rpc.itrocket.net"
     },
     {
-      "address": "https://rpc.orai.pfc.zone",
-      "provider": "PFC"
+      "provider": "oraichain-team",
+      "address": "https://rpc.orai.io"
     },
     {
-      "address": "https://orai-rpc.imdev.app",
-      "provider": "imORAI"
-    },
-    {
-      "address": "https://oraichain-mainnet-rpc.itrocket.net",
-      "provider": "ITRocket"
-    },
-    {
-      "address": "https://rpc.orai.io",
-      "provider": "oraichain-team"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://oraichain-rpc.publicnode.com:443"
     }
   ],
   "sdk_version": "0.45.16",

@@ -4,20 +4,8 @@
   "registry_name": "babylon",
   "api": [
     {
-      "provider": "PRO Delegators",
-      "address": "https://community.nuxian-node.ch:6797/babylon/crpc"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://babylon-api.polkachu.com:443"
-    },
-    {
-      "provider": "Nodes.Guru",
-      "address": "https://babylon-archive.nodes.guru:443/api"
-    },
-    {
-      "provider": "AutoStake 🛡️ Slash Protected",
-      "address": "https://babylon-mainnet-lcd.autostake.com:443"
     },
     {
       "provider": "Polkachu",
@@ -26,24 +14,32 @@
     {
       "provider": "Nodes.Guru",
       "address": "https://babylon.nodes.guru:443/api"
+    },
+    {
+      "provider": "Nodes.Guru",
+      "address": "https://babylon.nodes.guru/api"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-api.polkachu.com"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-archive-api.polkachu.com"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://babylon-rest.publicnode.com"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://api.babylon.validatus.com"
     }
   ],
   "rpc": [
     {
-      "provider": "PRO Delegators",
-      "address": "https://community.nuxian-node.ch:6797/babylon/trpc"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://babylon-rpc.polkachu.com:443"
-    },
-    {
-      "provider": "Nodes.Guru",
-      "address": "https://babylon-archive.nodes.guru:443/rpc"
-    },
-    {
-      "provider": "AutoStake 🛡️ Slash Protected",
-      "address": "https://babylon-mainnet-rpc.autostake.com:443"
     },
     {
       "provider": "Polkachu",
@@ -52,6 +48,22 @@
     {
       "provider": "Nodes.Guru",
       "address": "https://babylon.nodes.guru:443/rpc"
+    },
+    {
+      "provider": "Nodes.Guru",
+      "address": "https://babylon.nodes.guru/rpc"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://babylon-rpc.polkachu.com"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://babylon-rpc.publicnode.com:443"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://rpc.babylon.validatus.com"
     }
   ],
   "assets": [
@@ -59,10 +71,10 @@
       "base": "ubbn",
       "symbol": "BBN",
       "exponent": "6",
-      "logo": "babylon.jpg"
+      "logo": "/babylon.jpg"
     }
   ],
   "sdk_version": "0.50.9",
   "addr_prefix": "bbn",
-  "logo": "babylon.jpg"
+  "logo": "/babylon.jpg"
 }

@@ -4,110 +4,86 @@
   "registry_name": "lava",
   "api": [
     {
-      "address": "https://api.lava-mainnet-1.lava.aviaone.com",
-      "provider": "AVIAONE 🟢"
+      "provider": "Lava Over Lava",
+      "address": "https://lava.rest.lava.build"
     },
     {
-      "address": "https://lava.rest.lava.build",
-      "provider": "Lava Over Lava"
+      "provider": "BlueStake \ud83d\ude80",
+      "address": "https://lava-api.bluestake.net"
     },
     {
-      "address": "https://lava-api.bluestake.net",
-      "provider": "BlueStake 🚀"
+      "provider": "w3coins",
+      "address": "https://lava-api.w3coins.io:443"
     },
     {
-      "address": "https://lava.api-archive.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://lava.api.m.stavr.tech"
     },
     {
-      "address": "https://lava-api.w3coins.io:443",
-      "provider": "w3coins"
+      "provider": "LiveRaveN",
+      "address": "https://lava.api.liveraven.net"
     },
     {
-      "address": "https://lava-api.finteh.org:443",
-      "provider": "finteh"
+      "provider": "Stake Village",
+      "address": "https://lava.api.stakevillage.net:443"
     },
     {
-      "address": "https://lava-api.stake-town.com:443",
-      "provider": "StakeTown"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://lava-rest.publicnode.com"
     },
     {
-      "address": "https://lava-mainnet-lcd.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
+      "provider": "Vinjan.Inc",
+      "address": "https://api-lava.vinjan-inc.com"
     },
     {
-      "address": "https://lava-api.ibs.team:443",
-      "provider": "Inter Blockchain Services"
+      "provider": "Shazoes",
+      "address": "https://lava-mainnet-api.shazoes.xyz"
     },
     {
-      "address": "https://lava.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
-    },
-    {
-      "address": "https://api-lava.r93axnodes.cloud:443",
-      "provider": "r93AX Nodes"
-    },
-    {
-      "address": "https://lava.api.liveraven.net",
-      "provider": "LiveRaveN"
-    },
-    {
-      "address": "https://lava.api.stakevillage.net:443",
-      "provider": "Stake Village"
+      "provider": "AstroStake",
+      "address": "https://lava-api.linknode.org"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.lava-mainnet-1.lava.aviaone.com:443",
-      "provider": "AVIAONE 🟢"
+      "provider": "LiveRaveN",
+      "address": "https://lava.rpc.liveraven.net"
     },
     {
-      "address": "https://lava.rpc.liveraven.net",
-      "provider": "LiveRaveN"
+      "provider": "w3coins",
+      "address": "https://lava-rpc.w3coins.io:443"
     },
     {
-      "address": "https://lava-rpc.y2.finance:443",
-      "provider": "YTWOFUND"
+      "provider": "BlueStake \ud83d\ude80",
+      "address": "https://lava-rpc.bluestake.net:443"
     },
     {
-      "address": "https://lava-rpc.ibs.team:443",
-      "provider": "Inter Blockchain Services"
+      "provider": "Lava Over Lava",
+      "address": "https://lava.tendermintrpc.lava.build"
     },
     {
-      "address": "https://lava-rpc.w3coins.io:443",
-      "provider": "w3coins"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://lava.rpc.m.stavr.tech:443"
     },
     {
-      "address": "https://lava.rpc-archive.m.stavr.tech:443",
-      "provider": "🔥STAVR🔥"
+      "provider": "Stake Village",
+      "address": "https://lava.rpc.stakevillage.net:443"
     },
     {
-      "address": "https://lava-rpc.stake-town.com:443",
-      "provider": "StakeTown"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://lava-rpc.publicnode.com:443"
     },
     {
-      "address": "https://lava-rpc.bluestake.net:443",
-      "provider": "BlueStake 🚀"
+      "provider": "Vinjan.Inc",
+      "address": "https://rpc-lava.vinjan-inc.com"
     },
     {
-      "address": "https://rpc-lava.r93axnodes.cloud:443",
-      "provider": "r93AX Nodes"
+      "provider": "Shazoes",
+      "address": "https://lava-mainnet-rpc.shazoes.xyz"
     },
     {
-      "address": "https://lava.tendermintrpc.lava.build",
-      "provider": "Lava Over Lava"
-    },
-    {
-      "address": "https://lava-mainnet-rpc.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
-    },
-    {
-      "address": "https://lava.rpc.m.stavr.tech:443",
-      "provider": "🔥STAVR🔥"
-    },
-    {
-      "address": "https://lava.rpc.stakevillage.net:443",
-      "provider": "Stake Village"
+      "provider": "AstroStake",
+      "address": "https://lava-rpc.linknode.org"
     }
   ],
   "sdk_version": "0.47.13",

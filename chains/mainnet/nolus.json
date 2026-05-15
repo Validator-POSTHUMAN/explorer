@@ -4,54 +4,22 @@
   "registry_name": "nolus",
   "api": [
     {
-      "address": "https://nolus.api.liveraven.net",
-      "provider": "LiveRaveN"
+      "provider": "LiveRaveN",
+      "address": "https://nolus.api.liveraven.net"
     },
     {
-      "address": "https://rest.lavenderfive.com:443/nolus",
-      "provider": "Lavender.Five Nodes 🐝"
-    },
-    {
-      "address": "https://nolus-api.w3coins.io",
-      "provider": "w3coins"
-    },
-    {
-      "address": "https://nolus-mainnet-lcd.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
-    },
-    {
-      "address": "https://nolus-api.ibs.team",
-      "provider": "Inter Blockchain Services"
-    },
-    {
-      "address": "https://rest-nolus.architectnodes.com",
-      "provider": "Architect Nodes"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://nolus-rest.publicnode.com"
     }
   ],
   "rpc": [
     {
-      "address": "https://nolus.rpc.liveraven.net",
-      "provider": "LiveRaveN"
+      "provider": "LiveRaveN",
+      "address": "https://nolus.rpc.liveraven.net"
     },
     {
-      "address": "https://rpc.lavenderfive.com:443/nolus",
-      "provider": "Lavender.Five Nodes 🐝"
-    },
-    {
-      "address": "https://nolus-rpc.ibs.team",
-      "provider": "Inter Blockchain Services"
-    },
-    {
-      "address": "https://nolus-mainnet-rpc.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
-    },
-    {
-      "address": "https://nolus-rpc.w3coins.io",
-      "provider": "w3coins"
-    },
-    {
-      "address": "https://rpc-nolus.architectnodes.com",
-      "provider": "Architect Nodes"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://nolus-rpc.publicnode.com:443"
     }
   ],
   "sdk_version": "0.50.7",

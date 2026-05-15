@@ -4,46 +4,46 @@
   "registry_name": "beezee",
   "api": [
     {
-      "address": "https://rest.cosmos.directory/beezee",
-      "provider": "cosmos.directory"
+      "provider": "cosmos.directory",
+      "address": "https://rest.cosmos.directory/beezee"
     },
     {
-      "address": "https://rest.getbze.com",
-      "provider": "AlphaTeam"
+      "provider": "AlphaTeam",
+      "address": "https://rest.getbze.com"
     },
     {
-      "address": "https://rest-1.getbze.com",
-      "provider": "AlphaTeam"
+      "provider": "AlphaTeam",
+      "address": "https://rest-1.getbze.com"
     },
     {
-      "address": "https://rest-2.getbze.com",
-      "provider": "AlphaTeam"
+      "provider": "AlphaTeam",
+      "address": "https://rest-2.getbze.com"
     },
     {
-      "address": "https://beezee_mainnet_api.chain.whenmoonwhenlambo.money",
-      "provider": "🚀 WHEN MOON 🌕 WHEN LAMBO 🔥"
+      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
+      "address": "https://beezee_mainnet_api.chain.whenmoonwhenlambo.money"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.cosmos.directory/beezee",
-      "provider": "cosmos.directory"
+      "provider": "cosmos.directory",
+      "address": "https://rpc.cosmos.directory/beezee"
     },
     {
-      "address": "https://rpc.getbze.com",
-      "provider": "AlphaTeam"
+      "provider": "AlphaTeam",
+      "address": "https://rpc.getbze.com"
     },
     {
-      "address": "https://rpc-1.getbze.com",
-      "provider": "AlphaTeam"
+      "provider": "AlphaTeam",
+      "address": "https://rpc-1.getbze.com"
     },
     {
-      "address": "https://rpc-2.getbze.com",
-      "provider": "AlphaTeam"
+      "provider": "AlphaTeam",
+      "address": "https://rpc-2.getbze.com"
     },
     {
-      "address": "https://beezee_mainnet_rpc.chain.whenmoonwhenlambo.money",
-      "provider": "🚀 WHEN MOON 🌕 WHEN LAMBO 🔥"
+      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
+      "address": "https://beezee_mainnet_rpc.chain.whenmoonwhenlambo.money"
     }
   ],
   "sdk_version": "0.45.16",

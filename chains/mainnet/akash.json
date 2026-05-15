@@ -12,10 +12,6 @@
       "address": "https://public.stakewolle.com/cosmos/akash/rest"
     },
     {
-      "provider": "w3coins",
-      "address": "https://akash-api.w3coins.io"
-    },
-    {
       "provider": "ecostake",
       "address": "https://rest-akash.ecostake.com"
     },
@@ -28,24 +24,28 @@
       "address": "https://akash.c29r3.xyz:443/api"
     },
     {
-      "provider": "forbole",
-      "address": "https://api.akash.forbole.com:443"
-    },
-    {
       "provider": "Kleomedes",
       "address": "https://akash-api.kleomedes.network"
-    },
-    {
-      "provider": "Decloud Nodes Lab",
-      "address": "https://akash.declab.pro:443"
     },
     {
       "provider": "Cosmonaut Stakes",
       "address": "https://akash-mainnet-rest.cosmonautstakes.com:443"
     },
     {
-      "provider": "Stakeflow",
-      "address": "https://api-akash-01.stakeflow.io"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://akash-rest.publicnode.com"
+    },
+    {
+      "provider": "ValidatorNode",
+      "address": "https://akash-api.validatornode.com"
+    },
+    {
+      "provider": "Arcturian Tech",
+      "address": "https://akash.api.arcturian.tech"
+    },
+    {
+      "provider": "Pocket Network",
+      "address": "https://akash.api.pocket.network"
     }
   ],
   "rpc": [
@@ -58,10 +58,6 @@
       "address": "http://akash.c29r3.xyz:80/rpc"
     },
     {
-      "provider": "w3coins",
-      "address": "https://akash-rpc.w3coins.io"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://akash-rpc.polkachu.com"
     },
@@ -70,20 +66,24 @@
       "address": "https://rpc-akash.ecostake.com:443"
     },
     {
-      "provider": "Decloud Nodes Lab",
-      "address": "https://akash.declab.pro:26601"
-    },
-    {
-      "provider": "forbole",
-      "address": "https://rpc.akash.forbole.com:443"
-    },
-    {
       "provider": "Kleomedes",
       "address": "https://akash-rpc.kleomedes.network"
     },
     {
       "provider": "Cosmonaut Stakes",
       "address": "https://akash-mainnet-rpc.cosmonautstakes.com:443"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://akash-rpc.publicnode.com:443"
+    },
+    {
+      "provider": "Arcturian Tech",
+      "address": "https://akash.rpc.arcturian.tech"
+    },
+    {
+      "provider": "Pocket Network",
+      "address": "https://akash.api.pocket.network"
     }
   ],
   "sdk_version": "0.45.16",

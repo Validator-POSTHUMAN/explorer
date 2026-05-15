@@ -4,38 +4,194 @@
   "registry_name": "cosmoshub",
   "api": [
     {
-      "provider": "notional",
-      "address": "https://api-cosmoshub-ia.cosmosia.notional.ventures"
-    },
-    {
-      "provider": "blockapsis",
-      "address": "https://lcd-cosmoshub.blockapsis.com:443"
-    },
-    {
-      "provider": "WhisperNode🤐",
-      "address": "https://lcd-cosmoshub.whispernode.com:443"
-    },
-    { "provider": "pupmos", "address": "https://api-cosmoshub.pupmos.network" },
-    {
       "provider": "publicnode",
       "address": "https://cosmos-rest.publicnode.com"
     },
-    { "provider": "staketab", "address": "https://cosmos-rest.staketab.org" },
-    { "provider": "nodestake", "address": "https://api.cosmos.nodestake.top" },
     {
-      "provider": "Golden Ratio Staking",
-      "address": "https://rest-cosmoshub.goldenratiostaking.net"
+      "provider": "nodestake",
+      "address": "https://api.cosmos.nodestake.top"
+    },
+    {
+      "provider": "CryptoCrew",
+      "address": "https://rest.cosmoshub-main.ccvalidators.com:443"
+    },
+    {
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rest.lavenderfive.com:443/cosmoshub"
+    },
+    {
+      "provider": "DragonStake",
+      "address": "https://lcd.cosmos.dragonstake.io"
+    },
+    {
+      "provider": "Stakin",
+      "address": "https://cosmoshub.rest.stakin-nodes.com"
+    },
+    {
+      "provider": "ecostake",
+      "address": "https://rest-cosmoshub.ecostake.com"
+    },
+    {
+      "provider": "Easy 2 Stake",
+      "address": "https://cosmos-lcd.easy2stake.com"
+    },
+    {
+      "provider": "NodeStake",
+      "address": "https://api.cosmos.nodestake.org"
+    },
+    {
+      "provider": "kjnodes",
+      "address": "https://cosmoshub.api.kjnodes.com"
+    },
+    {
+      "provider": "w3coins",
+      "address": "https://cosmos-api.w3coins.io"
+    },
+    {
+      "provider": "PRO Delegators",
+      "address": "https://community.nuxian-node.ch:6797/gaia/crpc"
+    },
+    {
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://cosmos-api.highstakes.ch"
+    },
+    {
+      "provider": "cosmosrescue",
+      "address": "https://cosmoshub-api.cosmosrescue.dev"
+    },
+    {
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/cosmoshub/rest"
+    },
+    {
+      "provider": "Stake&Relax \ud83e\udda5",
+      "address": "https://cosmos-api.stakeandrelax.net"
+    },
+    {
+      "provider": "ITRocket",
+      "address": "https://cosmoshub-mainnet-api.itrocket.net"
+    },
+    {
+      "provider": "Inter Blockchain Services",
+      "address": "https://cosmos.ibs.team:443/api"
+    },
+    {
+      "provider": "Citizen Web3",
+      "address": "https://api.cosmoshub-4-archive.citizenweb3.com:443"
+    },
+    {
+      "provider": "Citizen Web3",
+      "address": "https://api.cosmoshub-4.citizenweb3.com:443"
+    },
+    {
+      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
+      "address": "https://cosmoshub-mainnet.chain.whenmoonwhenlambo.money"
+    },
+    {
+      "provider": "Cumulo",
+      "address": "https://api.cosmos.cumulo.com.es"
     }
   ],
   "rpc": [
-    { "provider": "icycro", "address": "https://cosmos-rpc.icycro.org" },
     {
       "provider": "dragonstake",
       "address": "https://rpc.cosmos.dragonstake.io"
     },
     {
-      "provider": "Golden Ratio Staking",
-      "address": "https://rpc-cosmoshub.goldenratiostaking.net"
+      "provider": "CryptoCrew",
+      "address": "https://rpc.cosmoshub-main.ccvalidators.com:443"
+    },
+    {
+      "provider": "Lava",
+      "address": "https://cosmoshub.tendermintrpc.lava.build:443"
+    },
+    {
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rpc.lavenderfive.com:443/cosmoshub"
+    },
+    {
+      "provider": "ecostake",
+      "address": "https://rpc-cosmoshub.ecostake.com"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://cosmos-rpc.polkachu.com"
+    },
+    {
+      "provider": "Stakin",
+      "address": "https://cosmoshub.rpc.stakin-nodes.com"
+    },
+    {
+      "provider": "Easy 2 Stake",
+      "address": "https://cosmos-rpc.easy2stake.com"
+    },
+    {
+      "provider": "NodeStake",
+      "address": "https://rpc.cosmos.nodestake.org"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://cosmos-rpc.publicnode.com:443"
+    },
+    {
+      "provider": "kjnodes",
+      "address": "https://cosmoshub.rpc.kjnodes.com"
+    },
+    {
+      "provider": "w3coins",
+      "address": "https://cosmos-rpc.w3coins.io"
+    },
+    {
+      "provider": "PRO Delegators",
+      "address": "https://community.nuxian-node.ch:6797/gaia/trpc"
+    },
+    {
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://cosmos-rpc.highstakes.ch"
+    },
+    {
+      "provider": "cosmosrescue",
+      "address": "https://cosmoshub-rpc.cosmosrescue.dev"
+    },
+    {
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/cosmoshub/rpc"
+    },
+    {
+      "provider": "Citizen Web3",
+      "address": "https://rpc.cosmoshub-4.citizenweb3.com"
+    },
+    {
+      "provider": "Stake&Relax \ud83e\udda5",
+      "address": "https://cosmos-rpc.stakeandrelax.net"
+    },
+    {
+      "provider": "ITRocket",
+      "address": "https://cosmoshub-mainnet-rpc.itrocket.net"
+    },
+    {
+      "provider": "Inter Blockchain Services",
+      "address": "https://cosmos.ibs.team:443/rpc"
+    },
+    {
+      "provider": "Citizen Web3",
+      "address": "https://rpc.cosmoshub-4-archive.citizenweb3.com:443"
+    },
+    {
+      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
+      "address": "https://cosmoshub-mainnet.chain.whenmoonwhenlambo.money"
+    },
+    {
+      "provider": "Cumulo",
+      "address": "https://rpc.cosmos.cumulo.com.es"
+    },
+    {
+      "provider": "Pocket Network",
+      "address": "https://cosmoshub.api.pocket.network"
+    },
+    {
+      "provider": "GetBlock RPC Nodes",
+      "address": "https://go.getblock.io/17515cb3ec0e43b7817f182e5de6066a"
     }
   ],
   "sdk_version": "0.45.1",

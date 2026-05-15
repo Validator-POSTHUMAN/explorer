@@ -4,28 +4,12 @@
   "registry_name": "axelar",
   "api": [
     {
-      "provider": "chainlayer",
-      "address": "https://axelar-lcd.quickapi.com:443"
-    },
-    {
       "provider": "nodes.guru",
       "address": "https://api-1.axelar.nodes.guru:443"
     },
     {
-      "provider": "Stakeflow",
-      "address": "https://api-axelar-01.stakeflow.io"
-    },
-    {
-      "provider": "Imperator.co",
-      "address": "https://lcd-axelar.imperator.co:443"
-    },
-    {
       "provider": "Qubelabs",
       "address": "https://axelar-lcd.qubelabs.io:443"
-    },
-    {
-      "provider": "QuantNode",
-      "address": "https://axelar-lcd.quantnode.tech"
     },
     {
       "provider": "Stakin",
@@ -36,50 +20,30 @@
       "address": "https://axelar-api.polkachu.com"
     },
     {
-      "provider": "Inter Blockchain Services",
-      "address": "https://axelar-api.ibs.team"
+      "provider": "QuantNode",
+      "address": "https://axelar.lcd.quantnode.xyz"
     },
     {
-      "provider": "BlockHunters 🎯",
-      "address": "https://api.axelar.bh.rocks"
+      "provider": "Inter Blockchain Services",
+      "address": "https://axelar.ibs.team:443/api"
+    },
+    {
+      "provider": "Staketab",
+      "address": "https://axelar-rest.staketab.org"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://axelar-rest.publicnode.com"
     }
   ],
   "rpc": [
-    {
-      "provider": "QuantNode",
-      "address": "https://axelar-rpc.quantnode.tech"
-    },
-    {
-      "provider": "Imperator.co",
-      "address": "https://rpc-axelar.imperator.co:443"
-    },
-    {
-      "provider": "RockawayX Infra",
-      "address": "https://axelar-rpc.rockrpc.net"
-    },
-    {
-      "provider": "Inter Blockchain Services",
-      "address": "https://axelar-rpc.ibs.team"
-    },
     {
       "provider": "Polkachu",
       "address": "https://axelar-rpc.polkachu.com"
     },
     {
-      "provider": "chainlayer",
-      "address": "https://axelar-rpc.quickapi.com:443"
-    },
-    {
-      "provider": "BlockHunters 🎯",
-      "address": "https://rpc.axelar.bh.rocks"
-    },
-    {
       "provider": "Qubelabs",
       "address": "https://axelar-rpc.qubelabs.io:443"
-    },
-    {
-      "provider": "Stakeflow",
-      "address": "https://rpc-axelar-01.stakeflow.io"
     },
     {
       "provider": "nodes.guru",
@@ -92,6 +56,22 @@
     {
       "provider": "Stakin",
       "address": "https://axelar.rpc.stakin-nodes.com"
+    },
+    {
+      "provider": "QuantNode",
+      "address": "https://axelar.rpc.quantnode.xyz"
+    },
+    {
+      "provider": "Inter Blockchain Services",
+      "address": "https://axelar.ibs.team:443/rpc"
+    },
+    {
+      "provider": "Staketab",
+      "address": "https://axelar-rpc.staketab.org:443"
+    },
+    {
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://axelar-rpc.publicnode.com:443"
     }
   ],
   "sdk_version": "0.45.17",

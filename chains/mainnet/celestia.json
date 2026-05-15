@@ -4,125 +4,177 @@
   "registry_name": "celestia",
   "api": [
     {
-      "address": " https://rest.cosmos.directory:443/celestia",
-      "provider": "cosmos.directory"
+      "provider": "cosmos.directory",
+      "address": " https://rest.cosmos.directory:443/celestia"
     },
     {
-      "address": "https://api.celestia.nodestake.org:443",
-      "provider": "NodeStake"
+      "provider": "NodeStake",
+      "address": "https://api.celestia.nodestake.org:443"
     },
     {
-      "address": "https://celestia-api.stake-town.com:443",
-      "provider": "StakeTown"
+      "provider": "kjnodes",
+      "address": "https://celestia.api.kjnodes.com:443"
     },
     {
-      "address": "https://celestia.api.kjnodes.com:443",
-      "provider": "kjnodes"
+      "provider": "Validatus",
+      "address": "https://api.celestia.validatus.com:443"
     },
     {
-      "address": "https://api.lunaroasis.net:443",
-      "provider": "Lunar Oasis"
+      "provider": "DTEAM",
+      "address": "https://api.celestia.mainnet.dteam.tech:443"
     },
     {
-      "address": "https://api.celestia.validatus.com:443",
-      "provider": "Validatus"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rest.lavenderfive.com:443/celestia"
     },
     {
-      "address": "https://api-celestia.mzonder.com:443",
-      "provider": "MZONDER"
+      "provider": "Stakin",
+      "address": "https://celestia.rest.stakin-nodes.com:443"
     },
     {
-      "address": "https://api-celestia-01.stakeflow.io:443",
-      "provider": "Stakeflow"
+      "provider": "\ud83d\ude80 itrocket \ud83d\ude80",
+      "address": "https://celestia-mainnet-api.itrocket.net:443"
     },
     {
-      "address": "https://celestia-api.stakeandrelax.net:443",
-      "provider": "Stake&Relax Validator 🦥"
+      "provider": "Numia",
+      "address": "https://public-celestia-lcd.numia.xyz"
     },
     {
-      "address": "https://api.celestia.mainnet.dteam.tech:443",
-      "provider": "DTEAM"
+      "provider": "NodeStake",
+      "address": "https://api.celestia.nodestake.org"
     },
     {
-      "address": "https://rest.lavenderfive.com:443/celestia",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://celestia-rest.publicnode.com"
     },
     {
-      "address": "https://celestia.rest.stakin-nodes.com:443",
-      "provider": "Stakin"
+      "provider": "Stakin",
+      "address": "https://celestia.rest.stakin-nodes.com"
     },
     {
-      "address": "https://celestia-mainnet-api.itrocket.net:443",
-      "provider": "🚀 itrocket 🚀"
+      "provider": "kjnodes",
+      "address": "https://celestia.api.kjnodes.com"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://api.celestia.validatus.com"
+    },
+    {
+      "provider": "Cumulo",
+      "address": "https://celestia.api.cumulo.org.es"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://celestia-api.noders.services"
+    },
+    {
+      "provider": "itrocket",
+      "address": "https://celestia-mainnet-api.itrocket.net"
+    },
+    {
+      "provider": "Pro-Nodes75",
+      "address": "https://api.celestia.node75.org"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://api.archive.celestia.validatus.com"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.cosmos.directory:443/celestia",
-      "provider": "cosmos.directory"
+      "provider": "NodeStake",
+      "address": "https://rpc.celestia.nodestake.org:443"
     },
     {
-      "address": "https://rpc.celestia.nodestake.org:443",
-      "provider": "NodeStake"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rpc.lavenderfive.com:443/celestia"
     },
     {
-      "address": "https://rpc.celestia.citizenweb3.com:443",
-      "provider": "Citizen Web3"
+      "provider": "kjnodes",
+      "address": "https://celestia.rpc.kjnodes.com:443"
     },
     {
-      "address": "https://rpc.lavenderfive.com:443/celestia",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "Lunar Oasis",
+      "address": "https://rpc.lunaroasis.net:443"
     },
     {
-      "address": "https://celestia.rpc.kjnodes.com:443",
-      "provider": "kjnodes"
+      "provider": "Polkachu",
+      "address": "https://celestia-rpc.polkachu.com:443"
     },
     {
-      "address": "https://rpc.lunaroasis.net:443",
-      "provider": "Lunar Oasis"
+      "provider": "DTEAM",
+      "address": "https://rpc.celestia.mainnet.dteam.tech:443"
     },
     {
-      "address": "https://rpc-celestia.mzonder.com:443",
-      "provider": "MZONDER"
+      "provider": "Validatus",
+      "address": "https://rpc.celestia.validatus.com:443"
     },
     {
-      "address": "https://celestia-rpc.stake-town.com:443",
-      "provider": "StakeTown"
+      "provider": "\ud83d\ude80 itrocket \ud83d\ude80",
+      "address": "https://celestia-mainnet-rpc.itrocket.net:443"
     },
     {
-      "address": "https://celestia-rpc.polkachu.com:443",
-      "provider": "Polkachu"
+      "provider": "Numia",
+      "address": "https://public-celestia-rpc.numia.xyz"
     },
     {
-      "address": "https://rpc.celestia.mainnet.dteam.tech:443",
-      "provider": "DTEAM"
+      "provider": "Lunar Oasis",
+      "address": "https://rpc.lunaroasis.net"
     },
     {
-      "address": "https://celestia-rpc.stakeandrelax.net:443",
-      "provider": "Stake&Relax Validator 🦥"
+      "provider": "NodeStake",
+      "address": "https://rpc.celestia.nodestake.org"
     },
     {
-      "address": "https://rpc.celestia.validatus.com:443",
-      "provider": "Validatus"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://celestia-rpc.publicnode.com:443"
     },
     {
-      "address": "https://rpc-celestia-01.stakeflow.io:443",
-      "provider": "Stakeflow"
+      "provider": "Stakin",
+      "address": "https://celestia.rpc.stakin-nodes.com"
     },
     {
-      "address": "https://celestia-mainnet-rpc.itrocket.net:443",
-      "provider": "🚀 itrocket 🚀"
+      "provider": "kjnodes",
+      "address": "https://celestia.rpc.kjnodes.com"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://celestia-rpc.polkachu.com"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://rpc.celestia.validatus.com"
+    },
+    {
+      "provider": "Cumulo",
+      "address": "https://celestia.cumulo.org.es"
+    },
+    {
+      "provider": "[NODERS]TEAM",
+      "address": "https://celestia-rpc.noders.services"
+    },
+    {
+      "provider": "itrocket",
+      "address": "https://celestia-mainnet-rpc.itrocket.net"
+    },
+    {
+      "provider": "Pro-Nodes75",
+      "address": "https://rpc.celestia.node75.org"
+    },
+    {
+      "provider": "Validatus",
+      "address": "https://rpc.archive.celestia.validatus.com"
     }
   ],
   "sdk_version": "0.46.16",
   "addr_prefix": "celestia",
-  "logo": "celestia.png",
+  "logo": "/celestia.png",
   "assets": [
     {
       "base": "utia",
       "symbol": "TIA",
       "exponent": "6",
-      "logo": "celestia.png"
+      "logo": "/celestia.png"
     }
   ]
 }

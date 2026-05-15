@@ -4,118 +4,82 @@
   "registry_name": "persistence",
   "api": [
     {
-      "address": "https://persistence-lcd.quantnode.tech",
-      "provider": "QuantNode"
+      "provider": "Kleomedes",
+      "address": "https://persistence-api.kleomedes.network"
     },
     {
-      "address": "https://persistence-api.kleomedes.network",
-      "provider": "Kleomedes"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://persistence.api.m.stavr.tech"
     },
     {
-      "address": "https://persistence.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "Polkachu",
+      "address": "https://persistence-api.polkachu.com"
     },
     {
-      "address": "https://rest.core.persistence.one",
-      "provider": "Persistence"
+      "provider": "Validatus",
+      "address": "https://api.persistence.validatus.com"
     },
     {
-      "address": "https://persistence-api.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "Cosmonaut Stakes",
+      "address": "https://persistence-mainnet-rest.cosmonautstakes.com"
     },
     {
-      "address": "https://rest-persistence.architectnodes.com",
-      "provider": "Architect Nodes"
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/persistence/rest"
     },
     {
-      "address": "https://api-persistence-01.stakeflow.io",
-      "provider": "Stakeflow"
+      "provider": "QuantNode",
+      "address": "https://persistence.lcd.quantnode.xyz"
     },
     {
-      "address": "https://persistence-api.stake-town.com",
-      "provider": "StakeTown"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://persistence-rest.publicnode.com"
     },
     {
-      "address": "https://api.persistence.validatus.com",
-      "provider": "Validatus"
-    },
-    {
-      "address": "https://persistence-mainnet-lcd.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
-    },
-    {
-      "address": "https://persistence-api.highstakes.ch",
-      "provider": "High Stakes 🇨🇭"
-    },
-    {
-      "address": "https://persistence-mainnet-rest.cosmonautstakes.com",
-      "provider": "Cosmonaut Stakes"
-    },
-    {
-      "address": "https://public.stakewolle.com/cosmos/persistence/rest",
-      "provider": "Stakewolle"
-    },
-    {
-      "address": "https://persistence-api.stakeandrelax.net",
-      "provider": "Stake&Relax Validator 🦥"
+      "provider": "Pocket Network",
+      "address": "https://persistence.api.pocket.network"
     }
   ],
   "rpc": [
     {
-      "address": "https://persistence-rpc.quantnode.tech",
-      "provider": "QuantNode"
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/persistence/rpc"
     },
     {
-      "address": "https://rpc.core.persistence.one",
-      "provider": "Persistence"
+      "provider": "Polkachu",
+      "address": "https://persistence-rpc.polkachu.com"
     },
     {
-      "address": "https://public.stakewolle.com/cosmos/persistence/rpc",
-      "provider": "Stakewolle"
+      "provider": "Validatus",
+      "address": "https://rpc.persistence.validatus.com"
     },
     {
-      "address": "https://persistence-rpc.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://persistence.rpc.m.stavr.tech"
     },
     {
-      "address": "https://rpc-persistence.architectnodes.com",
-      "provider": "Architect Nodes"
+      "provider": "Kleomedes",
+      "address": "https://persistence-rpc.kleomedes.network"
     },
     {
-      "address": "https://rpc-persistence-01.stakeflow.io",
-      "provider": "Stakeflow"
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://persistence-rpc.highstakes.ch"
     },
     {
-      "address": "https://persistence-rpc.stake-town.com",
-      "provider": "StakeTown"
+      "provider": "Cosmonaut Stakes",
+      "address": "https://persistence-mainnet-rpc.cosmonautstakes.com"
     },
     {
-      "address": "https://rpc.persistence.validatus.com",
-      "provider": "Validatus"
+      "provider": "QuantNode",
+      "address": "https://persistence.rpc.quantnode.xyz"
     },
     {
-      "address": "https://persistence.rpc.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://persistence-rpc.publicnode.com:443"
     },
     {
-      "address": "https://persistence-mainnet-rpc.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
-    },
-    {
-      "address": "https://persistence-rpc.stakeandrelax.net",
-      "provider": "Stake&Relax Validator 🦥"
-    },
-    {
-      "address": "https://persistence-rpc.kleomedes.network",
-      "provider": "Kleomedes"
-    },
-    {
-      "address": "https://persistence-rpc.highstakes.ch",
-      "provider": "High Stakes 🇨🇭"
-    },
-    {
-      "address": "https://persistence-mainnet-rpc.cosmonautstakes.com",
-      "provider": "Cosmonaut Stakes"
+      "provider": "Pocket Network",
+      "address": "https://persistence.api.pocket.network"
     }
   ],
   "sdk_version": "0.47.10",

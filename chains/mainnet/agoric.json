@@ -4,66 +4,26 @@
   "registry_name": "agoric",
   "api": [
     {
-      "address": "https://api.agoric.stakewith.us",
-      "provider": "StakeWithUs"
+      "provider": "Polkachu",
+      "address": "https://agoric-api.polkachu.com"
     },
     {
-      "address": "https://agoric-api.w3coins.io",
-      "provider": "w3coins"
-    },
-    {
-      "address": "https://agoric.api.kjnodes.com",
-      "provider": "kjnodes"
-    },
-    {
-      "address": "https://agoric.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
-    },
-    {
-      "address": "https://agoric-api.stakeandrelax.net",
-      "provider": "Stake&Relax 🦥"
-    },
-    {
-      "address": "https://agoric-api.polkachu.com",
-      "provider": "Polkachu"
-    },
-    {
-      "address": "https://agoric-mainnet-lcd.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
+      "provider": "unknown",
+      "address": "https://main.api.agoric.net:443"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.agoric.stakewith.us",
-      "provider": "StakeWithUs"
+      "provider": "StakeAngle",
+      "address": "https://agoric-rpc.stakeangle.com"
     },
     {
-      "address": "https://agoric-rpc.stakeangle.com",
-      "provider": "StakeAngle"
+      "provider": "Polkachu",
+      "address": "https://agoric-rpc.polkachu.com"
     },
     {
-      "address": "https://rpc.agoric.bronbro.io:443",
-      "provider": "Bro_n_Bro"
-    },
-    {
-      "address": "https://agoric-rpc.stakeandrelax.net",
-      "provider": "Stake&Relax 🦥"
-    },
-    {
-      "address": "https://agoric-rpc.w3coins.io",
-      "provider": "w3coins"
-    },
-    {
-      "address": "https://agoric-mainnet-rpc.autostake.com:443",
-      "provider": "AutoStake 🛡️ Slash Protected"
-    },
-    {
-      "address": "https://agoric-rpc.polkachu.com",
-      "provider": "Polkachu"
-    },
-    {
-      "address": "https://agoric.rpc.kjnodes.com",
-      "provider": "kjnodes"
+      "provider": "unknown",
+      "address": "https://main.rpc.agoric.net:443"
     }
   ],
   "sdk_version": "0.46.16",

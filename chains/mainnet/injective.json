@@ -4,58 +4,46 @@
   "registry_name": "injective",
   "api": [
     {
-      "address": "https://rest-injective.ecostake.com",
-      "provider": "ecostake"
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/injective/rest"
     },
     {
-      "address": "https://public.stakewolle.com/cosmos/injective/rest",
-      "provider": "Stakewolle"
+      "provider": "Polkachu",
+      "address": "https://injective-api.polkachu.com"
     },
     {
-      "address": "https://injective-api.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rest.lavenderfive.com:443/injective"
     },
     {
-      "address": "https://rest.lavenderfive.com:443/injective",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://injective-api.highstakes.ch"
     },
     {
-      "address": "https://6d0ff611-9009-4bd1-a7a7-acec7c70d454.injective-1.mesa-rest.newmetric.xyz",
-      "provider": "NewMetric"
-    },
-    {
-      "address": "https://rest.injective.goldenratiostaking.net",
-      "provider": "Golden Ratio Staking"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://injective-rest.publicnode.com"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc-injective.ecostake.com",
-      "provider": "ecostake"
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/injective/rpc"
     },
     {
-      "address": "https://public.stakewolle.com/cosmos/injective/rpc",
-      "provider": "Stakewolle"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rpc.lavenderfive.com:443/injective"
     },
     {
-      "address": "https://rpc.lavenderfive.com:443/injective",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
+      "address": "https://injective-rpc.highstakes.ch"
     },
     {
-      "address": "https://injective-rpc.highstakes.ch",
-      "provider": "High Stakes 🇨🇭"
+      "provider": "Polkachu",
+      "address": "https://injective-rpc.polkachu.com"
     },
     {
-      "address": "https://6d0ff611-9009-4bd1-a7a7-acec7c70d454.injective-1.mesa-rpc.newmetric.xyz",
-      "provider": "NewMetric"
-    },
-    {
-      "address": "https://rpc.injective.goldenratiostaking.net",
-      "provider": "Golden Ratio Staking"
-    },
-    {
-      "address": "https://injective-rpc.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://injective-rpc.publicnode.com:443"
     }
   ],
   "sdk_version": "0.50.9",

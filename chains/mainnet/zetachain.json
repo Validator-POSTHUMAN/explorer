@@ -4,50 +4,54 @@
   "registry_name": "zetachain",
   "api": [
     {
-      "address": "https://zetachain.blockpi.network/lcd/v1/public",
-      "provider": "BlockPI"
+      "provider": "BlockPI",
+      "address": "https://zetachain.blockpi.network/lcd/v1/public"
     },
     {
-      "address": "https://zetachain.api.nodeshub.online:443",
-      "provider": "Nodes Hub 🛡️ 100% Slash Protected 🛡️ | Restake ✅"
+      "provider": "Nodes Hub \ud83d\udee1\ufe0f 100% Slash Protected \ud83d\udee1\ufe0f | Restake \u2705",
+      "address": "https://zetachain.api.nodeshub.online:443"
     },
     {
-      "address": "https://zeta.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://zeta.api.m.stavr.tech"
     },
     {
-      "address": "https://rest.lavenderfive.com:443/zetachain",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rest.lavenderfive.com:443/zetachain"
     },
     {
-      "address": "https://zetachain-api.noders.services",
-      "provider": "[NODERS]TEAM"
+      "provider": "[NODERS]TEAM",
+      "address": "https://zetachain-api.noders.services"
+    },
+    {
+      "provider": "NodeStake",
+      "address": "https://api.zetachain.nodestake.org"
     }
   ],
   "rpc": [
     {
-      "address": "https://zetachain.rpc.nodeshub.online:443",
-      "provider": "Nodes Hub 🛡️ 100% Slash Protected 🛡️ | Restake ✅"
+      "provider": "Nodes Hub \ud83d\udee1\ufe0f 100% Slash Protected \ud83d\udee1\ufe0f | Restake \u2705",
+      "address": "https://zetachain.rpc.nodeshub.online:443"
     },
     {
-      "address": "https://rpc.lavenderfive.com:443/zetachain",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "Lavender.Five Nodes \ud83d\udc1d",
+      "address": "https://rpc.lavenderfive.com:443/zetachain"
     },
     {
-      "address": "https://zetachain.blockpi.network/rpc/v1/public",
-      "provider": "BlockPI"
+      "provider": "BlockPI",
+      "address": "https://zetachain.blockpi.network/rpc/v1/public"
     },
     {
-      "address": "https://zetachain-rpc.noders.services",
-      "provider": "[NODERS]TEAM"
+      "provider": "[NODERS]TEAM",
+      "address": "https://zetachain-rpc.noders.services"
     },
     {
-      "address": "https://rpc.zetachain.nodestake.org",
-      "provider": "NodeStake"
+      "provider": "NodeStake",
+      "address": "https://rpc.zetachain.nodestake.org"
     },
     {
-      "address": "https://zeta.rpc.m.stavr.tech:443",
-      "provider": "🔥STAVR🔥"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://zeta.rpc.m.stavr.tech:443"
     }
   ],
   "sdk_version": "0.47.10",

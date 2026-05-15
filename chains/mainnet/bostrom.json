@@ -4,22 +4,14 @@
   "registry_name": "bostrom",
   "api": [
     {
-      "address": "https://lcd.bostrom.cybernode.ai",
-      "provider": "cybercongress"
-    },
-    {
-      "address": "https://lcd.cyber.bronbro.io:443",
-      "provider": "Bro_n_Bro"
+      "provider": "cybercongress",
+      "address": "https://lcd.bostrom.cybernode.ai"
     }
   ],
   "rpc": [
     {
-      "address": "https://rpc.bostrom.cybernode.ai",
-      "provider": "cybercongress"
-    },
-    {
-      "address": "https://rpc.cyber.bronbro.io:443",
-      "provider": "Bro_n_Bro"
+      "provider": "cybercongress",
+      "address": "https://rpc.bostrom.cybernode.ai"
     }
   ],
   "sdk_version": "0.47.12",

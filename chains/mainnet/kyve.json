@@ -4,94 +4,46 @@
   "registry_name": "kyve",
   "api": [
     {
-      "address": "https://kyve.api.liveraven.net",
-      "provider": "LiveRaveN"
+      "provider": "LiveRaveN",
+      "address": "https://kyve.api.liveraven.net"
     },
     {
-      "address": "https://lcd-kyve.imperator.co",
-      "provider": "Imperator.co"
+      "provider": "kyve",
+      "address": "https://api.kyve.network"
     },
     {
-      "address": "https://api.kyve.network",
-      "provider": "kyve"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://kyve.api.m.stavr.tech"
     },
     {
-      "address": "https://rest.lavenderfive.com:443/kyve",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
+      "address": "https://kyve_mainnet_api.chain.whenmoonwhenlambo.money"
     },
     {
-      "address": "https://kyve.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
-    },
-    {
-      "address": "https://kyve-api.noders.services",
-      "provider": "[NODERS]TEAM"
-    },
-    {
-      "address": "https://api-kyve.mms.team",
-      "provider": "MMS"
-    },
-    {
-      "address": "https://rest-kyve.ecostake.com",
-      "provider": "ecostake"
-    },
-    {
-      "address": "https://kyve-api.ibs.team",
-      "provider": "Inter Blockchain Services"
-    },
-    {
-      "address": "https://kyve.declab.pro:443",
-      "provider": "Decloud Nodes Lab"
-    },
-    {
-      "address": "https://kyve_mainnet_api.chain.whenmoonwhenlambo.money",
-      "provider": "🚀 WHEN MOON 🌕 WHEN LAMBO 🔥"
+      "provider": "Inter Blockchain Services",
+      "address": "https://kyve.ibs.team:443/api"
     }
   ],
   "rpc": [
     {
-      "address": "https://kyve.rpc.liveraven.net",
-      "provider": "LiveRaveN"
+      "provider": "LiveRaveN",
+      "address": "https://kyve.rpc.liveraven.net"
     },
     {
-      "address": "https://rpc-kyve.imperator.co",
-      "provider": "Imperator.co"
+      "provider": "kyve",
+      "address": "https://rpc.kyve.network"
     },
     {
-      "address": "https://rpc.kyve.network",
-      "provider": "kyve"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "http://kyve.rpc.m.stavr.tech:12357"
     },
     {
-      "address": "https://rpc.lavenderfive.com:443/kyve",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
+      "address": "https://kyve_mainnet_rpc.chain.whenmoonwhenlambo.money"
     },
     {
-      "address": "https://rpc-kyve.ecostake.com",
-      "provider": "ecostake"
-    },
-    {
-      "address": "https://kyve-rpc.noders.services",
-      "provider": "[NODERS]TEAM"
-    },
-    {
-      "address": "http://kyve.rpc.m.stavr.tech:12357",
-      "provider": "🔥STAVR🔥"
-    },
-    {
-      "address": "https://rpc-kyve.mms.team",
-      "provider": "MMS"
-    },
-    {
-      "address": "https://kyve-rpc.ibs.team",
-      "provider": "Inter Blockchain Services"
-    },
-    {
-      "address": "https://kyve.declab.pro:26616",
-      "provider": "Decloud Nodes Lab"
-    },
-    {
-      "address": "https://kyve_mainnet_rpc.chain.whenmoonwhenlambo.money",
-      "provider": "🚀 WHEN MOON 🌕 WHEN LAMBO 🔥"
+      "provider": "Inter Blockchain Services",
+      "address": "https://kyve.ibs.team:443/rpc"
     }
   ],
   "sdk_version": "0.50.7-kyve-rc0",

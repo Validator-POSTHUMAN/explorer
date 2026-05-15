@@ -4,118 +4,70 @@
   "registry_name": "juno",
   "api": [
     {
-      "address": "https://juno-api.stakeandrelax.net",
-      "provider": "Stake&Relax Validator 🦥"
+      "provider": "Stake&Relax Validator \ud83e\udda5",
+      "address": "https://juno-api.stakeandrelax.net"
     },
     {
-      "address": "https://juno.api.m.stavr.tech",
-      "provider": "🔥STAVR🔥"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://juno.api.m.stavr.tech"
     },
     {
-      "address": "https://lcd-juno.validavia.me",
-      "provider": "Validavia"
+      "provider": "Validatus",
+      "address": "https://api.juno.validatus.com"
     },
     {
-      "address": "https://juno-api.chainroot.io",
-      "provider": "Chainroot"
+      "provider": "Polkachu",
+      "address": "https://juno-api.polkachu.com"
     },
     {
-      "address": "https://rest.lavenderfive.com:443/juno",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "Kleomedes",
+      "address": "https://juno-api.kleomedes.network"
     },
     {
-      "address": "https://api.juno.validatus.com",
-      "provider": "Validatus"
+      "provider": "Cogwheel",
+      "address": "https://juno-api.cogwheel.zone"
     },
     {
-      "address": "https://juno-api.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://juno-rest.publicnode.com"
     },
     {
-      "address": "https://api-juno-01.stakeflow.io",
-      "provider": "Stakeflow"
-    },
-    {
-      "address": "https://rest-juno.architectnodes.com",
-      "provider": "Architect Nodes"
-    },
-    {
-      "address": "https://juno-api.stake-town.com",
-      "provider": "StakeTown"
-    },
-    {
-      "address": "https://juno-api.kleomedes.network",
-      "provider": "Kleomedes"
-    },
-    {
-      "address": "https://juno.declab.pro:443",
-      "provider": "Decloud Nodes Lab"
-    },
-    {
-      "address": "https://api.juno.chaintools.tech",
-      "provider": "ChainTools"
-    },
-    {
-      "address": "https://juno-api.cogwheel.zone",
-      "provider": "Cogwheel"
+      "provider": "Pocket Network",
+      "address": "https://juno.api.pocket.network"
     }
   ],
   "rpc": [
     {
-      "address": "https://juno-rpc.stakeandrelax.net",
-      "provider": "Stake&Relax Validator 🦥"
+      "provider": "Stake&Relax Validator \ud83e\udda5",
+      "address": "https://juno-rpc.stakeandrelax.net"
     },
     {
-      "address": "https://rpc-juno.validavia.me",
-      "provider": "Validavia"
+      "provider": "Validatus",
+      "address": "https://rpc.juno.validatus.com"
     },
     {
-      "address": "https://juno-rpc.chainroot.io",
-      "provider": "Chainroot"
+      "provider": "Polkachu",
+      "address": "https://juno-rpc.polkachu.com"
     },
     {
-      "address": "https://rpc.juno.validatus.com",
-      "provider": "Validatus"
+      "provider": "Kleomedes",
+      "address": "https://juno-rpc.kleomedes.network"
     },
     {
-      "address": "https://juno-rpc.polkachu.com",
-      "provider": "Polkachu"
+      "provider": "Cogwheel",
+      "address": "https://juno-rpc.cogwheel.zone"
     },
     {
-      "address": "https://rpc.lavenderfive.com:443/juno",
-      "provider": "Lavender.Five Nodes 🐝"
+      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
+      "address": "https://juno.rpc.m.stavr.tech"
     },
     {
-      "address": "https://rpc-juno-01.stakeflow.io",
-      "provider": "Stakeflow"
+      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
+      "address": "https://juno-rpc.publicnode.com:443"
     },
     {
-      "address": "https://rpc-juno.architectnodes.com",
-      "provider": "Architect Nodes"
-    },
-    {
-      "address": "https://rpc-juno.itastakers.com",
-      "provider": "itastakers"
-    },
-    {
-      "address": "https://juno-rpc.stake-town.com",
-      "provider": "StakeTown"
-    },
-    {
-      "address": "https://juno-rpc.kleomedes.network",
-      "provider": "Kleomedes"
-    },
-    {
-      "address": "https://juno.declab.pro:26610",
-      "provider": "Decloud Nodes Lab"
-    },
-    {
-      "address": "https://rpc.juno.chaintools.tech",
-      "provider": "ChainTools"
-    },
-    {
-      "address": "https://juno-rpc.cogwheel.zone",
-      "provider": "Cogwheel"
+      "provider": "Pocket Network",
+      "address": "https://juno.api.pocket.network"
     }
   ],
   "sdk_version": "0.47.12",

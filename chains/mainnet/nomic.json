@@ -4,18 +4,18 @@
   "registry_name": "nomic",
   "api": [
     {
-      "address": "https://nomic-rpc.polkachu.com",
-      "provider": "Polkachu"
-    },
-    {
-      "address": "https://rpc.nomic.basementnodes.ca:443",
-      "provider": "Basement Nodes ⚡️"
+      "provider": "nomic-io",
+      "address": "https://app.nomic.io:8443"
     }
   ],
   "rpc": [
     {
-      "address": "https://app.nomic.io:8443",
-      "provider": "nomic-io"
+      "provider": "nomic-io",
+      "address": "https://stakenet-rpc.nomic.io:2096"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://nomic-rpc.polkachu.com"
     }
   ],
   "addr_prefix": "nomic",
