@@ -236,7 +236,7 @@ function selected(route: any, nav: NavLink) {
           {{ $t('module.links') }}
         </div>
         <a
-          href="https://twitter.com/POSTHUMAN_DVS"
+          href="https://x.com/celestia"
           target="_blank"
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
         >
@@ -248,7 +248,7 @@ function selected(route: any, nav: NavLink) {
           </div>
         </a>
         <a
-          href="https://discord.gg/csWJMCjQHh"
+          href="https://discord.com/invite/YsnTPcSfWQ"
           target="_blank"
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
         >
@@ -260,7 +260,7 @@ function selected(route: any, nav: NavLink) {
           </div>
         </a>
         <a
-          href="https://t.me/Crypto_Base_Chat"
+          href="https://t.me/CelestiaCommunity/"
           target="_blank"
           class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
         >
