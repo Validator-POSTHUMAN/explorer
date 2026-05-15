@@ -2,6 +2,7 @@
   "chain_name": "celestia",
   "theme_color": "#2e2e2e",
   "registry_name": "celestia",
+  "pretty_name": "Celestia",
   "api": [
     {
       "provider": "cosmos.directory",

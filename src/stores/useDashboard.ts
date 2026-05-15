@@ -109,6 +109,7 @@ export interface LocalConfig {
   rpc: string[] | Endpoint[];
   sdk_version: string;
   registry_name?: string;
+  pretty_name?: string;
   features?: string[];
   keplr_price_step?: {
     low: number,
@@ -155,7 +156,7 @@ export function fromLocal(lc: LocalConfig): ChainConfig {
   conf.bech32Prefix = lc.addr_prefix;
   conf.chainName = lc.chain_name;
   conf.coinType = lc.coin_type;
-  conf.prettyName = lc.registry_name || lc.chain_name;
+  conf.prettyName = lc.pretty_name || lc.registry_name || lc.chain_name;
   conf.endpoints = {
     rest: apiConverter(lc.api),
     rpc: apiConverter(lc.rpc),

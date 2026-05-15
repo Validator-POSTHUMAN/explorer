@@ -1,6 +1,8 @@
 {
   "chain_name": "celestia-testnet",
   "theme_color": "#2e2e2e",
+  "registry_name": "celestiatestnet3",
+  "pretty_name": "Celestia Testnet (Mocha)",
   "api": [
     {
       "provider": "IT ROCKET",
@@ -39,6 +41,5 @@
       "exponent": "6",
       "logo": "/celestia.png"
     }
-  ],
-  "registry_name": "celestiatestnet3"
+  ]
 }
