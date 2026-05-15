@@ -38,10 +38,12 @@ needed.
 
 ## Git layout
 
-- **Remote:** `git@github.com:Validator-POSTHUMAN/explorer.git` (shares origin
-  with `explorer/`)
-- **Branch deployed:** `posthuman-prod` (single commit on top of `41a6e48`
+- **Remote:** `git@github.com:Validator-POSTHUMAN/explorer.git` (same repo
+  as `explorer/`; branches named with `-celestia` suffix to disambiguate).
+- **Branch deployed:** `posthuman-prod-celestia` (based on `41a6e48`
   "add celestia"), authored by Web3 Forever.
+- **Companion branch:** `dev-redesign-celestia` — the broken redesign
+  variant kept for ad-hoc testing.
 
 ## Chain config fields
 
