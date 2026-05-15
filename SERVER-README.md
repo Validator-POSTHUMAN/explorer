@@ -43,6 +43,30 @@ needed.
 - **Branch deployed:** `posthuman-prod` (single commit on top of `41a6e48`
   "add celestia"), authored by Web3 Forever.
 
+## Chain config fields
+
+Per chain (`chains/mainnet/*.json`):
+
+- `chain_name` — used in URL routing (`/<chain_name>/staking`). Don't change
+  without breaking permalinks.
+- `registry_name` — directory name in `cosmos/chain-registry`. Used by the
+  endpoint-refresh script to look up upstream endpoint lists. For testnets,
+  see note below.
+- `pretty_name` — display string in the UI. If absent, falls back to
+  `registry_name`, then `chain_name`. Use this for human-readable labels
+  like "Celestia Testnet (Mocha)" — keeps `registry_name` free to match the
+  raw chain-registry directory naming (`celestiatestnet3`).
+
+## Testnet endpoint refresh — caveat
+
+`cosmos/chain-registry` puts testnets under `testnets/<name>/chain.json`,
+not at the top level. The `update_endpoints.py` script currently looks
+only at the top level, so testnet chains print `(no registry)`. For
+celestia-testnet the endpoints were refreshed via a one-shot inline
+script using path `testnets/celestiatestnet3/`. If you need to refresh
+testnet endpoints again, extend the script to try `testnets/<name>/` as a
+fallback, or do the same inline.
+
 ## Other notes
 
 - See `../explorer/SERVER-README.md` for shared notes (endpoint refresh
