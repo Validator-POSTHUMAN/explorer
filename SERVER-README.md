@@ -63,7 +63,7 @@ If you ever need to undo a deploy: rebuild from prior commit
 RPC/LCD endpoints rot quickly. To refresh from `cosmos/chain-registry`:
 
 ```bash
-python3 /tmp/update_endpoints.py /srv/data/apps/explorer/chains/mainnet
+python3 scripts/update_endpoints.py /srv/data/apps/explorer/chains/mainnet
 ```
 
 The script merges local + chain-registry endpoints, probes each for
