@@ -51,9 +51,9 @@ If you ever need to undo a deploy: rebuild from prior commit
     `master` locally). Has ~250 commits ahead of `1f98c1b` including the
     redesign that we tried and rolled back due to performance/UI
     regressions. Kept for ad-hoc testing.
-  - `master` (on GitHub only) ← older state at `88ed724`. Was the default
-    branch until 2026-05-15. Can be deleted via GitHub web UI once the
-    default is switched to `posthuman-prod`.
+    - Old `master`/`redesign`/`new-navbar`/etc. branches on GitHub were
+    deleted 2026-05-15 — the only branches on origin now are the four
+    above (two prod + two dev-redesign).
 - The two server checkouts (`explorer/` and `explorer2/`) share this
   remote. To keep branch names unambiguous, explorer2 uses the suffix
   `-celestia` (e.g., `posthuman-prod-celestia`).
@@ -92,13 +92,13 @@ auto-renews via systemd timer when <30 days left.
 
 ## Other operational notes
 
-- `/srv/data/apps/explorer-preview/` is a `git worktree` from `master` for
-  ad-hoc preview testing. `yarn dev` there binds to `127.0.0.1:5180` only;
-  access via SSH tunnel:
+- `/srv/data/apps/explorer-preview/` is a `git worktree` from
+  `dev-redesign` for ad-hoc preview testing. `yarn dev` there binds to
+  `127.0.0.1:5180` only; access via SSH tunnel:
   ```
   ssh -L 5180:127.0.0.1:5180 valoper@65.21.7.184
   ```
   Not auto-started; run `yarn dev` manually when needed.
 - Old nginx site files (`test.claim`, `next`, `explorer2`/atomone-explorer)
-  moved to `/etc/nginx/sites-available/_disabled/` on 2026-05-14 — kept
-  recoverable.
+  and their certbot certs were removed 2026-05-15 — fully purged from
+  `sites-available/`, `sites-enabled/`, and `/etc/letsencrypt/live/`.
