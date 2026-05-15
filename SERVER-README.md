@@ -47,10 +47,16 @@ If you ever need to undo a deploy: rebuild from prior commit
 - **Branches of interest:**
   - `posthuman-prod` ← **what's deployed.** Branched from `1f98c1b` (April
     2025); contains posthuman customizations + endpoint refresh on top.
-  - `master` ← tracks upstream `ping-pub/explorer` master + earlier
-    posthuman merges. Has the redesign (~250 commits ahead of `1f98c1b`)
-    that we tried and rolled back due to performance/UI regressions.
-- **Untracked:** `SERVER-README.md` (this file — kept local on purpose).
+  - `dev-redesign` ← the upstream-merged + posthuman-redesign branch (was
+    `master` locally). Has ~250 commits ahead of `1f98c1b` including the
+    redesign that we tried and rolled back due to performance/UI
+    regressions. Kept for ad-hoc testing.
+  - `master` (on GitHub only) ← older state at `88ed724`. Was the default
+    branch until 2026-05-15. Can be deleted via GitHub web UI once the
+    default is switched to `posthuman-prod`.
+- The two server checkouts (`explorer/` and `explorer2/`) share this
+  remote. To keep branch names unambiguous, explorer2 uses the suffix
+  `-celestia` (e.g., `posthuman-prod-celestia`).
 
 ## Updating chain endpoints
 
