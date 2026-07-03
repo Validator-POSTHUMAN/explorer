@@ -2,14 +2,11 @@
   "chain_name": "celestia",
   "theme_color": "#2e2e2e",
   "registry_name": "celestia",
+  "pretty_name": "Celestia",
   "api": [
     {
       "provider": "cosmos.directory",
       "address": " https://rest.cosmos.directory:443/celestia"
-    },
-    {
-      "provider": "NodeStake",
-      "address": "https://api.celestia.nodestake.org:443"
     },
     {
       "provider": "kjnodes",
@@ -38,10 +35,6 @@
     {
       "provider": "Numia",
       "address": "https://public-celestia-lcd.numia.xyz"
-    },
-    {
-      "provider": "NodeStake",
-      "address": "https://api.celestia.nodestake.org"
     },
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
@@ -78,13 +71,17 @@
     {
       "provider": "Validatus",
       "address": "https://api.archive.celestia.validatus.com"
+    },
+    {
+      "provider": "QUAD",
+      "address": "https://celestia.rpc.uquad.org:443"
+    },
+    {
+      "provider": "AM Solutions",
+      "address": "https://rest-celestia.theamsolutions.info"
     }
   ],
   "rpc": [
-    {
-      "provider": "NodeStake",
-      "address": "https://rpc.celestia.nodestake.org:443"
-    },
     {
       "provider": "Lavender.Five Nodes \ud83d\udc1d",
       "address": "https://rpc.lavenderfive.com:443/celestia"
@@ -120,10 +117,6 @@
     {
       "provider": "Lunar Oasis",
       "address": "https://rpc.lunaroasis.net"
-    },
-    {
-      "provider": "NodeStake",
-      "address": "https://rpc.celestia.nodestake.org"
     },
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
@@ -164,6 +157,14 @@
     {
       "provider": "Validatus",
       "address": "https://rpc.archive.celestia.validatus.com"
+    },
+    {
+      "provider": "QUAD",
+      "address": "https://celestia.rpc.uquad.org:443"
+    },
+    {
+      "provider": "AM Solutions",
+      "address": "https://rpc-celestia.theamsolutions.info"
     }
   ],
   "sdk_version": "0.46.16",

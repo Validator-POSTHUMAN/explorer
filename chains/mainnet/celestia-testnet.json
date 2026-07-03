@@ -1,0 +1,45 @@
+{
+  "chain_name": "celestia-testnet",
+  "theme_color": "#2e2e2e",
+  "registry_name": "celestiatestnet3",
+  "pretty_name": "Celestia Testnet (Mocha)",
+  "api": [
+    {
+      "provider": "IT ROCKET",
+      "address": "https://celestia-testnet-api.itrocket.net"
+    },
+    {
+      "provider": "P-OPs",
+      "address": "https://api-mocha.pops.one"
+    },
+    {
+      "provider": "DTEAM",
+      "address": "https://api.celestia.testnet.dteam.tech:443"
+    }
+  ],
+  "rpc": [
+    {
+      "provider": "IT ROCKET",
+      "address": "https://celestia-testnet-rpc.itrocket.net"
+    },
+    {
+      "provider": "P-OPs",
+      "address": "https://rpc-mocha.pops.one"
+    },
+    {
+      "provider": "DTEAM",
+      "address": "https://rpc.celestia.testnet.dteam.tech:443"
+    }
+  ],
+  "sdk_version": "0.46.16",
+  "addr_prefix": "celestia",
+  "logo": "/celestia.png",
+  "assets": [
+    {
+      "base": "utia",
+      "symbol": "TIA",
+      "exponent": "6",
+      "logo": "/celestia.png"
+    }
+  ]
+}
