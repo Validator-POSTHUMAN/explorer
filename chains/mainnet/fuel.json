@@ -1,17 +1,25 @@
 {
   "chain_name": "fuel",
+  "pretty_name": "Fuel Sequencer",
   "theme_color": "#2e2e2e",
-  "registry_name": "fuel",
   "api": [
     {
-      "provider": "IT ROCKET",
-      "address": "https://fuel-mainnet-api.itrocket.net"
+      "provider": "Simply Staking",
+      "address": "https://rest-fuel-seq.simplystaking.xyz"
+    },
+    {
+      "provider": "Cumulo",
+      "address": "https://api.fuel.cumulo.com.es"
     }
   ],
   "rpc": [
     {
-      "provider": "IT ROCKET",
-      "address": "https://fuel-mainnet-rpc.itrocket.net"
+      "provider": "Simply Staking",
+      "address": "https://rpc-fuel-seq.simplystaking.xyz"
+    },
+    {
+      "provider": "Cumulo",
+      "address": "https://rpc.fuel.cumulo.com.es"
     }
   ],
   "sdk_version": "0.50.10",

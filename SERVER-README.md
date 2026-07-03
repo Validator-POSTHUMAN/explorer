@@ -3,7 +3,7 @@
 Live at: **https://explorer.posthuman.digital/**
 
 A multi-chain Cosmos explorer (Vue 3 + Vite SPA), fork of `github.com/ping-pub/explorer`.
-Serves 28 chains (Cosmos hub, Osmosis, Celestia + Celestia Testnet (Mocha),
+Serves 27 chains (Cosmos hub, Osmosis, Celestia + Celestia Testnet (Mocha),
 Babylon, Injective, etc.). Testnets shown in the main list live in
 `chains/mainnet/` — the `chains/testnet/` dir is only loaded when the
 hostname contains "testnet", which never matches this domain.
@@ -82,9 +82,12 @@ auto-renews via systemd timer when <30 days left.
 ## Known issues
 
 - 284 vulns reported by `yarn audit` — almost all in dev tree, not bundled.
-- `bostrom` and `fuel` have NO live public endpoints anywhere (probed
-  2026-07-03: local lists, chain-registry, publicnode/polkachu all dead).
-  Their pages can't load data. Candidates for removal from the chain list.
+- `bostrom` was removed 2026-07-03 — zero live public endpoints anywhere
+  (local lists, chain-registry, publicnode all dead).
+- `fuel` (Fuel Sequencer, seq-mainnet-1) is NOT in cosmos/chain-registry —
+  endpoint source of truth is FuelLabs/fuel-sequencer-deployments on GitHub.
+  Using Simply Staking + Cumulo (probed alive 2026-07-03). Polkachu's
+  fuel-api answers with different pool numbers (wrong network?) — avoided.
 - `rpc.babylon.posthuman.digital` / `rest-api.babylon.posthuman.digital`
   (95.217.229.104, another posthuman host) answer 404 — proxy up, node gone.
   Removed from babylon-testnet.json (replaced with Nodes.Guru + Polkachu,
