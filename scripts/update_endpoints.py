@@ -17,6 +17,10 @@ TIMEOUT = 5
 PROBE_REST = "/cosmos/staking/v1beta1/pool"
 PROBE_RPC = "/status"
 UA = "ping-pub-endpoint-refresher/1.0"
+# The SPA calls endpoints via fetch() from this origin. A 200 without
+# Access-Control-Allow-Origin is dead to the browser, so probing must
+# require CORS, not just liveness.
+ORIGIN = "https://explorer.posthuman.digital"
 
 # Lax TLS for probing — some LCDs have weird intermediate certs but work
 TLS_CTX = ssl.create_default_context()
@@ -37,9 +41,12 @@ def fetch_chain_registry(registry_name: str):
 def probe(addr: str, path: str) -> bool:
     full = addr.rstrip("/") + path
     try:
-        req = urllib.request.Request(full, headers={"User-Agent": UA})
+        req = urllib.request.Request(full, headers={"User-Agent": UA, "Origin": ORIGIN})
         with urllib.request.urlopen(req, timeout=TIMEOUT, context=TLS_CTX) as r:
             if r.status != 200:
+                return False
+            acao = r.headers.get("Access-Control-Allow-Origin", "")
+            if acao not in ("*", ORIGIN):
                 return False
             # body should be JSON
             r.read(2048)  # don't pull full body, but verify some bytes come back
@@ -118,6 +125,11 @@ def process_chain(json_path: str, dry_run: bool = False):
         f"  {'(no registry)' if cr is None else ''}"
     )
     print(line)
+
+    # Adopt the registry's canonical display name (UI falls back to
+    # registry_name/chain_name otherwise — "Cosmoshub", "Secretnetwork").
+    if cr and cr.get("pretty_name") and not local.get("pretty_name"):
+        local["pretty_name"] = cr["pretty_name"]
 
     if not dry_run and (alive_rest or alive_rpc):
         local["api"] = alive_rest if alive_rest else local_api  # don't wipe if all dead

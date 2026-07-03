@@ -8,10 +8,6 @@
       "address": "https://lava.rest.lava.build"
     },
     {
-      "provider": "BlueStake \ud83d\ude80",
-      "address": "https://lava-api.bluestake.net"
-    },
-    {
       "provider": "w3coins",
       "address": "https://lava-api.w3coins.io:443"
     },
@@ -26,6 +22,10 @@
     {
       "provider": "Shazoes",
       "address": "https://lava-mainnet-api.shazoes.xyz"
+    },
+    {
+      "provider": "Stake Village",
+      "address": "https://lava.api.stakevillage.net:443"
     }
   ],
   "rpc": [
@@ -38,10 +38,6 @@
       "address": "https://lava-rpc.w3coins.io:443"
     },
     {
-      "provider": "BlueStake \ud83d\ude80",
-      "address": "https://lava-rpc.bluestake.net:443"
-    },
-    {
       "provider": "Lava Over Lava",
       "address": "https://lava.tendermintrpc.lava.build"
     },
@@ -52,6 +48,10 @@
     {
       "provider": "Shazoes",
       "address": "https://lava-mainnet-rpc.shazoes.xyz"
+    },
+    {
+      "provider": "Stake Village",
+      "address": "https://lava.rpc.stakevillage.net:443"
     }
   ],
   "sdk_version": "0.47.13",
@@ -65,5 +65,6 @@
       "coingecko_id": "lava-network",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lava/images/lava.png"
     }
-  ]
+  ],
+  "pretty_name": "Lava"
 }

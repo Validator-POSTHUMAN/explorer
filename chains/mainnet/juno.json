@@ -12,16 +12,8 @@
       "address": "https://juno.api.m.stavr.tech"
     },
     {
-      "provider": "Validatus",
-      "address": "https://api.juno.validatus.com"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://juno-api.polkachu.com"
-    },
-    {
-      "provider": "Kleomedes",
-      "address": "https://juno-api.kleomedes.network"
     },
     {
       "provider": "Cogwheel",
@@ -42,10 +34,6 @@
       "address": "https://juno-rpc.stakeandrelax.net"
     },
     {
-      "provider": "Validatus",
-      "address": "https://rpc.juno.validatus.com"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://juno-rpc.polkachu.com"
     },
@@ -56,10 +44,6 @@
     {
       "provider": "Cogwheel",
       "address": "https://juno-rpc.cogwheel.zone"
-    },
-    {
-      "provider": "\ud83d\udd25STAVR\ud83d\udd25",
-      "address": "https://juno.rpc.m.stavr.tech"
     },
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
@@ -81,5 +65,6 @@
       "coingecko_id": "juno-network",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.svg"
     }
-  ]
+  ],
+  "pretty_name": "Juno"
 }

@@ -14,10 +14,6 @@
   ],
   "rpc": [
     {
-      "provider": "StakeAngle",
-      "address": "https://agoric-rpc.stakeangle.com"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://agoric-rpc.polkachu.com"
     },
@@ -37,5 +33,6 @@
       "coingecko_id": "agoric",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.svg"
     }
-  ]
+  ],
+  "pretty_name": "Agoric"
 }

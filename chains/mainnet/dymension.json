@@ -14,10 +14,6 @@
       "address": "https://dymension-api.noders.services:443"
     },
     {
-      "provider": "Pro-Nodes75",
-      "address": "https://api.dymension.node75.org:443"
-    },
-    {
       "provider": "Stake&Relax \ud83e\udda5",
       "address": "https://dymension-api.stakeandrelax.net:443"
     },
@@ -36,10 +32,6 @@
     {
       "provider": "Stake&Relax \ud83e\udda5",
       "address": "https://dymension-api.stakeandrelax.net"
-    },
-    {
-      "provider": "Pro-Nodes75",
-      "address": "https://api.dymension.node75.org"
     },
     {
       "provider": "[NODERS]TEAM",
@@ -72,10 +64,6 @@
       "address": "https://dymension-rpc.stakeandrelax.net:443"
     },
     {
-      "provider": "Pro-Nodes75",
-      "address": "https://rpc.dymension.node75.org:443"
-    },
-    {
       "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "https://dym.rpc.m.stavr.tech:443"
     },
@@ -96,10 +84,6 @@
       "address": "https://dymension-rpc.stakeandrelax.net"
     },
     {
-      "provider": "Pro-Nodes75",
-      "address": "https://rpc.dymension.node75.org"
-    },
-    {
       "provider": "[NODERS]TEAM",
       "address": "https://dymension-rpc.noders.services"
     }
@@ -118,5 +102,6 @@
   ],
   "addr_prefix": "dym",
   "theme_color": "#2e2e2e",
-  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg"
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dymension/images/dymension-logo.svg",
+  "pretty_name": "Dymension Hub"
 }

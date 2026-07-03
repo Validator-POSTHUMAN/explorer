@@ -12,10 +12,6 @@
     {
       "provider": "nomic-io",
       "address": "https://stakenet-rpc.nomic.io:2096"
-    },
-    {
-      "provider": "Polkachu",
-      "address": "https://nomic-rpc.polkachu.com"
     }
   ],
   "addr_prefix": "nomic",
@@ -27,5 +23,6 @@
       "exponent": "6",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nomic/images/nom.svg"
     }
-  ]
+  ],
+  "pretty_name": "Nomic"
 }

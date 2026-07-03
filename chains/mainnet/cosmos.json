@@ -12,20 +12,12 @@
       "address": "https://api.cosmos.nodestake.top"
     },
     {
-      "provider": "CryptoCrew",
-      "address": "https://rest.cosmoshub-main.ccvalidators.com:443"
-    },
-    {
       "provider": "Lavender.Five Nodes \ud83d\udc1d",
       "address": "https://rest.lavenderfive.com:443/cosmoshub"
     },
     {
       "provider": "ecostake",
       "address": "https://rest-cosmoshub.ecostake.com"
-    },
-    {
-      "provider": "Easy 2 Stake",
-      "address": "https://cosmos-lcd.easy2stake.com"
     },
     {
       "provider": "NodeStake",
@@ -38,14 +30,6 @@
     {
       "provider": "w3coins",
       "address": "https://cosmos-api.w3coins.io"
-    },
-    {
-      "provider": "PRO Delegators",
-      "address": "https://community.nuxian-node.ch:6797/gaia/crpc"
-    },
-    {
-      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
-      "address": "https://cosmos-api.highstakes.ch"
     },
     {
       "provider": "cosmosrescue",
@@ -68,27 +52,11 @@
       "address": "https://cosmos.ibs.team:443/api"
     },
     {
-      "provider": "Citizen Web3",
-      "address": "https://api.cosmoshub-4-archive.citizenweb3.com:443"
-    },
-    {
-      "provider": "Citizen Web3",
-      "address": "https://api.cosmoshub-4.citizenweb3.com:443"
-    },
-    {
-      "provider": "Cumulo",
-      "address": "https://api.cosmos.cumulo.com.es"
-    },
-    {
-      "provider": "QUAD",
-      "address": "https://cosmos.rpc.uquad.org:443"
+      "provider": "Pocket Network",
+      "address": "https://cosmoshub.api.pocket.network"
     }
   ],
   "rpc": [
-    {
-      "provider": "CryptoCrew",
-      "address": "https://rpc.cosmoshub-main.ccvalidators.com:443"
-    },
     {
       "provider": "Lava",
       "address": "https://cosmoshub.tendermintrpc.lava.build:443"
@@ -104,10 +72,6 @@
     {
       "provider": "Polkachu",
       "address": "https://cosmos-rpc.polkachu.com"
-    },
-    {
-      "provider": "Easy 2 Stake",
-      "address": "https://cosmos-rpc.easy2stake.com"
     },
     {
       "provider": "NodeStake",
@@ -126,24 +90,12 @@
       "address": "https://cosmos-rpc.w3coins.io"
     },
     {
-      "provider": "PRO Delegators",
-      "address": "https://community.nuxian-node.ch:6797/gaia/trpc"
-    },
-    {
-      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
-      "address": "https://cosmos-rpc.highstakes.ch"
-    },
-    {
       "provider": "cosmosrescue",
       "address": "https://cosmoshub-rpc.cosmosrescue.dev"
     },
     {
       "provider": "Stakewolle",
       "address": "https://public.stakewolle.com/cosmos/cosmoshub/rpc"
-    },
-    {
-      "provider": "Citizen Web3",
-      "address": "https://rpc.cosmoshub-4.citizenweb3.com"
     },
     {
       "provider": "Stake&Relax \ud83e\udda5",
@@ -158,16 +110,8 @@
       "address": "https://cosmos.ibs.team:443/rpc"
     },
     {
-      "provider": "Citizen Web3",
-      "address": "https://rpc.cosmoshub-4-archive.citizenweb3.com:443"
-    },
-    {
-      "provider": "Cumulo",
-      "address": "https://rpc.cosmos.cumulo.com.es"
-    },
-    {
-      "provider": "QUAD",
-      "address": "https://cosmos.rpc.uquad.org:443"
+      "provider": "Pocket Network",
+      "address": "https://cosmoshub.api.pocket.network"
     }
   ],
   "sdk_version": "0.45.1",
@@ -183,5 +127,6 @@
       "coingecko_id": "cosmos",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg"
     }
-  ]
+  ],
+  "pretty_name": "Cosmos Hub"
 }

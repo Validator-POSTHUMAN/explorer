@@ -24,24 +24,12 @@
       "address": "https://akash.c29r3.xyz:443/api"
     },
     {
-      "provider": "Kleomedes",
-      "address": "https://akash-api.kleomedes.network"
-    },
-    {
-      "provider": "Cosmonaut Stakes",
-      "address": "https://akash-mainnet-rest.cosmonautstakes.com:443"
-    },
-    {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
       "address": "https://akash-rest.publicnode.com"
     },
     {
       "provider": "Pocket Network",
       "address": "https://akash.api.pocket.network"
-    },
-    {
-      "provider": "QUAD",
-      "address": "https://akash.rpc.uquad.org:443"
     }
   ],
   "rpc": [
@@ -50,20 +38,12 @@
       "address": "https://rpc.lavenderfive.com:443/akash"
     },
     {
-      "provider": "c29r3",
-      "address": "http://akash.c29r3.xyz:80/rpc"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://akash-rpc.polkachu.com"
     },
     {
       "provider": "ecostake",
       "address": "https://rpc-akash.ecostake.com:443"
-    },
-    {
-      "provider": "Kleomedes",
-      "address": "https://akash-rpc.kleomedes.network"
     },
     {
       "provider": "Cosmonaut Stakes",
@@ -76,10 +56,6 @@
     {
       "provider": "Pocket Network",
       "address": "https://akash.api.pocket.network"
-    },
-    {
-      "provider": "QUAD",
-      "address": "https://akash.rpc.uquad.org:443"
     }
   ],
   "sdk_version": "0.45.16",
@@ -94,5 +70,6 @@
       "coingecko_id": "akash-network",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.svg"
     }
-  ]
+  ],
+  "pretty_name": "Akash"
 }

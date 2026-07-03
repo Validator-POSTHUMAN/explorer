@@ -4,20 +4,12 @@
   "registry_name": "persistence",
   "api": [
     {
-      "provider": "Kleomedes",
-      "address": "https://persistence-api.kleomedes.network"
-    },
-    {
       "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "https://persistence.api.m.stavr.tech"
     },
     {
       "provider": "Polkachu",
       "address": "https://persistence-api.polkachu.com"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://api.persistence.validatus.com"
     },
     {
       "provider": "Cosmonaut Stakes",
@@ -42,20 +34,8 @@
       "address": "https://persistence-rpc.polkachu.com"
     },
     {
-      "provider": "Validatus",
-      "address": "https://rpc.persistence.validatus.com"
-    },
-    {
       "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "https://persistence.rpc.m.stavr.tech"
-    },
-    {
-      "provider": "Kleomedes",
-      "address": "https://persistence-rpc.kleomedes.network"
-    },
-    {
-      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
-      "address": "https://persistence-rpc.highstakes.ch"
     },
     {
       "provider": "Cosmonaut Stakes",
@@ -77,5 +57,6 @@
       "coingecko_id": "persistence",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.svg"
     }
-  ]
+  ],
+  "pretty_name": "Persistence"
 }

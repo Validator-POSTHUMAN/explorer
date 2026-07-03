@@ -50,10 +50,6 @@
       "address": "https://rpc-1.axelar.nodes.guru:443"
     },
     {
-      "provider": "p-ops",
-      "address": "https://axelar-rpc.pops.one:443"
-    },
-    {
       "provider": "Stakin",
       "address": "https://axelar.rpc.stakin-nodes.com"
     },
@@ -86,5 +82,6 @@
       "coingecko_id": "axelar",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.svg"
     }
-  ]
+  ],
+  "pretty_name": "Axelar"
 }

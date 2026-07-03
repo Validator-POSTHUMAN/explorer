@@ -65,5 +65,6 @@
       "coingecko_id": "oraichain-token",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-token.svg"
     }
-  ]
+  ],
+  "pretty_name": "Oraichain"
 }

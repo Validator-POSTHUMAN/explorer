@@ -13,10 +13,6 @@
       "address": "https://celestia.api.kjnodes.com:443"
     },
     {
-      "provider": "Validatus",
-      "address": "https://api.celestia.validatus.com:443"
-    },
-    {
       "provider": "DTEAM",
       "address": "https://api.celestia.mainnet.dteam.tech:443"
     },
@@ -49,10 +45,6 @@
       "address": "https://celestia.api.kjnodes.com"
     },
     {
-      "provider": "Validatus",
-      "address": "https://api.celestia.validatus.com"
-    },
-    {
       "provider": "Cumulo",
       "address": "https://celestia.api.cumulo.org.es"
     },
@@ -63,22 +55,6 @@
     {
       "provider": "itrocket",
       "address": "https://celestia-mainnet-api.itrocket.net"
-    },
-    {
-      "provider": "Pro-Nodes75",
-      "address": "https://api.celestia.node75.org"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://api.archive.celestia.validatus.com"
-    },
-    {
-      "provider": "QUAD",
-      "address": "https://celestia.rpc.uquad.org:443"
-    },
-    {
-      "provider": "AM Solutions",
-      "address": "https://rest-celestia.theamsolutions.info"
     }
   ],
   "rpc": [
@@ -101,10 +77,6 @@
     {
       "provider": "DTEAM",
       "address": "https://rpc.celestia.mainnet.dteam.tech:443"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://rpc.celestia.validatus.com:443"
     },
     {
       "provider": "\ud83d\ude80 itrocket \ud83d\ude80",
@@ -135,10 +107,6 @@
       "address": "https://celestia-rpc.polkachu.com"
     },
     {
-      "provider": "Validatus",
-      "address": "https://rpc.celestia.validatus.com"
-    },
-    {
       "provider": "Cumulo",
       "address": "https://celestia.cumulo.org.es"
     },
@@ -149,22 +117,6 @@
     {
       "provider": "itrocket",
       "address": "https://celestia-mainnet-rpc.itrocket.net"
-    },
-    {
-      "provider": "Pro-Nodes75",
-      "address": "https://rpc.celestia.node75.org"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://rpc.archive.celestia.validatus.com"
-    },
-    {
-      "provider": "QUAD",
-      "address": "https://celestia.rpc.uquad.org:443"
-    },
-    {
-      "provider": "AM Solutions",
-      "address": "https://rpc-celestia.theamsolutions.info"
     }
   ],
   "sdk_version": "0.46.16",

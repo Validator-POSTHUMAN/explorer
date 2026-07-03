@@ -2,15 +2,11 @@
   "chain_name": "celestia-testnet",
   "theme_color": "#2e2e2e",
   "registry_name": "celestiatestnet3",
-  "pretty_name": "Celestia Testnet (Mocha)",
+  "pretty_name": "Celestia Testnet",
   "api": [
     {
       "provider": "IT ROCKET",
       "address": "https://celestia-testnet-api.itrocket.net"
-    },
-    {
-      "provider": "P-OPs",
-      "address": "https://api-mocha.pops.one"
     },
     {
       "provider": "DTEAM",
@@ -21,10 +17,6 @@
     {
       "provider": "IT ROCKET",
       "address": "https://celestia-testnet-rpc.itrocket.net"
-    },
-    {
-      "provider": "P-OPs",
-      "address": "https://rpc-mocha.pops.one"
     },
     {
       "provider": "DTEAM",

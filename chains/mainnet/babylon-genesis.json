@@ -9,23 +9,11 @@
     },
     {
       "provider": "Polkachu",
-      "address": "https://babylon-archive-api.polkachu.com:443"
-    },
-    {
-      "provider": "Polkachu",
       "address": "https://babylon-api.polkachu.com"
-    },
-    {
-      "provider": "Polkachu",
-      "address": "https://babylon-archive-api.polkachu.com"
     },
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
       "address": "https://babylon-rest.publicnode.com"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://api.babylon.validatus.com"
     }
   ],
   "rpc": [
@@ -44,10 +32,6 @@
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
       "address": "https://babylon-rpc.publicnode.com:443"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://rpc.babylon.validatus.com"
     }
   ],
   "assets": [
@@ -60,5 +44,6 @@
   ],
   "sdk_version": "0.50.9",
   "addr_prefix": "bbn",
-  "logo": "/babylon.jpg"
+  "logo": "/babylon.jpg",
+  "pretty_name": "Babylon Genesis"
 }

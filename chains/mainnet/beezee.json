@@ -49,5 +49,6 @@
       "coingecko_id": "bzedge",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/beezee/images/bze.svg"
     }
-  ]
+  ],
+  "pretty_name": "BeeZee"
 }

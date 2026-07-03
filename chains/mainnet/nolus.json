@@ -33,5 +33,6 @@
       "coingecko_id": "nolus",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/nolus/images/nolus.svg"
     }
-  ]
+  ],
+  "pretty_name": "Nolus"
 }

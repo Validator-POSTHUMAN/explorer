@@ -6,10 +6,6 @@
     {
       "provider": "Simply Staking",
       "address": "https://rest-fuel-seq.simplystaking.xyz"
-    },
-    {
-      "provider": "Cumulo",
-      "address": "https://api.fuel.cumulo.com.es"
     }
   ],
   "rpc": [

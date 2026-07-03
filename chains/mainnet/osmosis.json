@@ -23,14 +23,6 @@
       "address": "https://osmosis-rest.publicnode.com"
     },
     {
-      "provider": "Validatus",
-      "address": "https://api.osmosis.validatus.com:443"
-    },
-    {
-      "provider": "Stakewolle",
-      "address": "https://public.stakewolle.com/cosmos/osmosis/rest"
-    },
-    {
       "provider": "[NODERS]TEAM",
       "address": "https://osmosis-api.noders.services"
     },
@@ -41,10 +33,6 @@
     {
       "provider": "Polkachu",
       "address": "https://osmosis-api.polkachu.com"
-    },
-    {
-      "provider": "Citizen Web3",
-      "address": "https://api.osmosis.citizenweb3.com"
     }
   ],
   "rpc": [
@@ -69,14 +57,6 @@
       "address": "https://osmosis-rpc.publicnode.com:443"
     },
     {
-      "provider": "FreshSTAKING",
-      "address": "http://rpc-osmosis.freshstaking.com:31657"
-    },
-    {
-      "provider": "Validatus",
-      "address": "https://rpc.osmosis.validatus.com"
-    },
-    {
       "provider": "Stakewolle",
       "address": "https://public.stakewolle.com/cosmos/osmosis/rpc"
     },
@@ -85,20 +65,12 @@
       "address": "https://osmosis-rpc.noders.services"
     },
     {
-      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
-      "address": "https://osmosis-rpc.highstakes.ch"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://osmosis-rpc.polkachu.com"
     },
     {
       "provider": "Crosnest",
       "address": "https://rpc.cros-nest.com/osmosis"
-    },
-    {
-      "provider": "Citizen Web3",
-      "address": "https://rpc.osmosis.citizenweb3.com"
     },
     {
       "provider": "Pocket Network",
@@ -134,5 +106,6 @@
       "coingecko_id": "somm",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sommelier/images/somm.svg"
     }
-  ]
+  ],
+  "pretty_name": "Osmosis"
 }

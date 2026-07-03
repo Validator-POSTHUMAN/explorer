@@ -8,12 +8,16 @@
       "address": "https://rest.lavenderfive.com:443/injective"
     },
     {
-      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
-      "address": "https://injective-api.highstakes.ch"
-    },
-    {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
       "address": "https://injective-rest.publicnode.com"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://injective-api.polkachu.com"
+    },
+    {
+      "provider": "Stakewolle",
+      "address": "https://public.stakewolle.com/cosmos/injective/rest"
     }
   ],
   "rpc": [
@@ -26,12 +30,12 @@
       "address": "https://rpc.lavenderfive.com:443/injective"
     },
     {
-      "provider": "High Stakes \ud83c\udde8\ud83c\udded",
-      "address": "https://injective-rpc.highstakes.ch"
-    },
-    {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
       "address": "https://injective-rpc.publicnode.com:443"
+    },
+    {
+      "provider": "Polkachu",
+      "address": "https://injective-rpc.polkachu.com"
     }
   ],
   "sdk_version": "0.50.9",
@@ -45,5 +49,6 @@
       "coingecko_id": "injective-protocol",
       "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.svg"
     }
-  ]
+  ],
+  "pretty_name": "Injective"
 }

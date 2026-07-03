@@ -2,10 +2,6 @@
   "chain_name": "humans",
   "api": [
     {
-      "provider": "StakeAngle",
-      "address": "http://humans-rpc.stakeangle.com:41417"
-    },
-    {
       "provider": "TheNOP.io",
       "address": "https://api-humansai.thenop.io:443"
     },
@@ -44,10 +40,6 @@
   ],
   "rpc": [
     {
-      "provider": "POSTHUMAN\u221eDVS",
-      "address": "https://rpc.humans.posthuman.digital"
-    },
-    {
       "provider": "TheNOP.io",
       "address": "https://rpc-humansai.thenop.io:443"
     },
@@ -76,10 +68,6 @@
       "address": "https://humans-mainnet-rpc.itrocket.net"
     },
     {
-      "provider": "StakeAngle",
-      "address": "https://humans-rpc.stakeangle.com"
-    },
-    {
       "provider": "KonsorTech",
       "address": "https://mainnet-humans-rpc.konsortech.xyz"
     },
@@ -102,5 +90,6 @@
   ],
   "addr_prefix": "human",
   "theme_color": "#2e2e2e",
-  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.svg"
+  "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/humans/images/heart-dark-mode.svg",
+  "pretty_name": "Humans.ai"
 }
