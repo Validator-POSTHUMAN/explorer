@@ -5,6 +5,10 @@
   "pretty_name": "Celestia Testnet",
   "api": [
     {
+      "provider": "POSTHUMAN∞DVS",
+      "address": "https://rest-celestia-testnet.posthuman.digital"
+    },
+    {
       "provider": "IT ROCKET",
       "address": "https://celestia-testnet-api.itrocket.net"
     },
@@ -14,6 +18,10 @@
     }
   ],
   "rpc": [
+    {
+      "provider": "POSTHUMAN∞DVS",
+      "address": "https://rpc-celestia-testnet.posthuman.digital"
+    },
     {
       "provider": "IT ROCKET",
       "address": "https://celestia-testnet-rpc.itrocket.net"
