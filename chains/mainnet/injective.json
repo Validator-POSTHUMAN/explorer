@@ -4,14 +4,6 @@
   "registry_name": "injective",
   "api": [
     {
-      "provider": "Stakewolle",
-      "address": "https://public.stakewolle.com/cosmos/injective/rest"
-    },
-    {
-      "provider": "Polkachu",
-      "address": "https://injective-api.polkachu.com"
-    },
-    {
       "provider": "Lavender.Five Nodes \ud83d\udc1d",
       "address": "https://rest.lavenderfive.com:443/injective"
     },
@@ -36,10 +28,6 @@
     {
       "provider": "High Stakes \ud83c\udde8\ud83c\udded",
       "address": "https://injective-rpc.highstakes.ch"
-    },
-    {
-      "provider": "Polkachu",
-      "address": "https://injective-rpc.polkachu.com"
     },
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",

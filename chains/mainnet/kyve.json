@@ -16,10 +16,6 @@
       "address": "https://kyve.api.m.stavr.tech"
     },
     {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://kyve_mainnet_api.chain.whenmoonwhenlambo.money"
-    },
-    {
       "provider": "Inter Blockchain Services",
       "address": "https://kyve.ibs.team:443/api"
     }
@@ -36,10 +32,6 @@
     {
       "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "http://kyve.rpc.m.stavr.tech:12357"
-    },
-    {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://kyve_mainnet_rpc.chain.whenmoonwhenlambo.money"
     },
     {
       "provider": "Inter Blockchain Services",

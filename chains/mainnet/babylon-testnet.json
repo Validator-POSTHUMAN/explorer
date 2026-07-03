@@ -1,23 +1,24 @@
 {
   "chain_name": "babylon-testnet",
+  "pretty_name": "Babylon Testnet",
   "api": [
     {
-      "provider": "ITROCKET",
-      "address": "https://babylon-testnet-api.itrocket.net"
+      "provider": "Nodes.Guru",
+      "address": "https://babylon-testnet-api.nodes.guru"
     },
     {
-      "provider": "POSTHUMAN\u221eDVS",
-      "address": "https://rest-api.babylon.posthuman.digital"
+      "provider": "Polkachu",
+      "address": "https://babylon-testnet-api.polkachu.com"
     }
   ],
   "rpc": [
     {
-      "provider": "ITROCKET",
-      "address": "https://babylon-testnet-rpc.itrocket.net"
+      "provider": "Nodes.Guru",
+      "address": "https://babylon-testnet-rpc.nodes.guru"
     },
     {
-      "provider": "POSTHUMAN\u221eDVS",
-      "address": "https://rpc.babylon.posthuman.digital"
+      "provider": "Polkachu",
+      "address": "https://babylon-testnet-rpc.polkachu.com"
     }
   ],
   "assets": [

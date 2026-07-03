@@ -12,14 +12,6 @@
       "address": "https://babylon-archive-api.polkachu.com:443"
     },
     {
-      "provider": "Nodes.Guru",
-      "address": "https://babylon.nodes.guru:443/api"
-    },
-    {
-      "provider": "Nodes.Guru",
-      "address": "https://babylon.nodes.guru/api"
-    },
-    {
       "provider": "Polkachu",
       "address": "https://babylon-api.polkachu.com"
     },
@@ -44,14 +36,6 @@
     {
       "provider": "Polkachu",
       "address": "https://babylon-archive-rpc.polkachu.com"
-    },
-    {
-      "provider": "Nodes.Guru",
-      "address": "https://babylon.nodes.guru:443/rpc"
-    },
-    {
-      "provider": "Nodes.Guru",
-      "address": "https://babylon.nodes.guru/rpc"
     },
     {
       "provider": "Polkachu",

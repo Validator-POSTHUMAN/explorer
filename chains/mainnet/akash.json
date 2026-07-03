@@ -36,16 +36,12 @@
       "address": "https://akash-rest.publicnode.com"
     },
     {
-      "provider": "ValidatorNode",
-      "address": "https://akash-api.validatornode.com"
-    },
-    {
-      "provider": "Arcturian Tech",
-      "address": "https://akash.api.arcturian.tech"
-    },
-    {
       "provider": "Pocket Network",
       "address": "https://akash.api.pocket.network"
+    },
+    {
+      "provider": "QUAD",
+      "address": "https://akash.rpc.uquad.org:443"
     }
   ],
   "rpc": [
@@ -78,12 +74,12 @@
       "address": "https://akash-rpc.publicnode.com:443"
     },
     {
-      "provider": "Arcturian Tech",
-      "address": "https://akash.rpc.arcturian.tech"
-    },
-    {
       "provider": "Pocket Network",
       "address": "https://akash.api.pocket.network"
+    },
+    {
+      "provider": "QUAD",
+      "address": "https://akash.rpc.uquad.org:443"
     }
   ],
   "sdk_version": "0.45.16",

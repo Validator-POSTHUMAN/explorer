@@ -41,6 +41,10 @@
     {
       "provider": "Polkachu",
       "address": "https://osmosis-api.polkachu.com"
+    },
+    {
+      "provider": "Citizen Web3",
+      "address": "https://api.osmosis.citizenweb3.com"
     }
   ],
   "rpc": [
@@ -87,6 +91,18 @@
     {
       "provider": "Polkachu",
       "address": "https://osmosis-rpc.polkachu.com"
+    },
+    {
+      "provider": "Crosnest",
+      "address": "https://rpc.cros-nest.com/osmosis"
+    },
+    {
+      "provider": "Citizen Web3",
+      "address": "https://rpc.osmosis.citizenweb3.com"
+    },
+    {
+      "provider": "Pocket Network",
+      "address": "https://osmosis.api.pocket.network"
     }
   ],
   "snapshot_provider": "",

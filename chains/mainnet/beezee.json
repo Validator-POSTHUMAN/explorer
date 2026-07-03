@@ -18,10 +18,6 @@
     {
       "provider": "AlphaTeam",
       "address": "https://rest-2.getbze.com"
-    },
-    {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://beezee_mainnet_api.chain.whenmoonwhenlambo.money"
     }
   ],
   "rpc": [
@@ -40,10 +36,6 @@
     {
       "provider": "AlphaTeam",
       "address": "https://rpc-2.getbze.com"
-    },
-    {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://beezee_mainnet_rpc.chain.whenmoonwhenlambo.money"
     }
   ],
   "sdk_version": "0.45.16",

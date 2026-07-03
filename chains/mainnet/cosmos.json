@@ -20,14 +20,6 @@
       "address": "https://rest.lavenderfive.com:443/cosmoshub"
     },
     {
-      "provider": "DragonStake",
-      "address": "https://lcd.cosmos.dragonstake.io"
-    },
-    {
-      "provider": "Stakin",
-      "address": "https://cosmoshub.rest.stakin-nodes.com"
-    },
-    {
       "provider": "ecostake",
       "address": "https://rest-cosmoshub.ecostake.com"
     },
@@ -84,19 +76,15 @@
       "address": "https://api.cosmoshub-4.citizenweb3.com:443"
     },
     {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://cosmoshub-mainnet.chain.whenmoonwhenlambo.money"
-    },
-    {
       "provider": "Cumulo",
       "address": "https://api.cosmos.cumulo.com.es"
+    },
+    {
+      "provider": "QUAD",
+      "address": "https://cosmos.rpc.uquad.org:443"
     }
   ],
   "rpc": [
-    {
-      "provider": "dragonstake",
-      "address": "https://rpc.cosmos.dragonstake.io"
-    },
     {
       "provider": "CryptoCrew",
       "address": "https://rpc.cosmoshub-main.ccvalidators.com:443"
@@ -116,10 +104,6 @@
     {
       "provider": "Polkachu",
       "address": "https://cosmos-rpc.polkachu.com"
-    },
-    {
-      "provider": "Stakin",
-      "address": "https://cosmoshub.rpc.stakin-nodes.com"
     },
     {
       "provider": "Easy 2 Stake",
@@ -178,20 +162,12 @@
       "address": "https://rpc.cosmoshub-4-archive.citizenweb3.com:443"
     },
     {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://cosmoshub-mainnet.chain.whenmoonwhenlambo.money"
-    },
-    {
       "provider": "Cumulo",
       "address": "https://rpc.cosmos.cumulo.com.es"
     },
     {
-      "provider": "Pocket Network",
-      "address": "https://cosmoshub.api.pocket.network"
-    },
-    {
-      "provider": "GetBlock RPC Nodes",
-      "address": "https://go.getblock.io/17515cb3ec0e43b7817f182e5de6066a"
+      "provider": "QUAD",
+      "address": "https://cosmos.rpc.uquad.org:443"
     }
   ],
   "sdk_version": "0.45.1",

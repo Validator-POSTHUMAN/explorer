@@ -24,10 +24,6 @@
       "address": "https://atomone-api.cogwheel.zone"
     },
     {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://atomone_mainnet_api.chain.whenmoonwhenlambo.money"
-    },
-    {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
       "address": "https://atomone-rest.publicnode.com"
     },
@@ -68,10 +64,6 @@
       "address": "https://atomone-mainnet-api.shazoes.xyz"
     },
     {
-      "provider": "kynraze",
-      "address": "https://atomone-api.kynraze.com:443"
-    },
-    {
       "provider": "StakerHouse",
       "address": "https://atomone-rest.stakerhouse.com"
     },
@@ -94,6 +86,14 @@
     {
       "provider": "\ud83c\udfc6OshVanK\ud83c\udfc6",
       "address": "https://atomone-mainnet-api.oshvank.xyz"
+    },
+    {
+      "provider": "Roomit",
+      "address": "https://api.atomone.roomit.xyz"
+    },
+    {
+      "provider": "Indonode",
+      "address": "https://api.atomone.indonode.net"
     }
   ],
   "rpc": [
@@ -116,10 +116,6 @@
     {
       "provider": "crosnest",
       "address": "https://rpc-atomone-1.cros-nest.com:443"
-    },
-    {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://atomone_mainnet_rpc.chain.whenmoonwhenlambo.money"
     },
     {
       "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
@@ -166,10 +162,6 @@
       "address": "https://atomone-mainnet-rpc.shazoes.xyz"
     },
     {
-      "provider": "kynraze",
-      "address": "https://atomone-rpc.kynraze.com:443"
-    },
-    {
       "provider": "StakerHouse",
       "address": "https://atomone-rpc.stakerhouse.com"
     },
@@ -192,6 +184,14 @@
     {
       "provider": "\ud83c\udfc6OshVanK\ud83c\udfc6",
       "address": "https://atomone-mainnet-rpc.oshvank.xyz"
+    },
+    {
+      "provider": "Roomit",
+      "address": "https://rpc.atomone.roomit.xyz"
+    },
+    {
+      "provider": "Indonode",
+      "address": "https://rpc.atomone.indonode.net:443"
     }
   ],
   "sdk_version": "0.47.13",

@@ -20,10 +20,6 @@
       "address": "https://rest-fetchhub.fetch.ai"
     },
     {
-      "provider": "BlueStake \ud83d\ude80",
-      "address": "https://fetchai-api.bluestake.net"
-    },
-    {
       "provider": "High Stakes \ud83c\udde8\ud83c\udded",
       "address": "https://fetch-api.highstakes.ch"
     },
@@ -38,6 +34,10 @@
     {
       "provider": "Pocket Network",
       "address": "https://fetch.api.pocket.network"
+    },
+    {
+      "provider": "cosmosrescue",
+      "address": "https://fetch-api.cosmosrescue.com"
     }
   ],
   "rpc": [
@@ -56,10 +56,6 @@
     {
       "provider": "fetch.ai",
       "address": "https://rpc-fetchhub.fetch.ai:443"
-    },
-    {
-      "provider": "BlueStake \ud83d\ude80",
-      "address": "https://fetchai-rpc.bluestake.net:443"
     },
     {
       "provider": "Stakewolle",

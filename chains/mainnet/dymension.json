@@ -6,10 +6,6 @@
       "address": "https://m-dymension.api.utsa.tech:443"
     },
     {
-      "provider": "NodeStake",
-      "address": "https://api.dymension.nodestake.org:443"
-    },
-    {
       "provider": "\ud83d\udd25STAVR\ud83d\udd25",
       "address": "https://dymension.api.m.stavr.tech:443"
     },
@@ -26,16 +22,8 @@
       "address": "https://dymension-api.stakeandrelax.net:443"
     },
     {
-      "provider": "NodeStake",
-      "address": "https://api.dymension.nodestake.org"
-    },
-    {
       "provider": "Lavender.Five Nodes \ud83d\udc1d",
       "address": "https://rest.lavenderfive.com:443/dymension"
-    },
-    {
-      "provider": "Kynraze",
-      "address": "https://dymension-api.kynraze.com"
     },
     {
       "provider": "lesnik | UTSA",
@@ -50,20 +38,16 @@
       "address": "https://dymension-api.stakeandrelax.net"
     },
     {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://dymension-rest.publicnode.com"
-    },
-    {
-      "provider": "Inter Blockchain Services",
-      "address": "https://dymension.ibs.team:443/api"
-    },
-    {
       "provider": "Pro-Nodes75",
       "address": "https://api.dymension.node75.org"
     },
     {
       "provider": "[NODERS]TEAM",
       "address": "https://dymension-api.noders.services"
+    },
+    {
+      "provider": "Bro_n_Bro",
+      "address": "https://lcd.dymension.bronbro.io:443"
     }
   ],
   "rpc": [
@@ -110,14 +94,6 @@
     {
       "provider": "Stake&Relax \ud83e\udda5",
       "address": "https://dymension-rpc.stakeandrelax.net"
-    },
-    {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://dymension-rpc.publicnode.com:443"
-    },
-    {
-      "provider": "Inter Blockchain Services",
-      "address": "https://dymension.ibs.team:443/rpc"
     },
     {
       "provider": "Pro-Nodes75",

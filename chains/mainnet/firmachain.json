@@ -42,10 +42,6 @@
       "address": "https://firma.rpc.m.stavr.tech:443"
     },
     {
-      "provider": "\ud83d\ude80 WHEN MOON \ud83c\udf15 WHEN LAMBO \ud83d\udd25",
-      "address": "https://firmachain_mainnet_rpc.chain.whenmoonwhenlambo.money"
-    },
-    {
       "provider": "FirmaChain",
       "address": "https://lcd-mainnet.firmachain.dev:26657"
     }

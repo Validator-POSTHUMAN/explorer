@@ -4,10 +4,6 @@
   "registry_name": "dungeon",
   "api": [
     {
-      "provider": "WHEN MOON",
-      "address": "https://dungeon_mainnet_api.chain.whenmoonwhenlambo.money"
-    },
-    {
       "provider": "Quasar",
       "address": "https://dungeon-wallet.api.quasarstaking.ai"
     },
@@ -25,10 +21,6 @@
     }
   ],
   "rpc": [
-    {
-      "provider": "WHEN MOON",
-      "address": "https://dungeon_mainnet_rpc.chain.whenmoonwhenlambo.money"
-    },
     {
       "provider": "Quasar",
       "address": "https://dungeon-wallet.rpc.quasarstaking.ai"

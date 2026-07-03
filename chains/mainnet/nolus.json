@@ -8,8 +8,8 @@
       "address": "https://nolus.api.liveraven.net"
     },
     {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://nolus-rest.publicnode.com"
+      "provider": "NolusProtocol",
+      "address": "https://lcd.nolus.network"
     }
   ],
   "rpc": [
@@ -18,8 +18,8 @@
       "address": "https://nolus.rpc.liveraven.net"
     },
     {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://nolus-rpc.publicnode.com:443"
+      "provider": "NolusProtocol",
+      "address": "https://rpc.nolus.network"
     }
   ],
   "sdk_version": "0.50.7",

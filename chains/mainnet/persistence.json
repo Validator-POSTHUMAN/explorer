@@ -30,14 +30,6 @@
     {
       "provider": "QuantNode",
       "address": "https://persistence.lcd.quantnode.xyz"
-    },
-    {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://persistence-rest.publicnode.com"
-    },
-    {
-      "provider": "Pocket Network",
-      "address": "https://persistence.api.pocket.network"
     }
   ],
   "rpc": [
@@ -72,14 +64,6 @@
     {
       "provider": "QuantNode",
       "address": "https://persistence.rpc.quantnode.xyz"
-    },
-    {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://persistence-rpc.publicnode.com:443"
-    },
-    {
-      "provider": "Pocket Network",
-      "address": "https://persistence.api.pocket.network"
     }
   ],
   "sdk_version": "0.47.10",

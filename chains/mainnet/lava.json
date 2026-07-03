@@ -24,24 +24,8 @@
       "address": "https://lava.api.liveraven.net"
     },
     {
-      "provider": "Stake Village",
-      "address": "https://lava.api.stakevillage.net:443"
-    },
-    {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://lava-rest.publicnode.com"
-    },
-    {
-      "provider": "Vinjan.Inc",
-      "address": "https://api-lava.vinjan-inc.com"
-    },
-    {
       "provider": "Shazoes",
       "address": "https://lava-mainnet-api.shazoes.xyz"
-    },
-    {
-      "provider": "AstroStake",
-      "address": "https://lava-api.linknode.org"
     }
   ],
   "rpc": [
@@ -66,24 +50,8 @@
       "address": "https://lava.rpc.m.stavr.tech:443"
     },
     {
-      "provider": "Stake Village",
-      "address": "https://lava.rpc.stakevillage.net:443"
-    },
-    {
-      "provider": "Allnodes \u26a1\ufe0f Nodes & Staking",
-      "address": "https://lava-rpc.publicnode.com:443"
-    },
-    {
-      "provider": "Vinjan.Inc",
-      "address": "https://rpc-lava.vinjan-inc.com"
-    },
-    {
       "provider": "Shazoes",
       "address": "https://lava-mainnet-rpc.shazoes.xyz"
-    },
-    {
-      "provider": "AstroStake",
-      "address": "https://lava-rpc.linknode.org"
     }
   ],
   "sdk_version": "0.47.13",
