@@ -3,7 +3,10 @@
 Live at: **https://explorer.posthuman.digital/**
 
 A multi-chain Cosmos explorer (Vue 3 + Vite SPA), fork of `github.com/ping-pub/explorer`.
-Serves 27 mainnet chains (Cosmos hub, Osmosis, Celestia, Babylon, Injective, etc.).
+Serves 28 chains (Cosmos hub, Osmosis, Celestia + Celestia Testnet (Mocha),
+Babylon, Injective, etc.). Testnets shown in the main list live in
+`chains/mainnet/` — the `chains/testnet/` dir is only loaded when the
+hostname contains "testnet", which never matches this domain.
 
 ## How it's deployed
 
@@ -29,10 +32,9 @@ After any change in `chains/`, `src/`, or `public/`:
 
 ```bash
 cd /srv/data/apps/explorer
-yarn build-only          # vite build → dist/
-                         # (don't use `yarn build` — type-check fails on
-                         #  untracked src/libs/api/registry.ts; non-blocking
-                         #  for runtime)
+yarn build-only          # vite build → dist/ (fast path, skips type-check)
+                         # `yarn build` (with vue-tsc) also works since the
+                         # group types fix — use either
 ```
 
 nginx auto-picks up the new `dist/` — no reload needed (hashed asset
@@ -80,11 +82,13 @@ auto-renews via systemd timer when <30 days left.
 ## Known issues
 
 - 284 vulns reported by `yarn audit` — almost all in dev tree, not bundled.
-- `src/libs/api/` is committed (api customization layer) but has TS errors
-  in `registry.ts` that block `yarn build` (full type-check). Cosmetic —
-  `yarn build-only` skips vue-tsc and produces a working bundle. Real fix
-  is on `master` (the missing `src/types/group.ts`) but blocked by other
-  master regressions.
+- `bostrom` and `fuel` have NO live public endpoints anywhere (probed
+  2026-07-03: local lists, chain-registry, publicnode/polkachu all dead).
+  Their pages can't load data. Candidates for removal from the chain list.
+- `rpc.babylon.posthuman.digital` / `rest-api.babylon.posthuman.digital`
+  (95.217.229.104, another posthuman host) answer 404 — proxy up, node gone.
+  Removed from babylon-testnet.json (replaced with Nodes.Guru + Polkachu,
+  bbn-test-5); re-add once the node is fixed.
 - nginx CVE-2026-42945 (Rift, heap overflow in `ngx_http_rewrite_module`):
   installed `nginx 1.18.0-6.1+deb11u2` is in affected range, but no
   `rewrite`/`set $var` directives in any config → trigger path unreachable.
