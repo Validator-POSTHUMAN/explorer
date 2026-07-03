@@ -159,6 +159,11 @@ export const useBlockchain = defineStore('blockchain', {
       } else {
         const all = this.current?.endpoints?.rest;
         if (all) {
+          const posthumanEndpoint = all.find((endpoint) =>
+            endpoint.provider?.toLowerCase().includes('posthuman')
+          );
+          if (posthumanEndpoint) return posthumanEndpoint;
+
           const rn = Math.random();
           const endpoint = all[Math.floor(rn * all.length)];
           return endpoint
