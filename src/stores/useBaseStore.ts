@@ -17,6 +17,7 @@ export const useBaseStore = defineStore('baseStore', {
                 | 'light'
                 | 'dark',
             connected: true,
+            endpointFailures: 0,
         };
     },
     getters: {
@@ -77,8 +78,24 @@ export const useBaseStore = defineStore('baseStore', {
             try{
                 this.latest = await this.blockchain.rpc?.getBaseBlockLatest();
                 this.connected = true
+                this.endpointFailures = 0
             }catch(e) {
                 this.connected = false
+                // Failover: the poller calls this every 6s; after two
+                // consecutive failures rotate to another REST endpoint
+                // instead of staying "disconnected" forever.
+                this.endpointFailures++
+                if (this.endpointFailures >= 2) {
+                    this.endpointFailures = 0
+                    const cur = this.blockchain.endpoint?.address
+                    const others = this.blockchain.current?.endpoints?.rest?.filter(
+                        (x) => x.address !== cur
+                    )
+                    if (others && others.length > 0) {
+                        const next = others[Math.floor(Math.random() * others.length)]
+                        await this.blockchain.setRestEndpoint(next)
+                    }
+                }
             }
             if (
                 !this.earlest ||

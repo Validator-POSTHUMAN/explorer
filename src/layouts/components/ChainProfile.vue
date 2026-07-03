@@ -28,6 +28,7 @@ function changeEndpoint(item: Endpoint) {
         <div
           :key="
             baseStore.latest?.block?.header?.height ||
+            chainStore.current?.prettyName ||
             chainStore.chainName ||
             ''
           "
@@ -36,7 +37,7 @@ function changeEndpoint(item: Endpoint) {
           {{
             baseStore.latest?.block?.header?.height
               ? `#${baseStore.latest.block.header.height}`
-              : chainStore.chainName || ''
+              : chainStore.current?.prettyName || chainStore.chainName || ''
           }}
           <span class="text-error">{{
             baseStore.connected ? '' : 'disconnected'
